@@ -39,7 +39,7 @@ describe("CustomFieldEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -102,7 +102,7 @@ describe("CustomFieldEntity", function()
 
     local custom_field_ref01_resdata_up0_result, err = custom_field_ref01_ent:update(custom_field_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local custom_field_ref01_resdata_up0 = helpers.to_map(custom_field_ref01_resdata_up0_result)
+    local custom_field_ref01_resdata_up0 = helpers.to_map(type(custom_field_ref01_resdata_up0_result) == 'table' and custom_field_ref01_resdata_up0_result.data_get and custom_field_ref01_resdata_up0_result:data_get() or custom_field_ref01_resdata_up0_result)
     assert.is_not_nil(custom_field_ref01_resdata_up0)
     assert.are.equal(custom_field_ref01_resdata_up0["id"], custom_field_ref01_data_up0_up["id"])
     assert.are.equal(custom_field_ref01_resdata_up0[custom_field_ref01_markdef_up0_name], custom_field_ref01_markdef_up0_value)
@@ -113,7 +113,7 @@ describe("CustomFieldEntity", function()
     }
     local custom_field_ref01_data_dt0_loaded, err = custom_field_ref01_ent:load(custom_field_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local custom_field_ref01_data_dt0_load_result = helpers.to_map(custom_field_ref01_data_dt0_loaded)
+    local custom_field_ref01_data_dt0_load_result = helpers.to_map(type(custom_field_ref01_data_dt0_loaded) == 'table' and custom_field_ref01_data_dt0_loaded.data_get and custom_field_ref01_data_dt0_loaded:data_get() or custom_field_ref01_data_dt0_loaded)
     assert.is_not_nil(custom_field_ref01_data_dt0_load_result)
     assert.are.equal(custom_field_ref01_data_dt0_load_result["id"], custom_field_ref01_data["id"])
 

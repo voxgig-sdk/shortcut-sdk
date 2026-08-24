@@ -52,7 +52,7 @@ func TestEpicEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -110,7 +110,7 @@ func TestEpicEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		epicRef01Data = core.ToMapAny(epicRef01DataResult)
+		epicRef01Data = core.ToMapAny(entityData(epicRef01DataResult))
 		if epicRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -150,7 +150,7 @@ func TestEpicEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		epicRef01ResdataUp0 := core.ToMapAny(epicRef01ResdataUp0Result)
+		epicRef01ResdataUp0 := core.ToMapAny(entityData(epicRef01ResdataUp0Result))
 		if epicRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -169,7 +169,7 @@ func TestEpicEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		epicRef01DataDt0LoadResult := core.ToMapAny(epicRef01DataDt0Loaded)
+		epicRef01DataDt0LoadResult := core.ToMapAny(entityData(epicRef01DataDt0Loaded))
 		if epicRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

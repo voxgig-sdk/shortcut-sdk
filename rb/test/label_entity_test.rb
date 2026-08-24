@@ -33,7 +33,7 @@ class LabelEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class LabelEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.label"), "label_ref01"))
 
     label_ref01_data_result = label_ref01_ent.create(label_ref01_data, nil)
-    label_ref01_data = Helpers.to_map(label_ref01_data_result)
+    label_ref01_data = Helpers.to_map(label_ref01_data_result.respond_to?(:data_get) ? label_ref01_data_result.data_get : label_ref01_data_result)
     assert !label_ref01_data.nil?
     assert !label_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class LabelEntityTest < Minitest::Test
     label_ref01_data_up0_up[label_ref01_markdef_up0_name] = label_ref01_markdef_up0_value
 
     label_ref01_resdata_up0_result = label_ref01_ent.update(label_ref01_data_up0_up, nil)
-    label_ref01_resdata_up0 = Helpers.to_map(label_ref01_resdata_up0_result)
+    label_ref01_resdata_up0 = Helpers.to_map(label_ref01_resdata_up0_result.respond_to?(:data_get) ? label_ref01_resdata_up0_result.data_get : label_ref01_resdata_up0_result)
     assert !label_ref01_resdata_up0.nil?
     assert_equal label_ref01_resdata_up0["id"], label_ref01_data_up0_up["id"]
     assert_equal label_ref01_resdata_up0[label_ref01_markdef_up0_name], label_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class LabelEntityTest < Minitest::Test
       "id" => label_ref01_data["id"],
     }
     label_ref01_data_dt0_loaded = label_ref01_ent.load(label_ref01_match_dt0, nil)
-    label_ref01_data_dt0_load_result = Helpers.to_map(label_ref01_data_dt0_loaded)
+    label_ref01_data_dt0_load_result = Helpers.to_map(label_ref01_data_dt0_loaded.respond_to?(:data_get) ? label_ref01_data_dt0_loaded.data_get : label_ref01_data_dt0_loaded)
     assert !label_ref01_data_dt0_load_result.nil?
     assert_equal label_ref01_data_dt0_load_result["id"], label_ref01_data["id"]
 

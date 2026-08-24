@@ -33,7 +33,7 @@ class RepositoryEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -87,7 +87,7 @@ class RepositoryEntityTest < Minitest::Test
       "id" => repository_ref01_data["id"],
     }
     repository_ref01_data_dt0_loaded = repository_ref01_ent.load(repository_ref01_match_dt0, nil)
-    repository_ref01_data_dt0_load_result = Helpers.to_map(repository_ref01_data_dt0_loaded)
+    repository_ref01_data_dt0_load_result = Helpers.to_map(repository_ref01_data_dt0_loaded.respond_to?(:data_get) ? repository_ref01_data_dt0_loaded.data_get : repository_ref01_data_dt0_loaded)
     assert !repository_ref01_data_dt0_load_result.nil?
     assert_equal repository_ref01_data_dt0_load_result["id"], repository_ref01_data["id"]
 

@@ -42,8 +42,8 @@ class TestLabelEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestLabelEntity:
         label_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.label"), "label_ref01"))
 
-        label_ref01_data = helpers.to_map(label_ref01_ent.create(label_ref01_data, None))
+        label_ref01_data = helpers.to_map(runner.entity_data(label_ref01_ent.create(label_ref01_data, None)))
         assert label_ref01_data is not None
         assert label_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestLabelEntity:
         label_ref01_markdef_up0_value = "Mark01-label_ref01_" + str(setup["now"])
         label_ref01_data_up0_up[label_ref01_markdef_up0_name] = label_ref01_markdef_up0_value
 
-        label_ref01_resdata_up0 = helpers.to_map(label_ref01_ent.update(label_ref01_data_up0_up, None))
+        label_ref01_resdata_up0 = helpers.to_map(runner.entity_data(label_ref01_ent.update(label_ref01_data_up0_up, None)))
         assert label_ref01_resdata_up0 is not None
         assert label_ref01_resdata_up0["id"] == label_ref01_data_up0_up["id"]
         assert label_ref01_resdata_up0[label_ref01_markdef_up0_name] == label_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestLabelEntity:
             "id": label_ref01_data["id"],
         }
         label_ref01_data_dt0_loaded = label_ref01_ent.load(label_ref01_match_dt0, None)
-        label_ref01_data_dt0_load_result = helpers.to_map(label_ref01_data_dt0_loaded)
+        label_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(label_ref01_data_dt0_loaded))
         assert label_ref01_data_dt0_load_result is not None
         assert label_ref01_data_dt0_load_result["id"] == label_ref01_data["id"]
 

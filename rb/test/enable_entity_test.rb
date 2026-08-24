@@ -45,7 +45,7 @@ class EnableEntityTest < Minitest::Test
     }
 
     enable_ref01_resdata_up0_result = enable_ref01_ent.update(enable_ref01_data_up0_up, nil)
-    enable_ref01_resdata_up0 = Helpers.to_map(enable_ref01_resdata_up0_result)
+    enable_ref01_resdata_up0 = Helpers.to_map(enable_ref01_resdata_up0_result.respond_to?(:data_get) ? enable_ref01_resdata_up0_result.data_get : enable_ref01_resdata_up0_result)
     assert !enable_ref01_resdata_up0.nil?
 
   end

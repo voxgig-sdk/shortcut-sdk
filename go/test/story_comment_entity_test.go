@@ -52,7 +52,7 @@ func TestStoryCommentEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -109,7 +109,7 @@ func TestStoryCommentEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		storyCommentRef01Data = core.ToMapAny(storyCommentRef01DataResult)
+		storyCommentRef01Data = core.ToMapAny(entityData(storyCommentRef01DataResult))
 		if storyCommentRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -150,7 +150,7 @@ func TestStoryCommentEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		storyCommentRef01ResdataUp0 := core.ToMapAny(storyCommentRef01ResdataUp0Result)
+		storyCommentRef01ResdataUp0 := core.ToMapAny(entityData(storyCommentRef01ResdataUp0Result))
 		if storyCommentRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -169,7 +169,7 @@ func TestStoryCommentEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		storyCommentRef01DataDt0LoadResult := core.ToMapAny(storyCommentRef01DataDt0Loaded)
+		storyCommentRef01DataDt0LoadResult := core.ToMapAny(entityData(storyCommentRef01DataDt0Loaded))
 		if storyCommentRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

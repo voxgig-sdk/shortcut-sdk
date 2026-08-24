@@ -40,7 +40,7 @@ class MilestoneEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -84,7 +84,7 @@ class MilestoneEntityTest extends TestCase
         $milestone_ref01_data["category_id"] = $setup["idmap"]["category01"];
 
         $milestone_ref01_data_result = $milestone_ref01_ent->create($milestone_ref01_data, null);
-        $milestone_ref01_data = Helpers::to_map($milestone_ref01_data_result);
+        $milestone_ref01_data = Helpers::to_map(is_object($milestone_ref01_data_result) && method_exists($milestone_ref01_data_result, 'data_get') ? $milestone_ref01_data_result->data_get() : $milestone_ref01_data_result);
         $this->assertNotNull($milestone_ref01_data);
         $this->assertNotNull($milestone_ref01_data["id"]);
 
@@ -109,7 +109,7 @@ class MilestoneEntityTest extends TestCase
         $milestone_ref01_data_up0_up[$milestone_ref01_markdef_up0_name] = $milestone_ref01_markdef_up0_value;
 
         $milestone_ref01_resdata_up0_result = $milestone_ref01_ent->update($milestone_ref01_data_up0_up, null);
-        $milestone_ref01_resdata_up0 = Helpers::to_map($milestone_ref01_resdata_up0_result);
+        $milestone_ref01_resdata_up0 = Helpers::to_map(is_object($milestone_ref01_resdata_up0_result) && method_exists($milestone_ref01_resdata_up0_result, 'data_get') ? $milestone_ref01_resdata_up0_result->data_get() : $milestone_ref01_resdata_up0_result);
         $this->assertNotNull($milestone_ref01_resdata_up0);
         $this->assertEquals($milestone_ref01_resdata_up0["id"], $milestone_ref01_data_up0_up["id"]);
         $this->assertEquals($milestone_ref01_resdata_up0[$milestone_ref01_markdef_up0_name], $milestone_ref01_markdef_up0_value);
@@ -119,7 +119,7 @@ class MilestoneEntityTest extends TestCase
             "id" => $milestone_ref01_data["id"],
         ];
         $milestone_ref01_data_dt0_loaded = $milestone_ref01_ent->load($milestone_ref01_match_dt0, null);
-        $milestone_ref01_data_dt0_load_result = Helpers::to_map($milestone_ref01_data_dt0_loaded);
+        $milestone_ref01_data_dt0_load_result = Helpers::to_map(is_object($milestone_ref01_data_dt0_loaded) && method_exists($milestone_ref01_data_dt0_loaded, 'data_get') ? $milestone_ref01_data_dt0_loaded->data_get() : $milestone_ref01_data_dt0_loaded);
         $this->assertNotNull($milestone_ref01_data_dt0_load_result);
         $this->assertEquals($milestone_ref01_data_dt0_load_result["id"], $milestone_ref01_data["id"]);
 

@@ -39,7 +39,7 @@ describe("IterationEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("IterationEntity", function()
 
     local iteration_ref01_data_result, err = iteration_ref01_ent:create(iteration_ref01_data, nil)
     assert.is_nil(err)
-    iteration_ref01_data = helpers.to_map(iteration_ref01_data_result)
+    iteration_ref01_data = helpers.to_map(type(iteration_ref01_data_result) == 'table' and iteration_ref01_data_result.data_get and iteration_ref01_data_result:data_get() or iteration_ref01_data_result)
     assert.is_not_nil(iteration_ref01_data)
     assert.is_not_nil(iteration_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("IterationEntity", function()
 
     local iteration_ref01_resdata_up0_result, err = iteration_ref01_ent:update(iteration_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local iteration_ref01_resdata_up0 = helpers.to_map(iteration_ref01_resdata_up0_result)
+    local iteration_ref01_resdata_up0 = helpers.to_map(type(iteration_ref01_resdata_up0_result) == 'table' and iteration_ref01_resdata_up0_result.data_get and iteration_ref01_resdata_up0_result:data_get() or iteration_ref01_resdata_up0_result)
     assert.is_not_nil(iteration_ref01_resdata_up0)
     assert.are.equal(iteration_ref01_resdata_up0["id"], iteration_ref01_data_up0_up["id"])
     assert.are.equal(iteration_ref01_resdata_up0[iteration_ref01_markdef_up0_name], iteration_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("IterationEntity", function()
     }
     local iteration_ref01_data_dt0_loaded, err = iteration_ref01_ent:load(iteration_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local iteration_ref01_data_dt0_load_result = helpers.to_map(iteration_ref01_data_dt0_loaded)
+    local iteration_ref01_data_dt0_load_result = helpers.to_map(type(iteration_ref01_data_dt0_loaded) == 'table' and iteration_ref01_data_dt0_loaded.data_get and iteration_ref01_data_dt0_loaded:data_get() or iteration_ref01_data_dt0_loaded)
     assert.is_not_nil(iteration_ref01_data_dt0_load_result)
     assert.are.equal(iteration_ref01_data_dt0_load_result["id"], iteration_ref01_data["id"])
 

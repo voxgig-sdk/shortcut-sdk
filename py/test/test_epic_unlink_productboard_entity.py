@@ -45,7 +45,7 @@ class TestEpicUnlinkProductboardEntity:
             vs.getpath(setup["data"], "new.epic_unlink_productboard"), "epic_unlink_productboard_ref01"))
         epic_unlink_productboard_ref01_data["epic-public-id"] = setup["idmap"]["epic-public-id01"]
 
-        epic_unlink_productboard_ref01_data = helpers.to_map(epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data, None))
+        epic_unlink_productboard_ref01_data = helpers.to_map(runner.entity_data(epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data, None)))
         assert epic_unlink_productboard_ref01_data is not None
 
 

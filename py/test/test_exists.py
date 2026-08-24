@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Shortcut SDK exists test
 
 import pytest
 from shortcut_sdk import ShortcutSDK

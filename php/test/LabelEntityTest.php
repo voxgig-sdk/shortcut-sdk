@@ -40,7 +40,7 @@ class LabelEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class LabelEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.label"), "label_ref01"));
 
         $label_ref01_data_result = $label_ref01_ent->create($label_ref01_data, null);
-        $label_ref01_data = Helpers::to_map($label_ref01_data_result);
+        $label_ref01_data = Helpers::to_map(is_object($label_ref01_data_result) && method_exists($label_ref01_data_result, 'data_get') ? $label_ref01_data_result->data_get() : $label_ref01_data_result);
         $this->assertNotNull($label_ref01_data);
         $this->assertNotNull($label_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class LabelEntityTest extends TestCase
         $label_ref01_data_up0_up[$label_ref01_markdef_up0_name] = $label_ref01_markdef_up0_value;
 
         $label_ref01_resdata_up0_result = $label_ref01_ent->update($label_ref01_data_up0_up, null);
-        $label_ref01_resdata_up0 = Helpers::to_map($label_ref01_resdata_up0_result);
+        $label_ref01_resdata_up0 = Helpers::to_map(is_object($label_ref01_resdata_up0_result) && method_exists($label_ref01_resdata_up0_result, 'data_get') ? $label_ref01_resdata_up0_result->data_get() : $label_ref01_resdata_up0_result);
         $this->assertNotNull($label_ref01_resdata_up0);
         $this->assertEquals($label_ref01_resdata_up0["id"], $label_ref01_data_up0_up["id"]);
         $this->assertEquals($label_ref01_resdata_up0[$label_ref01_markdef_up0_name], $label_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class LabelEntityTest extends TestCase
             "id" => $label_ref01_data["id"],
         ];
         $label_ref01_data_dt0_loaded = $label_ref01_ent->load($label_ref01_match_dt0, null);
-        $label_ref01_data_dt0_load_result = Helpers::to_map($label_ref01_data_dt0_loaded);
+        $label_ref01_data_dt0_load_result = Helpers::to_map(is_object($label_ref01_data_dt0_loaded) && method_exists($label_ref01_data_dt0_loaded, 'data_get') ? $label_ref01_data_dt0_loaded->data_get() : $label_ref01_data_dt0_loaded);
         $this->assertNotNull($label_ref01_data_dt0_load_result);
         $this->assertEquals($label_ref01_data_dt0_load_result["id"], $label_ref01_data["id"]);
 

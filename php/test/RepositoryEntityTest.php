@@ -40,7 +40,7 @@ class RepositoryEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -97,7 +97,7 @@ class RepositoryEntityTest extends TestCase
             "id" => $repository_ref01_data["id"],
         ];
         $repository_ref01_data_dt0_loaded = $repository_ref01_ent->load($repository_ref01_match_dt0, null);
-        $repository_ref01_data_dt0_load_result = Helpers::to_map($repository_ref01_data_dt0_loaded);
+        $repository_ref01_data_dt0_load_result = Helpers::to_map(is_object($repository_ref01_data_dt0_loaded) && method_exists($repository_ref01_data_dt0_loaded, 'data_get') ? $repository_ref01_data_dt0_loaded->data_get() : $repository_ref01_data_dt0_loaded);
         $this->assertNotNull($repository_ref01_data_dt0_load_result);
         $this->assertEquals($repository_ref01_data_dt0_load_result["id"], $repository_ref01_data["id"]);
 

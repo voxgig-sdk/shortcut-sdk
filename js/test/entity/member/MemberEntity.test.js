@@ -45,13 +45,13 @@ describe('MemberEntity', async () => {
     const member_ref01_ent = client.Member()
     const member_ref01_match = {}
 
-    const member_ref01_list = await member_ref01_ent.list(member_ref01_match)
+    const member_ref01_list = (await member_ref01_ent.list(member_ref01_match)).map((e) => e.data())
 
 
     // LOAD
     const member_ref01_match_dt0 = {}
     member_ref01_match_dt0.id = member_ref01_data.id
-    const member_ref01_data_dt0 = await member_ref01_ent.load(member_ref01_match_dt0)
+    const member_ref01_data_dt0 = (await member_ref01_ent.load(member_ref01_match_dt0)).data()
     assert(member_ref01_data_dt0.id === member_ref01_data.id)
 
 

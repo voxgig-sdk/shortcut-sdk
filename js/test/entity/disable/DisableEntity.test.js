@@ -45,7 +45,7 @@ describe('DisableEntity', async () => {
     const disable_ref01_ent = client.Disable()
     const disable_ref01_data_up0 = {}
 
-    const disable_ref01_resdata_up0 = await disable_ref01_ent.update(disable_ref01_data_up0)
+    const disable_ref01_resdata_up0 = (await disable_ref01_ent.update(disable_ref01_data_up0)).data()
     assert(null != disable_ref01_resdata_up0)
 
 

@@ -74,7 +74,7 @@ func TestKeyResultEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		keyResultRef01ResdataUp0 := core.ToMapAny(keyResultRef01ResdataUp0Result)
+		keyResultRef01ResdataUp0 := core.ToMapAny(entityData(keyResultRef01ResdataUp0Result))
 		if keyResultRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -93,7 +93,7 @@ func TestKeyResultEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		keyResultRef01DataDt0LoadResult := core.ToMapAny(keyResultRef01DataDt0Loaded)
+		keyResultRef01DataDt0LoadResult := core.ToMapAny(entityData(keyResultRef01DataDt0Loaded))
 		if keyResultRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

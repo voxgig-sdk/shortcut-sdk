@@ -33,7 +33,7 @@ class ThreadedCommentEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -74,7 +74,7 @@ class ThreadedCommentEntityTest < Minitest::Test
     threaded_comment_ref01_data["epic_id"] = setup[:idmap]["epic01"]
 
     threaded_comment_ref01_data_result = threaded_comment_ref01_ent.create(threaded_comment_ref01_data, nil)
-    threaded_comment_ref01_data = Helpers.to_map(threaded_comment_ref01_data_result)
+    threaded_comment_ref01_data = Helpers.to_map(threaded_comment_ref01_data_result.respond_to?(:data_get) ? threaded_comment_ref01_data_result.data_get : threaded_comment_ref01_data_result)
     assert !threaded_comment_ref01_data.nil?
     assert !threaded_comment_ref01_data["id"].nil?
 
@@ -102,7 +102,7 @@ class ThreadedCommentEntityTest < Minitest::Test
     threaded_comment_ref01_data_up0_up[threaded_comment_ref01_markdef_up0_name] = threaded_comment_ref01_markdef_up0_value
 
     threaded_comment_ref01_resdata_up0_result = threaded_comment_ref01_ent.update(threaded_comment_ref01_data_up0_up, nil)
-    threaded_comment_ref01_resdata_up0 = Helpers.to_map(threaded_comment_ref01_resdata_up0_result)
+    threaded_comment_ref01_resdata_up0 = Helpers.to_map(threaded_comment_ref01_resdata_up0_result.respond_to?(:data_get) ? threaded_comment_ref01_resdata_up0_result.data_get : threaded_comment_ref01_resdata_up0_result)
     assert !threaded_comment_ref01_resdata_up0.nil?
     assert_equal threaded_comment_ref01_resdata_up0["id"], threaded_comment_ref01_data_up0_up["id"]
     assert_equal threaded_comment_ref01_resdata_up0[threaded_comment_ref01_markdef_up0_name], threaded_comment_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class ThreadedCommentEntityTest < Minitest::Test
       "id" => threaded_comment_ref01_data["id"],
     }
     threaded_comment_ref01_data_dt0_loaded = threaded_comment_ref01_ent.load(threaded_comment_ref01_match_dt0, nil)
-    threaded_comment_ref01_data_dt0_load_result = Helpers.to_map(threaded_comment_ref01_data_dt0_loaded)
+    threaded_comment_ref01_data_dt0_load_result = Helpers.to_map(threaded_comment_ref01_data_dt0_loaded.respond_to?(:data_get) ? threaded_comment_ref01_data_dt0_loaded.data_get : threaded_comment_ref01_data_dt0_loaded)
     assert !threaded_comment_ref01_data_dt0_load_result.nil?
     assert_equal threaded_comment_ref01_data_dt0_load_result["id"], threaded_comment_ref01_data["id"]
 

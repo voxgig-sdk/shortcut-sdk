@@ -63,13 +63,13 @@ describe('RepositoryEntity', async () => {
     const repository_ref01_ent = client.Repository()
     const repository_ref01_match: any = {}
 
-    const repository_ref01_list = await repository_ref01_ent.list(repository_ref01_match)
+    const repository_ref01_list = (await repository_ref01_ent.list(repository_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const repository_ref01_match_dt0: any = {}
     repository_ref01_match_dt0.id = repository_ref01_data.id
-    const repository_ref01_data_dt0 = await repository_ref01_ent.load(repository_ref01_match_dt0)
+    const repository_ref01_data_dt0 = (await repository_ref01_ent.load(repository_ref01_match_dt0)).data()
     assert(repository_ref01_data_dt0.id === repository_ref01_data.id)
 
 

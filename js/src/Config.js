@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(fn) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'Shortcut',
+        slug: "shortcut",
+    version: "0.0.1",
+    target: "js",
+
   }
 
 
@@ -36,7 +47,7 @@ class Config {
 
 
   options = {
-    base: 'https://api.app.shortcut.com',
+    base: "https://api.app.shortcut.com",
 
     auth: {
       prefix: '',
@@ -170,7 +181,6 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "DELETE",
@@ -187,11 +197,9 @@ class Config {
                   "story_ids": "`reqdata.story_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -201,108 +209,92 @@ class Config {
     "category": {
       "fields": [
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 0
+          "short": "A true/false boolean indicating if the Category has been archived.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "color",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The hex color to be displayed with the Category (for example, \"#ff0000\").",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The time/date that the Category was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "The Global ID of the Category.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 6
+          "short": "The unique ID of the Category.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The name of the Category.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "type",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ANY`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The time/date that the Category was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "category",
@@ -312,7 +304,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -331,18 +322,15 @@ class Config {
                   "type": "`reqdata.type`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -356,28 +344,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "category_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -403,28 +386,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "category_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -450,28 +428,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "category_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -501,11 +474,9 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -521,26 +492,21 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -570,11 +536,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -588,128 +552,102 @@ class Config {
     "custom_field": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The ID of the CustomField we want to move this CustomField after.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The ID of the CustomField we want to move this CustomField before.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "canonical_name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The canonical name for a Shortcut-defined field.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The instant when this CustomField was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "A string description of the CustomField",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "enabled",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 5
+          "short": "When true, the CustomField can be applied to entities in the Workspace.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "field_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The type of Custom Field, eg.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "fixed_position",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 8
+          "short": "When true, the CustomFieldEnumValues may not be reordered.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "icon_set_identifier",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "A string that represents the icon that corresponds to this custom field.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The unique public ID for the CustomField.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "The name of the Custom Field.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "An integer indicating the position of this Custom Field with respect to the other CustomField",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_types",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "The types of stories this CustomField is scoped to.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The instant when this CustomField was last updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "values",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 15
+          "short": "A collection of legal values for a CustomField.",
+          "type": "`$ARRAY`"
         }
       ],
       "name": "custom_field",
@@ -719,7 +657,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -733,28 +670,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "custom_field_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -780,28 +712,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "custom_field_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -827,28 +754,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "custom_field_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -882,11 +804,9 @@ class Config {
                   "values": "`reqdata.value`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -902,7 +822,6 @@ class Config {
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "PUT",
@@ -917,11 +836,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "PUT",
@@ -936,11 +853,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -950,32 +865,28 @@ class Config {
     "doc_slim": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Doc.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "content",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The content for the new document",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The public id of the Doc",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "title",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The title for the new document",
+          "type": "`$STRING`"
         }
       ],
       "name": "doc_slim",
@@ -985,7 +896,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -1002,18 +912,15 @@ class Config {
                   "title": "`reqdata.title`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -1027,11 +934,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -1047,7 +952,6 @@ class Config {
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "PUT",
@@ -1062,11 +966,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "PUT",
@@ -1081,11 +983,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -1095,7 +995,6 @@ class Config {
     "entity_template": {
       "fields": [
         {
-          "active": true,
           "name": "author_id",
           "op": {
             "list": {
@@ -1103,40 +1002,31 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The id of the user creating this template.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The time/date when the entity template was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "custom_fields",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 2
+          "short": "An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "deadline",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The due date of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The description of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "op": {
             "list": {
@@ -1144,96 +1034,72 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 6
+          "short": "The ID of the epic the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estimate",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "short": "The numeric point estimate of the story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "external_links",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "An array of external links connected to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "files",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 10
+          "short": "An array of UUIDs for any Members listed as Followers.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "group_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "The ID of the group to which the story is assigned.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 12
+          "short": "The unique identifier for the entity template.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "iteration_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 13
+          "short": "The ID of the iteration the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "label_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 14
+          "short": "An array of label ids attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 15
+          "short": "An array of labels attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "last_used_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The last time that someone created an entity using this template.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "linked_files",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 17
+          "short": "An array of linked files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "create": {
@@ -1245,71 +1111,55 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "The name of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "owner_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 19
+          "short": "An array of UUIDs of the owners of this story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "project_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 20
+          "short": "The ID of the project the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_contents",
           "op": {
             "update": {
-              "req": false,
               "type": "`$OBJECT`"
             }
           },
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 21
+          "short": "A map of story attributes this template populates.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "story_type",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 22
+          "short": "The type of story (feature, bug, chore).",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "sub_tasks",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 23
+          "short": "An array of sub-tasks connected to the story",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "tasks",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 24
+          "short": "An array of tasks connected to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 25
+          "short": "The time/date when the entity template was last updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workflow_state_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 26
+          "short": "The ID of the workflow state the story is currently in.",
+          "type": "`$INTEGER`"
         }
       ],
       "name": "entity_template",
@@ -1319,7 +1169,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -1337,18 +1186,15 @@ class Config {
                   "story_contents": "`reqdata.story_content`"
                 },
                 "res": "`body.story_contents`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -1362,28 +1208,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "entity_template_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -1409,28 +1250,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.story_contents`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "entity_template_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -1456,28 +1292,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "entity_template_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -1506,11 +1337,9 @@ class Config {
                   "story_contents": "`reqdata.story_content`"
                 },
                 "res": "`body.story_contents`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -1520,520 +1349,432 @@ class Config {
     "epic": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "The ID of the Epic we want to move this Epic after.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The Shortcut application url for the Epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "True/false boolean that indicates whether the Epic is archived or not.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "associated_groups",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 3
+          "short": "An array containing Group IDs and Group-owned story counts for the Epic's associated groups.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "short": "The ID of the Epic we want to move this Epic before.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "comments",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 5
+          "short": "A nested array of threaded comments.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "completed",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 6
+          "short": "A true/false boolean indicating if the Epic has been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The time/date the Epic was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "A manual override for the time/date the Epic was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "converted_from_story_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 9
+          "short": "The ID of the Story that was converted to an Epic.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The time/date the Epic was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deadline",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "The Epic's deadline.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "list": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 12
+          "short": "The Epic's description.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_state_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 14
+          "short": "The ID of the Epic State.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "follower_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 16
+          "short": "An array of UUIDs for any Members you want to add as Followers on this Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 17
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "`Deprecated` The ID of the group to associate with the epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 19
+          "short": "An array of UUIDS for Groups to which this Epic is related.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 20
+          "short": "An array of Group IDs that have been mentioned in the Epic description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "health",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 21
+          "short": "The current health status of the Epic.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 22
+          "short": "The unique ID of the Epic.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "label_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 23
+          "short": "An array of Label ids attached to the Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 24
+          "short": "An array of Labels attached to the Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 25
+          "short": "An array of Member IDs that have been mentioned in the Epic description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 26
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "milestone_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 27
+          "short": "`Deprecated` The ID of the Objective this Epic is related to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 28
+          "short": "The name of the Epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "objective_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 29
+          "short": "An array of IDs for Objectives to which this epic is related.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 30
+          "short": "An array of UUIDs for any members you want to add as Owners on this new Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "planned_start_date",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 31
+          "short": "The Epic's planned start date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 32
+          "short": "The Epic's relative position in the Epic workflow state.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "productboard_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 33
+          "short": "The ID of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 34
+          "short": "The name of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_plugin_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 35
+          "short": "The ID of the associated productboard integration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 36
+          "short": "The URL of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "project_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 37
+          "short": "The IDs of Projects related to this Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "requested_by_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 38
+          "short": "The ID of the Member that requested the epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 39
+          "short": "A true/false boolean indicating if the Epic has been started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "started_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 40
+          "short": "The time/date the Epic was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 41
+          "short": "A manual override for the time/date the Epic was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "state",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 42
+          "short": "`Deprecated` The workflow state that the Epic is in.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 43
+          "short": "A group of calculated values for this Epic.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "stories_without_projects",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 44
+          "short": "The number of stories in this epic which are not associated with a project.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 45
+          "short": "The time/date the Epic was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "epic",
@@ -2043,7 +1784,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -2078,54 +1818,42 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -2155,19 +1883,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -2188,21 +1912,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "label_id",
                     "orig": "label_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2229,21 +1949,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "milestone_id",
                     "orig": "milestone_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2270,21 +1986,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 3
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "objectif_id",
                     "orig": "objective_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2311,28 +2023,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 4
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2358,28 +2065,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2405,28 +2107,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2473,11 +2170,9 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -2497,291 +2192,248 @@ class Config {
     "epic_paginated_result": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 1
+          "short": "True/false boolean that indicates whether the Epic is archived or not.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "associated_groups",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 2
+          "short": "An array containing Group IDs and Group-owned story counts for the Epic's associated groups.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "completed",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 3
+          "short": "A true/false boolean indicating if the Epic has been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The time/date the Epic was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_override",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A manual override for the time/date the Epic was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The time/date the Epic was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deadline",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The Epic's deadline.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The Epic's description.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_state_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 10
+          "short": "The ID of the Epic State.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "external_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "follower_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 12
+          "short": "An array of UUIDs for any Members you want to add as Followers on this Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "`Deprecated` The ID of the group to associate with the epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 15
+          "short": "An array of UUIDS for Groups to which this Epic is related.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 16
+          "short": "An array of Group IDs that have been mentioned in the Epic description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 17
+          "short": "The unique ID of the Epic.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "label_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 18
+          "short": "An array of Label ids attached to the Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 19
+          "short": "An array of Labels attached to the Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 20
+          "short": "An array of Member IDs that have been mentioned in the Epic description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 21
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "milestone_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 22
+          "short": "`Deprecated` The ID of the Objective this Epic is related to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 23
+          "short": "The name of the Epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "objective_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 24
+          "short": "An array of IDs for Objectives to which this epic is related.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 25
+          "short": "An array of UUIDs for any members you want to add as Owners on this new Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "planned_start_date",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 26
+          "short": "The Epic's planned start date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 27
+          "short": "The Epic's relative position in the Epic workflow state.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "productboard_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 28
+          "short": "The ID of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 29
+          "short": "The name of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_plugin_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 30
+          "short": "The ID of the associated productboard integration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "productboard_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 31
+          "short": "The URL of the associated productboard feature.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "project_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 32
+          "short": "The IDs of Projects related to this Epic.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "requested_by_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 33
+          "short": "The ID of the Member that requested the epic.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 34
+          "short": "A true/false boolean indicating if the Epic has been started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "started_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 35
+          "short": "The time/date the Epic was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started_at_override",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 36
+          "short": "A manual override for the time/date the Epic was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "state",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 37
+          "short": "`Deprecated` The workflow state that the Epic is in.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 38
+          "short": "A group of calculated values for this Epic.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "stories_without_projects",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 39
+          "short": "The number of stories in this epic which are not associated with a project.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 40
+          "short": "The time/date the Epic was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "epic_paginated_result",
@@ -2791,31 +2443,24 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page",
                     "orig": "page",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   }
                 ]
@@ -2839,11 +2484,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -2859,17 +2502,14 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -2896,11 +2536,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         }
       },
       "relations": {
@@ -2910,74 +2548,62 @@ class Config {
     "epic_workflow": {
       "fields": [
         {
-          "active": true,
           "name": "color",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The hex color for this Epic State.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The time/date the Epic State was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The description of what sort of Epics belong in that Epic State.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The unique ID of the Epic State.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The Epic State's name.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "short": "The position that the Epic State is in, starting with 0 at the left.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The type of Epic State (Unstarted, Started, or Done)",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "When the Epic State was last updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "epic_workflow",
@@ -2987,7 +2613,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -3001,11 +2626,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.epic_states`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -3015,219 +2638,182 @@ class Config {
     "group": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 1
+          "short": "Whether or not the Group is archived.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "color",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The hex color to be displayed with the Group (for example, \"#ff0000\").",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "color_key",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The color key to be displayed with the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The instant when this group was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "default_workflow_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The ID of the default workflow for stories created in this group.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The description of the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "display_icon",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 7
+          "short": "Icons are used to attach images to Groups, Workspaces, Members, and Loading screens in the Shortcut web application.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "display_icon_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The Icon id for the avatar of this Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "The id of the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "member_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 12
+          "short": "The Member IDs contain within the Group.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The mention name of the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The name of the Group.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "num_epics_started",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "The number of epics assigned to the group which are in the started workflow state.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 16
+          "short": "The total number of stories assigned to the group.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_backlog",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 17
+          "short": "The number of stories assigned to the group which are in a backlog workflow state.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_started",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 18
+          "short": "The number of stories assigned to the group which are in a started workflow state.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 19
+          "short": "The last instant when this group was updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workflow_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 20
+          "short": "The Workflow IDs contained within the Group.",
+          "type": "`$ARRAY`"
         }
       ],
       "name": "group",
@@ -3237,7 +2823,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -3260,18 +2845,15 @@ class Config {
                   "workflow_ids": "`reqdata.workflow_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -3285,28 +2867,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "group_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -3332,28 +2909,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "group_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -3390,11 +2962,9 @@ class Config {
                   "workflow_ids": "`reqdata.workflow_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -3404,73 +2974,57 @@ class Config {
     "health": {
       "fields": [
         {
-          "active": true,
           "name": "author_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The ID of the permission who created or updated the Health record.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The time that the Health record was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "short": "The ID of the Epic associated with this Health record.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The unique ID of the Health record.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "objective_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The ID of the Objective associated with this Health record.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "status",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The health status of the Epic or Objective.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "text",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The text of the Health record.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The time that the Health record was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "health",
@@ -3480,17 +3034,14 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -3520,28 +3071,23 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -3568,28 +3114,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -3616,28 +3157,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "health_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -3666,11 +3202,9 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -3684,81 +3218,78 @@ class Config {
     "history": {
       "fields": [
         {
-          "active": true,
           "name": "actions",
           "req": true,
+          "short": "An array of actions that were performed for the change.",
           "type": "`$ARRAY`",
-          "index$": 0
+          "union": {
+            "branches": 19,
+            "count": 1,
+            "depth": 1
+          }
         },
         {
-          "active": true,
           "name": "actor_name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The name of the actor that performed the action, if it can be determined.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "automation_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The ID of the automation that performed the change.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "changed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The date when the change occurred.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The ID of the webhook that handled the change.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "The ID representing the change for the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "member_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The ID of the member who performed the change.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "primary_id",
-          "req": false,
+          "short": "The ID of the primary entity that has changed, if applicable.",
           "type": "`$STRING`",
-          "index$": 7
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 0
+          }
         },
         {
-          "active": true,
           "name": "references",
-          "req": false,
+          "short": "An array of objects affected by the change.",
           "type": "`$ARRAY`",
-          "index$": 8
+          "union": {
+            "branches": 12,
+            "count": 12,
+            "depth": 5
+          }
         },
         {
-          "active": true,
           "name": "version",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The version of the change format.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "webhook_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The ID of the webhook that handled the change.",
+          "type": "`$STRING`"
         }
       ],
       "name": "history",
@@ -3768,17 +3299,14 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -3805,11 +3333,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -3823,202 +3349,170 @@ class Config {
     "iteration": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Iteration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "associated_groups",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 1
+          "short": "An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The instant when this iteration was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The description of the iteration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "end_date",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The date this iteration ends.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A string description of this resource",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "follower_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 6
+          "short": "An array of UUIDs for any Members listed as Followers.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "An array of UUIDs for any Groups you want to add as Followers.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of Group IDs that have been mentioned in the Story description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 10
+          "short": "The ID of the iteration.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "label_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 11
+          "short": "An array of label ids attached to the iteration.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 12
+          "short": "An array of labels attached to the iteration.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "An array of Member IDs that have been mentioned in the Story description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 14
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The name of the iteration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "start_date",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The date this iteration begins.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 17
+          "short": "A group of calculated values for this Iteration.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "status",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "The status of the iteration.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 19
+          "short": "The instant when this iteration was last updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "iteration",
@@ -4028,7 +3522,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -4050,54 +3543,42 @@ class Config {
                   "start_date": "`reqdata.start_date`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -4127,11 +3608,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -4145,28 +3624,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "iteration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4192,28 +3666,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "iteration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4239,28 +3708,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "iteration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4294,11 +3758,9 @@ class Config {
                   "start_date": "`reqdata.start_date`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -4308,86 +3770,72 @@ class Config {
     "key_result": {
       "fields": [
         {
-          "active": true,
           "name": "current_observed_value",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "short": "The starting value of the Key Result.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "current_target_value",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "short": "The starting value of the Key Result.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The ID of the Key Result.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "initial_observed_value",
           "op": {
             "update": {
-              "req": false,
               "type": "`$OBJECT`"
             }
           },
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 3
+          "short": "The starting value of the Key Result.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The name of the Key Result.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "objective_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The Objective to which this Key Result belongs.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "observed_value",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 6
+          "short": "The starting value of the Key Result.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "progress",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "short": "The integer percentage of progress toward completion of the Key Result.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "target_value",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 8
+          "short": "The starting value of the Key Result.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The type of the Key Result (numeric, percent, or boolean).",
+          "type": "`$STRING`"
         }
       ],
       "name": "key_result",
@@ -4397,17 +3845,14 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "key_result_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -4433,28 +3878,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "key_result_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -4485,11 +3925,9 @@ class Config {
                   "target_value": "`reqdata.target_value`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -4499,14 +3937,12 @@ class Config {
     "label": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Label.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "list": {
@@ -4514,12 +3950,10 @@ class Config {
               "type": "`$BOOLEAN`"
             }
           },
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 1
+          "short": "A true/false boolean indicating if the Label has been archived.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "color",
           "op": {
             "list": {
@@ -4527,19 +3961,16 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The time/date that the Label was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "list": {
@@ -4547,19 +3978,16 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The description of the new Label.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "list": {
@@ -4567,169 +3995,144 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 8
+          "short": "The unique ID of the Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The name of the new Label.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "num_epics",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 10
+          "short": "The total number of Epics with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_epics_completed",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 11
+          "short": "The number of completed Epics associated with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_epics_in_progress",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The number of in progress epics associated with this label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_epics_total",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 13
+          "short": "The total number of Epics associated with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_epics_unstarted",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 14
+          "short": "The number of unstarted epics associated with this label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_points_backlog",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "The total number of backlog points with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_points_completed",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 16
+          "short": "The total number of completed points with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_points_in_progress",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 17
+          "short": "The total number of in-progress points with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_points_total",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 18
+          "short": "The total number of points with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_points_unstarted",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 19
+          "short": "The total number of unstarted points with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_related_documents",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 20
+          "short": "The total number of Documents associated this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_backlog",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 21
+          "short": "The total number of stories backlog Stories with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_completed",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 22
+          "short": "The total number of completed Stories with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_in_progress",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 23
+          "short": "The total number of in-progress Stories with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_total",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 24
+          "short": "The total number of Stories with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_unestimated",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 25
+          "short": "The total number of Stories with no point estimate with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "num_stories_unstarted",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 26
+          "short": "The total number of stories unstarted Stories with this Label.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 27
+          "short": "A group of calculated values for this Label.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 28
+          "short": "The time/date that the Label was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "label",
@@ -4739,7 +4142,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -4758,26 +4160,21 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body.stats`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "slim",
                     "orig": "slim",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -4798,28 +4195,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "label_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4845,28 +4237,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.stats`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "label_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4892,28 +4279,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "label_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -4944,11 +4326,9 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body.stats`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -4958,187 +4338,157 @@ class Config {
     "linked_file": {
       "fields": [
         {
-          "active": true,
           "name": "content_type",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The content type of the image (e.g.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The time/date the LinkedFile was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The description of the file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 4
+          "short": "The groups that are mentioned in the description of the file.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The unique identifier for the file.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 6
+          "short": "The members that are mentioned in the description of the file.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The name of the linked file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "size",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 9
+          "short": "The filesize, if the integration provided it.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 10
+          "short": "The ID of the linked story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 11
+          "short": "The IDs of the stories this file is attached to.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "thumbnail_url",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 12
+          "short": "The URL of the file thumbnail, if the integration provided it.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "type",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The integration type (e.g.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The time/date the LinkedFile was updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "uploader_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The UUID of the member that uploaded the file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "url",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The URL of the file.",
+          "type": "`$STRING`"
         }
       ],
       "name": "linked_file",
@@ -5148,7 +4498,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -5172,18 +4521,15 @@ class Config {
                   "url": "`reqdata.url`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -5197,28 +4543,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "linked_file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -5244,28 +4585,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "linked_file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -5291,28 +4627,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "linked_file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -5347,11 +4678,9 @@ class Config {
                   "url": "`reqdata.url`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -5361,130 +4690,104 @@ class Config {
     "member": {
       "fields": [
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The time/date the Member was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_without_invite",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 1
+          "short": "Whether this member was created as a placeholder entity.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "disabled",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "True/false boolean indicating whether the Member has been disabled within the Workspace.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 5
+          "short": "The Member's group ids",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The Member's ID in Shortcut.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "installation_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "Only set for agents.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "is_owner",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 8
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "mention_name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "organization2",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 11
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "profile",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 12
+          "short": "A group of Member profile details.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "replaced_by",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The id of the member that replaces this one when merged.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "role",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The Member's role in the Workspace.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "state",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The user state, one of partial, full, disabled, or imported.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The time/date the Member was last updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workspace2",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 17
+          "type": "`$OBJECT`"
         }
       ],
       "name": "member",
@@ -5494,23 +4797,18 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "disabled",
                     "orig": "disabled",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "org_public_id",
                     "orig": "org_public_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -5532,37 +4830,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "member_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "org_public_id",
                     "orig": "org_public_id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -5590,11 +4881,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -5608,11 +4897,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -5622,220 +4909,183 @@ class Config {
     "milestone": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "The ID of the Milestone we want to move this Milestone after.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The Shortcut application url for the Milestone.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "A boolean indicating whether the Milestone has been archived or not.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "short": "The ID of the Milestone we want to move this Milestone before.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "categories",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 4
+          "short": "An array of Categories attached to the Milestone.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "completed",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 5
+          "short": "A true/false boolean indicating if the Milestone has been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The time/date the Milestone was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "A manual override for the time/date the Milestone was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The time/date the Milestone was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The Milestone's description.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The unique ID of the Milestone.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "key_result_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "The IDs of the Key Results associated with the Objective.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The name of the Milestone.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "started",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 16
+          "short": "A true/false boolean indicating if the Milestone has been started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "started_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 17
+          "short": "The time/date the Milestone was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "A manual override for the time/date the Milestone was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "state",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 19
+          "short": "The workflow state that the Milestone is in.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 20
+          "short": "A group of calculated values for this Milestone.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 21
+          "short": "The time/date the Milestone was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "milestone",
@@ -5845,7 +5095,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -5866,28 +5115,23 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "category_id",
                     "orig": "category_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -5914,21 +5158,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "category_id",
                     "orig": "category_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -5955,11 +5195,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -5973,28 +5211,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "milestone_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6020,28 +5253,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "milestone_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6067,28 +5295,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "milestone_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6124,11 +5347,9 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -6148,17 +5369,14 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "objective_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6184,11 +5402,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -6198,224 +5414,186 @@ class Config {
     "objective": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "The ID of the Objective we want to move this Objective after.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The Shortcut application url for the Objective.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "A boolean indicating whether the Objective has been archived or not.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "short": "The ID of the Objective we want to move this Objective before.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "categories",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 4
+          "short": "An array of Categories attached to the Objective.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "completed",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 5
+          "short": "A true/false boolean indicating if the Objectivehas been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The time/date the Objective was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "A manual override for the time/date the Objective was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The time/date the Objective was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "list": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The Objective's description.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The unique ID of the Objective.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "key_result_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "The IDs of the Key Results associated with the Objective.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The name of the Objective.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "started",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 16
+          "short": "A true/false boolean indicating if the Objective has been started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "started_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 17
+          "short": "The time/date the Objective was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "A manual override for the time/date the Objective was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "state",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 19
+          "short": "The workflow state that the Objective is in.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 20
+          "short": "A group of calculated values for this Objective.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 21
+          "short": "The time/date the Objective was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "objective",
@@ -6425,7 +5603,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -6446,54 +5623,42 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -6523,47 +5688,36 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -6593,11 +5747,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -6611,28 +5763,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "objective_public_id",
                     "orig": "objective_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6658,28 +5805,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "objective_public_id",
                     "orig": "objective_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -6715,11 +5857,9 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -6733,244 +5873,206 @@ class Config {
     "project": {
       "fields": [
         {
-          "active": true,
           "name": "abbreviation",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Project abbreviation used in Story summaries.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The Shortcut application url for the Project.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "True/false boolean indicating whether the Project is in an Archived state.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "color",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The color associated with the Project in the Shortcut member interface.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The time/date that the Project was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "days_to_thermometer",
           "op": {
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The number of days before the thermometer appears in the Story summary.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The description of the Project.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "follower_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of UUIDs for any Members listed as Followers.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The Global ID of the Project.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 11
+          "short": "The unique ID of the Project.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "iteration_length",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The number of weeks per iteration in this Project.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The name of the Project",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "show_thermometer",
           "op": {
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 14
+          "short": "Configuration to enable or disable thermometers in the Story summary.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "start_time",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The date at which the Project was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 16
+          "short": "A group of calculated values for this Project.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "team_id",
           "op": {
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 17
+          "short": "The ID of the team the project belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "The time/date that the Project was last updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workflow_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 19
+          "short": "The ID of the workflow the project belongs to.",
+          "type": "`$INTEGER`"
         }
       ],
       "name": "project",
@@ -6980,7 +6082,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -7006,18 +6107,15 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -7031,28 +6129,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "project_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -7078,28 +6171,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "project_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -7125,28 +6213,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "project_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -7182,11 +6265,9 @@ class Config {
                   "team_id": "`reqdata.team_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -7196,67 +6277,58 @@ class Config {
     "repository": {
       "fields": [
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The time/date the Repository was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The VCS unique identifier for the Repository.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "full_name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The full name of the VCS repository.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "short": "The ID associated to the VCS repository in Shortcut.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "The shorthand name of the VCS repository.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The VCS provider for the Repository.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "The time/date the Repository was updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "short": "The URL of the Repository.",
+          "type": "`$STRING`"
         }
       ],
       "name": "repository",
@@ -7266,7 +6338,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -7280,28 +6351,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "repo_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -7327,11 +6393,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -7341,32 +6405,28 @@ class Config {
     "search": {
       "fields": [
         {
-          "active": true,
           "name": "epics",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "short": "The results of the Epic search query.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "iterations",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "short": "The results of the Iteration search query.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "milestones",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "short": "The results of the Objective search query.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "stories",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 3
+          "short": "The results of the Story search query.",
+          "type": "`$OBJECT`"
         }
       ],
       "name": "search",
@@ -7376,43 +6436,33 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -7441,11 +6491,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -7455,79 +6503,64 @@ class Config {
     "story": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "The ID of the story we want to move this story after.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The Shortcut application url for the Story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "archived",
           "op": {
             "create": {
-              "req": false,
               "type": "`$BOOLEAN`"
             },
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "True if the story has been archived or not.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "short": "The ID of the story we want to move this story before.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "blocked",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 4
+          "short": "A true/false boolean indicating if the Story is currently blocked.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "blocker",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 5
+          "short": "A true/false boolean indicating if the Story is currently a blocker of another story.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "branch_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 6
+          "short": "An array of IDs of Branches attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "branches",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "An array of Git branches attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "comment_ids",
           "op": {
             "list": {
@@ -7535,244 +6568,197 @@ class Config {
               "type": "`$ARRAY`"
             }
           },
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "An array of IDs of Comments attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "comments",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of comments attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "commit_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 10
+          "short": "An array of IDs of Commits attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "commits",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 11
+          "short": "An array of commits attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "completed",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 12
+          "short": "A true/false boolean indicating if the Story has been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The time/date the Story was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "A manual override for the time/date the Story was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The time/date the Story was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "custom_fields",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 16
+          "short": "An array of CustomField value assertions for the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "custom_fields_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 17
+          "short": "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "custom_fields_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 18
+          "short": "A map specifying a CustomField ID.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "cycle_time",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 19
+          "short": "The cycle time (in seconds) of this story when complete.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "deadline",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 20
+          "short": "The due date of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "list": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 21
+          "short": "The description of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 22
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 23
+          "short": "The ID of the epic the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "estimate",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 24
+          "short": "The numeric point estimate of the story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 25
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_links",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 26
+          "short": "An array of external links (strings) associated with a Story",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "external_links_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 27
+          "short": "An array of External Links associated with this story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "external_links_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 28
+          "short": "An array of External Links associated with this story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "file_ids",
           "op": {
             "list": {
@@ -7780,177 +6766,140 @@ class Config {
               "type": "`$ARRAY`"
             }
           },
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 29
+          "short": "An array of IDs of files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "file_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 30
+          "short": "An array of IDs of files attached to the story in addition to files from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "file_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 31
+          "short": "An array of IDs of files removed from files from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "files",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 32
+          "short": "An array of files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 33
+          "short": "An array of UUIDs for any Members listed as Followers.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 34
+          "short": "The UUIDs of the new followers to be added in addition to followers from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 35
+          "short": "The UUIDs of the new followers to be removed from followers from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "formatted_vcs_branch_name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 36
+          "short": "The formatted branch name for this story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 37
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 38
+          "short": "The ID of the group associated with the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 39
+          "short": "An array of Group IDs that have been mentioned in the Story description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 40
+          "short": "The unique ID of the Story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "iteration_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 41
+          "short": "The ID of the iteration the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "label_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 42
+          "short": "An array of label ids attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 43
+          "short": "An array of labels attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 44
+          "short": "An array of labels attached to the story in addition to the labels provided by the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 45
+          "short": "An array of labels to remove from the labels provided by the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "lead_time",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 46
+          "short": "The lead time (in seconds) of this story when complete.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "linked_file_ids",
           "op": {
             "list": {
@@ -7958,84 +6907,68 @@ class Config {
               "type": "`$ARRAY`"
             }
           },
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 47
+          "short": "An array of IDs of linked files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "linked_file_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 48
+          "short": "An array of IDs of linked files attached to the story in addition to files from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "linked_file_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 49
+          "short": "An array of IDs of linked files removed from files from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "linked_files",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 50
+          "short": "An array of linked files attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 51
+          "short": "An array of Member IDs that have been mentioned in the Story description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 52
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "move_to",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 53
+          "short": "One of \"first\" or \"last\".",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "moved_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 54
+          "short": "The time/date the Story was last changed workflow-state.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 55
+          "short": "The name of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "num_tasks_completed",
           "op": {
             "list": {
@@ -8043,227 +6976,188 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 56
+          "short": "The number of tasks on the story which are complete.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "owner_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 57
+          "short": "An array of UUIDs of the owners of this story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 58
+          "short": "The UUIDs of the new owners to be added in addition to owners from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 59
+          "short": "The UUIDs of the new owners to be removed from owners from the template.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "parent_story_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 60
+          "short": "The id of the parent story to associate with this story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 61
+          "short": "A number representing the position of the story in relation to every other story in the current project.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "previous_iteration_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 62
+          "short": "The IDs of the iteration the story belongs to.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "project_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 63
+          "short": "The ID of the project the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "pull_request_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 64
+          "short": "An array of IDs of Pull/Merge Requests attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "pull_requests",
           "op": {
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 65
+          "short": "An array of Pull/Merge Requests attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "requested_by_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 66
+          "short": "The ID of the Member that requested the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "source_task_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 67
+          "short": "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "started",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 68
+          "short": "A true/false boolean indicating if the Story has been started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "started_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 69
+          "short": "The time/date the Story was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "started_at_override",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 70
+          "short": "A manual override for the time/date the Story was started.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stats",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 71
+          "short": "The stats object for Stories",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "story_links",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 72
+          "short": "An array of story links attached to the Story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "story_template_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 73
+          "short": "The ID of the story template used to create this story, or null if not created using a template.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "story_type",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             },
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 74
+          "short": "The type of story (feature, bug, chore).",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "sub_task_story_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 75
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "sub_tasks",
-          "req": false,
+          "short": "A list of either params to create a new sub-task or link an existing story as a sub-task",
           "type": "`$ARRAY`",
-          "index$": 76
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 1
+          }
         },
         {
-          "active": true,
           "name": "synced_item",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 77
+          "short": "The synced item for the story.",
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "task_ids",
           "op": {
             "list": {
@@ -8271,63 +7165,53 @@ class Config {
               "type": "`$ARRAY`"
             }
           },
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 78
+          "short": "An array of IDs of Tasks attached to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "tasks",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "list": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 79
+          "short": "An array of tasks connected to the story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 80
+          "short": "The time/date the Story was updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workflow_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 81
+          "short": "The ID of the workflow the story belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "workflow_state_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$INTEGER`"
             },
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 82
+          "short": "The ID of the workflow state the story is currently in.",
+          "type": "`$INTEGER`"
         }
       ],
       "name": "story",
@@ -8337,7 +7221,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -8384,11 +7267,9 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -8452,54 +7333,42 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "detail",
                     "orig": "detail",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "entity_type",
                     "orig": "entity_type",
-                    "reqd": false,
                     "type": "`$ARRAY`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "next",
                     "orig": "next",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "page_size",
                     "orig": "page_size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "query",
                     "orig": "query",
@@ -8529,38 +7398,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "group_id",
                     "orig": "group_public_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "limit",
                     "orig": "limit",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "offset",
                     "orig": "offset",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   }
                 ]
@@ -8590,30 +7451,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -8642,30 +7497,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 2
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "iteration_id",
                     "orig": "iteration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -8694,30 +7543,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 3
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "label_id",
                     "orig": "label_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -8746,30 +7589,24 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 4
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "project_id",
                     "orig": "project_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ],
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "includes_description",
                     "orig": "includes_description",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   }
                 ]
@@ -8798,15 +7635,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 5
+              }
             },
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "external_link",
                     "orig": "external_link",
@@ -8832,28 +7666,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 6
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -8879,28 +7708,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -8926,28 +7750,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9002,11 +7821,9 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -9032,161 +7849,135 @@ class Config {
     "story_comment": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Comment.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "author_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The unique ID of the Member who is the Comment's author.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "blocker",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The time/date when the Comment was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deleted",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 4
+          "short": "True/false boolean indicating whether the Comment has been deleted.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "The unique IDs of the Group who are mentioned in the Comment.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 8
+          "short": "The unique ID of the Comment.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "linked_to_slack",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 9
+          "short": "Whether the Comment is currently the root of a thread that is linked to Slack.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 10
+          "short": "The unique IDs of the Member who are mentioned in the Comment.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 11
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "parent_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The ID of the parent Comment this Comment is threaded under.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 13
+          "short": "The Comments numerical position in the list from oldest to newest.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "reactions",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 14
+          "short": "A set of Reactions to this Comment.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "story_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "The ID of the Story on which the Comment appears.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "text",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The text of the Comment.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "unblocks_parent",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 17
+          "short": "Marks the comment as an unblocker to its blocker parent.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 18
+          "short": "The time/date when the Comment was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "story_comment",
@@ -9196,26 +7987,21 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "comment_id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9246,21 +8032,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9294,28 +8076,23 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9342,37 +8119,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9402,37 +8172,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9464,11 +8227,9 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -9486,78 +8247,67 @@ class Config {
     "story_link": {
       "fields": [
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The time/date when the Story Link was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "short": "The unique identifier of the Story Link.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "object_id",
           "op": {
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "short": "The ID of the object Story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "subject_id",
           "op": {
             "update": {
-              "req": false,
               "type": "`$INTEGER`"
             }
           },
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "short": "The ID of the subject Story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "subject_workflow_state_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The workflow state of the \"subject\" story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The time/date when the Story Link was last updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "verb",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "How the subject Story acts on the object Story.",
+          "type": "`$STRING`"
         }
       ],
       "name": "story_link",
@@ -9567,7 +8317,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -9585,28 +8334,23 @@ class Config {
                   "verb": "`reqdata.verb`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_link_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9632,28 +8376,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_link_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9679,28 +8418,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "story_link_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9730,11 +8464,9 @@ class Config {
                   "verb": "`reqdata.verb`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -9744,11 +8476,10 @@ class Config {
     "story_reaction": {
       "fields": [
         {
-          "active": true,
           "name": "emoji",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The emoji short-code to add / remove.",
+          "type": "`$STRING`"
         }
       ],
       "name": "story_reaction",
@@ -9758,26 +8489,21 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "comment_id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9810,37 +8536,30 @@ class Config {
                   "emoji": "`reqdata.emoji`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "comment_id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -9873,11 +8592,9 @@ class Config {
                   "emoji": "`reqdata.emoji`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -9892,305 +8609,226 @@ class Config {
     "story_slim": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "The ID of the story that the stories are to be moved below.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "archived",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 1
+          "short": "A true/false boolean indicating whether the Story is in archived state.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "short": "The ID of the story that the stories are to be moved before.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "completed_at_end",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "Stories should have been completed on or before this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "completed_at_start",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "Stories should have been completed on or after this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at_end",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "Stories should have been created on or before this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at_start",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "Stories should have been created on or after this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "custom_fields_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "custom_fields_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "deadline",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 9
+          "short": "The due date of the story.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deadline_end",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "Stories should have a deadline on or before this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deadline_start",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "Stories should have a deadline on or after this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "epic_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 12
+          "short": "The Epic IDs that may be associated with the Stories.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "epic_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "The Epic IDs that may be associated with the Stories.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "estimate",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 14
+          "short": "The number of estimate points associate with the Stories.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "external_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "An ID or URL that references an external resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_links",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 16
+          "short": "An array of External Links associated with this story.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 17
+          "short": "The UUIDs of the new followers to be added.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "follower_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 18
+          "short": "The UUIDs of the followers to be removed.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "group_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 19
+          "short": "The Group ID that is associated with the Stories",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 20
+          "short": "The Group IDs that are associated with the Stories",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "includes_description",
-          "req": false,
-          "type": "`$BOOLEAN`",
-          "index$": 21
+          "short": "Whether to include the story description in the response.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "iteration_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 22
+          "short": "The Iteration ID that may be associated with the Stories.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "iteration_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 23
+          "short": "The Iteration IDs that may be associated with the Stories.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "label_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 24
+          "short": "The Label IDs that may be associated with the Stories.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "label_name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 25
+          "short": "The name of any associated Labels.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "labels_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 26
+          "short": "An array of labels to be added.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "labels_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 27
+          "short": "An array of labels to be removed.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "move_to",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 28
+          "short": "One of \"first\" or \"last\".",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "owner_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 29
+          "short": "An array of UUIDs for any Users who may be Owners of the Stories.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "owner_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 30
+          "short": "An array of UUIDs for any Users who may be Owners of the Stories.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids_add",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 31
+          "short": "The UUIDs of the new owners to be added.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids_remove",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 32
+          "short": "The UUIDs of the owners to be removed.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "project_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 33
+          "short": "The IDs for the Projects the Stories may be assigned to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "project_ids",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 34
+          "short": "The IDs for the Projects the Stories may be assigned to.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "requested_by_id",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 35
+          "short": "The UUID of any Users who may have requested the Stories.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stories",
           "req": true,
+          "short": "An array of stories to be created.",
           "type": "`$ARRAY`",
-          "index$": 36
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 4
+          }
         },
         {
-          "active": true,
           "name": "story_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 37
+          "short": "The Ids of the Stories you wish to update.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "story_type",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 38
+          "short": "The type of Stories that you want returned.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at_end",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 39
+          "short": "Stories should have been updated on or before this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at_start",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 40
+          "short": "Stories should have been updated on or after this date.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "workflow_state_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 41
+          "short": "The unique IDs of the specific Workflow States that the Stories should be in.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "workflow_state_types",
-          "req": false,
-          "type": "`$ARRAY`",
-          "index$": 42
+          "short": "The type of Workflow State the Stories may be in.",
+          "type": "`$ARRAY`"
         }
       ],
       "name": "story_slim",
@@ -10200,7 +8838,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -10217,11 +8854,9 @@ class Config {
                   "stories": "`reqdata.story`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -10265,18 +8900,15 @@ class Config {
                   "workflow_state_types": "`reqdata.workflow_state_type`"
                 },
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "PUT",
@@ -10315,11 +8947,9 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -10329,167 +8959,139 @@ class Config {
     "task": {
       "fields": [
         {
-          "active": true,
           "name": "after_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "short": "Move task after this task ID.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "before_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "short": "Move task before this task ID.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "complete",
           "op": {
             "create": {
-              "req": false,
               "type": "`$BOOLEAN`"
             },
             "update": {
-              "req": false,
               "type": "`$BOOLEAN`"
             }
           },
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 2
+          "short": "True/false boolean indicating whether the Task has been completed.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "completed_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The time/date the Task was completed.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "The time/date the Task was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "Full text of the Task.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 7
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "global_id",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 8
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of UUIDs of Groups mentioned in this Task.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 10
+          "short": "The unique ID of the Task.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 11
+          "short": "An array of UUIDs of Members mentioned in this Task.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 12
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "owner_ids",
           "op": {
             "create": {
-              "req": false,
               "type": "`$ARRAY`"
             },
             "update": {
-              "req": false,
               "type": "`$ARRAY`"
             }
           },
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 13
+          "short": "An array of UUIDs of the Owners of this Task.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "position",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 14
+          "short": "The number corresponding to the Task's position within a list of Tasks on a Story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 15
+          "short": "The unique identifier of the parent Story.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The time/date the Task was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "task",
@@ -10499,17 +9101,14 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10543,37 +9142,30 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "task_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10603,37 +9195,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "task_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10663,37 +9248,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "task_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "story_id",
                     "orig": "story_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10729,11 +9307,9 @@ class Config {
                   "owner_ids": "`reqdata.owner_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -10747,119 +9323,102 @@ class Config {
     "threaded_comment": {
       "fields": [
         {
-          "active": true,
           "name": "app_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "The Shortcut application url for the Comment.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "author_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The unique ID of the Member that authored the Comment.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "comments",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 2
+          "short": "A nested array of threaded comments.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "The time/date the Comment was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "deleted",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 4
+          "short": "True/false boolean indicating whether the Comment is deleted.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "An array of Group IDs that have been mentioned in this Comment.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 8
+          "short": "The unique ID of the Comment.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "An array of Member IDs that have been mentioned in this Comment.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 10
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "text",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 11
+          "short": "The text of the Comment.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "create": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 12
+          "short": "The time/date the Comment was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "threaded_comment",
@@ -10869,26 +9428,21 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10924,21 +9478,17 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             },
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -10971,28 +9521,23 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11019,37 +9564,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11079,37 +9617,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11139,37 +9670,30 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "epic_id",
                     "orig": "epic_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "comment_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11201,11 +9725,9 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -11219,159 +9741,136 @@ class Config {
     "uploaded_file": {
       "fields": [
         {
-          "active": true,
           "name": "content_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "short": "Free form string corresponding to a text or image file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "created_at",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The time/date that the file was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "short": "The description of the file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "external_id",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "This field can be set to another unique ID.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "filename",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 5
+          "short": "The name assigned to the file in Shortcut upon upload.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "group_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 6
+          "short": "The unique IDs of the Groups who are mentioned in the file description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "short": "The unique ID for the file.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "member_mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "The unique IDs of the Members who are mentioned in the file description.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "mention_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 9
+          "short": "`Deprecated:` use `member_mention_ids`.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "name",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The optional User-specified name of the file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "size",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 11
+          "short": "The size of the file.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "story_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 12
+          "short": "The unique IDs of the Stories associated with this file.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "thumbnail_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 13
+          "short": "The url where the thumbnail of the file can be found in Shortcut.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 14
+          "short": "The time/date that the file was updated.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "uploader_id",
           "op": {
             "update": {
-              "req": false,
               "type": "`$STRING`"
             }
           },
           "req": true,
-          "type": "`$STRING`",
-          "index$": 15
+          "short": "The unique ID of the Member who uploaded the file.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 16
+          "short": "The URL for the file.",
+          "type": "`$STRING`"
         }
       ],
       "name": "uploaded_file",
@@ -11381,7 +9880,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -11395,18 +9893,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "list": {
           "input": "data",
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -11420,28 +9915,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11467,28 +9957,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11514,28 +9999,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         },
         "update": {
           "input": "data",
           "name": "update",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "file_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11568,11 +10048,9 @@ class Config {
                   "uploader_id": "`reqdata.uploader_id`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "update"
+          ]
         }
       },
       "relations": {
@@ -11582,18 +10060,13 @@ class Config {
     "webhook": {
       "fields": [
         {
-          "active": true,
           "name": "secret",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "webhook_url",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "webhook",
@@ -11603,7 +10076,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -11621,28 +10093,23 @@ class Config {
                   "webhook_url": "`reqdata.webhook_url`"
                 },
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "integration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11669,28 +10136,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         },
         "remove": {
           "input": "data",
           "name": "remove",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "integration_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11717,11 +10179,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "remove"
+          ]
         }
       },
       "relations": {
@@ -11731,81 +10191,70 @@ class Config {
     "workflow": {
       "fields": [
         {
-          "active": true,
           "name": "auto_assign_owner",
           "req": true,
-          "type": "`$BOOLEAN`",
-          "index$": 0
+          "short": "Indicates if an owner is automatically assigned when an unowned story is started.",
+          "type": "`$BOOLEAN`"
         },
         {
-          "active": true,
           "name": "created_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "short": "The date the Workflow was created.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "default_state_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "short": "The unique ID of the default state that new Stories are entered into.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "description",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "short": "A description of the workflow.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "entity_type",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "short": "A string description of this resource.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "short": "The unique ID of the Workflow.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 6
+          "short": "The name of the workflow.",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "project_ids",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 7
+          "short": "An array of IDs of projects within the Workflow.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "states",
           "req": true,
-          "type": "`$ARRAY`",
-          "index$": 8
+          "short": "A map of the states in this Workflow.",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
           "name": "team_id",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 9
+          "short": "The ID of the team the workflow belongs to.",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "updated_at",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 10
+          "short": "The date the Workflow was updated.",
+          "type": "`$STRING`"
         }
       ],
       "name": "workflow",
@@ -11815,7 +10264,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -11829,28 +10277,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "workflow_public_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -11876,11 +10319,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

@@ -44,7 +44,7 @@ class StoryLinkEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.story_link"), "story_link_ref01"));
 
         $story_link_ref01_data_result = $story_link_ref01_ent->create($story_link_ref01_data, null);
-        $story_link_ref01_data = Helpers::to_map($story_link_ref01_data_result);
+        $story_link_ref01_data = Helpers::to_map(is_object($story_link_ref01_data_result) && method_exists($story_link_ref01_data_result, 'data_get') ? $story_link_ref01_data_result->data_get() : $story_link_ref01_data_result);
         $this->assertNotNull($story_link_ref01_data);
         $this->assertNotNull($story_link_ref01_data["id"]);
 
@@ -58,7 +58,7 @@ class StoryLinkEntityTest extends TestCase
         $story_link_ref01_data_up0_up[$story_link_ref01_markdef_up0_name] = $story_link_ref01_markdef_up0_value;
 
         $story_link_ref01_resdata_up0_result = $story_link_ref01_ent->update($story_link_ref01_data_up0_up, null);
-        $story_link_ref01_resdata_up0 = Helpers::to_map($story_link_ref01_resdata_up0_result);
+        $story_link_ref01_resdata_up0 = Helpers::to_map(is_object($story_link_ref01_resdata_up0_result) && method_exists($story_link_ref01_resdata_up0_result, 'data_get') ? $story_link_ref01_resdata_up0_result->data_get() : $story_link_ref01_resdata_up0_result);
         $this->assertNotNull($story_link_ref01_resdata_up0);
         $this->assertEquals($story_link_ref01_resdata_up0["id"], $story_link_ref01_data_up0_up["id"]);
         $this->assertEquals($story_link_ref01_resdata_up0[$story_link_ref01_markdef_up0_name], $story_link_ref01_markdef_up0_value);
@@ -68,7 +68,7 @@ class StoryLinkEntityTest extends TestCase
             "id" => $story_link_ref01_data["id"],
         ];
         $story_link_ref01_data_dt0_loaded = $story_link_ref01_ent->load($story_link_ref01_match_dt0, null);
-        $story_link_ref01_data_dt0_load_result = Helpers::to_map($story_link_ref01_data_dt0_loaded);
+        $story_link_ref01_data_dt0_load_result = Helpers::to_map(is_object($story_link_ref01_data_dt0_loaded) && method_exists($story_link_ref01_data_dt0_loaded, 'data_get') ? $story_link_ref01_data_dt0_loaded->data_get() : $story_link_ref01_data_dt0_loaded);
         $this->assertNotNull($story_link_ref01_data_dt0_load_result);
         $this->assertEquals($story_link_ref01_data_dt0_load_result["id"], $story_link_ref01_data["id"]);
 

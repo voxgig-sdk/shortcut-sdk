@@ -42,8 +42,8 @@ class TestObjectiveEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestObjectiveEntity:
         objective_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.objective"), "objective_ref01"))
 
-        objective_ref01_data = helpers.to_map(objective_ref01_ent.create(objective_ref01_data, None))
+        objective_ref01_data = helpers.to_map(runner.entity_data(objective_ref01_ent.create(objective_ref01_data, None)))
         assert objective_ref01_data is not None
         assert objective_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestObjectiveEntity:
         objective_ref01_markdef_up0_value = "Mark01-objective_ref01_" + str(setup["now"])
         objective_ref01_data_up0_up[objective_ref01_markdef_up0_name] = objective_ref01_markdef_up0_value
 
-        objective_ref01_resdata_up0 = helpers.to_map(objective_ref01_ent.update(objective_ref01_data_up0_up, None))
+        objective_ref01_resdata_up0 = helpers.to_map(runner.entity_data(objective_ref01_ent.update(objective_ref01_data_up0_up, None)))
         assert objective_ref01_resdata_up0 is not None
         assert objective_ref01_resdata_up0["id"] == objective_ref01_data_up0_up["id"]
         assert objective_ref01_resdata_up0[objective_ref01_markdef_up0_name] == objective_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestObjectiveEntity:
             "id": objective_ref01_data["id"],
         }
         objective_ref01_data_dt0_loaded = objective_ref01_ent.load(objective_ref01_match_dt0, None)
-        objective_ref01_data_dt0_load_result = helpers.to_map(objective_ref01_data_dt0_loaded)
+        objective_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(objective_ref01_data_dt0_loaded))
         assert objective_ref01_data_dt0_load_result is not None
         assert objective_ref01_data_dt0_load_result["id"] == objective_ref01_data["id"]
 

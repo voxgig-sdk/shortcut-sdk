@@ -67,14 +67,14 @@ describe('StoryEntity', async () => {
     story_ref01_data['label_id'] = setup.idmap['label01']
     story_ref01_data['project_id'] = setup.idmap['project01']
 
-    story_ref01_data = await story_ref01_ent.create(story_ref01_data)
+    story_ref01_data = (await story_ref01_ent.create(story_ref01_data)).data()
     assert(null != story_ref01_data.id)
 
 
     // LIST
     const story_ref01_match: any = {}
 
-    const story_ref01_list = await story_ref01_ent.list(story_ref01_match)
+    const story_ref01_list = (await story_ref01_ent.list(story_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(story_ref01_list, { id: story_ref01_data.id })))
 
@@ -86,7 +86,7 @@ describe('StoryEntity', async () => {
     const story_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-story_ref01_' + setup.now }
     ;(story_ref01_data_up0 as any)[story_ref01_markdef_up0.name] = story_ref01_markdef_up0.value
 
-    const story_ref01_resdata_up0 = await story_ref01_ent.update(story_ref01_data_up0)
+    const story_ref01_resdata_up0 = (await story_ref01_ent.update(story_ref01_data_up0)).data()
     assert(story_ref01_resdata_up0.id === story_ref01_data_up0.id)
 
     assert((story_ref01_resdata_up0 as any)[story_ref01_markdef_up0.name] === story_ref01_markdef_up0.value)
@@ -95,7 +95,7 @@ describe('StoryEntity', async () => {
     // LOAD
     const story_ref01_match_dt0: any = {}
     story_ref01_match_dt0.id = story_ref01_data.id
-    const story_ref01_data_dt0 = await story_ref01_ent.load(story_ref01_match_dt0)
+    const story_ref01_data_dt0 = (await story_ref01_ent.load(story_ref01_match_dt0)).data()
     assert(story_ref01_data_dt0.id === story_ref01_data.id)
 
 
@@ -107,7 +107,7 @@ describe('StoryEntity', async () => {
     // LIST
     const story_ref01_match_rt0: any = {}
 
-    const story_ref01_list_rt0 = await story_ref01_ent.list(story_ref01_match_rt0)
+    const story_ref01_list_rt0 = (await story_ref01_ent.list(story_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(story_ref01_list_rt0, { id: story_ref01_data.id })))
 

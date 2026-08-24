@@ -40,7 +40,7 @@ class IterationEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class IterationEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.iteration"), "iteration_ref01"));
 
         $iteration_ref01_data_result = $iteration_ref01_ent->create($iteration_ref01_data, null);
-        $iteration_ref01_data = Helpers::to_map($iteration_ref01_data_result);
+        $iteration_ref01_data = Helpers::to_map(is_object($iteration_ref01_data_result) && method_exists($iteration_ref01_data_result, 'data_get') ? $iteration_ref01_data_result->data_get() : $iteration_ref01_data_result);
         $this->assertNotNull($iteration_ref01_data);
         $this->assertNotNull($iteration_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class IterationEntityTest extends TestCase
         $iteration_ref01_data_up0_up[$iteration_ref01_markdef_up0_name] = $iteration_ref01_markdef_up0_value;
 
         $iteration_ref01_resdata_up0_result = $iteration_ref01_ent->update($iteration_ref01_data_up0_up, null);
-        $iteration_ref01_resdata_up0 = Helpers::to_map($iteration_ref01_resdata_up0_result);
+        $iteration_ref01_resdata_up0 = Helpers::to_map(is_object($iteration_ref01_resdata_up0_result) && method_exists($iteration_ref01_resdata_up0_result, 'data_get') ? $iteration_ref01_resdata_up0_result->data_get() : $iteration_ref01_resdata_up0_result);
         $this->assertNotNull($iteration_ref01_resdata_up0);
         $this->assertEquals($iteration_ref01_resdata_up0["id"], $iteration_ref01_data_up0_up["id"]);
         $this->assertEquals($iteration_ref01_resdata_up0[$iteration_ref01_markdef_up0_name], $iteration_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class IterationEntityTest extends TestCase
             "id" => $iteration_ref01_data["id"],
         ];
         $iteration_ref01_data_dt0_loaded = $iteration_ref01_ent->load($iteration_ref01_match_dt0, null);
-        $iteration_ref01_data_dt0_load_result = Helpers::to_map($iteration_ref01_data_dt0_loaded);
+        $iteration_ref01_data_dt0_load_result = Helpers::to_map(is_object($iteration_ref01_data_dt0_loaded) && method_exists($iteration_ref01_data_dt0_loaded, 'data_get') ? $iteration_ref01_data_dt0_loaded->data_get() : $iteration_ref01_data_dt0_loaded);
         $this->assertNotNull($iteration_ref01_data_dt0_load_result);
         $this->assertEquals($iteration_ref01_data_dt0_load_result["id"], $iteration_ref01_data["id"]);
 

@@ -1,0 +1,280 @@
+# Entity: category
+
+main: kit: entity: category: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "archived"
+      op: {
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      req: true
+      short: "A true/false boolean indicating if the Category has been archived."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "color"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The hex color to be displayed with the Category (for example, \"#ff0000\")."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      short: "The time/date that the Category was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "external_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "This field can be set to another unique ID."
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      short: "The Global ID of the Category."
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique ID of the Category."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The name of the Category."
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      op: {
+        create: {
+          req: false
+          type: "`$ANY`"
+        }
+      }
+      req: true
+      short: "The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category."
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      short: "The time/date that the Category was updated."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "category"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/categories"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+          ]
+          transform: {
+            req: {
+              color: "`reqdata.color`"
+              external_id: "`reqdata.external_id`"
+              name: "`reqdata.name`"
+              type: "`reqdata.type`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/v3/categories"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "category_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/categories/{category-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "category-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "category_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/categories/{category-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "category-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "category_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/categories/{category-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "category-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              archived: "`reqdata.archived`"
+              color: "`reqdata.color`"
+              name: "`reqdata.name`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

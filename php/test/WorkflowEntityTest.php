@@ -40,7 +40,7 @@ class WorkflowEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -97,7 +97,7 @@ class WorkflowEntityTest extends TestCase
             "id" => $workflow_ref01_data["id"],
         ];
         $workflow_ref01_data_dt0_loaded = $workflow_ref01_ent->load($workflow_ref01_match_dt0, null);
-        $workflow_ref01_data_dt0_load_result = Helpers::to_map($workflow_ref01_data_dt0_loaded);
+        $workflow_ref01_data_dt0_load_result = Helpers::to_map(is_object($workflow_ref01_data_dt0_loaded) && method_exists($workflow_ref01_data_dt0_loaded, 'data_get') ? $workflow_ref01_data_dt0_loaded->data_get() : $workflow_ref01_data_dt0_loaded);
         $this->assertNotNull($workflow_ref01_data_dt0_load_result);
         $this->assertEquals($workflow_ref01_data_dt0_load_result["id"], $workflow_ref01_data["id"]);
 

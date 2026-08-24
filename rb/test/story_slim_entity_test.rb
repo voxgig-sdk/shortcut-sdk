@@ -37,7 +37,7 @@ class StorySlimEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.story_slim"), "story_slim_ref01"))
 
     story_slim_ref01_data_result = story_slim_ref01_ent.create(story_slim_ref01_data, nil)
-    story_slim_ref01_data = Helpers.to_map(story_slim_ref01_data_result)
+    story_slim_ref01_data = Helpers.to_map(story_slim_ref01_data_result.respond_to?(:data_get) ? story_slim_ref01_data_result.data_get : story_slim_ref01_data_result)
     assert !story_slim_ref01_data.nil?
 
     # UPDATE
@@ -49,7 +49,7 @@ class StorySlimEntityTest < Minitest::Test
     story_slim_ref01_data_up0_up[story_slim_ref01_markdef_up0_name] = story_slim_ref01_markdef_up0_value
 
     story_slim_ref01_resdata_up0_result = story_slim_ref01_ent.update(story_slim_ref01_data_up0_up, nil)
-    story_slim_ref01_resdata_up0 = Helpers.to_map(story_slim_ref01_resdata_up0_result)
+    story_slim_ref01_resdata_up0 = Helpers.to_map(story_slim_ref01_resdata_up0_result.respond_to?(:data_get) ? story_slim_ref01_resdata_up0_result.data_get : story_slim_ref01_resdata_up0_result)
     assert !story_slim_ref01_resdata_up0.nil?
     assert_equal story_slim_ref01_resdata_up0[story_slim_ref01_markdef_up0_name], story_slim_ref01_markdef_up0_value
 

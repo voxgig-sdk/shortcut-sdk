@@ -51,7 +51,7 @@ func TestDocSlimEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -106,7 +106,7 @@ func TestDocSlimEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		docSlimRef01Data = core.ToMapAny(docSlimRef01DataResult)
+		docSlimRef01Data = core.ToMapAny(entityData(docSlimRef01DataResult))
 		if docSlimRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}

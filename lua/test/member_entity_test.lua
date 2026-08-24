@@ -39,7 +39,7 @@ describe("MemberEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -97,7 +97,7 @@ describe("MemberEntity", function()
     }
     local member_ref01_data_dt0_loaded, err = member_ref01_ent:load(member_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local member_ref01_data_dt0_load_result = helpers.to_map(member_ref01_data_dt0_loaded)
+    local member_ref01_data_dt0_load_result = helpers.to_map(type(member_ref01_data_dt0_loaded) == 'table' and member_ref01_data_dt0_loaded.data_get and member_ref01_data_dt0_loaded:data_get() or member_ref01_data_dt0_loaded)
     assert.is_not_nil(member_ref01_data_dt0_load_result)
     assert.are.equal(member_ref01_data_dt0_load_result["id"], member_ref01_data["id"])
 

@@ -33,7 +33,7 @@ class UploadedFileEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class UploadedFileEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.uploaded_file"), "uploaded_file_ref01"))
 
     uploaded_file_ref01_data_result = uploaded_file_ref01_ent.create(uploaded_file_ref01_data, nil)
-    uploaded_file_ref01_data = Helpers.to_map(uploaded_file_ref01_data_result)
+    uploaded_file_ref01_data = Helpers.to_map(uploaded_file_ref01_data_result.respond_to?(:data_get) ? uploaded_file_ref01_data_result.data_get : uploaded_file_ref01_data_result)
     assert !uploaded_file_ref01_data.nil?
     assert !uploaded_file_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class UploadedFileEntityTest < Minitest::Test
     uploaded_file_ref01_data_up0_up[uploaded_file_ref01_markdef_up0_name] = uploaded_file_ref01_markdef_up0_value
 
     uploaded_file_ref01_resdata_up0_result = uploaded_file_ref01_ent.update(uploaded_file_ref01_data_up0_up, nil)
-    uploaded_file_ref01_resdata_up0 = Helpers.to_map(uploaded_file_ref01_resdata_up0_result)
+    uploaded_file_ref01_resdata_up0 = Helpers.to_map(uploaded_file_ref01_resdata_up0_result.respond_to?(:data_get) ? uploaded_file_ref01_resdata_up0_result.data_get : uploaded_file_ref01_resdata_up0_result)
     assert !uploaded_file_ref01_resdata_up0.nil?
     assert_equal uploaded_file_ref01_resdata_up0["id"], uploaded_file_ref01_data_up0_up["id"]
     assert_equal uploaded_file_ref01_resdata_up0[uploaded_file_ref01_markdef_up0_name], uploaded_file_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class UploadedFileEntityTest < Minitest::Test
       "id" => uploaded_file_ref01_data["id"],
     }
     uploaded_file_ref01_data_dt0_loaded = uploaded_file_ref01_ent.load(uploaded_file_ref01_match_dt0, nil)
-    uploaded_file_ref01_data_dt0_load_result = Helpers.to_map(uploaded_file_ref01_data_dt0_loaded)
+    uploaded_file_ref01_data_dt0_load_result = Helpers.to_map(uploaded_file_ref01_data_dt0_loaded.respond_to?(:data_get) ? uploaded_file_ref01_data_dt0_loaded.data_get : uploaded_file_ref01_data_dt0_loaded)
     assert !uploaded_file_ref01_data_dt0_load_result.nil?
     assert_equal uploaded_file_ref01_data_dt0_load_result["id"], uploaded_file_ref01_data["id"]
 

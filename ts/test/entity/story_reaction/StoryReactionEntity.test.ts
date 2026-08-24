@@ -64,7 +64,7 @@ describe('StoryReactionEntity', async () => {
     story_reaction_ref01_data['comment_id'] = setup.idmap['comment01']
     story_reaction_ref01_data['story_id'] = setup.idmap['story01']
 
-    story_reaction_ref01_data = await story_reaction_ref01_ent.create(story_reaction_ref01_data)
+    story_reaction_ref01_data = (await story_reaction_ref01_ent.create(story_reaction_ref01_data)).data()
     assert(null != story_reaction_ref01_data)
 
 

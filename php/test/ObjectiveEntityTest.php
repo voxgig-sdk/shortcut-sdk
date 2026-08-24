@@ -40,7 +40,7 @@ class ObjectiveEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class ObjectiveEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.objective"), "objective_ref01"));
 
         $objective_ref01_data_result = $objective_ref01_ent->create($objective_ref01_data, null);
-        $objective_ref01_data = Helpers::to_map($objective_ref01_data_result);
+        $objective_ref01_data = Helpers::to_map(is_object($objective_ref01_data_result) && method_exists($objective_ref01_data_result, 'data_get') ? $objective_ref01_data_result->data_get() : $objective_ref01_data_result);
         $this->assertNotNull($objective_ref01_data);
         $this->assertNotNull($objective_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class ObjectiveEntityTest extends TestCase
         $objective_ref01_data_up0_up[$objective_ref01_markdef_up0_name] = $objective_ref01_markdef_up0_value;
 
         $objective_ref01_resdata_up0_result = $objective_ref01_ent->update($objective_ref01_data_up0_up, null);
-        $objective_ref01_resdata_up0 = Helpers::to_map($objective_ref01_resdata_up0_result);
+        $objective_ref01_resdata_up0 = Helpers::to_map(is_object($objective_ref01_resdata_up0_result) && method_exists($objective_ref01_resdata_up0_result, 'data_get') ? $objective_ref01_resdata_up0_result->data_get() : $objective_ref01_resdata_up0_result);
         $this->assertNotNull($objective_ref01_resdata_up0);
         $this->assertEquals($objective_ref01_resdata_up0["id"], $objective_ref01_data_up0_up["id"]);
         $this->assertEquals($objective_ref01_resdata_up0[$objective_ref01_markdef_up0_name], $objective_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class ObjectiveEntityTest extends TestCase
             "id" => $objective_ref01_data["id"],
         ];
         $objective_ref01_data_dt0_loaded = $objective_ref01_ent->load($objective_ref01_match_dt0, null);
-        $objective_ref01_data_dt0_load_result = Helpers::to_map($objective_ref01_data_dt0_loaded);
+        $objective_ref01_data_dt0_load_result = Helpers::to_map(is_object($objective_ref01_data_dt0_loaded) && method_exists($objective_ref01_data_dt0_loaded, 'data_get') ? $objective_ref01_data_dt0_loaded->data_get() : $objective_ref01_data_dt0_loaded);
         $this->assertNotNull($objective_ref01_data_dt0_load_result);
         $this->assertEquals($objective_ref01_data_dt0_load_result["id"], $objective_ref01_data["id"]);
 

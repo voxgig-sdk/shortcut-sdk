@@ -6,7 +6,11 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/shortcut-sdk/go/core"
+)
 
 // Bulk is the typed data model for the bulk entity.
 type Bulk struct {
@@ -393,9 +397,52 @@ type EpicLoadMatch struct {
 
 // EpicListMatch is the typed request payload for Epic.ListTyped.
 type EpicListMatch struct {
-	LabelId *int `json:"label_id,omitempty"`
+	AfterId *int `json:"after_id,omitempty"`
+	AppUrl *string `json:"app_url,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	AssociatedGroups *[]any `json:"associated_groups,omitempty"`
+	BeforeId *int `json:"before_id,omitempty"`
+	Comments *[]any `json:"comments,omitempty"`
+	Completed *bool `json:"completed,omitempty"`
+	CompletedAt *string `json:"completed_at,omitempty"`
+	CompletedAtOverride *string `json:"completed_at_override,omitempty"`
+	ConvertedFromStoryId *int `json:"converted_from_story_id,omitempty"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	Deadline *string `json:"deadline,omitempty"`
+	Description *string `json:"description,omitempty"`
+	EntityType *string `json:"entity_type,omitempty"`
+	EpicStateId *int `json:"epic_state_id,omitempty"`
+	ExternalId *string `json:"external_id,omitempty"`
+	FollowerIds *[]any `json:"follower_ids,omitempty"`
+	GlobalId *string `json:"global_id,omitempty"`
+	GroupId *string `json:"group_id,omitempty"`
+	GroupIds *[]any `json:"group_ids,omitempty"`
+	GroupMentionIds *[]any `json:"group_mention_ids,omitempty"`
+	Health *map[string]any `json:"health,omitempty"`
+	Id *int `json:"id,omitempty"`
+	LabelIds *[]any `json:"label_ids,omitempty"`
+	Labels *[]any `json:"labels,omitempty"`
+	MemberMentionIds *[]any `json:"member_mention_ids,omitempty"`
+	MentionIds *[]any `json:"mention_ids,omitempty"`
 	MilestoneId *int `json:"milestone_id,omitempty"`
-	ObjectifId *int `json:"objectif_id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	ObjectiveIds *[]any `json:"objective_ids,omitempty"`
+	OwnerIds *[]any `json:"owner_ids,omitempty"`
+	PlannedStartDate *string `json:"planned_start_date,omitempty"`
+	Position *int `json:"position,omitempty"`
+	ProductboardId *string `json:"productboard_id,omitempty"`
+	ProductboardName *string `json:"productboard_name,omitempty"`
+	ProductboardPluginId *string `json:"productboard_plugin_id,omitempty"`
+	ProductboardUrl *string `json:"productboard_url,omitempty"`
+	ProjectIds *[]any `json:"project_ids,omitempty"`
+	RequestedById *string `json:"requested_by_id,omitempty"`
+	Started *bool `json:"started,omitempty"`
+	StartedAt *string `json:"started_at,omitempty"`
+	StartedAtOverride *string `json:"started_at_override,omitempty"`
+	State *string `json:"state,omitempty"`
+	Stats *map[string]any `json:"stats,omitempty"`
+	StoriesWithoutProjects *int `json:"stories_without_projects,omitempty"`
+	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
 // EpicCreateData is the typed request payload for Epic.CreateTyped.
@@ -1203,7 +1250,7 @@ type Member struct {
 
 // MemberLoadMatch is the typed request payload for Member.LoadTyped.
 type MemberLoadMatch struct {
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 }
 
 // MemberListMatch is the typed request payload for Member.ListTyped.
@@ -1261,7 +1308,28 @@ type MilestoneLoadMatch struct {
 
 // MilestoneListMatch is the typed request payload for Milestone.ListTyped.
 type MilestoneListMatch struct {
-	CategoryId *int `json:"category_id,omitempty"`
+	AfterId *int `json:"after_id,omitempty"`
+	AppUrl *string `json:"app_url,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	BeforeId *int `json:"before_id,omitempty"`
+	Categories *[]any `json:"categories,omitempty"`
+	Completed *bool `json:"completed,omitempty"`
+	CompletedAt *string `json:"completed_at,omitempty"`
+	CompletedAtOverride *string `json:"completed_at_override,omitempty"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	Description *string `json:"description,omitempty"`
+	EntityType *string `json:"entity_type,omitempty"`
+	GlobalId *string `json:"global_id,omitempty"`
+	Id *int `json:"id,omitempty"`
+	KeyResultIds *[]any `json:"key_result_ids,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Position *int `json:"position,omitempty"`
+	Started *bool `json:"started,omitempty"`
+	StartedAt *string `json:"started_at,omitempty"`
+	StartedAtOverride *string `json:"started_at_override,omitempty"`
+	State *string `json:"state,omitempty"`
+	Stats *map[string]any `json:"stats,omitempty"`
+	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
 // MilestoneCreateData is the typed request payload for Milestone.CreateTyped.
@@ -1687,11 +1755,89 @@ type StoryLoadMatch struct {
 
 // StoryListMatch is the typed request payload for Story.ListTyped.
 type StoryListMatch struct {
-	GroupId *string `json:"group_id,omitempty"`
+	AfterId *int `json:"after_id,omitempty"`
+	AppUrl *string `json:"app_url,omitempty"`
+	Archived *bool `json:"archived,omitempty"`
+	BeforeId *int `json:"before_id,omitempty"`
+	Blocked *bool `json:"blocked,omitempty"`
+	Blocker *bool `json:"blocker,omitempty"`
+	BranchIds *[]any `json:"branch_ids,omitempty"`
+	Branches *[]any `json:"branches,omitempty"`
+	CommentIds *[]any `json:"comment_ids,omitempty"`
+	Comments *[]any `json:"comments,omitempty"`
+	CommitIds *[]any `json:"commit_ids,omitempty"`
+	Commits *[]any `json:"commits,omitempty"`
+	Completed *bool `json:"completed,omitempty"`
+	CompletedAt *string `json:"completed_at,omitempty"`
+	CompletedAtOverride *string `json:"completed_at_override,omitempty"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	CustomFields *[]any `json:"custom_fields,omitempty"`
+	CustomFieldsAdd *[]any `json:"custom_fields_add,omitempty"`
+	CustomFieldsRemove *[]any `json:"custom_fields_remove,omitempty"`
+	CycleTime *int `json:"cycle_time,omitempty"`
+	Deadline *string `json:"deadline,omitempty"`
+	Description *string `json:"description,omitempty"`
+	EntityType *string `json:"entity_type,omitempty"`
 	EpicId *int `json:"epic_id,omitempty"`
+	Estimate *int `json:"estimate,omitempty"`
+	ExternalId *string `json:"external_id,omitempty"`
+	ExternalLinks *[]any `json:"external_links,omitempty"`
+	ExternalLinksAdd *[]any `json:"external_links_add,omitempty"`
+	ExternalLinksRemove *[]any `json:"external_links_remove,omitempty"`
+	FileIds *[]any `json:"file_ids,omitempty"`
+	FileIdsAdd *[]any `json:"file_ids_add,omitempty"`
+	FileIdsRemove *[]any `json:"file_ids_remove,omitempty"`
+	Files *[]any `json:"files,omitempty"`
+	FollowerIds *[]any `json:"follower_ids,omitempty"`
+	FollowerIdsAdd *[]any `json:"follower_ids_add,omitempty"`
+	FollowerIdsRemove *[]any `json:"follower_ids_remove,omitempty"`
+	FormattedVcsBranchName *string `json:"formatted_vcs_branch_name,omitempty"`
+	GlobalId *string `json:"global_id,omitempty"`
+	GroupId *string `json:"group_id,omitempty"`
+	GroupMentionIds *[]any `json:"group_mention_ids,omitempty"`
+	Id *int `json:"id,omitempty"`
 	IterationId *int `json:"iteration_id,omitempty"`
-	LabelId *int `json:"label_id,omitempty"`
+	LabelIds *[]any `json:"label_ids,omitempty"`
+	Labels *[]any `json:"labels,omitempty"`
+	LabelsAdd *[]any `json:"labels_add,omitempty"`
+	LabelsRemove *[]any `json:"labels_remove,omitempty"`
+	LeadTime *int `json:"lead_time,omitempty"`
+	LinkedFileIds *[]any `json:"linked_file_ids,omitempty"`
+	LinkedFileIdsAdd *[]any `json:"linked_file_ids_add,omitempty"`
+	LinkedFileIdsRemove *[]any `json:"linked_file_ids_remove,omitempty"`
+	LinkedFiles *[]any `json:"linked_files,omitempty"`
+	MemberMentionIds *[]any `json:"member_mention_ids,omitempty"`
+	MentionIds *[]any `json:"mention_ids,omitempty"`
+	MoveTo *string `json:"move_to,omitempty"`
+	MovedAt *string `json:"moved_at,omitempty"`
+	Name *string `json:"name,omitempty"`
+	NumTasksCompleted *int `json:"num_tasks_completed,omitempty"`
+	OwnerIds *[]any `json:"owner_ids,omitempty"`
+	OwnerIdsAdd *[]any `json:"owner_ids_add,omitempty"`
+	OwnerIdsRemove *[]any `json:"owner_ids_remove,omitempty"`
+	ParentStoryId *int `json:"parent_story_id,omitempty"`
+	Position *int `json:"position,omitempty"`
+	PreviousIterationIds *[]any `json:"previous_iteration_ids,omitempty"`
 	ProjectId *int `json:"project_id,omitempty"`
+	PullRequestIds *[]any `json:"pull_request_ids,omitempty"`
+	PullRequests *[]any `json:"pull_requests,omitempty"`
+	RequestedById *string `json:"requested_by_id,omitempty"`
+	SourceTaskId *int `json:"source_task_id,omitempty"`
+	Started *bool `json:"started,omitempty"`
+	StartedAt *string `json:"started_at,omitempty"`
+	StartedAtOverride *string `json:"started_at_override,omitempty"`
+	Stats *map[string]any `json:"stats,omitempty"`
+	StoryLinks *[]any `json:"story_links,omitempty"`
+	StoryTemplateId *string `json:"story_template_id,omitempty"`
+	StoryType *string `json:"story_type,omitempty"`
+	SubTaskStoryIds *[]any `json:"sub_task_story_ids,omitempty"`
+	SubTasks *[]any `json:"sub_tasks,omitempty"`
+	SyncedItem *map[string]any `json:"synced_item,omitempty"`
+	TaskIds *[]any `json:"task_ids,omitempty"`
+	Tasks *[]any `json:"tasks,omitempty"`
+	UpdatedAt *string `json:"updated_at,omitempty"`
+	WorkflowId *int `json:"workflow_id,omitempty"`
+	WorkflowStateId *int `json:"workflow_state_id,omitempty"`
 }
 
 // StoryCreateData is the typed request payload for Story.CreateTyped.
@@ -1909,9 +2055,7 @@ type StoryCommentListMatch struct {
 
 // StoryCommentCreateData is the typed request payload for StoryComment.CreateTyped.
 type StoryCommentCreateData struct {
-	CommentId *int `json:"comment_id,omitempty"`
-	StoryId *int `json:"story_id,omitempty"`
-	Id *int `json:"id,omitempty"`
+	Id int `json:"id"`
 	AppUrl string `json:"app_url"`
 	AuthorId string `json:"author_id"`
 	Blocker *bool `json:"blocker,omitempty"`
@@ -1926,6 +2070,7 @@ type StoryCommentCreateData struct {
 	ParentId *int `json:"parent_id,omitempty"`
 	Position int `json:"position"`
 	Reactions []any `json:"reactions"`
+	StoryId int `json:"story_id"`
 	Text string `json:"text"`
 	UnblocksParent *bool `json:"unblocks_parent,omitempty"`
 	UpdatedAt string `json:"updated_at"`
@@ -2467,12 +2612,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -2484,12 +2643,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

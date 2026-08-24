@@ -1,0 +1,483 @@
+# Entity: objective
+
+main: kit: entity: objective: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "after_id"
+      req: false
+      short: "The ID of the Objective we want to move this Objective after."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "app_url"
+      req: true
+      short: "The Shortcut application url for the Objective."
+      type: "`$STRING`"
+    }
+    {
+      name: "archived"
+      op: {
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      req: true
+      short: "A boolean indicating whether the Objective has been archived or not."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "before_id"
+      req: false
+      short: "The ID of the Objective we want to move this Objective before."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "categories"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of Categories attached to the Objective."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "completed"
+      req: true
+      short: "A true/false boolean indicating if the Objectivehas been completed."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "completed_at"
+      req: true
+      short: "The time/date the Objective was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "completed_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Objective was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      short: "The time/date the Objective was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The Objective's description."
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique ID of the Objective."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "key_result_ids"
+      req: true
+      short: "The IDs of the Key Results associated with the Objective."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The name of the Objective."
+      type: "`$STRING`"
+    }
+    {
+      name: "position"
+      req: true
+      short: "A number representing the position of the Objective in relation to every other Objective within the Workspace."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "started"
+      req: true
+      short: "A true/false boolean indicating if the Objective has been started."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "started_at"
+      req: true
+      short: "The time/date the Objective was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "started_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Objective was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "state"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The workflow state that the Objective is in."
+      type: "`$STRING`"
+    }
+    {
+      name: "stats"
+      req: true
+      short: "A group of calculated values for this Objective."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      short: "The time/date the Objective was updated."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "objective"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/objectives"
+          parts: [
+            "api"
+            "v3"
+            "objectives"
+          ]
+          transform: {
+            req: {
+              categories: "`reqdata.category`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              started_at_override: "`reqdata.started_at_override`"
+              state: "`reqdata.state`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "detail"
+                orig: "detail"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "entity_type"
+                orig: "entity_type"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "next"
+                orig: "next"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "page_size"
+                orig: "page_size"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "query"
+                orig: "query"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/search/milestones"
+          parts: [
+            "api"
+            "v3"
+            "search"
+            "milestones"
+          ]
+          select: {
+            exist: [
+              "detail"
+              "entity_type"
+              "next"
+              "page_size"
+              "query"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "detail"
+                orig: "detail"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "entity_type"
+                orig: "entity_type"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "next"
+                orig: "next"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "page_size"
+                orig: "page_size"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "query"
+                orig: "query"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/search/objectives"
+          parts: [
+            "api"
+            "v3"
+            "search"
+            "objectives"
+          ]
+          select: {
+            exist: [
+              "detail"
+              "entity_type"
+              "next"
+              "page_size"
+              "query"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/api/v3/objectives"
+          parts: [
+            "api"
+            "v3"
+            "objectives"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "objective_public_id"
+                orig: "objective_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/objectives/{objective-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "objectives"
+            "{objective_public_id}"
+          ]
+          rename: {
+            param: {
+              "objective-public-id": "objective_public_id"
+            }
+          }
+          select: {
+            exist: [
+              "objective_public_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "objective_public_id"
+                orig: "objective_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/objectives/{objective-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "objectives"
+            "{objective_public_id}"
+          ]
+          rename: {
+            param: {
+              "objective-public-id": "objective_public_id"
+            }
+          }
+          select: {
+            exist: [
+              "objective_public_id"
+            ]
+          }
+          transform: {
+            req: {
+              after_id: "`reqdata.after_id`"
+              archived: "`reqdata.archived`"
+              before_id: "`reqdata.before_id`"
+              categories: "`reqdata.category`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              started_at_override: "`reqdata.started_at_override`"
+              state: "`reqdata.state`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "objectif"
+      ]
+    ]
+  }
+
+
+
+}

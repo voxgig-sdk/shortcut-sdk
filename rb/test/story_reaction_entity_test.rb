@@ -39,7 +39,7 @@ class StoryReactionEntityTest < Minitest::Test
     story_reaction_ref01_data["story_id"] = setup[:idmap]["story01"]
 
     story_reaction_ref01_data_result = story_reaction_ref01_ent.create(story_reaction_ref01_data, nil)
-    story_reaction_ref01_data = Helpers.to_map(story_reaction_ref01_data_result)
+    story_reaction_ref01_data = Helpers.to_map(story_reaction_ref01_data_result.respond_to?(:data_get) ? story_reaction_ref01_data_result.data_get : story_reaction_ref01_data_result)
     assert !story_reaction_ref01_data.nil?
 
 

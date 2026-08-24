@@ -52,7 +52,7 @@ func TestMilestoneEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -108,7 +108,7 @@ func TestMilestoneEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		milestoneRef01Data = core.ToMapAny(milestoneRef01DataResult)
+		milestoneRef01Data = core.ToMapAny(entityData(milestoneRef01DataResult))
 		if milestoneRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -146,7 +146,7 @@ func TestMilestoneEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		milestoneRef01ResdataUp0 := core.ToMapAny(milestoneRef01ResdataUp0Result)
+		milestoneRef01ResdataUp0 := core.ToMapAny(entityData(milestoneRef01ResdataUp0Result))
 		if milestoneRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -165,7 +165,7 @@ func TestMilestoneEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		milestoneRef01DataDt0LoadResult := core.ToMapAny(milestoneRef01DataDt0Loaded)
+		milestoneRef01DataDt0LoadResult := core.ToMapAny(entityData(milestoneRef01DataDt0Loaded))
 		if milestoneRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

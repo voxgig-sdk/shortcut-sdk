@@ -40,7 +40,7 @@ class LinkedFileEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class LinkedFileEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.linked_file"), "linked_file_ref01"));
 
         $linked_file_ref01_data_result = $linked_file_ref01_ent->create($linked_file_ref01_data, null);
-        $linked_file_ref01_data = Helpers::to_map($linked_file_ref01_data_result);
+        $linked_file_ref01_data = Helpers::to_map(is_object($linked_file_ref01_data_result) && method_exists($linked_file_ref01_data_result, 'data_get') ? $linked_file_ref01_data_result->data_get() : $linked_file_ref01_data_result);
         $this->assertNotNull($linked_file_ref01_data);
         $this->assertNotNull($linked_file_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class LinkedFileEntityTest extends TestCase
         $linked_file_ref01_data_up0_up[$linked_file_ref01_markdef_up0_name] = $linked_file_ref01_markdef_up0_value;
 
         $linked_file_ref01_resdata_up0_result = $linked_file_ref01_ent->update($linked_file_ref01_data_up0_up, null);
-        $linked_file_ref01_resdata_up0 = Helpers::to_map($linked_file_ref01_resdata_up0_result);
+        $linked_file_ref01_resdata_up0 = Helpers::to_map(is_object($linked_file_ref01_resdata_up0_result) && method_exists($linked_file_ref01_resdata_up0_result, 'data_get') ? $linked_file_ref01_resdata_up0_result->data_get() : $linked_file_ref01_resdata_up0_result);
         $this->assertNotNull($linked_file_ref01_resdata_up0);
         $this->assertEquals($linked_file_ref01_resdata_up0["id"], $linked_file_ref01_data_up0_up["id"]);
         $this->assertEquals($linked_file_ref01_resdata_up0[$linked_file_ref01_markdef_up0_name], $linked_file_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class LinkedFileEntityTest extends TestCase
             "id" => $linked_file_ref01_data["id"],
         ];
         $linked_file_ref01_data_dt0_loaded = $linked_file_ref01_ent->load($linked_file_ref01_match_dt0, null);
-        $linked_file_ref01_data_dt0_load_result = Helpers::to_map($linked_file_ref01_data_dt0_loaded);
+        $linked_file_ref01_data_dt0_load_result = Helpers::to_map(is_object($linked_file_ref01_data_dt0_loaded) && method_exists($linked_file_ref01_data_dt0_loaded, 'data_get') ? $linked_file_ref01_data_dt0_loaded->data_get() : $linked_file_ref01_data_dt0_loaded);
         $this->assertNotNull($linked_file_ref01_data_dt0_load_result);
         $this->assertEquals($linked_file_ref01_data_dt0_load_result["id"], $linked_file_ref01_data["id"]);
 

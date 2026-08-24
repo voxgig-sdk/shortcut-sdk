@@ -62,14 +62,14 @@ describe('LabelEntity', async () => {
     const label_ref01_ent = client.Label()
     let label_ref01_data = setup.data.new.label['label_ref01']
 
-    label_ref01_data = await label_ref01_ent.create(label_ref01_data)
+    label_ref01_data = (await label_ref01_ent.create(label_ref01_data)).data()
     assert(null != label_ref01_data.id)
 
 
     // LIST
     const label_ref01_match: any = {}
 
-    const label_ref01_list = await label_ref01_ent.list(label_ref01_match)
+    const label_ref01_list = (await label_ref01_ent.list(label_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(label_ref01_list, { id: label_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('LabelEntity', async () => {
     const label_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-label_ref01_' + setup.now }
     ;(label_ref01_data_up0 as any)[label_ref01_markdef_up0.name] = label_ref01_markdef_up0.value
 
-    const label_ref01_resdata_up0 = await label_ref01_ent.update(label_ref01_data_up0)
+    const label_ref01_resdata_up0 = (await label_ref01_ent.update(label_ref01_data_up0)).data()
     assert(label_ref01_resdata_up0.id === label_ref01_data_up0.id)
 
     assert((label_ref01_resdata_up0 as any)[label_ref01_markdef_up0.name] === label_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('LabelEntity', async () => {
     // LOAD
     const label_ref01_match_dt0: any = {}
     label_ref01_match_dt0.id = label_ref01_data.id
-    const label_ref01_data_dt0 = await label_ref01_ent.load(label_ref01_match_dt0)
+    const label_ref01_data_dt0 = (await label_ref01_ent.load(label_ref01_match_dt0)).data()
     assert(label_ref01_data_dt0.id === label_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('LabelEntity', async () => {
     // LIST
     const label_ref01_match_rt0: any = {}
 
-    const label_ref01_list_rt0 = await label_ref01_ent.list(label_ref01_match_rt0)
+    const label_ref01_list_rt0 = (await label_ref01_ent.list(label_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(label_ref01_list_rt0, { id: label_ref01_data.id })))
 

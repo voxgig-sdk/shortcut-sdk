@@ -52,7 +52,7 @@ class DisableEntityTest extends TestCase
         ];
 
         $disable_ref01_resdata_up0_result = $disable_ref01_ent->update($disable_ref01_data_up0_up, null);
-        $disable_ref01_resdata_up0 = Helpers::to_map($disable_ref01_resdata_up0_result);
+        $disable_ref01_resdata_up0 = Helpers::to_map(is_object($disable_ref01_resdata_up0_result) && method_exists($disable_ref01_resdata_up0_result, 'data_get') ? $disable_ref01_resdata_up0_result->data_get() : $disable_ref01_resdata_up0_result);
         $this->assertNotNull($disable_ref01_resdata_up0);
 
     }

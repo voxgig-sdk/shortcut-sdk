@@ -33,7 +33,7 @@ class DocSlimEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class DocSlimEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.doc_slim"), "doc_slim_ref01"))
 
     doc_slim_ref01_data_result = doc_slim_ref01_ent.create(doc_slim_ref01_data, nil)
-    doc_slim_ref01_data = Helpers.to_map(doc_slim_ref01_data_result)
+    doc_slim_ref01_data = Helpers.to_map(doc_slim_ref01_data_result.respond_to?(:data_get) ? doc_slim_ref01_data_result.data_get : doc_slim_ref01_data_result)
     assert !doc_slim_ref01_data.nil?
     assert !doc_slim_ref01_data["id"].nil?
 

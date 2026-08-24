@@ -33,7 +33,7 @@ class ProjectEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class ProjectEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.project"), "project_ref01"))
 
     project_ref01_data_result = project_ref01_ent.create(project_ref01_data, nil)
-    project_ref01_data = Helpers.to_map(project_ref01_data_result)
+    project_ref01_data = Helpers.to_map(project_ref01_data_result.respond_to?(:data_get) ? project_ref01_data_result.data_get : project_ref01_data_result)
     assert !project_ref01_data.nil?
     assert !project_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class ProjectEntityTest < Minitest::Test
     project_ref01_data_up0_up[project_ref01_markdef_up0_name] = project_ref01_markdef_up0_value
 
     project_ref01_resdata_up0_result = project_ref01_ent.update(project_ref01_data_up0_up, nil)
-    project_ref01_resdata_up0 = Helpers.to_map(project_ref01_resdata_up0_result)
+    project_ref01_resdata_up0 = Helpers.to_map(project_ref01_resdata_up0_result.respond_to?(:data_get) ? project_ref01_resdata_up0_result.data_get : project_ref01_resdata_up0_result)
     assert !project_ref01_resdata_up0.nil?
     assert_equal project_ref01_resdata_up0["id"], project_ref01_data_up0_up["id"]
     assert_equal project_ref01_resdata_up0[project_ref01_markdef_up0_name], project_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class ProjectEntityTest < Minitest::Test
       "id" => project_ref01_data["id"],
     }
     project_ref01_data_dt0_loaded = project_ref01_ent.load(project_ref01_match_dt0, nil)
-    project_ref01_data_dt0_load_result = Helpers.to_map(project_ref01_data_dt0_loaded)
+    project_ref01_data_dt0_load_result = Helpers.to_map(project_ref01_data_dt0_loaded.respond_to?(:data_get) ? project_ref01_data_dt0_loaded.data_get : project_ref01_data_dt0_loaded)
     assert !project_ref01_data_dt0_load_result.nil?
     assert_equal project_ref01_data_dt0_load_result["id"], project_ref01_data["id"]
 

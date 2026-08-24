@@ -51,7 +51,7 @@ class TestDisableEntity:
         disable_ref01_data_up0_up = {
         }
 
-        disable_ref01_resdata_up0 = helpers.to_map(disable_ref01_ent.update(disable_ref01_data_up0_up, None))
+        disable_ref01_resdata_up0 = helpers.to_map(runner.entity_data(disable_ref01_ent.update(disable_ref01_data_up0_up, None)))
         assert disable_ref01_resdata_up0 is not None
 
 

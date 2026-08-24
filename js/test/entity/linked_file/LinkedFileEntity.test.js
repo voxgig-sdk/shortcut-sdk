@@ -44,14 +44,14 @@ describe('LinkedFileEntity', async () => {
     const linked_file_ref01_ent = client.LinkedFile()
     let linked_file_ref01_data = setup.data.new.linked_file['linked_file_ref01']
 
-    linked_file_ref01_data = await linked_file_ref01_ent.create(linked_file_ref01_data)
+    linked_file_ref01_data = (await linked_file_ref01_ent.create(linked_file_ref01_data)).data()
     assert(null != linked_file_ref01_data.id)
 
 
     // LIST
     const linked_file_ref01_match = {}
 
-    const linked_file_ref01_list = await linked_file_ref01_ent.list(linked_file_ref01_match)
+    const linked_file_ref01_list = (await linked_file_ref01_ent.list(linked_file_ref01_match)).map((e) => e.data())
 
     assert(!isempty(select(linked_file_ref01_list, { id: linked_file_ref01_data.id })))
 
@@ -63,7 +63,7 @@ describe('LinkedFileEntity', async () => {
     const linked_file_ref01_markdef_up0 = { name: 'content_type', value: 'Mark01-linked_file_ref01_' + setup.now }
     linked_file_ref01_data_up0 [linked_file_ref01_markdef_up0.name] = linked_file_ref01_markdef_up0.value
 
-    const linked_file_ref01_resdata_up0 = await linked_file_ref01_ent.update(linked_file_ref01_data_up0)
+    const linked_file_ref01_resdata_up0 = (await linked_file_ref01_ent.update(linked_file_ref01_data_up0)).data()
     assert(linked_file_ref01_resdata_up0.id === linked_file_ref01_data_up0.id)
 
     assert(linked_file_ref01_resdata_up0[linked_file_ref01_markdef_up0.name] === linked_file_ref01_markdef_up0.value)
@@ -72,7 +72,7 @@ describe('LinkedFileEntity', async () => {
     // LOAD
     const linked_file_ref01_match_dt0 = {}
     linked_file_ref01_match_dt0.id = linked_file_ref01_data.id
-    const linked_file_ref01_data_dt0 = await linked_file_ref01_ent.load(linked_file_ref01_match_dt0)
+    const linked_file_ref01_data_dt0 = (await linked_file_ref01_ent.load(linked_file_ref01_match_dt0)).data()
     assert(linked_file_ref01_data_dt0.id === linked_file_ref01_data.id)
 
 
@@ -85,7 +85,7 @@ describe('LinkedFileEntity', async () => {
     // LIST
     const linked_file_ref01_match_rt0 = {}
 
-    const linked_file_ref01_list_rt0 = await linked_file_ref01_ent.list(linked_file_ref01_match_rt0)
+    const linked_file_ref01_list_rt0 = (await linked_file_ref01_ent.list(linked_file_ref01_match_rt0)).map((e) => e.data())
 
     assert(isempty(select(linked_file_ref01_list_rt0, { id: linked_file_ref01_data.id })))
 

@@ -59,7 +59,7 @@ func TestEpicUnlinkProductboardEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		epicUnlinkProductboardRef01Data = core.ToMapAny(epicUnlinkProductboardRef01DataResult)
+		epicUnlinkProductboardRef01Data = core.ToMapAny(entityData(epicUnlinkProductboardRef01DataResult))
 		if epicUnlinkProductboardRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}

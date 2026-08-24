@@ -1205,18 +1205,190 @@ EpicLoadMatch = Struct.new(
 
 # Request payload for Epic#list.
 #
-# @!attribute [rw] label_id
+# @!attribute [rw] after_id
 #   @return [Integer, nil]
+#
+# @!attribute [rw] app_url
+#   @return [String, nil]
+#
+# @!attribute [rw] archived
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] associated_groups
+#   @return [Array, nil]
+#
+# @!attribute [rw] before_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] comments
+#   @return [Array, nil]
+#
+# @!attribute [rw] completed
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] completed_at
+#   @return [String, nil]
+#
+# @!attribute [rw] completed_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] converted_from_story_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] created_at
+#   @return [String, nil]
+#
+# @!attribute [rw] deadline
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] entity_type
+#   @return [String, nil]
+#
+# @!attribute [rw] epic_state_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] external_id
+#   @return [String, nil]
+#
+# @!attribute [rw] follower_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] global_id
+#   @return [String, nil]
+#
+# @!attribute [rw] group_id
+#   @return [String, nil]
+#
+# @!attribute [rw] group_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] group_mention_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] health
+#   @return [Hash, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] label_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] labels
+#   @return [Array, nil]
+#
+# @!attribute [rw] member_mention_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] mention_ids
+#   @return [Array, nil]
 #
 # @!attribute [rw] milestone_id
 #   @return [Integer, nil]
 #
-# @!attribute [rw] objectif_id
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] objective_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] owner_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] planned_start_date
+#   @return [String, nil]
+#
+# @!attribute [rw] position
 #   @return [Integer, nil]
+#
+# @!attribute [rw] productboard_id
+#   @return [String, nil]
+#
+# @!attribute [rw] productboard_name
+#   @return [String, nil]
+#
+# @!attribute [rw] productboard_plugin_id
+#   @return [String, nil]
+#
+# @!attribute [rw] productboard_url
+#   @return [String, nil]
+#
+# @!attribute [rw] project_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] requested_by_id
+#   @return [String, nil]
+#
+# @!attribute [rw] started
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] started_at
+#   @return [String, nil]
+#
+# @!attribute [rw] started_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] state
+#   @return [String, nil]
+#
+# @!attribute [rw] stats
+#   @return [Hash, nil]
+#
+# @!attribute [rw] stories_without_projects
+#   @return [Integer, nil]
+#
+# @!attribute [rw] updated_at
+#   @return [String, nil]
 EpicListMatch = Struct.new(
-  :label_id,
+  :after_id,
+  :app_url,
+  :archived,
+  :associated_groups,
+  :before_id,
+  :comments,
+  :completed,
+  :completed_at,
+  :completed_at_override,
+  :converted_from_story_id,
+  :created_at,
+  :deadline,
+  :description,
+  :entity_type,
+  :epic_state_id,
+  :external_id,
+  :follower_ids,
+  :global_id,
+  :group_id,
+  :group_ids,
+  :group_mention_ids,
+  :health,
+  :id,
+  :label_ids,
+  :labels,
+  :member_mention_ids,
+  :mention_ids,
   :milestone_id,
-  :objectif_id,
+  :name,
+  :objective_ids,
+  :owner_ids,
+  :planned_start_date,
+  :position,
+  :productboard_id,
+  :productboard_name,
+  :productboard_plugin_id,
+  :productboard_url,
+  :project_ids,
+  :requested_by_id,
+  :started,
+  :started_at,
+  :started_at_override,
+  :state,
+  :stats,
+  :stories_without_projects,
+  :updated_at,
   keyword_init: true
 )
 
@@ -3961,7 +4133,7 @@ Member = Struct.new(
 # Request payload for Member#load.
 #
 # @!attribute [rw] id
-#   @return [String, nil]
+#   @return [String]
 MemberLoadMatch = Struct.new(
   :id,
   keyword_init: true
@@ -4148,10 +4320,94 @@ MilestoneLoadMatch = Struct.new(
 
 # Request payload for Milestone#list.
 #
-# @!attribute [rw] category_id
+# @!attribute [rw] after_id
 #   @return [Integer, nil]
+#
+# @!attribute [rw] app_url
+#   @return [String, nil]
+#
+# @!attribute [rw] archived
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] before_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] categories
+#   @return [Array, nil]
+#
+# @!attribute [rw] completed
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] completed_at
+#   @return [String, nil]
+#
+# @!attribute [rw] completed_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] created_at
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] entity_type
+#   @return [String, nil]
+#
+# @!attribute [rw] global_id
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] key_result_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] position
+#   @return [Integer, nil]
+#
+# @!attribute [rw] started
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] started_at
+#   @return [String, nil]
+#
+# @!attribute [rw] started_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] state
+#   @return [String, nil]
+#
+# @!attribute [rw] stats
+#   @return [Hash, nil]
+#
+# @!attribute [rw] updated_at
+#   @return [String, nil]
 MilestoneListMatch = Struct.new(
-  :category_id,
+  :after_id,
+  :app_url,
+  :archived,
+  :before_id,
+  :categories,
+  :completed,
+  :completed_at,
+  :completed_at_override,
+  :created_at,
+  :description,
+  :entity_type,
+  :global_id,
+  :id,
+  :key_result_ids,
+  :name,
+  :position,
+  :started,
+  :started_at,
+  :started_at_override,
+  :state,
+  :stats,
+  :updated_at,
   keyword_init: true
 )
 
@@ -5587,26 +5843,338 @@ StoryLoadMatch = Struct.new(
 
 # Request payload for Story#list.
 #
-# @!attribute [rw] group_id
+# @!attribute [rw] after_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] app_url
+#   @return [String, nil]
+#
+# @!attribute [rw] archived
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] before_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] blocked
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] blocker
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] branch_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] branches
+#   @return [Array, nil]
+#
+# @!attribute [rw] comment_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] comments
+#   @return [Array, nil]
+#
+# @!attribute [rw] commit_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] commits
+#   @return [Array, nil]
+#
+# @!attribute [rw] completed
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] completed_at
+#   @return [String, nil]
+#
+# @!attribute [rw] completed_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] created_at
+#   @return [String, nil]
+#
+# @!attribute [rw] custom_fields
+#   @return [Array, nil]
+#
+# @!attribute [rw] custom_fields_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] custom_fields_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] cycle_time
+#   @return [Integer, nil]
+#
+# @!attribute [rw] deadline
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] entity_type
 #   @return [String, nil]
 #
 # @!attribute [rw] epic_id
 #   @return [Integer, nil]
 #
+# @!attribute [rw] estimate
+#   @return [Integer, nil]
+#
+# @!attribute [rw] external_id
+#   @return [String, nil]
+#
+# @!attribute [rw] external_links
+#   @return [Array, nil]
+#
+# @!attribute [rw] external_links_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] external_links_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] file_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] file_ids_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] file_ids_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] files
+#   @return [Array, nil]
+#
+# @!attribute [rw] follower_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] follower_ids_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] follower_ids_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] formatted_vcs_branch_name
+#   @return [String, nil]
+#
+# @!attribute [rw] global_id
+#   @return [String, nil]
+#
+# @!attribute [rw] group_id
+#   @return [String, nil]
+#
+# @!attribute [rw] group_mention_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] id
+#   @return [Integer, nil]
+#
 # @!attribute [rw] iteration_id
 #   @return [Integer, nil]
 #
-# @!attribute [rw] label_id
+# @!attribute [rw] label_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] labels
+#   @return [Array, nil]
+#
+# @!attribute [rw] labels_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] labels_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] lead_time
 #   @return [Integer, nil]
+#
+# @!attribute [rw] linked_file_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] linked_file_ids_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] linked_file_ids_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] linked_files
+#   @return [Array, nil]
+#
+# @!attribute [rw] member_mention_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] mention_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] move_to
+#   @return [String, nil]
+#
+# @!attribute [rw] moved_at
+#   @return [String, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] num_tasks_completed
+#   @return [Integer, nil]
+#
+# @!attribute [rw] owner_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] owner_ids_add
+#   @return [Array, nil]
+#
+# @!attribute [rw] owner_ids_remove
+#   @return [Array, nil]
+#
+# @!attribute [rw] parent_story_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] position
+#   @return [Integer, nil]
+#
+# @!attribute [rw] previous_iteration_ids
+#   @return [Array, nil]
 #
 # @!attribute [rw] project_id
 #   @return [Integer, nil]
+#
+# @!attribute [rw] pull_request_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] pull_requests
+#   @return [Array, nil]
+#
+# @!attribute [rw] requested_by_id
+#   @return [String, nil]
+#
+# @!attribute [rw] source_task_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] started
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] started_at
+#   @return [String, nil]
+#
+# @!attribute [rw] started_at_override
+#   @return [String, nil]
+#
+# @!attribute [rw] stats
+#   @return [Hash, nil]
+#
+# @!attribute [rw] story_links
+#   @return [Array, nil]
+#
+# @!attribute [rw] story_template_id
+#   @return [String, nil]
+#
+# @!attribute [rw] story_type
+#   @return [String, nil]
+#
+# @!attribute [rw] sub_task_story_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] sub_tasks
+#   @return [Array, nil]
+#
+# @!attribute [rw] synced_item
+#   @return [Hash, nil]
+#
+# @!attribute [rw] task_ids
+#   @return [Array, nil]
+#
+# @!attribute [rw] tasks
+#   @return [Array, nil]
+#
+# @!attribute [rw] updated_at
+#   @return [String, nil]
+#
+# @!attribute [rw] workflow_id
+#   @return [Integer, nil]
+#
+# @!attribute [rw] workflow_state_id
+#   @return [Integer, nil]
 StoryListMatch = Struct.new(
-  :group_id,
+  :after_id,
+  :app_url,
+  :archived,
+  :before_id,
+  :blocked,
+  :blocker,
+  :branch_ids,
+  :branches,
+  :comment_ids,
+  :comments,
+  :commit_ids,
+  :commits,
+  :completed,
+  :completed_at,
+  :completed_at_override,
+  :created_at,
+  :custom_fields,
+  :custom_fields_add,
+  :custom_fields_remove,
+  :cycle_time,
+  :deadline,
+  :description,
+  :entity_type,
   :epic_id,
+  :estimate,
+  :external_id,
+  :external_links,
+  :external_links_add,
+  :external_links_remove,
+  :file_ids,
+  :file_ids_add,
+  :file_ids_remove,
+  :files,
+  :follower_ids,
+  :follower_ids_add,
+  :follower_ids_remove,
+  :formatted_vcs_branch_name,
+  :global_id,
+  :group_id,
+  :group_mention_ids,
+  :id,
   :iteration_id,
-  :label_id,
+  :label_ids,
+  :labels,
+  :labels_add,
+  :labels_remove,
+  :lead_time,
+  :linked_file_ids,
+  :linked_file_ids_add,
+  :linked_file_ids_remove,
+  :linked_files,
+  :member_mention_ids,
+  :mention_ids,
+  :move_to,
+  :moved_at,
+  :name,
+  :num_tasks_completed,
+  :owner_ids,
+  :owner_ids_add,
+  :owner_ids_remove,
+  :parent_story_id,
+  :position,
+  :previous_iteration_ids,
   :project_id,
+  :pull_request_ids,
+  :pull_requests,
+  :requested_by_id,
+  :source_task_id,
+  :started,
+  :started_at,
+  :started_at_override,
+  :stats,
+  :story_links,
+  :story_template_id,
+  :story_type,
+  :sub_task_story_ids,
+  :sub_tasks,
+  :synced_item,
+  :task_ids,
+  :tasks,
+  :updated_at,
+  :workflow_id,
+  :workflow_state_id,
   keyword_init: true
 )
 
@@ -6398,14 +6966,8 @@ StoryCommentListMatch = Struct.new(
 
 # Request payload for StoryComment#create.
 #
-# @!attribute [rw] comment_id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] story_id
-#   @return [Integer, nil]
-#
 # @!attribute [rw] id
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] app_url
 #   @return [String]
@@ -6449,6 +7011,9 @@ StoryCommentListMatch = Struct.new(
 # @!attribute [rw] reactions
 #   @return [Array]
 #
+# @!attribute [rw] story_id
+#   @return [Integer]
+#
 # @!attribute [rw] text
 #   @return [String]
 #
@@ -6458,8 +7023,6 @@ StoryCommentListMatch = Struct.new(
 # @!attribute [rw] updated_at
 #   @return [String]
 StoryCommentCreateData = Struct.new(
-  :comment_id,
-  :story_id,
   :id,
   :app_url,
   :author_id,
@@ -6475,6 +7038,7 @@ StoryCommentCreateData = Struct.new(
   :parent_id,
   :position,
   :reactions,
+  :story_id,
   :text,
   :unblocks_parent,
   :updated_at,

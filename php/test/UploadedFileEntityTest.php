@@ -40,7 +40,7 @@ class UploadedFileEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class UploadedFileEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.uploaded_file"), "uploaded_file_ref01"));
 
         $uploaded_file_ref01_data_result = $uploaded_file_ref01_ent->create($uploaded_file_ref01_data, null);
-        $uploaded_file_ref01_data = Helpers::to_map($uploaded_file_ref01_data_result);
+        $uploaded_file_ref01_data = Helpers::to_map(is_object($uploaded_file_ref01_data_result) && method_exists($uploaded_file_ref01_data_result, 'data_get') ? $uploaded_file_ref01_data_result->data_get() : $uploaded_file_ref01_data_result);
         $this->assertNotNull($uploaded_file_ref01_data);
         $this->assertNotNull($uploaded_file_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class UploadedFileEntityTest extends TestCase
         $uploaded_file_ref01_data_up0_up[$uploaded_file_ref01_markdef_up0_name] = $uploaded_file_ref01_markdef_up0_value;
 
         $uploaded_file_ref01_resdata_up0_result = $uploaded_file_ref01_ent->update($uploaded_file_ref01_data_up0_up, null);
-        $uploaded_file_ref01_resdata_up0 = Helpers::to_map($uploaded_file_ref01_resdata_up0_result);
+        $uploaded_file_ref01_resdata_up0 = Helpers::to_map(is_object($uploaded_file_ref01_resdata_up0_result) && method_exists($uploaded_file_ref01_resdata_up0_result, 'data_get') ? $uploaded_file_ref01_resdata_up0_result->data_get() : $uploaded_file_ref01_resdata_up0_result);
         $this->assertNotNull($uploaded_file_ref01_resdata_up0);
         $this->assertEquals($uploaded_file_ref01_resdata_up0["id"], $uploaded_file_ref01_data_up0_up["id"]);
         $this->assertEquals($uploaded_file_ref01_resdata_up0[$uploaded_file_ref01_markdef_up0_name], $uploaded_file_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class UploadedFileEntityTest extends TestCase
             "id" => $uploaded_file_ref01_data["id"],
         ];
         $uploaded_file_ref01_data_dt0_loaded = $uploaded_file_ref01_ent->load($uploaded_file_ref01_match_dt0, null);
-        $uploaded_file_ref01_data_dt0_load_result = Helpers::to_map($uploaded_file_ref01_data_dt0_loaded);
+        $uploaded_file_ref01_data_dt0_load_result = Helpers::to_map(is_object($uploaded_file_ref01_data_dt0_loaded) && method_exists($uploaded_file_ref01_data_dt0_loaded, 'data_get') ? $uploaded_file_ref01_data_dt0_loaded->data_get() : $uploaded_file_ref01_data_dt0_loaded);
         $this->assertNotNull($uploaded_file_ref01_data_dt0_load_result);
         $this->assertEquals($uploaded_file_ref01_data_dt0_load_result["id"], $uploaded_file_ref01_data["id"]);
 

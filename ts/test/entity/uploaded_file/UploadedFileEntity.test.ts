@@ -62,14 +62,14 @@ describe('UploadedFileEntity', async () => {
     const uploaded_file_ref01_ent = client.UploadedFile()
     let uploaded_file_ref01_data = setup.data.new.uploaded_file['uploaded_file_ref01']
 
-    uploaded_file_ref01_data = await uploaded_file_ref01_ent.create(uploaded_file_ref01_data)
+    uploaded_file_ref01_data = (await uploaded_file_ref01_ent.create(uploaded_file_ref01_data)).data()
     assert(null != uploaded_file_ref01_data.id)
 
 
     // LIST
     const uploaded_file_ref01_match: any = {}
 
-    const uploaded_file_ref01_list = await uploaded_file_ref01_ent.list(uploaded_file_ref01_match)
+    const uploaded_file_ref01_list = (await uploaded_file_ref01_ent.list(uploaded_file_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(uploaded_file_ref01_list, { id: uploaded_file_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('UploadedFileEntity', async () => {
     const uploaded_file_ref01_markdef_up0 = { name: 'content_type', value: 'Mark01-uploaded_file_ref01_' + setup.now }
     ;(uploaded_file_ref01_data_up0 as any)[uploaded_file_ref01_markdef_up0.name] = uploaded_file_ref01_markdef_up0.value
 
-    const uploaded_file_ref01_resdata_up0 = await uploaded_file_ref01_ent.update(uploaded_file_ref01_data_up0)
+    const uploaded_file_ref01_resdata_up0 = (await uploaded_file_ref01_ent.update(uploaded_file_ref01_data_up0)).data()
     assert(uploaded_file_ref01_resdata_up0.id === uploaded_file_ref01_data_up0.id)
 
     assert((uploaded_file_ref01_resdata_up0 as any)[uploaded_file_ref01_markdef_up0.name] === uploaded_file_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('UploadedFileEntity', async () => {
     // LOAD
     const uploaded_file_ref01_match_dt0: any = {}
     uploaded_file_ref01_match_dt0.id = uploaded_file_ref01_data.id
-    const uploaded_file_ref01_data_dt0 = await uploaded_file_ref01_ent.load(uploaded_file_ref01_match_dt0)
+    const uploaded_file_ref01_data_dt0 = (await uploaded_file_ref01_ent.load(uploaded_file_ref01_match_dt0)).data()
     assert(uploaded_file_ref01_data_dt0.id === uploaded_file_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('UploadedFileEntity', async () => {
     // LIST
     const uploaded_file_ref01_match_rt0: any = {}
 
-    const uploaded_file_ref01_list_rt0 = await uploaded_file_ref01_ent.list(uploaded_file_ref01_match_rt0)
+    const uploaded_file_ref01_list_rt0 = (await uploaded_file_ref01_ent.list(uploaded_file_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(uploaded_file_ref01_list_rt0, { id: uploaded_file_ref01_data.id })))
 

@@ -39,7 +39,7 @@ describe("ProjectEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("ProjectEntity", function()
 
     local project_ref01_data_result, err = project_ref01_ent:create(project_ref01_data, nil)
     assert.is_nil(err)
-    project_ref01_data = helpers.to_map(project_ref01_data_result)
+    project_ref01_data = helpers.to_map(type(project_ref01_data_result) == 'table' and project_ref01_data_result.data_get and project_ref01_data_result:data_get() or project_ref01_data_result)
     assert.is_not_nil(project_ref01_data)
     assert.is_not_nil(project_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("ProjectEntity", function()
 
     local project_ref01_resdata_up0_result, err = project_ref01_ent:update(project_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local project_ref01_resdata_up0 = helpers.to_map(project_ref01_resdata_up0_result)
+    local project_ref01_resdata_up0 = helpers.to_map(type(project_ref01_resdata_up0_result) == 'table' and project_ref01_resdata_up0_result.data_get and project_ref01_resdata_up0_result:data_get() or project_ref01_resdata_up0_result)
     assert.is_not_nil(project_ref01_resdata_up0)
     assert.are.equal(project_ref01_resdata_up0["id"], project_ref01_data_up0_up["id"])
     assert.are.equal(project_ref01_resdata_up0[project_ref01_markdef_up0_name], project_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("ProjectEntity", function()
     }
     local project_ref01_data_dt0_loaded, err = project_ref01_ent:load(project_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local project_ref01_data_dt0_load_result = helpers.to_map(project_ref01_data_dt0_loaded)
+    local project_ref01_data_dt0_load_result = helpers.to_map(type(project_ref01_data_dt0_loaded) == 'table' and project_ref01_data_dt0_loaded.data_get and project_ref01_data_dt0_loaded:data_get() or project_ref01_data_dt0_loaded)
     assert.is_not_nil(project_ref01_data_dt0_load_result)
     assert.are.equal(project_ref01_data_dt0_load_result["id"], project_ref01_data["id"])
 

@@ -1,0 +1,228 @@
+# Entity: member
+
+main: kit: entity: member: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "created_at"
+      req: true
+      short: "The time/date the Member was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_without_invite"
+      req: true
+      short: "Whether this member was created as a placeholder entity."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "disabled"
+      req: true
+      short: "True/false boolean indicating whether the Member has been disabled within the Workspace."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "group_ids"
+      req: true
+      short: "The Member's group ids"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The Member's ID in Shortcut."
+      type: "`$STRING`"
+    }
+    {
+      name: "installation_id"
+      req: false
+      short: "Only set for agents."
+      type: "`$STRING`"
+    }
+    {
+      name: "is_owner"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "mention_name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "organization2"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "profile"
+      req: true
+      short: "A group of Member profile details."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "replaced_by"
+      req: false
+      short: "The id of the member that replaces this one when merged."
+      type: "`$STRING`"
+    }
+    {
+      name: "role"
+      req: true
+      short: "The Member's role in the Workspace."
+      type: "`$STRING`"
+    }
+    {
+      name: "state"
+      req: true
+      short: "The user state, one of partial, full, disabled, or imported."
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      short: "The time/date the Member was last updated."
+      type: "`$STRING`"
+    }
+    {
+      name: "workspace2"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "member"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "disabled"
+                orig: "disabled"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "org_public_id"
+                orig: "org_public_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/members"
+          parts: [
+            "api"
+            "v3"
+            "members"
+          ]
+          select: {
+            exist: [
+              "disabled"
+              "org_public_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "member_public_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "org_public_id"
+                orig: "org_public_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/members/{member-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "members"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "member-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "org_public_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/api/v3/member"
+          parts: [
+            "api"
+            "v3"
+            "member"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

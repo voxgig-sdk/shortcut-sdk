@@ -62,14 +62,14 @@ describe('DocSlimEntity', async () => {
     const doc_slim_ref01_ent = client.DocSlim()
     let doc_slim_ref01_data = setup.data.new.doc_slim['doc_slim_ref01']
 
-    doc_slim_ref01_data = await doc_slim_ref01_ent.create(doc_slim_ref01_data)
+    doc_slim_ref01_data = (await doc_slim_ref01_ent.create(doc_slim_ref01_data)).data()
     assert(null != doc_slim_ref01_data.id)
 
 
     // LIST
     const doc_slim_ref01_match: any = {}
 
-    const doc_slim_ref01_list = await doc_slim_ref01_ent.list(doc_slim_ref01_match)
+    const doc_slim_ref01_list = (await doc_slim_ref01_ent.list(doc_slim_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(doc_slim_ref01_list, { id: doc_slim_ref01_data.id })))
 

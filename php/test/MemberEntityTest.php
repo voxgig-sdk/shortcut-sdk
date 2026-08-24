@@ -40,7 +40,7 @@ class MemberEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -97,7 +97,7 @@ class MemberEntityTest extends TestCase
             "id" => $member_ref01_data["id"],
         ];
         $member_ref01_data_dt0_loaded = $member_ref01_ent->load($member_ref01_match_dt0, null);
-        $member_ref01_data_dt0_load_result = Helpers::to_map($member_ref01_data_dt0_loaded);
+        $member_ref01_data_dt0_load_result = Helpers::to_map(is_object($member_ref01_data_dt0_loaded) && method_exists($member_ref01_data_dt0_loaded, 'data_get') ? $member_ref01_data_dt0_loaded->data_get() : $member_ref01_data_dt0_loaded);
         $this->assertNotNull($member_ref01_data_dt0_load_result);
         $this->assertEquals($member_ref01_data_dt0_load_result["id"], $member_ref01_data["id"]);
 

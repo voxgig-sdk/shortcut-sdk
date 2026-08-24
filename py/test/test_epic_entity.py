@@ -42,8 +42,8 @@ class TestEpicEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -81,7 +81,7 @@ class TestEpicEntity:
         epic_ref01_data["milestone_id"] = setup["idmap"]["milestone01"]
         epic_ref01_data["objectif_id"] = setup["idmap"]["objectif01"]
 
-        epic_ref01_data = helpers.to_map(epic_ref01_ent.create(epic_ref01_data, None))
+        epic_ref01_data = helpers.to_map(runner.entity_data(epic_ref01_ent.create(epic_ref01_data, None)))
         assert epic_ref01_data is not None
         assert epic_ref01_data["id"] is not None
 
@@ -107,7 +107,7 @@ class TestEpicEntity:
         epic_ref01_markdef_up0_value = "Mark01-epic_ref01_" + str(setup["now"])
         epic_ref01_data_up0_up[epic_ref01_markdef_up0_name] = epic_ref01_markdef_up0_value
 
-        epic_ref01_resdata_up0 = helpers.to_map(epic_ref01_ent.update(epic_ref01_data_up0_up, None))
+        epic_ref01_resdata_up0 = helpers.to_map(runner.entity_data(epic_ref01_ent.update(epic_ref01_data_up0_up, None)))
         assert epic_ref01_resdata_up0 is not None
         assert epic_ref01_resdata_up0["id"] == epic_ref01_data_up0_up["id"]
         assert epic_ref01_resdata_up0[epic_ref01_markdef_up0_name] == epic_ref01_markdef_up0_value
@@ -117,7 +117,7 @@ class TestEpicEntity:
             "id": epic_ref01_data["id"],
         }
         epic_ref01_data_dt0_loaded = epic_ref01_ent.load(epic_ref01_match_dt0, None)
-        epic_ref01_data_dt0_load_result = helpers.to_map(epic_ref01_data_dt0_loaded)
+        epic_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(epic_ref01_data_dt0_loaded))
         assert epic_ref01_data_dt0_load_result is not None
         assert epic_ref01_data_dt0_load_result["id"] == epic_ref01_data["id"]
 

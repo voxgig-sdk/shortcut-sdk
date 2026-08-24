@@ -1,0 +1,84 @@
+# Entity: doc_slim
+
+main: kit: entity: doc_slim: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "app_url"
+      req: true
+      short: "The Shortcut application url for the Doc."
+      type: "`$STRING`"
+    }
+    {
+      name: "content"
+      req: true
+      short: "The content for the new document"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The public id of the Doc"
+      type: "`$STRING`"
+    }
+    {
+      name: "title"
+      req: true
+      short: "The title for the new document"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "doc_slim"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/documents"
+          parts: [
+            "api"
+            "v3"
+            "documents"
+          ]
+          transform: {
+            req: {
+              content: "`reqdata.content`"
+              title: "`reqdata.title`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/v3/documents"
+          parts: [
+            "api"
+            "v3"
+            "documents"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -33,7 +33,7 @@ class MilestoneEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -74,7 +74,7 @@ class MilestoneEntityTest < Minitest::Test
     milestone_ref01_data["category_id"] = setup[:idmap]["category01"]
 
     milestone_ref01_data_result = milestone_ref01_ent.create(milestone_ref01_data, nil)
-    milestone_ref01_data = Helpers.to_map(milestone_ref01_data_result)
+    milestone_ref01_data = Helpers.to_map(milestone_ref01_data_result.respond_to?(:data_get) ? milestone_ref01_data_result.data_get : milestone_ref01_data_result)
     assert !milestone_ref01_data.nil?
     assert !milestone_ref01_data["id"].nil?
 
@@ -99,7 +99,7 @@ class MilestoneEntityTest < Minitest::Test
     milestone_ref01_data_up0_up[milestone_ref01_markdef_up0_name] = milestone_ref01_markdef_up0_value
 
     milestone_ref01_resdata_up0_result = milestone_ref01_ent.update(milestone_ref01_data_up0_up, nil)
-    milestone_ref01_resdata_up0 = Helpers.to_map(milestone_ref01_resdata_up0_result)
+    milestone_ref01_resdata_up0 = Helpers.to_map(milestone_ref01_resdata_up0_result.respond_to?(:data_get) ? milestone_ref01_resdata_up0_result.data_get : milestone_ref01_resdata_up0_result)
     assert !milestone_ref01_resdata_up0.nil?
     assert_equal milestone_ref01_resdata_up0["id"], milestone_ref01_data_up0_up["id"]
     assert_equal milestone_ref01_resdata_up0[milestone_ref01_markdef_up0_name], milestone_ref01_markdef_up0_value
@@ -109,7 +109,7 @@ class MilestoneEntityTest < Minitest::Test
       "id" => milestone_ref01_data["id"],
     }
     milestone_ref01_data_dt0_loaded = milestone_ref01_ent.load(milestone_ref01_match_dt0, nil)
-    milestone_ref01_data_dt0_load_result = Helpers.to_map(milestone_ref01_data_dt0_loaded)
+    milestone_ref01_data_dt0_load_result = Helpers.to_map(milestone_ref01_data_dt0_loaded.respond_to?(:data_get) ? milestone_ref01_data_dt0_loaded.data_get : milestone_ref01_data_dt0_loaded)
     assert !milestone_ref01_data_dt0_load_result.nil?
     assert_equal milestone_ref01_data_dt0_load_result["id"], milestone_ref01_data["id"]
 

@@ -37,7 +37,7 @@ class EpicPaginatedResultEntity extends ShortcutEntityBase<EpicPaginatedResult> 
 
 
 
-  async list(this: any, reqmatch?: EpicPaginatedResultListMatch, ctrl?: Control): Promise<EpicPaginatedResult[]> {
+  async list(this: any, reqmatch?: EpicPaginatedResultListMatch, ctrl?: Control): Promise<EpicPaginatedResultEntity[]> {
 
     const utility = this._utility
 

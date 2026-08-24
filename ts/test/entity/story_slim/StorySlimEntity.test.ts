@@ -62,7 +62,7 @@ describe('StorySlimEntity', async () => {
     const story_slim_ref01_ent = client.StorySlim()
     let story_slim_ref01_data = setup.data.new.story_slim['story_slim_ref01']
 
-    story_slim_ref01_data = await story_slim_ref01_ent.create(story_slim_ref01_data)
+    story_slim_ref01_data = (await story_slim_ref01_ent.create(story_slim_ref01_data)).data()
     assert(null != story_slim_ref01_data)
 
 
@@ -72,7 +72,7 @@ describe('StorySlimEntity', async () => {
     const story_slim_ref01_markdef_up0 = { name: 'completed_at_end', value: 'Mark01-story_slim_ref01_' + setup.now }
     ;(story_slim_ref01_data_up0 as any)[story_slim_ref01_markdef_up0.name] = story_slim_ref01_markdef_up0.value
 
-    const story_slim_ref01_resdata_up0 = await story_slim_ref01_ent.update(story_slim_ref01_data_up0)
+    const story_slim_ref01_resdata_up0 = (await story_slim_ref01_ent.update(story_slim_ref01_data_up0)).data()
     assert(null != story_slim_ref01_resdata_up0)
 
     assert((story_slim_ref01_resdata_up0 as any)[story_slim_ref01_markdef_up0.name] === story_slim_ref01_markdef_up0.value)

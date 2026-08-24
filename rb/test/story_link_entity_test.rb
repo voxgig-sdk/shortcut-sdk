@@ -37,7 +37,7 @@ class StoryLinkEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.story_link"), "story_link_ref01"))
 
     story_link_ref01_data_result = story_link_ref01_ent.create(story_link_ref01_data, nil)
-    story_link_ref01_data = Helpers.to_map(story_link_ref01_data_result)
+    story_link_ref01_data = Helpers.to_map(story_link_ref01_data_result.respond_to?(:data_get) ? story_link_ref01_data_result.data_get : story_link_ref01_data_result)
     assert !story_link_ref01_data.nil?
     assert !story_link_ref01_data["id"].nil?
 
@@ -51,7 +51,7 @@ class StoryLinkEntityTest < Minitest::Test
     story_link_ref01_data_up0_up[story_link_ref01_markdef_up0_name] = story_link_ref01_markdef_up0_value
 
     story_link_ref01_resdata_up0_result = story_link_ref01_ent.update(story_link_ref01_data_up0_up, nil)
-    story_link_ref01_resdata_up0 = Helpers.to_map(story_link_ref01_resdata_up0_result)
+    story_link_ref01_resdata_up0 = Helpers.to_map(story_link_ref01_resdata_up0_result.respond_to?(:data_get) ? story_link_ref01_resdata_up0_result.data_get : story_link_ref01_resdata_up0_result)
     assert !story_link_ref01_resdata_up0.nil?
     assert_equal story_link_ref01_resdata_up0["id"], story_link_ref01_data_up0_up["id"]
     assert_equal story_link_ref01_resdata_up0[story_link_ref01_markdef_up0_name], story_link_ref01_markdef_up0_value
@@ -61,7 +61,7 @@ class StoryLinkEntityTest < Minitest::Test
       "id" => story_link_ref01_data["id"],
     }
     story_link_ref01_data_dt0_loaded = story_link_ref01_ent.load(story_link_ref01_match_dt0, nil)
-    story_link_ref01_data_dt0_load_result = Helpers.to_map(story_link_ref01_data_dt0_loaded)
+    story_link_ref01_data_dt0_load_result = Helpers.to_map(story_link_ref01_data_dt0_loaded.respond_to?(:data_get) ? story_link_ref01_data_dt0_loaded.data_get : story_link_ref01_data_dt0_loaded)
     assert !story_link_ref01_data_dt0_load_result.nil?
     assert_equal story_link_ref01_data_dt0_load_result["id"], story_link_ref01_data["id"]
 

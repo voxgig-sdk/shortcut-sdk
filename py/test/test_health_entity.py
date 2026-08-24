@@ -42,8 +42,8 @@ class TestHealthEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -79,7 +79,7 @@ class TestHealthEntity:
             vs.getpath(setup["data"], "new.health"), "health_ref01"))
         health_ref01_data["epic_id"] = setup["idmap"]["epic01"]
 
-        health_ref01_data = helpers.to_map(health_ref01_ent.create(health_ref01_data, None))
+        health_ref01_data = helpers.to_map(runner.entity_data(health_ref01_ent.create(health_ref01_data, None)))
         assert health_ref01_data is not None
         assert health_ref01_data["id"] is not None
 
@@ -105,7 +105,7 @@ class TestHealthEntity:
         health_ref01_markdef_up0_value = "Mark01-health_ref01_" + str(setup["now"])
         health_ref01_data_up0_up[health_ref01_markdef_up0_name] = health_ref01_markdef_up0_value
 
-        health_ref01_resdata_up0 = helpers.to_map(health_ref01_ent.update(health_ref01_data_up0_up, None))
+        health_ref01_resdata_up0 = helpers.to_map(runner.entity_data(health_ref01_ent.update(health_ref01_data_up0_up, None)))
         assert health_ref01_resdata_up0 is not None
         assert health_ref01_resdata_up0["id"] == health_ref01_data_up0_up["id"]
         assert health_ref01_resdata_up0[health_ref01_markdef_up0_name] == health_ref01_markdef_up0_value
@@ -115,7 +115,7 @@ class TestHealthEntity:
             "id": health_ref01_data["id"],
         }
         health_ref01_data_dt0_loaded = health_ref01_ent.load(health_ref01_match_dt0, None)
-        health_ref01_data_dt0_load_result = helpers.to_map(health_ref01_data_dt0_loaded)
+        health_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(health_ref01_data_dt0_loaded))
         assert health_ref01_data_dt0_load_result is not None
         assert health_ref01_data_dt0_load_result["id"] == health_ref01_data["id"]
 

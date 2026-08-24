@@ -28,7 +28,7 @@ class ShortcutSDK
     utility = ShortcutUtility.new
     @_utility = utility
 
-    config = ShortcutConfig.make_config
+    config = ShortcutConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

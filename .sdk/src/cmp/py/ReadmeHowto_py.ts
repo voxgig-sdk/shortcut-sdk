@@ -1,5 +1,5 @@
 
-import { cmp, Content, isAuthActive, envName, canonKey, entityIdField, pickExampleEntity, opRequestShape, safeVarName, exampleVarName } from '@voxgig/sdkgen'
+import { cmp, Content, isAuthActive, envName, canonKey, canonScalarKey, entityIdField, pickExampleEntity, opRequestShape, safeVarName, exampleVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -10,7 +10,7 @@ import {
 
 // A type-correct Python literal for a field's canonical type.
 function pyLit(type: any): string {
-  const k = canonKey(type)
+  const k = canonScalarKey(type)
   if ('INTEGER' === k || 'NUMBER' === k) return '1'
   if ('BOOLEAN' === k) return 'True'
   if ('ARRAY' === k) return '[]'
@@ -54,7 +54,8 @@ const ReadmeHowto = cmp(function ReadmeHowto(props: any) {
   // The op-driven test-mode line, shown only when the SDK has an entity op.
   // A direct()-only SDK (no ops anywhere) shows a direct() call instead.
   const testModeExample = primaryOp
-    ? `# Entity ops return the bare record and raise on error.
+    ? `# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 ${eVar} = client.${eName}().${primaryOp}(${testArg})
 # ${eVar} contains the mock response record`
     : `result = client.direct({"path": "/api/resource", "method": "GET"})

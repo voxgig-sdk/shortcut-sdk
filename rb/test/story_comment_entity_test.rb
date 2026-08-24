@@ -33,7 +33,7 @@ class StoryCommentEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -75,7 +75,7 @@ class StoryCommentEntityTest < Minitest::Test
     story_comment_ref01_data["story_id"] = setup[:idmap]["story01"]
 
     story_comment_ref01_data_result = story_comment_ref01_ent.create(story_comment_ref01_data, nil)
-    story_comment_ref01_data = Helpers.to_map(story_comment_ref01_data_result)
+    story_comment_ref01_data = Helpers.to_map(story_comment_ref01_data_result.respond_to?(:data_get) ? story_comment_ref01_data_result.data_get : story_comment_ref01_data_result)
     assert !story_comment_ref01_data.nil?
     assert !story_comment_ref01_data["id"].nil?
 
@@ -103,7 +103,7 @@ class StoryCommentEntityTest < Minitest::Test
     story_comment_ref01_data_up0_up[story_comment_ref01_markdef_up0_name] = story_comment_ref01_markdef_up0_value
 
     story_comment_ref01_resdata_up0_result = story_comment_ref01_ent.update(story_comment_ref01_data_up0_up, nil)
-    story_comment_ref01_resdata_up0 = Helpers.to_map(story_comment_ref01_resdata_up0_result)
+    story_comment_ref01_resdata_up0 = Helpers.to_map(story_comment_ref01_resdata_up0_result.respond_to?(:data_get) ? story_comment_ref01_resdata_up0_result.data_get : story_comment_ref01_resdata_up0_result)
     assert !story_comment_ref01_resdata_up0.nil?
     assert_equal story_comment_ref01_resdata_up0["id"], story_comment_ref01_data_up0_up["id"]
     assert_equal story_comment_ref01_resdata_up0[story_comment_ref01_markdef_up0_name], story_comment_ref01_markdef_up0_value
@@ -113,7 +113,7 @@ class StoryCommentEntityTest < Minitest::Test
       "id" => story_comment_ref01_data["id"],
     }
     story_comment_ref01_data_dt0_loaded = story_comment_ref01_ent.load(story_comment_ref01_match_dt0, nil)
-    story_comment_ref01_data_dt0_load_result = Helpers.to_map(story_comment_ref01_data_dt0_loaded)
+    story_comment_ref01_data_dt0_load_result = Helpers.to_map(story_comment_ref01_data_dt0_loaded.respond_to?(:data_get) ? story_comment_ref01_data_dt0_loaded.data_get : story_comment_ref01_data_dt0_loaded)
     assert !story_comment_ref01_data_dt0_load_result.nil?
     assert_equal story_comment_ref01_data_dt0_load_result["id"], story_comment_ref01_data["id"]
 

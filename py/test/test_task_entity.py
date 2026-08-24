@@ -45,7 +45,7 @@ class TestTaskEntity:
             vs.getpath(setup["data"], "new.task"), "task_ref01"))
         task_ref01_data["story_id"] = setup["idmap"]["story01"]
 
-        task_ref01_data = helpers.to_map(task_ref01_ent.create(task_ref01_data, None))
+        task_ref01_data = helpers.to_map(runner.entity_data(task_ref01_ent.create(task_ref01_data, None)))
         assert task_ref01_data is not None
         assert task_ref01_data["id"] is not None
 
@@ -59,7 +59,7 @@ class TestTaskEntity:
         task_ref01_markdef_up0_value = "Mark01-task_ref01_" + str(setup["now"])
         task_ref01_data_up0_up[task_ref01_markdef_up0_name] = task_ref01_markdef_up0_value
 
-        task_ref01_resdata_up0 = helpers.to_map(task_ref01_ent.update(task_ref01_data_up0_up, None))
+        task_ref01_resdata_up0 = helpers.to_map(runner.entity_data(task_ref01_ent.update(task_ref01_data_up0_up, None)))
         assert task_ref01_resdata_up0 is not None
         assert task_ref01_resdata_up0["id"] == task_ref01_data_up0_up["id"]
         assert task_ref01_resdata_up0[task_ref01_markdef_up0_name] == task_ref01_markdef_up0_value
@@ -69,7 +69,7 @@ class TestTaskEntity:
             "id": task_ref01_data["id"],
         }
         task_ref01_data_dt0_loaded = task_ref01_ent.load(task_ref01_match_dt0, None)
-        task_ref01_data_dt0_load_result = helpers.to_map(task_ref01_data_dt0_loaded)
+        task_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(task_ref01_data_dt0_loaded))
         assert task_ref01_data_dt0_load_result is not None
         assert task_ref01_data_dt0_load_result["id"] == task_ref01_data["id"]
 

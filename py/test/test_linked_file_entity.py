@@ -42,8 +42,8 @@ class TestLinkedFileEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestLinkedFileEntity:
         linked_file_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.linked_file"), "linked_file_ref01"))
 
-        linked_file_ref01_data = helpers.to_map(linked_file_ref01_ent.create(linked_file_ref01_data, None))
+        linked_file_ref01_data = helpers.to_map(runner.entity_data(linked_file_ref01_ent.create(linked_file_ref01_data, None)))
         assert linked_file_ref01_data is not None
         assert linked_file_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestLinkedFileEntity:
         linked_file_ref01_markdef_up0_value = "Mark01-linked_file_ref01_" + str(setup["now"])
         linked_file_ref01_data_up0_up[linked_file_ref01_markdef_up0_name] = linked_file_ref01_markdef_up0_value
 
-        linked_file_ref01_resdata_up0 = helpers.to_map(linked_file_ref01_ent.update(linked_file_ref01_data_up0_up, None))
+        linked_file_ref01_resdata_up0 = helpers.to_map(runner.entity_data(linked_file_ref01_ent.update(linked_file_ref01_data_up0_up, None)))
         assert linked_file_ref01_resdata_up0 is not None
         assert linked_file_ref01_resdata_up0["id"] == linked_file_ref01_data_up0_up["id"]
         assert linked_file_ref01_resdata_up0[linked_file_ref01_markdef_up0_name] == linked_file_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestLinkedFileEntity:
             "id": linked_file_ref01_data["id"],
         }
         linked_file_ref01_data_dt0_loaded = linked_file_ref01_ent.load(linked_file_ref01_match_dt0, None)
-        linked_file_ref01_data_dt0_load_result = helpers.to_map(linked_file_ref01_data_dt0_loaded)
+        linked_file_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(linked_file_ref01_data_dt0_loaded))
         assert linked_file_ref01_data_dt0_load_result is not None
         assert linked_file_ref01_data_dt0_load_result["id"] == linked_file_ref01_data["id"]
 

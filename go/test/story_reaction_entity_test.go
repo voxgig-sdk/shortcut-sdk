@@ -60,7 +60,7 @@ func TestStoryReactionEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		storyReactionRef01Data = core.ToMapAny(storyReactionRef01DataResult)
+		storyReactionRef01Data = core.ToMapAny(entityData(storyReactionRef01DataResult))
 		if storyReactionRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}

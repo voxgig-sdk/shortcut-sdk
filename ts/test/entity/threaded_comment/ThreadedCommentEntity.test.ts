@@ -63,7 +63,7 @@ describe('ThreadedCommentEntity', async () => {
     let threaded_comment_ref01_data = setup.data.new.threaded_comment['threaded_comment_ref01']
     threaded_comment_ref01_data['epic_id'] = setup.idmap['epic01']
 
-    threaded_comment_ref01_data = await threaded_comment_ref01_ent.create(threaded_comment_ref01_data)
+    threaded_comment_ref01_data = (await threaded_comment_ref01_ent.create(threaded_comment_ref01_data)).data()
     assert(null != threaded_comment_ref01_data.id)
 
 
@@ -71,7 +71,7 @@ describe('ThreadedCommentEntity', async () => {
     const threaded_comment_ref01_match: any = {}
     threaded_comment_ref01_match['epic_id'] = setup.idmap['epic01']
 
-    const threaded_comment_ref01_list = await threaded_comment_ref01_ent.list(threaded_comment_ref01_match)
+    const threaded_comment_ref01_list = (await threaded_comment_ref01_ent.list(threaded_comment_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(threaded_comment_ref01_list, { id: threaded_comment_ref01_data.id })))
 
@@ -84,7 +84,7 @@ describe('ThreadedCommentEntity', async () => {
     const threaded_comment_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-threaded_comment_ref01_' + setup.now }
     ;(threaded_comment_ref01_data_up0 as any)[threaded_comment_ref01_markdef_up0.name] = threaded_comment_ref01_markdef_up0.value
 
-    const threaded_comment_ref01_resdata_up0 = await threaded_comment_ref01_ent.update(threaded_comment_ref01_data_up0)
+    const threaded_comment_ref01_resdata_up0 = (await threaded_comment_ref01_ent.update(threaded_comment_ref01_data_up0)).data()
     assert(threaded_comment_ref01_resdata_up0.id === threaded_comment_ref01_data_up0.id)
 
     assert((threaded_comment_ref01_resdata_up0 as any)[threaded_comment_ref01_markdef_up0.name] === threaded_comment_ref01_markdef_up0.value)
@@ -93,7 +93,7 @@ describe('ThreadedCommentEntity', async () => {
     // LOAD
     const threaded_comment_ref01_match_dt0: any = {}
     threaded_comment_ref01_match_dt0.id = threaded_comment_ref01_data.id
-    const threaded_comment_ref01_data_dt0 = await threaded_comment_ref01_ent.load(threaded_comment_ref01_match_dt0)
+    const threaded_comment_ref01_data_dt0 = (await threaded_comment_ref01_ent.load(threaded_comment_ref01_match_dt0)).data()
     assert(threaded_comment_ref01_data_dt0.id === threaded_comment_ref01_data.id)
 
 
@@ -106,7 +106,7 @@ describe('ThreadedCommentEntity', async () => {
     const threaded_comment_ref01_match_rt0: any = {}
     threaded_comment_ref01_match_rt0['epic_id'] = setup.idmap['epic01']
 
-    const threaded_comment_ref01_list_rt0 = await threaded_comment_ref01_ent.list(threaded_comment_ref01_match_rt0)
+    const threaded_comment_ref01_list_rt0 = (await threaded_comment_ref01_ent.list(threaded_comment_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(threaded_comment_ref01_list_rt0, { id: threaded_comment_ref01_data.id })))
 

@@ -62,7 +62,7 @@ describe('StoryLinkEntity', async () => {
     const story_link_ref01_ent = client.StoryLink()
     let story_link_ref01_data = setup.data.new.story_link['story_link_ref01']
 
-    story_link_ref01_data = await story_link_ref01_ent.create(story_link_ref01_data)
+    story_link_ref01_data = (await story_link_ref01_ent.create(story_link_ref01_data)).data()
     assert(null != story_link_ref01_data.id)
 
 
@@ -73,7 +73,7 @@ describe('StoryLinkEntity', async () => {
     const story_link_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-story_link_ref01_' + setup.now }
     ;(story_link_ref01_data_up0 as any)[story_link_ref01_markdef_up0.name] = story_link_ref01_markdef_up0.value
 
-    const story_link_ref01_resdata_up0 = await story_link_ref01_ent.update(story_link_ref01_data_up0)
+    const story_link_ref01_resdata_up0 = (await story_link_ref01_ent.update(story_link_ref01_data_up0)).data()
     assert(story_link_ref01_resdata_up0.id === story_link_ref01_data_up0.id)
 
     assert((story_link_ref01_resdata_up0 as any)[story_link_ref01_markdef_up0.name] === story_link_ref01_markdef_up0.value)
@@ -82,7 +82,7 @@ describe('StoryLinkEntity', async () => {
     // LOAD
     const story_link_ref01_match_dt0: any = {}
     story_link_ref01_match_dt0.id = story_link_ref01_data.id
-    const story_link_ref01_data_dt0 = await story_link_ref01_ent.load(story_link_ref01_match_dt0)
+    const story_link_ref01_data_dt0 = (await story_link_ref01_ent.load(story_link_ref01_match_dt0)).data()
     assert(story_link_ref01_data_dt0.id === story_link_ref01_data.id)
 
 

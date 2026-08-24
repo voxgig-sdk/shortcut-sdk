@@ -398,9 +398,52 @@ class EpicLoadMatch(TypedDict):
 
 
 class EpicListMatch(TypedDict, total=False):
-    label_id: int
+    after_id: int
+    app_url: str
+    archived: bool
+    associated_groups: list
+    before_id: int
+    comments: list
+    completed: bool
+    completed_at: str
+    completed_at_override: str
+    converted_from_story_id: int
+    created_at: str
+    deadline: str
+    description: str
+    entity_type: str
+    epic_state_id: int
+    external_id: str
+    follower_ids: list
+    global_id: str
+    group_id: str
+    group_ids: list
+    group_mention_ids: list
+    health: dict
+    id: int
+    label_ids: list
+    labels: list
+    member_mention_ids: list
+    mention_ids: list
     milestone_id: int
-    objectif_id: int
+    name: str
+    objective_ids: list
+    owner_ids: list
+    planned_start_date: str
+    position: int
+    productboard_id: str
+    productboard_name: str
+    productboard_plugin_id: str
+    productboard_url: str
+    project_ids: list
+    requested_by_id: str
+    started: bool
+    started_at: str
+    started_at_override: str
+    state: str
+    stats: dict
+    stories_without_projects: int
+    updated_at: str
 
 
 class EpicCreateDataRequired(TypedDict):
@@ -1227,7 +1270,7 @@ class Member(MemberRequired, total=False):
     replaced_by: str
 
 
-class MemberLoadMatch(TypedDict, total=False):
+class MemberLoadMatch(TypedDict):
     id: str
 
 
@@ -1285,7 +1328,28 @@ class MilestoneLoadMatch(TypedDict):
 
 
 class MilestoneListMatch(TypedDict, total=False):
-    category_id: int
+    after_id: int
+    app_url: str
+    archived: bool
+    before_id: int
+    categories: list
+    completed: bool
+    completed_at: str
+    completed_at_override: str
+    created_at: str
+    description: str
+    entity_type: str
+    global_id: str
+    id: int
+    key_result_ids: list
+    name: str
+    position: int
+    started: bool
+    started_at: str
+    started_at_override: str
+    state: str
+    stats: dict
+    updated_at: str
 
 
 class MilestoneCreateDataRequired(TypedDict):
@@ -1709,11 +1773,89 @@ class StoryLoadMatch(TypedDict):
 
 
 class StoryListMatch(TypedDict, total=False):
-    group_id: str
+    after_id: int
+    app_url: str
+    archived: bool
+    before_id: int
+    blocked: bool
+    blocker: bool
+    branch_ids: list
+    branches: list
+    comment_ids: list
+    comments: list
+    commit_ids: list
+    commits: list
+    completed: bool
+    completed_at: str
+    completed_at_override: str
+    created_at: str
+    custom_fields: list
+    custom_fields_add: list
+    custom_fields_remove: list
+    cycle_time: int
+    deadline: str
+    description: str
+    entity_type: str
     epic_id: int
+    estimate: int
+    external_id: str
+    external_links: list
+    external_links_add: list
+    external_links_remove: list
+    file_ids: list
+    file_ids_add: list
+    file_ids_remove: list
+    files: list
+    follower_ids: list
+    follower_ids_add: list
+    follower_ids_remove: list
+    formatted_vcs_branch_name: str
+    global_id: str
+    group_id: str
+    group_mention_ids: list
+    id: int
     iteration_id: int
-    label_id: int
+    label_ids: list
+    labels: list
+    labels_add: list
+    labels_remove: list
+    lead_time: int
+    linked_file_ids: list
+    linked_file_ids_add: list
+    linked_file_ids_remove: list
+    linked_files: list
+    member_mention_ids: list
+    mention_ids: list
+    move_to: str
+    moved_at: str
+    name: str
+    num_tasks_completed: int
+    owner_ids: list
+    owner_ids_add: list
+    owner_ids_remove: list
+    parent_story_id: int
+    position: int
+    previous_iteration_ids: list
     project_id: int
+    pull_request_ids: list
+    pull_requests: list
+    requested_by_id: str
+    source_task_id: int
+    started: bool
+    started_at: str
+    started_at_override: str
+    stats: dict
+    story_links: list
+    story_template_id: str
+    story_type: str
+    sub_task_story_ids: list
+    sub_tasks: list
+    synced_item: dict
+    task_ids: list
+    tasks: list
+    updated_at: str
+    workflow_id: int
+    workflow_state_id: int
 
 
 class StoryCreateDataRequired(TypedDict):
@@ -1933,6 +2075,7 @@ class StoryCommentListMatch(TypedDict):
 
 
 class StoryCommentCreateDataRequired(TypedDict):
+    id: int
     app_url: str
     author_id: str
     created_at: str
@@ -1945,14 +2088,12 @@ class StoryCommentCreateDataRequired(TypedDict):
     mention_ids: list
     position: int
     reactions: list
+    story_id: int
     text: str
     updated_at: str
 
 
 class StoryCommentCreateData(StoryCommentCreateDataRequired, total=False):
-    comment_id: int
-    story_id: int
-    id: int
     blocker: bool
     parent_id: int
     unblocks_parent: bool

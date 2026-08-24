@@ -33,7 +33,7 @@ class EpicEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -76,7 +76,7 @@ class EpicEntityTest < Minitest::Test
     epic_ref01_data["objectif_id"] = setup[:idmap]["objectif01"]
 
     epic_ref01_data_result = epic_ref01_ent.create(epic_ref01_data, nil)
-    epic_ref01_data = Helpers.to_map(epic_ref01_data_result)
+    epic_ref01_data = Helpers.to_map(epic_ref01_data_result.respond_to?(:data_get) ? epic_ref01_data_result.data_get : epic_ref01_data_result)
     assert !epic_ref01_data.nil?
     assert !epic_ref01_data["id"].nil?
 
@@ -103,7 +103,7 @@ class EpicEntityTest < Minitest::Test
     epic_ref01_data_up0_up[epic_ref01_markdef_up0_name] = epic_ref01_markdef_up0_value
 
     epic_ref01_resdata_up0_result = epic_ref01_ent.update(epic_ref01_data_up0_up, nil)
-    epic_ref01_resdata_up0 = Helpers.to_map(epic_ref01_resdata_up0_result)
+    epic_ref01_resdata_up0 = Helpers.to_map(epic_ref01_resdata_up0_result.respond_to?(:data_get) ? epic_ref01_resdata_up0_result.data_get : epic_ref01_resdata_up0_result)
     assert !epic_ref01_resdata_up0.nil?
     assert_equal epic_ref01_resdata_up0["id"], epic_ref01_data_up0_up["id"]
     assert_equal epic_ref01_resdata_up0[epic_ref01_markdef_up0_name], epic_ref01_markdef_up0_value
@@ -113,7 +113,7 @@ class EpicEntityTest < Minitest::Test
       "id" => epic_ref01_data["id"],
     }
     epic_ref01_data_dt0_loaded = epic_ref01_ent.load(epic_ref01_match_dt0, nil)
-    epic_ref01_data_dt0_load_result = Helpers.to_map(epic_ref01_data_dt0_loaded)
+    epic_ref01_data_dt0_load_result = Helpers.to_map(epic_ref01_data_dt0_loaded.respond_to?(:data_get) ? epic_ref01_data_dt0_loaded.data_get : epic_ref01_data_dt0_loaded)
     assert !epic_ref01_data_dt0_load_result.nil?
     assert_equal epic_ref01_data_dt0_load_result["id"], epic_ref01_data["id"]
 

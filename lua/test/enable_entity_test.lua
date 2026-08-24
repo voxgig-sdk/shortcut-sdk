@@ -49,7 +49,7 @@ describe("EnableEntity", function()
 
     local enable_ref01_resdata_up0_result, err = enable_ref01_ent:update(enable_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local enable_ref01_resdata_up0 = helpers.to_map(enable_ref01_resdata_up0_result)
+    local enable_ref01_resdata_up0 = helpers.to_map(type(enable_ref01_resdata_up0_result) == 'table' and enable_ref01_resdata_up0_result.data_get and enable_ref01_resdata_up0_result:data_get() or enable_ref01_resdata_up0_result)
     assert.is_not_nil(enable_ref01_resdata_up0)
 
   end)

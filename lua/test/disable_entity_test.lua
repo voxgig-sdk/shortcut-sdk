@@ -49,7 +49,7 @@ describe("DisableEntity", function()
 
     local disable_ref01_resdata_up0_result, err = disable_ref01_ent:update(disable_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local disable_ref01_resdata_up0 = helpers.to_map(disable_ref01_resdata_up0_result)
+    local disable_ref01_resdata_up0 = helpers.to_map(type(disable_ref01_resdata_up0_result) == 'table' and disable_ref01_resdata_up0_result.data_get and disable_ref01_resdata_up0_result:data_get() or disable_ref01_resdata_up0_result)
     assert.is_not_nil(disable_ref01_resdata_up0)
 
   end)

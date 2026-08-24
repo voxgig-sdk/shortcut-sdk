@@ -52,7 +52,7 @@ func TestCustomFieldEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -134,7 +134,7 @@ func TestCustomFieldEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		customFieldRef01ResdataUp0 := core.ToMapAny(customFieldRef01ResdataUp0Result)
+		customFieldRef01ResdataUp0 := core.ToMapAny(entityData(customFieldRef01ResdataUp0Result))
 		if customFieldRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -153,7 +153,7 @@ func TestCustomFieldEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		customFieldRef01DataDt0LoadResult := core.ToMapAny(customFieldRef01DataDt0Loaded)
+		customFieldRef01DataDt0LoadResult := core.ToMapAny(entityData(customFieldRef01DataDt0Loaded))
 		if customFieldRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

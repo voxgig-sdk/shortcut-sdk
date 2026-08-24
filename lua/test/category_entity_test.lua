@@ -39,7 +39,7 @@ describe("CategoryEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("CategoryEntity", function()
 
     local category_ref01_data_result, err = category_ref01_ent:create(category_ref01_data, nil)
     assert.is_nil(err)
-    category_ref01_data = helpers.to_map(category_ref01_data_result)
+    category_ref01_data = helpers.to_map(type(category_ref01_data_result) == 'table' and category_ref01_data_result.data_get and category_ref01_data_result:data_get() or category_ref01_data_result)
     assert.is_not_nil(category_ref01_data)
     assert.is_not_nil(category_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("CategoryEntity", function()
 
     local category_ref01_resdata_up0_result, err = category_ref01_ent:update(category_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local category_ref01_resdata_up0 = helpers.to_map(category_ref01_resdata_up0_result)
+    local category_ref01_resdata_up0 = helpers.to_map(type(category_ref01_resdata_up0_result) == 'table' and category_ref01_resdata_up0_result.data_get and category_ref01_resdata_up0_result:data_get() or category_ref01_resdata_up0_result)
     assert.is_not_nil(category_ref01_resdata_up0)
     assert.are.equal(category_ref01_resdata_up0["id"], category_ref01_data_up0_up["id"])
     assert.are.equal(category_ref01_resdata_up0[category_ref01_markdef_up0_name], category_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("CategoryEntity", function()
     }
     local category_ref01_data_dt0_loaded, err = category_ref01_ent:load(category_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local category_ref01_data_dt0_load_result = helpers.to_map(category_ref01_data_dt0_loaded)
+    local category_ref01_data_dt0_load_result = helpers.to_map(type(category_ref01_data_dt0_loaded) == 'table' and category_ref01_data_dt0_loaded.data_get and category_ref01_data_dt0_loaded:data_get() or category_ref01_data_dt0_loaded)
     assert.is_not_nil(category_ref01_data_dt0_load_result)
     assert.are.equal(category_ref01_data_dt0_load_result["id"], category_ref01_data["id"])
 

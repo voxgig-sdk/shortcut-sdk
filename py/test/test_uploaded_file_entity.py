@@ -42,8 +42,8 @@ class TestUploadedFileEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestUploadedFileEntity:
         uploaded_file_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.uploaded_file"), "uploaded_file_ref01"))
 
-        uploaded_file_ref01_data = helpers.to_map(uploaded_file_ref01_ent.create(uploaded_file_ref01_data, None))
+        uploaded_file_ref01_data = helpers.to_map(runner.entity_data(uploaded_file_ref01_ent.create(uploaded_file_ref01_data, None)))
         assert uploaded_file_ref01_data is not None
         assert uploaded_file_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestUploadedFileEntity:
         uploaded_file_ref01_markdef_up0_value = "Mark01-uploaded_file_ref01_" + str(setup["now"])
         uploaded_file_ref01_data_up0_up[uploaded_file_ref01_markdef_up0_name] = uploaded_file_ref01_markdef_up0_value
 
-        uploaded_file_ref01_resdata_up0 = helpers.to_map(uploaded_file_ref01_ent.update(uploaded_file_ref01_data_up0_up, None))
+        uploaded_file_ref01_resdata_up0 = helpers.to_map(runner.entity_data(uploaded_file_ref01_ent.update(uploaded_file_ref01_data_up0_up, None)))
         assert uploaded_file_ref01_resdata_up0 is not None
         assert uploaded_file_ref01_resdata_up0["id"] == uploaded_file_ref01_data_up0_up["id"]
         assert uploaded_file_ref01_resdata_up0[uploaded_file_ref01_markdef_up0_name] == uploaded_file_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestUploadedFileEntity:
             "id": uploaded_file_ref01_data["id"],
         }
         uploaded_file_ref01_data_dt0_loaded = uploaded_file_ref01_ent.load(uploaded_file_ref01_match_dt0, None)
-        uploaded_file_ref01_data_dt0_load_result = helpers.to_map(uploaded_file_ref01_data_dt0_loaded)
+        uploaded_file_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(uploaded_file_ref01_data_dt0_loaded))
         assert uploaded_file_ref01_data_dt0_load_result is not None
         assert uploaded_file_ref01_data_dt0_load_result["id"] == uploaded_file_ref01_data["id"]
 

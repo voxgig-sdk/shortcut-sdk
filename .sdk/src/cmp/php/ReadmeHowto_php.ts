@@ -1,12 +1,12 @@
 
-import { cmp, Content, isAuthActive, envName, canonKey, entityIdField, pickExampleEntity, opRequestShape } from '@voxgig/sdkgen'
+import { cmp, Content, isAuthActive, envName, canonKey, canonScalarKey, entityIdField, pickExampleEntity, opRequestShape, phpEntityAccessor } from '@voxgig/sdkgen'
 
 import { KIT, getModelPath, nom } from '@voxgig/apidef'
 
 
 // A type-correct PHP literal for a field's canonical type.
 function phpLit(type: any): string {
-  const k = canonKey(type)
+  const k = canonScalarKey(type)
   if ('INTEGER' === k || 'NUMBER' === k) return '1'
   if ('BOOLEAN' === k) return 'true'
   if ('ARRAY' === k || 'OBJECT' === k) return '[]'
@@ -51,8 +51,9 @@ const ReadmeHowto = cmp(function ReadmeHowto(props: any) {
   // The op-driven test-mode line, shown only when the SDK has an entity op.
   // A direct()-only SDK (no ops anywhere) shows a direct() call instead.
   const testModeExample = primaryOp
-    ? `// Entity ops return the bare mock record (throws on error).
-$${eName.toLowerCase()} = $client->${eName}()->${primaryOp}(${testCallArg});
+    ? `// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$${eName.toLowerCase()} = $client->${phpEntityAccessor(eName)}()->${primaryOp}(${testCallArg});
 print_r($${eName.toLowerCase()});`
     : `$result = $client->direct(["path" => "/api/resource", "method" => "GET"]);
 print_r($result);`

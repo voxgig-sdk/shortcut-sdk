@@ -45,7 +45,7 @@ class TaskEntityTest extends TestCase
         $task_ref01_data["story_id"] = $setup["idmap"]["story01"];
 
         $task_ref01_data_result = $task_ref01_ent->create($task_ref01_data, null);
-        $task_ref01_data = Helpers::to_map($task_ref01_data_result);
+        $task_ref01_data = Helpers::to_map(is_object($task_ref01_data_result) && method_exists($task_ref01_data_result, 'data_get') ? $task_ref01_data_result->data_get() : $task_ref01_data_result);
         $this->assertNotNull($task_ref01_data);
         $this->assertNotNull($task_ref01_data["id"]);
 
@@ -60,7 +60,7 @@ class TaskEntityTest extends TestCase
         $task_ref01_data_up0_up[$task_ref01_markdef_up0_name] = $task_ref01_markdef_up0_value;
 
         $task_ref01_resdata_up0_result = $task_ref01_ent->update($task_ref01_data_up0_up, null);
-        $task_ref01_resdata_up0 = Helpers::to_map($task_ref01_resdata_up0_result);
+        $task_ref01_resdata_up0 = Helpers::to_map(is_object($task_ref01_resdata_up0_result) && method_exists($task_ref01_resdata_up0_result, 'data_get') ? $task_ref01_resdata_up0_result->data_get() : $task_ref01_resdata_up0_result);
         $this->assertNotNull($task_ref01_resdata_up0);
         $this->assertEquals($task_ref01_resdata_up0["id"], $task_ref01_data_up0_up["id"]);
         $this->assertEquals($task_ref01_resdata_up0[$task_ref01_markdef_up0_name], $task_ref01_markdef_up0_value);
@@ -70,7 +70,7 @@ class TaskEntityTest extends TestCase
             "id" => $task_ref01_data["id"],
         ];
         $task_ref01_data_dt0_loaded = $task_ref01_ent->load($task_ref01_match_dt0, null);
-        $task_ref01_data_dt0_load_result = Helpers::to_map($task_ref01_data_dt0_loaded);
+        $task_ref01_data_dt0_load_result = Helpers::to_map(is_object($task_ref01_data_dt0_loaded) && method_exists($task_ref01_data_dt0_loaded, 'data_get') ? $task_ref01_data_dt0_loaded->data_get() : $task_ref01_data_dt0_loaded);
         $this->assertNotNull($task_ref01_data_dt0_load_result);
         $this->assertEquals($task_ref01_data_dt0_load_result["id"], $task_ref01_data["id"]);
 

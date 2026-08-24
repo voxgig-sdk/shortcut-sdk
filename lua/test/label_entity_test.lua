@@ -39,7 +39,7 @@ describe("LabelEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -82,7 +82,7 @@ describe("LabelEntity", function()
 
     local label_ref01_data_result, err = label_ref01_ent:create(label_ref01_data, nil)
     assert.is_nil(err)
-    label_ref01_data = helpers.to_map(label_ref01_data_result)
+    label_ref01_data = helpers.to_map(type(label_ref01_data_result) == 'table' and label_ref01_data_result.data_get and label_ref01_data_result:data_get() or label_ref01_data_result)
     assert.is_not_nil(label_ref01_data)
     assert.is_not_nil(label_ref01_data["id"])
 
@@ -109,7 +109,7 @@ describe("LabelEntity", function()
 
     local label_ref01_resdata_up0_result, err = label_ref01_ent:update(label_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local label_ref01_resdata_up0 = helpers.to_map(label_ref01_resdata_up0_result)
+    local label_ref01_resdata_up0 = helpers.to_map(type(label_ref01_resdata_up0_result) == 'table' and label_ref01_resdata_up0_result.data_get and label_ref01_resdata_up0_result:data_get() or label_ref01_resdata_up0_result)
     assert.is_not_nil(label_ref01_resdata_up0)
     assert.are.equal(label_ref01_resdata_up0["id"], label_ref01_data_up0_up["id"])
     assert.are.equal(label_ref01_resdata_up0[label_ref01_markdef_up0_name], label_ref01_markdef_up0_value)
@@ -120,7 +120,7 @@ describe("LabelEntity", function()
     }
     local label_ref01_data_dt0_loaded, err = label_ref01_ent:load(label_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local label_ref01_data_dt0_load_result = helpers.to_map(label_ref01_data_dt0_loaded)
+    local label_ref01_data_dt0_load_result = helpers.to_map(type(label_ref01_data_dt0_loaded) == 'table' and label_ref01_data_dt0_loaded.data_get and label_ref01_data_dt0_loaded:data_get() or label_ref01_data_dt0_loaded)
     assert.is_not_nil(label_ref01_data_dt0_load_result)
     assert.are.equal(label_ref01_data_dt0_load_result["id"], label_ref01_data["id"])
 

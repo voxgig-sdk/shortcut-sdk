@@ -65,7 +65,7 @@ describe('EpicEntity', async () => {
     epic_ref01_data['milestone_id'] = setup.idmap['milestone01']
     epic_ref01_data['objectif_id'] = setup.idmap['objectif01']
 
-    epic_ref01_data = await epic_ref01_ent.create(epic_ref01_data)
+    epic_ref01_data = (await epic_ref01_ent.create(epic_ref01_data)).data()
     assert(null != epic_ref01_data.id)
 
 
@@ -73,7 +73,7 @@ describe('EpicEntity', async () => {
     const epic_ref01_match: any = {}
     epic_ref01_match['objectif_id'] = setup.idmap['objectif01']
 
-    const epic_ref01_list = await epic_ref01_ent.list(epic_ref01_match)
+    const epic_ref01_list = (await epic_ref01_ent.list(epic_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(epic_ref01_list, { id: epic_ref01_data.id })))
 
@@ -85,7 +85,7 @@ describe('EpicEntity', async () => {
     const epic_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-epic_ref01_' + setup.now }
     ;(epic_ref01_data_up0 as any)[epic_ref01_markdef_up0.name] = epic_ref01_markdef_up0.value
 
-    const epic_ref01_resdata_up0 = await epic_ref01_ent.update(epic_ref01_data_up0)
+    const epic_ref01_resdata_up0 = (await epic_ref01_ent.update(epic_ref01_data_up0)).data()
     assert(epic_ref01_resdata_up0.id === epic_ref01_data_up0.id)
 
     assert((epic_ref01_resdata_up0 as any)[epic_ref01_markdef_up0.name] === epic_ref01_markdef_up0.value)
@@ -94,7 +94,7 @@ describe('EpicEntity', async () => {
     // LOAD
     const epic_ref01_match_dt0: any = {}
     epic_ref01_match_dt0.id = epic_ref01_data.id
-    const epic_ref01_data_dt0 = await epic_ref01_ent.load(epic_ref01_match_dt0)
+    const epic_ref01_data_dt0 = (await epic_ref01_ent.load(epic_ref01_match_dt0)).data()
     assert(epic_ref01_data_dt0.id === epic_ref01_data.id)
 
 
@@ -107,7 +107,7 @@ describe('EpicEntity', async () => {
     const epic_ref01_match_rt0: any = {}
     epic_ref01_match_rt0['objectif_id'] = setup.idmap['objectif01']
 
-    const epic_ref01_list_rt0 = await epic_ref01_ent.list(epic_ref01_match_rt0)
+    const epic_ref01_list_rt0 = (await epic_ref01_ent.list(epic_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(epic_ref01_list_rt0, { id: epic_ref01_data.id })))
 

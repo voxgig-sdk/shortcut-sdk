@@ -42,8 +42,8 @@ class TestStoryCommentEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -80,7 +80,7 @@ class TestStoryCommentEntity:
         story_comment_ref01_data["story-public-id"] = setup["idmap"]["story-public-id01"]
         story_comment_ref01_data["story_id"] = setup["idmap"]["story01"]
 
-        story_comment_ref01_data = helpers.to_map(story_comment_ref01_ent.create(story_comment_ref01_data, None))
+        story_comment_ref01_data = helpers.to_map(runner.entity_data(story_comment_ref01_ent.create(story_comment_ref01_data, None)))
         assert story_comment_ref01_data is not None
         assert story_comment_ref01_data["id"] is not None
 
@@ -107,7 +107,7 @@ class TestStoryCommentEntity:
         story_comment_ref01_markdef_up0_value = "Mark01-story_comment_ref01_" + str(setup["now"])
         story_comment_ref01_data_up0_up[story_comment_ref01_markdef_up0_name] = story_comment_ref01_markdef_up0_value
 
-        story_comment_ref01_resdata_up0 = helpers.to_map(story_comment_ref01_ent.update(story_comment_ref01_data_up0_up, None))
+        story_comment_ref01_resdata_up0 = helpers.to_map(runner.entity_data(story_comment_ref01_ent.update(story_comment_ref01_data_up0_up, None)))
         assert story_comment_ref01_resdata_up0 is not None
         assert story_comment_ref01_resdata_up0["id"] == story_comment_ref01_data_up0_up["id"]
         assert story_comment_ref01_resdata_up0[story_comment_ref01_markdef_up0_name] == story_comment_ref01_markdef_up0_value
@@ -117,7 +117,7 @@ class TestStoryCommentEntity:
             "id": story_comment_ref01_data["id"],
         }
         story_comment_ref01_data_dt0_loaded = story_comment_ref01_ent.load(story_comment_ref01_match_dt0, None)
-        story_comment_ref01_data_dt0_load_result = helpers.to_map(story_comment_ref01_data_dt0_loaded)
+        story_comment_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(story_comment_ref01_data_dt0_loaded))
         assert story_comment_ref01_data_dt0_load_result is not None
         assert story_comment_ref01_data_dt0_load_result["id"] == story_comment_ref01_data["id"]
 

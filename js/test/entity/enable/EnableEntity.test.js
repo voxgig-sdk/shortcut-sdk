@@ -45,7 +45,7 @@ describe('EnableEntity', async () => {
     const enable_ref01_ent = client.Enable()
     const enable_ref01_data_up0 = {}
 
-    const enable_ref01_resdata_up0 = await enable_ref01_ent.update(enable_ref01_data_up0)
+    const enable_ref01_resdata_up0 = (await enable_ref01_ent.update(enable_ref01_data_up0)).data()
     assert(null != enable_ref01_resdata_up0)
 
 

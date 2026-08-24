@@ -44,7 +44,7 @@ class TestStorySlimEntity:
         story_slim_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.story_slim"), "story_slim_ref01"))
 
-        story_slim_ref01_data = helpers.to_map(story_slim_ref01_ent.create(story_slim_ref01_data, None))
+        story_slim_ref01_data = helpers.to_map(runner.entity_data(story_slim_ref01_ent.create(story_slim_ref01_data, None)))
         assert story_slim_ref01_data is not None
 
         # UPDATE
@@ -55,7 +55,7 @@ class TestStorySlimEntity:
         story_slim_ref01_markdef_up0_value = "Mark01-story_slim_ref01_" + str(setup["now"])
         story_slim_ref01_data_up0_up[story_slim_ref01_markdef_up0_name] = story_slim_ref01_markdef_up0_value
 
-        story_slim_ref01_resdata_up0 = helpers.to_map(story_slim_ref01_ent.update(story_slim_ref01_data_up0_up, None))
+        story_slim_ref01_resdata_up0 = helpers.to_map(runner.entity_data(story_slim_ref01_ent.update(story_slim_ref01_data_up0_up, None)))
         assert story_slim_ref01_resdata_up0 is not None
         assert story_slim_ref01_resdata_up0[story_slim_ref01_markdef_up0_name] == story_slim_ref01_markdef_up0_value
 

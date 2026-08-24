@@ -42,8 +42,8 @@ class TestProjectEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestProjectEntity:
         project_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.project"), "project_ref01"))
 
-        project_ref01_data = helpers.to_map(project_ref01_ent.create(project_ref01_data, None))
+        project_ref01_data = helpers.to_map(runner.entity_data(project_ref01_ent.create(project_ref01_data, None)))
         assert project_ref01_data is not None
         assert project_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestProjectEntity:
         project_ref01_markdef_up0_value = "Mark01-project_ref01_" + str(setup["now"])
         project_ref01_data_up0_up[project_ref01_markdef_up0_name] = project_ref01_markdef_up0_value
 
-        project_ref01_resdata_up0 = helpers.to_map(project_ref01_ent.update(project_ref01_data_up0_up, None))
+        project_ref01_resdata_up0 = helpers.to_map(runner.entity_data(project_ref01_ent.update(project_ref01_data_up0_up, None)))
         assert project_ref01_resdata_up0 is not None
         assert project_ref01_resdata_up0["id"] == project_ref01_data_up0_up["id"]
         assert project_ref01_resdata_up0[project_ref01_markdef_up0_name] == project_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestProjectEntity:
             "id": project_ref01_data["id"],
         }
         project_ref01_data_dt0_loaded = project_ref01_ent.load(project_ref01_match_dt0, None)
-        project_ref01_data_dt0_load_result = helpers.to_map(project_ref01_data_dt0_loaded)
+        project_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(project_ref01_data_dt0_loaded))
         assert project_ref01_data_dt0_load_result is not None
         assert project_ref01_data_dt0_load_result["id"] == project_ref01_data["id"]
 

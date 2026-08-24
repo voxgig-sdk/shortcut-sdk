@@ -45,8 +45,8 @@ func loadEnvLocal() {
 }
 
 func envOverride(m map[string]any) map[string]any {
-	if os.Getenv("PROJECTNAME_TEST_LIVE") == "TRUE" ||
-		os.Getenv("PROJECTNAME_TEST_OVERRIDE") == "TRUE" {
+	if os.Getenv("PROJECTENV_TEST_LIVE") == "TRUE" ||
+		os.Getenv("PROJECTENV_TEST_OVERRIDE") == "TRUE" {
 		for key := range m {
 			envval := os.Getenv(key)
 			if envval != "" {
@@ -63,8 +63,8 @@ func envOverride(m map[string]any) map[string]any {
 		}
 	}
 
-	if explain := os.Getenv("PROJECTNAME_TEST_EXPLAIN"); explain != "" {
-		m["PROJECTNAME_TEST_EXPLAIN"] = explain
+	if explain := os.Getenv("PROJECTENV_TEST_EXPLAIN"); explain != "" {
+		m["PROJECTENV_TEST_EXPLAIN"] = explain
 	}
 
 	return m
@@ -216,9 +216,9 @@ func getSpec(spec map[string]any, keys ...string) map[string]any {
 type RunSubject func(entry map[string]any) (any, error)
 
 // PENDING sections are the ones deliberately left empty in the shared corpus
-// (.sdk/test/primary/<name>.aontu). Everything else MUST contribute cases.
+// (.sdk/test/primary/<name>.aon). Everything else MUST contribute cases.
 var pendingSections = map[string]bool{
-	"fetcher": true, "makeFetchDef": true, "makePoint": true, "makeResult": true,
+	"fetcher": true, "makeFetchDef": true, "makeResult": true,
 	"featureAdd": true, "featureHook": true, "featureInit": true,
 }
 
@@ -549,6 +549,18 @@ func ctxToMatchMap(ctx *sdk.Context) map[string]any {
 	}
 
 	return m
+}
+
+// entityData extracts the data map from an op result.
+//
+// Every entity operation resolves to the ENTITY (see AGENTS.md), so a flow
+// test that wants the record takes this hop. A plain map passes through
+// unchanged, so this is safe for the direct/prepare results too.
+func entityData(v any) any {
+	if ent, ok := v.(sdk.Entity); ok {
+		return ent.Data()
+	}
+	return v
 }
 
 // entityListToData extracts data maps from a list of Entity objects.

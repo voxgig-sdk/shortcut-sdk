@@ -44,7 +44,7 @@ class TestWebhookEntity:
         webhook_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.webhook"), "webhook_ref01"))
 
-        webhook_ref01_data = helpers.to_map(webhook_ref01_ent.create(webhook_ref01_data, None))
+        webhook_ref01_data = helpers.to_map(runner.entity_data(webhook_ref01_ent.create(webhook_ref01_data, None)))
         assert webhook_ref01_data is not None
 
         # LOAD

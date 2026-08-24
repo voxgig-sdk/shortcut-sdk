@@ -59,7 +59,7 @@ func TestStorySlimEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		storySlimRef01Data = core.ToMapAny(storySlimRef01DataResult)
+		storySlimRef01Data = core.ToMapAny(entityData(storySlimRef01DataResult))
 		if storySlimRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -76,7 +76,7 @@ func TestStorySlimEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		storySlimRef01ResdataUp0 := core.ToMapAny(storySlimRef01ResdataUp0Result)
+		storySlimRef01ResdataUp0 := core.ToMapAny(entityData(storySlimRef01ResdataUp0Result))
 		if storySlimRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}

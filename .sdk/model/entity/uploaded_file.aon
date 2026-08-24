@@ -1,0 +1,322 @@
+# Entity: uploaded_file
+
+main: kit: entity: uploaded_file: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "content_type"
+      req: true
+      short: "Free form string corresponding to a text or image file."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The time/date that the file was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The description of the file."
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "external_id"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "This field can be set to another unique ID."
+      type: "`$STRING`"
+    }
+    {
+      name: "filename"
+      req: true
+      short: "The name assigned to the file in Shortcut upon upload."
+      type: "`$STRING`"
+    }
+    {
+      name: "group_mention_ids"
+      req: true
+      short: "The unique IDs of the Groups who are mentioned in the file description."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique ID for the file."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "member_mention_ids"
+      req: true
+      short: "The unique IDs of the Members who are mentioned in the file description."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "mention_ids"
+      req: true
+      short: "`Deprecated:` use `member_mention_ids`."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The optional User-specified name of the file."
+      type: "`$STRING`"
+    }
+    {
+      name: "size"
+      req: true
+      short: "The size of the file."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "story_ids"
+      req: true
+      short: "The unique IDs of the Stories associated with this file."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "thumbnail_url"
+      req: true
+      short: "The url where the thumbnail of the file can be found in Shortcut."
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The time/date that the file was updated."
+      type: "`$STRING`"
+    }
+    {
+      name: "uploader_id"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The unique ID of the Member who uploaded the file."
+      type: "`$STRING`"
+    }
+    {
+      name: "url"
+      req: true
+      short: "The URL for the file."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "uploaded_file"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/files"
+          parts: [
+            "api"
+            "v3"
+            "files"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/v3/files"
+          parts: [
+            "api"
+            "v3"
+            "files"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/files/{file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/files/{file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/files/{file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              created_at: "`reqdata.created_at`"
+              description: "`reqdata.description`"
+              external_id: "`reqdata.external_id`"
+              name: "`reqdata.name`"
+              updated_at: "`reqdata.updated_at`"
+              uploader_id: "`reqdata.uploader_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

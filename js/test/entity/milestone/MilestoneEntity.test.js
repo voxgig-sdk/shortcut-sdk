@@ -45,14 +45,14 @@ describe('MilestoneEntity', async () => {
     let milestone_ref01_data = setup.data.new.milestone['milestone_ref01']
     milestone_ref01_data['category_id'] = setup.idmap['category01']
 
-    milestone_ref01_data = await milestone_ref01_ent.create(milestone_ref01_data)
+    milestone_ref01_data = (await milestone_ref01_ent.create(milestone_ref01_data)).data()
     assert(null != milestone_ref01_data.id)
 
 
     // LIST
     const milestone_ref01_match = {}
 
-    const milestone_ref01_list = await milestone_ref01_ent.list(milestone_ref01_match)
+    const milestone_ref01_list = (await milestone_ref01_ent.list(milestone_ref01_match)).map((e) => e.data())
 
     assert(!isempty(select(milestone_ref01_list, { id: milestone_ref01_data.id })))
 
@@ -64,7 +64,7 @@ describe('MilestoneEntity', async () => {
     const milestone_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-milestone_ref01_' + setup.now }
     milestone_ref01_data_up0 [milestone_ref01_markdef_up0.name] = milestone_ref01_markdef_up0.value
 
-    const milestone_ref01_resdata_up0 = await milestone_ref01_ent.update(milestone_ref01_data_up0)
+    const milestone_ref01_resdata_up0 = (await milestone_ref01_ent.update(milestone_ref01_data_up0)).data()
     assert(milestone_ref01_resdata_up0.id === milestone_ref01_data_up0.id)
 
     assert(milestone_ref01_resdata_up0[milestone_ref01_markdef_up0.name] === milestone_ref01_markdef_up0.value)
@@ -73,7 +73,7 @@ describe('MilestoneEntity', async () => {
     // LOAD
     const milestone_ref01_match_dt0 = {}
     milestone_ref01_match_dt0.id = milestone_ref01_data.id
-    const milestone_ref01_data_dt0 = await milestone_ref01_ent.load(milestone_ref01_match_dt0)
+    const milestone_ref01_data_dt0 = (await milestone_ref01_ent.load(milestone_ref01_match_dt0)).data()
     assert(milestone_ref01_data_dt0.id === milestone_ref01_data.id)
 
 
@@ -86,7 +86,7 @@ describe('MilestoneEntity', async () => {
     // LIST
     const milestone_ref01_match_rt0 = {}
 
-    const milestone_ref01_list_rt0 = await milestone_ref01_ent.list(milestone_ref01_match_rt0)
+    const milestone_ref01_list_rt0 = (await milestone_ref01_ent.list(milestone_ref01_match_rt0)).map((e) => e.data())
 
     assert(isempty(select(milestone_ref01_list_rt0, { id: milestone_ref01_data.id })))
 

@@ -33,7 +33,7 @@ class ObjectiveEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class ObjectiveEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.objective"), "objective_ref01"))
 
     objective_ref01_data_result = objective_ref01_ent.create(objective_ref01_data, nil)
-    objective_ref01_data = Helpers.to_map(objective_ref01_data_result)
+    objective_ref01_data = Helpers.to_map(objective_ref01_data_result.respond_to?(:data_get) ? objective_ref01_data_result.data_get : objective_ref01_data_result)
     assert !objective_ref01_data.nil?
     assert !objective_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class ObjectiveEntityTest < Minitest::Test
     objective_ref01_data_up0_up[objective_ref01_markdef_up0_name] = objective_ref01_markdef_up0_value
 
     objective_ref01_resdata_up0_result = objective_ref01_ent.update(objective_ref01_data_up0_up, nil)
-    objective_ref01_resdata_up0 = Helpers.to_map(objective_ref01_resdata_up0_result)
+    objective_ref01_resdata_up0 = Helpers.to_map(objective_ref01_resdata_up0_result.respond_to?(:data_get) ? objective_ref01_resdata_up0_result.data_get : objective_ref01_resdata_up0_result)
     assert !objective_ref01_resdata_up0.nil?
     assert_equal objective_ref01_resdata_up0["id"], objective_ref01_data_up0_up["id"]
     assert_equal objective_ref01_resdata_up0[objective_ref01_markdef_up0_name], objective_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class ObjectiveEntityTest < Minitest::Test
       "id" => objective_ref01_data["id"],
     }
     objective_ref01_data_dt0_loaded = objective_ref01_ent.load(objective_ref01_match_dt0, nil)
-    objective_ref01_data_dt0_load_result = Helpers.to_map(objective_ref01_data_dt0_loaded)
+    objective_ref01_data_dt0_load_result = Helpers.to_map(objective_ref01_data_dt0_loaded.respond_to?(:data_get) ? objective_ref01_data_dt0_loaded.data_get : objective_ref01_data_dt0_loaded)
     assert !objective_ref01_data_dt0_load_result.nil?
     assert_equal objective_ref01_data_dt0_load_result["id"], objective_ref01_data["id"]
 

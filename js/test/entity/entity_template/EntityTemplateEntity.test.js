@@ -44,14 +44,14 @@ describe('EntityTemplateEntity', async () => {
     const entity_template_ref01_ent = client.EntityTemplate()
     let entity_template_ref01_data = setup.data.new.entity_template['entity_template_ref01']
 
-    entity_template_ref01_data = await entity_template_ref01_ent.create(entity_template_ref01_data)
+    entity_template_ref01_data = (await entity_template_ref01_ent.create(entity_template_ref01_data)).data()
     assert(null != entity_template_ref01_data.id)
 
 
     // LIST
     const entity_template_ref01_match = {}
 
-    const entity_template_ref01_list = await entity_template_ref01_ent.list(entity_template_ref01_match)
+    const entity_template_ref01_list = (await entity_template_ref01_ent.list(entity_template_ref01_match)).map((e) => e.data())
 
     assert(!isempty(select(entity_template_ref01_list, { id: entity_template_ref01_data.id })))
 
@@ -63,7 +63,7 @@ describe('EntityTemplateEntity', async () => {
     const entity_template_ref01_markdef_up0 = { name: 'author_id', value: 'Mark01-entity_template_ref01_' + setup.now }
     entity_template_ref01_data_up0 [entity_template_ref01_markdef_up0.name] = entity_template_ref01_markdef_up0.value
 
-    const entity_template_ref01_resdata_up0 = await entity_template_ref01_ent.update(entity_template_ref01_data_up0)
+    const entity_template_ref01_resdata_up0 = (await entity_template_ref01_ent.update(entity_template_ref01_data_up0)).data()
     assert(entity_template_ref01_resdata_up0.id === entity_template_ref01_data_up0.id)
 
     assert(entity_template_ref01_resdata_up0[entity_template_ref01_markdef_up0.name] === entity_template_ref01_markdef_up0.value)
@@ -72,7 +72,7 @@ describe('EntityTemplateEntity', async () => {
     // LOAD
     const entity_template_ref01_match_dt0 = {}
     entity_template_ref01_match_dt0.id = entity_template_ref01_data.id
-    const entity_template_ref01_data_dt0 = await entity_template_ref01_ent.load(entity_template_ref01_match_dt0)
+    const entity_template_ref01_data_dt0 = (await entity_template_ref01_ent.load(entity_template_ref01_match_dt0)).data()
     assert(entity_template_ref01_data_dt0.id === entity_template_ref01_data.id)
 
 
@@ -85,7 +85,7 @@ describe('EntityTemplateEntity', async () => {
     // LIST
     const entity_template_ref01_match_rt0 = {}
 
-    const entity_template_ref01_list_rt0 = await entity_template_ref01_ent.list(entity_template_ref01_match_rt0)
+    const entity_template_ref01_list_rt0 = (await entity_template_ref01_ent.list(entity_template_ref01_match_rt0)).map((e) => e.data())
 
     assert(isempty(select(entity_template_ref01_list_rt0, { id: entity_template_ref01_data.id })))
 

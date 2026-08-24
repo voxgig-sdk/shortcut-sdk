@@ -82,6 +82,12 @@ local function make_options_util(ctx)
       },
     },
     utility = {},
+    -- Feature INSTANCES supplied at construction (the station adopt
+    -- path): consumed by the constructor's feature_add loop, so they are
+    -- class instances, not data -- `$ANY` accepts them verbatim. Without
+    -- this entry the seam is dead: the constructor reads
+    -- options.extend, but validate rejected the key.
+    extend = "`$ANY`",
     system = {},
     test = {
       active = false,
@@ -104,7 +110,20 @@ local function make_options_util(ctx)
   -- Preserve system.fetch before merge/validate.
   local sys_fetch = vs.getpath(opts, "system.fetch")
 
-  local merged = vs.merge({ {}, cfgopts, opts })
+  -- Preserve extend feature INSTANCES before merge/validate, by ORIGINAL
+  -- reference (the ts makeOptions keeps the caller's instances too):
+  -- merge/validate are data-oriented and would mangle instance tables
+  -- carrying functions -- the same reason system.fetch is preserved.
+  local extend = nil
+  if type(options) == "table" and type(options["extend"]) == "table" then
+    extend = options["extend"]
+  end
+
+  -- Clone the config side before merging: `config` is a per-Lua-state
+  -- singleton (see config_shared), and merge would otherwise use its nested
+  -- tables as merge TARGETS — one instance's options (server, headers, ...)
+  -- would contaminate every instance constructed after it.
+  local merged = vs.merge({ {}, vs.clone(cfgopts), opts })
   local validated = vs.validate(merged, optspec)
   if type(validated) ~= "table" then
     validated = {}
@@ -152,6 +171,11 @@ local function make_options_util(ctx)
     end
   end
 
+  -- Restore extend feature instances.
+  if extend ~= nil then
+    opts["extend"] = extend
+  end
+
   -- Derived clean config.
   local clean_keys = "key,token,id"
   local ck = vs.getpath(opts, "clean.keys")
@@ -197,6 +221,30 @@ local function make_options_util(ctx)
       end
     else
       featureorder = names
+    end
+    -- Station special case, mirroring test's: its transport wrap must
+    -- sit immediately outside the base transport (inside retry/cache/
+    -- netsim), so map-form activation hoists it to just after test -
+    -- or first, when no test entry exists. Without this the sorted
+    -- default would init station last and wrap OUTSIDE the recording
+    -- features, turning its wire-truth events into fiction.
+    local si = nil
+    for i, n in ipairs(featureorder) do
+      if n == "station" then
+        si = i
+        break
+      end
+    end
+    if si ~= nil then
+      table.remove(featureorder, si)
+      local ti = 0
+      for i, n in ipairs(featureorder) do
+        if n == "test" then
+          ti = i
+          break
+        end
+      end
+      table.insert(featureorder, ti + 1, "station")
     end
   end
 

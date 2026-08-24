@@ -42,8 +42,8 @@ class TestRepositoryEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -92,7 +92,7 @@ class TestRepositoryEntity:
             "id": repository_ref01_data["id"],
         }
         repository_ref01_data_dt0_loaded = repository_ref01_ent.load(repository_ref01_match_dt0, None)
-        repository_ref01_data_dt0_load_result = helpers.to_map(repository_ref01_data_dt0_loaded)
+        repository_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(repository_ref01_data_dt0_loaded))
         assert repository_ref01_data_dt0_load_result is not None
         assert repository_ref01_data_dt0_load_result["id"] == repository_ref01_data["id"]
 

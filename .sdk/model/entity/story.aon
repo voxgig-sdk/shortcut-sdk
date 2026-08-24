@@ -1,0 +1,1435 @@
+# Entity: story
+
+main: kit: entity: story: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "after_id"
+      req: false
+      short: "The ID of the story we want to move this story after."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "app_url"
+      req: true
+      short: "The Shortcut application url for the Story."
+      type: "`$STRING`"
+    }
+    {
+      name: "archived"
+      op: {
+        create: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      req: true
+      short: "True if the story has been archived or not."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "before_id"
+      req: false
+      short: "The ID of the story we want to move this story before."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "blocked"
+      req: true
+      short: "A true/false boolean indicating if the Story is currently blocked."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "blocker"
+      req: true
+      short: "A true/false boolean indicating if the Story is currently a blocker of another story."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "branch_ids"
+      req: false
+      short: "An array of IDs of Branches attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "branches"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of Git branches attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "comment_ids"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      req: false
+      short: "An array of IDs of Comments attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "comments"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of comments attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "commit_ids"
+      req: false
+      short: "An array of IDs of Commits attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "commits"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of commits attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "completed"
+      req: true
+      short: "A true/false boolean indicating if the Story has been completed."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "completed_at"
+      req: true
+      short: "The time/date the Story was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "completed_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Story was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The time/date the Story was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "custom_fields"
+      req: false
+      short: "An array of CustomField value assertions for the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "custom_fields_add"
+      req: false
+      short: "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "custom_fields_remove"
+      req: false
+      short: "A map specifying a CustomField ID."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "cycle_time"
+      req: false
+      short: "The cycle time (in seconds) of this story when complete."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "deadline"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The due date of the story."
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        list: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The description of the story."
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "epic_id"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "The ID of the epic the story belongs to."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "estimate"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "The numeric point estimate of the story."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "external_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "This field can be set to another unique ID."
+      type: "`$STRING`"
+    }
+    {
+      name: "external_links"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of external links (strings) associated with a Story"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "external_links_add"
+      req: false
+      short: "An array of External Links associated with this story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "external_links_remove"
+      req: false
+      short: "An array of External Links associated with this story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "file_ids"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      req: false
+      short: "An array of IDs of files attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "file_ids_add"
+      req: false
+      short: "An array of IDs of files attached to the story in addition to files from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "file_ids_remove"
+      req: false
+      short: "An array of IDs of files removed from files from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "files"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of files attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "follower_ids"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of UUIDs for any Members listed as Followers."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "follower_ids_add"
+      req: false
+      short: "The UUIDs of the new followers to be added in addition to followers from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "follower_ids_remove"
+      req: false
+      short: "The UUIDs of the new followers to be removed from followers from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "formatted_vcs_branch_name"
+      req: false
+      short: "The formatted branch name for this story."
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "group_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The ID of the group associated with the story."
+      type: "`$STRING`"
+    }
+    {
+      name: "group_mention_ids"
+      req: true
+      short: "An array of Group IDs that have been mentioned in the Story description."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique ID of the Story."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "iteration_id"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "The ID of the iteration the story belongs to."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "label_ids"
+      req: true
+      short: "An array of label ids attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "labels"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of labels attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "labels_add"
+      req: false
+      short: "An array of labels attached to the story in addition to the labels provided by the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "labels_remove"
+      req: false
+      short: "An array of labels to remove from the labels provided by the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "lead_time"
+      req: false
+      short: "The lead time (in seconds) of this story when complete."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "linked_file_ids"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      req: false
+      short: "An array of IDs of linked files attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "linked_file_ids_add"
+      req: false
+      short: "An array of IDs of linked files attached to the story in addition to files from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "linked_file_ids_remove"
+      req: false
+      short: "An array of IDs of linked files removed from files from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "linked_files"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of linked files attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "member_mention_ids"
+      req: true
+      short: "An array of Member IDs that have been mentioned in the Story description."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "mention_ids"
+      req: true
+      short: "`Deprecated:` use `member_mention_ids`."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "move_to"
+      req: false
+      short: "One of \"first\" or \"last\"."
+      type: "`$STRING`"
+    }
+    {
+      name: "moved_at"
+      req: true
+      short: "The time/date the Story was last changed workflow-state."
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The name of the story."
+      type: "`$STRING`"
+    }
+    {
+      name: "num_tasks_completed"
+      op: {
+        list: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      req: false
+      short: "The number of tasks on the story which are complete."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "owner_ids"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of UUIDs of the owners of this story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "owner_ids_add"
+      req: false
+      short: "The UUIDs of the new owners to be added in addition to owners from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "owner_ids_remove"
+      req: false
+      short: "The UUIDs of the new owners to be removed from owners from the template."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "parent_story_id"
+      req: false
+      short: "The id of the parent story to associate with this story."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "position"
+      req: true
+      short: "A number representing the position of the story in relation to every other story in the current project."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "previous_iteration_ids"
+      req: true
+      short: "The IDs of the iteration the story belongs to."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "project_id"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "The ID of the project the story belongs to."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "pull_request_ids"
+      req: false
+      short: "An array of IDs of Pull/Merge Requests attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "pull_requests"
+      op: {
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of Pull/Merge Requests attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "requested_by_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The ID of the Member that requested the story."
+      type: "`$STRING`"
+    }
+    {
+      name: "source_task_id"
+      req: false
+      short: "Given this story was converted from a task in another story, this is the original task ID that was converted to this story."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "started"
+      req: true
+      short: "A true/false boolean indicating if the Story has been started."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "started_at"
+      req: true
+      short: "The time/date the Story was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "started_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Story was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "stats"
+      req: true
+      short: "The stats object for Stories"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "story_links"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of story links attached to the Story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "story_template_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The ID of the story template used to create this story, or null if not created using a template."
+      type: "`$STRING`"
+    }
+    {
+      name: "story_type"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The type of story (feature, bug, chore)."
+      type: "`$STRING`"
+    }
+    {
+      name: "sub_task_story_ids"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "sub_tasks"
+      req: false
+      short: "A list of either params to create a new sub-task or link an existing story as a sub-task"
+      type: "`$ARRAY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 1
+      }
+    }
+    {
+      name: "synced_item"
+      req: true
+      short: "The synced item for the story."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "task_ids"
+      op: {
+        list: {
+          req: true
+          type: "`$ARRAY`"
+        }
+      }
+      req: false
+      short: "An array of IDs of Tasks attached to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "tasks"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        list: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of tasks connected to the story."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "updated_at"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The time/date the Story was updated."
+      type: "`$STRING`"
+    }
+    {
+      name: "workflow_id"
+      req: true
+      short: "The ID of the workflow the story belongs to."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "workflow_state_id"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      short: "The ID of the workflow state the story is currently in."
+      type: "`$INTEGER`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "story"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/stories"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+          ]
+          transform: {
+            req: {
+              archived: "`reqdata.archived`"
+              comments: "`reqdata.comment`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              created_at: "`reqdata.created_at`"
+              custom_fields: "`reqdata.custom_field`"
+              deadline: "`reqdata.deadline`"
+              description: "`reqdata.description`"
+              epic_id: "`reqdata.epic_id`"
+              estimate: "`reqdata.estimate`"
+              external_id: "`reqdata.external_id`"
+              external_links: "`reqdata.external_link`"
+              file_ids: "`reqdata.file_id`"
+              follower_ids: "`reqdata.follower_id`"
+              group_id: "`reqdata.group_id`"
+              iteration_id: "`reqdata.iteration_id`"
+              labels: "`reqdata.label`"
+              linked_file_ids: "`reqdata.linked_file_id`"
+              move_to: "`reqdata.move_to`"
+              name: "`reqdata.name`"
+              owner_ids: "`reqdata.owner_id`"
+              parent_story_id: "`reqdata.parent_story_id`"
+              project_id: "`reqdata.project_id`"
+              requested_by_id: "`reqdata.requested_by_id`"
+              source_task_id: "`reqdata.source_task_id`"
+              started_at_override: "`reqdata.started_at_override`"
+              story_links: "`reqdata.story_link`"
+              story_template_id: "`reqdata.story_template_id`"
+              story_type: "`reqdata.story_type`"
+              sub_tasks: "`reqdata.sub_task`"
+              tasks: "`reqdata.task`"
+              updated_at: "`reqdata.updated_at`"
+              workflow_state_id: "`reqdata.workflow_state_id`"
+            }
+            res: "`body`"
+          }
+        }
+        {
+          method: "POST"
+          orig: "/api/v3/stories/from-template"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "from-template"
+          ]
+          select: {
+            "$action": "from_template"
+          }
+          transform: {
+            req: {
+              archived: "`reqdata.archived`"
+              comments: "`reqdata.comment`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              created_at: "`reqdata.created_at`"
+              custom_fields: "`reqdata.custom_field`"
+              custom_fields_add: "`reqdata.custom_fields_add`"
+              custom_fields_remove: "`reqdata.custom_fields_remove`"
+              deadline: "`reqdata.deadline`"
+              description: "`reqdata.description`"
+              epic_id: "`reqdata.epic_id`"
+              estimate: "`reqdata.estimate`"
+              external_id: "`reqdata.external_id`"
+              external_links: "`reqdata.external_link`"
+              external_links_add: "`reqdata.external_links_add`"
+              external_links_remove: "`reqdata.external_links_remove`"
+              file_ids: "`reqdata.file_id`"
+              file_ids_add: "`reqdata.file_ids_add`"
+              file_ids_remove: "`reqdata.file_ids_remove`"
+              follower_ids: "`reqdata.follower_id`"
+              follower_ids_add: "`reqdata.follower_ids_add`"
+              follower_ids_remove: "`reqdata.follower_ids_remove`"
+              group_id: "`reqdata.group_id`"
+              iteration_id: "`reqdata.iteration_id`"
+              labels: "`reqdata.label`"
+              labels_add: "`reqdata.labels_add`"
+              labels_remove: "`reqdata.labels_remove`"
+              linked_file_ids: "`reqdata.linked_file_id`"
+              linked_file_ids_add: "`reqdata.linked_file_ids_add`"
+              linked_file_ids_remove: "`reqdata.linked_file_ids_remove`"
+              move_to: "`reqdata.move_to`"
+              name: "`reqdata.name`"
+              owner_ids: "`reqdata.owner_id`"
+              owner_ids_add: "`reqdata.owner_ids_add`"
+              owner_ids_remove: "`reqdata.owner_ids_remove`"
+              parent_story_id: "`reqdata.parent_story_id`"
+              project_id: "`reqdata.project_id`"
+              requested_by_id: "`reqdata.requested_by_id`"
+              source_task_id: "`reqdata.source_task_id`"
+              started_at_override: "`reqdata.started_at_override`"
+              story_links: "`reqdata.story_link`"
+              story_template_id: "`reqdata.story_template_id`"
+              story_type: "`reqdata.story_type`"
+              sub_tasks: "`reqdata.sub_task`"
+              tasks: "`reqdata.task`"
+              updated_at: "`reqdata.updated_at`"
+              workflow_state_id: "`reqdata.workflow_state_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "detail"
+                orig: "detail"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "entity_type"
+                orig: "entity_type"
+                reqd: false
+                type: "`$ARRAY`"
+              }
+              {
+                kind: "query"
+                name: "next"
+                orig: "next"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "page_size"
+                orig: "page_size"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "query"
+                orig: "query"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/search/stories"
+          parts: [
+            "api"
+            "v3"
+            "search"
+            "stories"
+          ]
+          select: {
+            exist: [
+              "detail"
+              "entity_type"
+              "next"
+              "page_size"
+              "query"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "group_id"
+                orig: "group_public_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/groups/{group-public-id}/stories"
+          parts: [
+            "api"
+            "v3"
+            "groups"
+            "{group_id}"
+            "stories"
+          ]
+          rename: {
+            param: {
+              "group-public-id": "group_id"
+            }
+          }
+          select: {
+            exist: [
+              "group_id"
+              "limit"
+              "offset"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "epic_id"
+                orig: "epic_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "includes_description"
+                orig: "includes_description"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/epics/{epic-public-id}/stories"
+          parts: [
+            "api"
+            "v3"
+            "epics"
+            "{epic_id}"
+            "stories"
+          ]
+          rename: {
+            param: {
+              "epic-public-id": "epic_id"
+            }
+          }
+          select: {
+            exist: [
+              "epic_id"
+              "includes_description"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "iteration_id"
+                orig: "iteration_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "includes_description"
+                orig: "includes_description"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/iterations/{iteration-public-id}/stories"
+          parts: [
+            "api"
+            "v3"
+            "iterations"
+            "{iteration_id}"
+            "stories"
+          ]
+          rename: {
+            param: {
+              "iteration-public-id": "iteration_id"
+            }
+          }
+          select: {
+            exist: [
+              "includes_description"
+              "iteration_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "label_id"
+                orig: "label_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "includes_description"
+                orig: "includes_description"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/labels/{label-public-id}/stories"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+            "{label_id}"
+            "stories"
+          ]
+          rename: {
+            param: {
+              "label-public-id": "label_id"
+            }
+          }
+          select: {
+            exist: [
+              "includes_description"
+              "label_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "project_id"
+                orig: "project_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "includes_description"
+                orig: "includes_description"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/projects/{project-public-id}/stories"
+          parts: [
+            "api"
+            "v3"
+            "projects"
+            "{project_id}"
+            "stories"
+          ]
+          rename: {
+            param: {
+              "project-public-id": "project_id"
+            }
+          }
+          select: {
+            exist: [
+              "includes_description"
+              "project_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "external_link"
+                orig: "external_link"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/external-link/stories"
+          parts: [
+            "api"
+            "v3"
+            "external-link"
+            "stories"
+          ]
+          select: {
+            exist: [
+              "external_link"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/stories/{story-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "story-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/stories/{story-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "story-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/stories/{story-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "story-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              after_id: "`reqdata.after_id`"
+              archived: "`reqdata.archived`"
+              before_id: "`reqdata.before_id`"
+              branch_ids: "`reqdata.branch_id`"
+              commit_ids: "`reqdata.commit_id`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              custom_fields: "`reqdata.custom_field`"
+              deadline: "`reqdata.deadline`"
+              description: "`reqdata.description`"
+              epic_id: "`reqdata.epic_id`"
+              estimate: "`reqdata.estimate`"
+              external_links: "`reqdata.external_link`"
+              file_ids: "`reqdata.file_id`"
+              follower_ids: "`reqdata.follower_id`"
+              group_id: "`reqdata.group_id`"
+              iteration_id: "`reqdata.iteration_id`"
+              labels: "`reqdata.label`"
+              linked_file_ids: "`reqdata.linked_file_id`"
+              move_to: "`reqdata.move_to`"
+              name: "`reqdata.name`"
+              owner_ids: "`reqdata.owner_id`"
+              parent_story_id: "`reqdata.parent_story_id`"
+              project_id: "`reqdata.project_id`"
+              pull_request_ids: "`reqdata.pull_request_id`"
+              requested_by_id: "`reqdata.requested_by_id`"
+              started_at_override: "`reqdata.started_at_override`"
+              story_type: "`reqdata.story_type`"
+              workflow_state_id: "`reqdata.workflow_state_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "epic"
+      ]
+      [
+        "group"
+      ]
+      [
+        "iteration"
+      ]
+      [
+        "label"
+      ]
+      [
+        "project"
+      ]
+    ]
+  }
+
+
+
+}

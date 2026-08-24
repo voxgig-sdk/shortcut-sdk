@@ -42,8 +42,8 @@ class TestIterationEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestIterationEntity:
         iteration_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.iteration"), "iteration_ref01"))
 
-        iteration_ref01_data = helpers.to_map(iteration_ref01_ent.create(iteration_ref01_data, None))
+        iteration_ref01_data = helpers.to_map(runner.entity_data(iteration_ref01_ent.create(iteration_ref01_data, None)))
         assert iteration_ref01_data is not None
         assert iteration_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestIterationEntity:
         iteration_ref01_markdef_up0_value = "Mark01-iteration_ref01_" + str(setup["now"])
         iteration_ref01_data_up0_up[iteration_ref01_markdef_up0_name] = iteration_ref01_markdef_up0_value
 
-        iteration_ref01_resdata_up0 = helpers.to_map(iteration_ref01_ent.update(iteration_ref01_data_up0_up, None))
+        iteration_ref01_resdata_up0 = helpers.to_map(runner.entity_data(iteration_ref01_ent.update(iteration_ref01_data_up0_up, None)))
         assert iteration_ref01_resdata_up0 is not None
         assert iteration_ref01_resdata_up0["id"] == iteration_ref01_data_up0_up["id"]
         assert iteration_ref01_resdata_up0[iteration_ref01_markdef_up0_name] == iteration_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestIterationEntity:
             "id": iteration_ref01_data["id"],
         }
         iteration_ref01_data_dt0_loaded = iteration_ref01_ent.load(iteration_ref01_match_dt0, None)
-        iteration_ref01_data_dt0_load_result = helpers.to_map(iteration_ref01_data_dt0_loaded)
+        iteration_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(iteration_ref01_data_dt0_loaded))
         assert iteration_ref01_data_dt0_load_result is not None
         assert iteration_ref01_data_dt0_load_result["id"] == iteration_ref01_data["id"]
 

@@ -42,8 +42,8 @@ class TestThreadedCommentEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -79,7 +79,7 @@ class TestThreadedCommentEntity:
             vs.getpath(setup["data"], "new.threaded_comment"), "threaded_comment_ref01"))
         threaded_comment_ref01_data["epic_id"] = setup["idmap"]["epic01"]
 
-        threaded_comment_ref01_data = helpers.to_map(threaded_comment_ref01_ent.create(threaded_comment_ref01_data, None))
+        threaded_comment_ref01_data = helpers.to_map(runner.entity_data(threaded_comment_ref01_ent.create(threaded_comment_ref01_data, None)))
         assert threaded_comment_ref01_data is not None
         assert threaded_comment_ref01_data["id"] is not None
 
@@ -106,7 +106,7 @@ class TestThreadedCommentEntity:
         threaded_comment_ref01_markdef_up0_value = "Mark01-threaded_comment_ref01_" + str(setup["now"])
         threaded_comment_ref01_data_up0_up[threaded_comment_ref01_markdef_up0_name] = threaded_comment_ref01_markdef_up0_value
 
-        threaded_comment_ref01_resdata_up0 = helpers.to_map(threaded_comment_ref01_ent.update(threaded_comment_ref01_data_up0_up, None))
+        threaded_comment_ref01_resdata_up0 = helpers.to_map(runner.entity_data(threaded_comment_ref01_ent.update(threaded_comment_ref01_data_up0_up, None)))
         assert threaded_comment_ref01_resdata_up0 is not None
         assert threaded_comment_ref01_resdata_up0["id"] == threaded_comment_ref01_data_up0_up["id"]
         assert threaded_comment_ref01_resdata_up0[threaded_comment_ref01_markdef_up0_name] == threaded_comment_ref01_markdef_up0_value
@@ -116,7 +116,7 @@ class TestThreadedCommentEntity:
             "id": threaded_comment_ref01_data["id"],
         }
         threaded_comment_ref01_data_dt0_loaded = threaded_comment_ref01_ent.load(threaded_comment_ref01_match_dt0, None)
-        threaded_comment_ref01_data_dt0_load_result = helpers.to_map(threaded_comment_ref01_data_dt0_loaded)
+        threaded_comment_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(threaded_comment_ref01_data_dt0_loaded))
         assert threaded_comment_ref01_data_dt0_load_result is not None
         assert threaded_comment_ref01_data_dt0_load_result["id"] == threaded_comment_ref01_data["id"]
 

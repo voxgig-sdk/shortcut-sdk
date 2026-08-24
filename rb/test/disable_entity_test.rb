@@ -45,7 +45,7 @@ class DisableEntityTest < Minitest::Test
     }
 
     disable_ref01_resdata_up0_result = disable_ref01_ent.update(disable_ref01_data_up0_up, nil)
-    disable_ref01_resdata_up0 = Helpers.to_map(disable_ref01_resdata_up0_result)
+    disable_ref01_resdata_up0 = Helpers.to_map(disable_ref01_resdata_up0_result.respond_to?(:data_get) ? disable_ref01_resdata_up0_result.data_get : disable_ref01_resdata_up0_result)
     assert !disable_ref01_resdata_up0.nil?
 
   end

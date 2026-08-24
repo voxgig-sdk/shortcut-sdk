@@ -52,7 +52,7 @@ class EnableEntityTest extends TestCase
         ];
 
         $enable_ref01_resdata_up0_result = $enable_ref01_ent->update($enable_ref01_data_up0_up, null);
-        $enable_ref01_resdata_up0 = Helpers::to_map($enable_ref01_resdata_up0_result);
+        $enable_ref01_resdata_up0 = Helpers::to_map(is_object($enable_ref01_resdata_up0_result) && method_exists($enable_ref01_resdata_up0_result, 'data_get') ? $enable_ref01_resdata_up0_result->data_get() : $enable_ref01_resdata_up0_result);
         $this->assertNotNull($enable_ref01_resdata_up0);
 
     }

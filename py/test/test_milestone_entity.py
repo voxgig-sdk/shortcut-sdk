@@ -42,8 +42,8 @@ class TestMilestoneEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -79,7 +79,7 @@ class TestMilestoneEntity:
             vs.getpath(setup["data"], "new.milestone"), "milestone_ref01"))
         milestone_ref01_data["category_id"] = setup["idmap"]["category01"]
 
-        milestone_ref01_data = helpers.to_map(milestone_ref01_ent.create(milestone_ref01_data, None))
+        milestone_ref01_data = helpers.to_map(runner.entity_data(milestone_ref01_ent.create(milestone_ref01_data, None)))
         assert milestone_ref01_data is not None
         assert milestone_ref01_data["id"] is not None
 
@@ -103,7 +103,7 @@ class TestMilestoneEntity:
         milestone_ref01_markdef_up0_value = "Mark01-milestone_ref01_" + str(setup["now"])
         milestone_ref01_data_up0_up[milestone_ref01_markdef_up0_name] = milestone_ref01_markdef_up0_value
 
-        milestone_ref01_resdata_up0 = helpers.to_map(milestone_ref01_ent.update(milestone_ref01_data_up0_up, None))
+        milestone_ref01_resdata_up0 = helpers.to_map(runner.entity_data(milestone_ref01_ent.update(milestone_ref01_data_up0_up, None)))
         assert milestone_ref01_resdata_up0 is not None
         assert milestone_ref01_resdata_up0["id"] == milestone_ref01_data_up0_up["id"]
         assert milestone_ref01_resdata_up0[milestone_ref01_markdef_up0_name] == milestone_ref01_markdef_up0_value
@@ -113,7 +113,7 @@ class TestMilestoneEntity:
             "id": milestone_ref01_data["id"],
         }
         milestone_ref01_data_dt0_loaded = milestone_ref01_ent.load(milestone_ref01_match_dt0, None)
-        milestone_ref01_data_dt0_load_result = helpers.to_map(milestone_ref01_data_dt0_loaded)
+        milestone_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(milestone_ref01_data_dt0_loaded))
         assert milestone_ref01_data_dt0_load_result is not None
         assert milestone_ref01_data_dt0_load_result["id"] == milestone_ref01_data["id"]
 

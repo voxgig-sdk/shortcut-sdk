@@ -1,5 +1,5 @@
 
-import { cmp, each, Content, isAuthActive, envName, canonKey, opRequestShape, entityIdField, entityDataIdField, entityOps, safeVarName, exampleVarName } from '@voxgig/sdkgen'
+import { cmp, each, Content, isAuthActive, envName, canonKey, canonScalarKey, opRequestShape, entityIdField, entityDataIdField, entityOps, safeVarName, exampleVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -61,7 +61,7 @@ client = ${ctor}
     // placeholder (the doc test EXECUTES these blocks, so a comment
     // placeholder would not parse).
     const rbLit = (type: any, placeholder: string = 'example'): string => {
-      const k = canonKey(type)
+      const k = canonScalarKey(type)
       if ('INTEGER' === k || 'NUMBER' === k) return '1'
       if ('BOOLEAN' === k) return 'true'
       if ('ARRAY' === k) return '[]'
@@ -125,7 +125,7 @@ ${neName} is nested under ${parentName}, so provide the \`${parentParam}\`.
 
 \`\`\`ruby
 begin
-  # load returns the bare ${neName} record (raises on error).
+  # load returns the ENTITY — call data_get for the ${neName} record (raises on error).
   ${neVar} = client.${neName}.load({ ${neMatch.join(', ')} })
   puts ${neVar}
 rescue => err
@@ -153,7 +153,7 @@ end
 
 \`\`\`ruby
 begin
-  # load returns the bare ${eName} record (raises on error).
+  # load returns the ENTITY — call data_get for the ${eName} record (raises on error).
   ${eVar} = client.${eName}.load(${loadArg})
   puts ${eVar}
 rescue => err
@@ -193,7 +193,7 @@ end
       return it && it.type
     }
     const idValueFor = (opname: string): string => (null != dataIdF && opnames.includes('create'))
-      ? `created["${dataIdF}"]`
+      ? `created.data_get["${dataIdF}"]`
       : rbLit(idParamType(opname), 'example_id')
 
     if (opnames.includes('create') || opnames.includes('update') || opnames.includes('remove')) {
@@ -202,7 +202,7 @@ end
 \`\`\`ruby
 `)
       if (opnames.includes('create')) {
-        Content(`# create returns the bare created ${eName} record.
+        Content(`# create returns the ENTITY — call data_get for the created ${eName} record.
 created = client.${eName}.create({ ${examplePairs('create').join(', ')} })
 
 `)
@@ -210,7 +210,7 @@ created = client.${eName}.create({ ${examplePairs('create').join(', ')} })
       if (opnames.includes('update')) {
         const updatePairs = (idF ? [`"${idF}" => ${idValueFor('update')}`] : []).concat(examplePairs('update'))
         const fromCreated = null != dataIdF && opnames.includes('create')
-        Content(`# Update${fromCreated ? ` — index the bare record directly (created["${dataIdF}"]).` : ''}
+        Content(`# Update${fromCreated ? ` — index the record via data_get (created.data_get["${dataIdF}"]).` : ''}
 client.${eName}.update({ ${updatePairs.join(', ')} })
 
 `)

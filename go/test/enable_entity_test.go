@@ -68,7 +68,7 @@ func TestEnableEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		enableRef01ResdataUp0 := core.ToMapAny(enableRef01ResdataUp0Result)
+		enableRef01ResdataUp0 := core.ToMapAny(entityData(enableRef01ResdataUp0Result))
 		if enableRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}

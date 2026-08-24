@@ -50,7 +50,7 @@ class KeyResultEntityTest < Minitest::Test
     key_result_ref01_data_up0_up[key_result_ref01_markdef_up0_name] = key_result_ref01_markdef_up0_value
 
     key_result_ref01_resdata_up0_result = key_result_ref01_ent.update(key_result_ref01_data_up0_up, nil)
-    key_result_ref01_resdata_up0 = Helpers.to_map(key_result_ref01_resdata_up0_result)
+    key_result_ref01_resdata_up0 = Helpers.to_map(key_result_ref01_resdata_up0_result.respond_to?(:data_get) ? key_result_ref01_resdata_up0_result.data_get : key_result_ref01_resdata_up0_result)
     assert !key_result_ref01_resdata_up0.nil?
     assert_equal key_result_ref01_resdata_up0["id"], key_result_ref01_data_up0_up["id"]
     assert_equal key_result_ref01_resdata_up0[key_result_ref01_markdef_up0_name], key_result_ref01_markdef_up0_value
@@ -60,7 +60,7 @@ class KeyResultEntityTest < Minitest::Test
       "id" => key_result_ref01_data["id"],
     }
     key_result_ref01_data_dt0_loaded = key_result_ref01_ent.load(key_result_ref01_match_dt0, nil)
-    key_result_ref01_data_dt0_load_result = Helpers.to_map(key_result_ref01_data_dt0_loaded)
+    key_result_ref01_data_dt0_load_result = Helpers.to_map(key_result_ref01_data_dt0_loaded.respond_to?(:data_get) ? key_result_ref01_data_dt0_loaded.data_get : key_result_ref01_data_dt0_loaded)
     assert !key_result_ref01_data_dt0_load_result.nil?
     assert_equal key_result_ref01_data_dt0_load_result["id"], key_result_ref01_data["id"]
 

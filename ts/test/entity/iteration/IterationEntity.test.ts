@@ -62,14 +62,14 @@ describe('IterationEntity', async () => {
     const iteration_ref01_ent = client.Iteration()
     let iteration_ref01_data = setup.data.new.iteration['iteration_ref01']
 
-    iteration_ref01_data = await iteration_ref01_ent.create(iteration_ref01_data)
+    iteration_ref01_data = (await iteration_ref01_ent.create(iteration_ref01_data)).data()
     assert(null != iteration_ref01_data.id)
 
 
     // LIST
     const iteration_ref01_match: any = {}
 
-    const iteration_ref01_list = await iteration_ref01_ent.list(iteration_ref01_match)
+    const iteration_ref01_list = (await iteration_ref01_ent.list(iteration_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(iteration_ref01_list, { id: iteration_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('IterationEntity', async () => {
     const iteration_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-iteration_ref01_' + setup.now }
     ;(iteration_ref01_data_up0 as any)[iteration_ref01_markdef_up0.name] = iteration_ref01_markdef_up0.value
 
-    const iteration_ref01_resdata_up0 = await iteration_ref01_ent.update(iteration_ref01_data_up0)
+    const iteration_ref01_resdata_up0 = (await iteration_ref01_ent.update(iteration_ref01_data_up0)).data()
     assert(iteration_ref01_resdata_up0.id === iteration_ref01_data_up0.id)
 
     assert((iteration_ref01_resdata_up0 as any)[iteration_ref01_markdef_up0.name] === iteration_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('IterationEntity', async () => {
     // LOAD
     const iteration_ref01_match_dt0: any = {}
     iteration_ref01_match_dt0.id = iteration_ref01_data.id
-    const iteration_ref01_data_dt0 = await iteration_ref01_ent.load(iteration_ref01_match_dt0)
+    const iteration_ref01_data_dt0 = (await iteration_ref01_ent.load(iteration_ref01_match_dt0)).data()
     assert(iteration_ref01_data_dt0.id === iteration_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('IterationEntity', async () => {
     // LIST
     const iteration_ref01_match_rt0: any = {}
 
-    const iteration_ref01_list_rt0 = await iteration_ref01_ent.list(iteration_ref01_match_rt0)
+    const iteration_ref01_list_rt0 = (await iteration_ref01_ent.list(iteration_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(iteration_ref01_list_rt0, { id: iteration_ref01_data.id })))
 

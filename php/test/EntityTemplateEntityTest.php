@@ -40,7 +40,7 @@ class EntityTemplateEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class EntityTemplateEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.entity_template"), "entity_template_ref01"));
 
         $entity_template_ref01_data_result = $entity_template_ref01_ent->create($entity_template_ref01_data, null);
-        $entity_template_ref01_data = Helpers::to_map($entity_template_ref01_data_result);
+        $entity_template_ref01_data = Helpers::to_map(is_object($entity_template_ref01_data_result) && method_exists($entity_template_ref01_data_result, 'data_get') ? $entity_template_ref01_data_result->data_get() : $entity_template_ref01_data_result);
         $this->assertNotNull($entity_template_ref01_data);
         $this->assertNotNull($entity_template_ref01_data["id"]);
 
@@ -108,7 +108,7 @@ class EntityTemplateEntityTest extends TestCase
         $entity_template_ref01_data_up0_up[$entity_template_ref01_markdef_up0_name] = $entity_template_ref01_markdef_up0_value;
 
         $entity_template_ref01_resdata_up0_result = $entity_template_ref01_ent->update($entity_template_ref01_data_up0_up, null);
-        $entity_template_ref01_resdata_up0 = Helpers::to_map($entity_template_ref01_resdata_up0_result);
+        $entity_template_ref01_resdata_up0 = Helpers::to_map(is_object($entity_template_ref01_resdata_up0_result) && method_exists($entity_template_ref01_resdata_up0_result, 'data_get') ? $entity_template_ref01_resdata_up0_result->data_get() : $entity_template_ref01_resdata_up0_result);
         $this->assertNotNull($entity_template_ref01_resdata_up0);
         $this->assertEquals($entity_template_ref01_resdata_up0["id"], $entity_template_ref01_data_up0_up["id"]);
         $this->assertEquals($entity_template_ref01_resdata_up0[$entity_template_ref01_markdef_up0_name], $entity_template_ref01_markdef_up0_value);
@@ -118,7 +118,7 @@ class EntityTemplateEntityTest extends TestCase
             "id" => $entity_template_ref01_data["id"],
         ];
         $entity_template_ref01_data_dt0_loaded = $entity_template_ref01_ent->load($entity_template_ref01_match_dt0, null);
-        $entity_template_ref01_data_dt0_load_result = Helpers::to_map($entity_template_ref01_data_dt0_loaded);
+        $entity_template_ref01_data_dt0_load_result = Helpers::to_map(is_object($entity_template_ref01_data_dt0_loaded) && method_exists($entity_template_ref01_data_dt0_loaded, 'data_get') ? $entity_template_ref01_data_dt0_loaded->data_get() : $entity_template_ref01_data_dt0_loaded);
         $this->assertNotNull($entity_template_ref01_data_dt0_load_result);
         $this->assertEquals($entity_template_ref01_data_dt0_load_result["id"], $entity_template_ref01_data["id"]);
 

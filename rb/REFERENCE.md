@@ -280,16 +280,16 @@ category = client.Category
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `archived` | `Boolean` | Yes |  |
-| `color` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `type` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `archived` | `Boolean` | Yes | A true/false boolean indicating if the Category has been archived. |
+| `color` | `String` | Yes | The hex color to be displayed with the Category (for example, "#ff0000"). |
+| `created_at` | `String` | Yes | The time/date that the Category was created. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `global_id` | `String` | Yes | The Global ID of the Category. |
+| `id` | `Integer` | Yes | The unique ID of the Category. |
+| `name` | `String` | Yes | The name of the Category. |
+| `type` | `String` | Yes | The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category. |
+| `updated_at` | `String` | Yes | The time/date that the Category was updated. |
 
 ### Field Usage by Operation
 
@@ -448,22 +448,22 @@ custom_field = client.CustomField
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `String` | No |  |
-| `before_id` | `String` | No |  |
-| `canonical_name` | `String` | No |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | No |  |
-| `enabled` | `Boolean` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `field_type` | `String` | Yes |  |
-| `fixed_position` | `Boolean` | No |  |
-| `icon_set_identifier` | `String` | No |  |
-| `id` | `String` | Yes |  |
-| `name` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `story_types` | `Array` | No |  |
-| `updated_at` | `String` | Yes |  |
-| `values` | `Array` | No |  |
+| `after_id` | `String` | No | The ID of the CustomField we want to move this CustomField after. |
+| `before_id` | `String` | No | The ID of the CustomField we want to move this CustomField before. |
+| `canonical_name` | `String` | No | The canonical name for a Shortcut-defined field. |
+| `created_at` | `String` | Yes | The instant when this CustomField was created. |
+| `description` | `String` | No | A string description of the CustomField |
+| `enabled` | `Boolean` | Yes | When true, the CustomField can be applied to entities in the Workspace. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `field_type` | `String` | Yes | The type of Custom Field, eg. |
+| `fixed_position` | `Boolean` | No | When true, the CustomFieldEnumValues may not be reordered. |
+| `icon_set_identifier` | `String` | No | A string that represents the icon that corresponds to this custom field. |
+| `id` | `String` | Yes | The unique public ID for the CustomField. |
+| `name` | `String` | Yes | The name of the Custom Field. |
+| `position` | `Integer` | Yes | An integer indicating the position of this Custom Field with respect to the other CustomField |
+| `story_types` | `Array` | No | The types of stories this CustomField is scoped to. |
+| `updated_at` | `String` | Yes | The instant when this CustomField was last updated. |
+| `values` | `Array` | No | A collection of legal values for a CustomField. |
 
 ### Field Usage by Operation
 
@@ -611,10 +611,10 @@ doc_slim = client.DocSlim
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `content` | `String` | Yes |  |
-| `id` | `String` | Yes |  |
-| `title` | `String` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Doc. |
+| `content` | `String` | Yes | The content for the new document |
+| `id` | `String` | Yes | The public id of the Doc |
+| `title` | `String` | Yes | The title for the new document |
 
 ### Operations
 
@@ -727,33 +727,33 @@ entity_template = client.EntityTemplate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_id` | `String` | No |  |
-| `created_at` | `String` | Yes |  |
-| `custom_fields` | `Array` | No |  |
-| `deadline` | `String` | No |  |
-| `description` | `String` | No |  |
-| `entity_type` | `String` | No |  |
-| `epic_id` | `Integer` | No |  |
-| `estimate` | `Integer` | No |  |
-| `external_links` | `Array` | No |  |
-| `files` | `Array` | No |  |
-| `follower_ids` | `Array` | No |  |
-| `group_id` | `String` | No |  |
-| `id` | `String` | Yes |  |
-| `iteration_id` | `Integer` | No |  |
-| `label_ids` | `Array` | No |  |
-| `labels` | `Array` | No |  |
-| `last_used_at` | `String` | Yes |  |
-| `linked_files` | `Array` | No |  |
-| `name` | `String` | No |  |
-| `owner_ids` | `Array` | No |  |
-| `project_id` | `Integer` | No |  |
-| `story_contents` | `Hash` | Yes |  |
-| `story_type` | `String` | No |  |
-| `sub_tasks` | `Array` | No |  |
-| `tasks` | `Array` | No |  |
-| `updated_at` | `String` | Yes |  |
-| `workflow_state_id` | `Integer` | No |  |
+| `author_id` | `String` | No | The id of the user creating this template. |
+| `created_at` | `String` | Yes | The time/date when the entity template was created. |
+| `custom_fields` | `Array` | No | An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField. |
+| `deadline` | `String` | No | The due date of the story. |
+| `description` | `String` | No | The description of the story. |
+| `entity_type` | `String` | No | A string description of this resource. |
+| `epic_id` | `Integer` | No | The ID of the epic the story belongs to. |
+| `estimate` | `Integer` | No | The numeric point estimate of the story. |
+| `external_links` | `Array` | No | An array of external links connected to the story. |
+| `files` | `Array` | No | An array of files attached to the story. |
+| `follower_ids` | `Array` | No | An array of UUIDs for any Members listed as Followers. |
+| `group_id` | `String` | No | The ID of the group to which the story is assigned. |
+| `id` | `String` | Yes | The unique identifier for the entity template. |
+| `iteration_id` | `Integer` | No | The ID of the iteration the story belongs to. |
+| `label_ids` | `Array` | No | An array of label ids attached to the story. |
+| `labels` | `Array` | No | An array of labels attached to the story. |
+| `last_used_at` | `String` | Yes | The last time that someone created an entity using this template. |
+| `linked_files` | `Array` | No | An array of linked files attached to the story. |
+| `name` | `String` | No | The name of the story. |
+| `owner_ids` | `Array` | No | An array of UUIDs of the owners of this story. |
+| `project_id` | `Integer` | No | The ID of the project the story belongs to. |
+| `story_contents` | `Hash` | Yes | A map of story attributes this template populates. |
+| `story_type` | `String` | No | The type of story (feature, bug, chore). |
+| `sub_tasks` | `Array` | No | An array of sub-tasks connected to the story |
+| `tasks` | `Array` | No | An array of tasks connected to the story. |
+| `updated_at` | `String` | Yes | The time/date when the entity template was last updated. |
+| `workflow_state_id` | `Integer` | No | The ID of the workflow state the story is currently in. |
 
 ### Field Usage by Operation
 
@@ -878,52 +878,52 @@ epic = client.Epic
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `associated_groups` | `Array` | Yes |  |
-| `before_id` | `Integer` | No |  |
-| `comments` | `Array` | Yes |  |
-| `completed` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `completed_at_override` | `String` | Yes |  |
-| `converted_from_story_id` | `Integer` | No |  |
-| `created_at` | `String` | Yes |  |
-| `deadline` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `epic_state_id` | `Integer` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `follower_ids` | `Array` | Yes |  |
+| `after_id` | `Integer` | No | The ID of the Epic we want to move this Epic after. |
+| `app_url` | `String` | Yes | The Shortcut application url for the Epic. |
+| `archived` | `Boolean` | Yes | True/false boolean that indicates whether the Epic is archived or not. |
+| `associated_groups` | `Array` | Yes | An array containing Group IDs and Group-owned story counts for the Epic's associated groups. |
+| `before_id` | `Integer` | No | The ID of the Epic we want to move this Epic before. |
+| `comments` | `Array` | Yes | A nested array of threaded comments. |
+| `completed` | `Boolean` | Yes | A true/false boolean indicating if the Epic has been completed. |
+| `completed_at` | `String` | Yes | The time/date the Epic was completed. |
+| `completed_at_override` | `String` | Yes | A manual override for the time/date the Epic was completed. |
+| `converted_from_story_id` | `Integer` | No | The ID of the Story that was converted to an Epic. |
+| `created_at` | `String` | Yes | The time/date the Epic was created. |
+| `deadline` | `String` | Yes | The Epic's deadline. |
+| `description` | `String` | Yes | The Epic's description. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `epic_state_id` | `Integer` | Yes | The ID of the Epic State. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `follower_ids` | `Array` | Yes | An array of UUIDs for any Members you want to add as Followers on this Epic. |
 | `global_id` | `String` | Yes |  |
-| `group_id` | `String` | Yes |  |
-| `group_ids` | `Array` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `health` | `Hash` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `label_ids` | `Array` | Yes |  |
-| `labels` | `Array` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `milestone_id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `objective_ids` | `Array` | Yes |  |
-| `owner_ids` | `Array` | Yes |  |
-| `planned_start_date` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `productboard_id` | `String` | Yes |  |
-| `productboard_name` | `String` | Yes |  |
-| `productboard_plugin_id` | `String` | Yes |  |
-| `productboard_url` | `String` | Yes |  |
-| `project_ids` | `Array` | Yes |  |
-| `requested_by_id` | `String` | Yes |  |
-| `started` | `Boolean` | Yes |  |
-| `started_at` | `String` | Yes |  |
-| `started_at_override` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `stories_without_projects` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `group_id` | `String` | Yes | `Deprecated` The ID of the group to associate with the epic. |
+| `group_ids` | `Array` | Yes | An array of UUIDS for Groups to which this Epic is related. |
+| `group_mention_ids` | `Array` | Yes | An array of Group IDs that have been mentioned in the Epic description. |
+| `health` | `Hash` | Yes | The current health status of the Epic. |
+| `id` | `Integer` | Yes | The unique ID of the Epic. |
+| `label_ids` | `Array` | Yes | An array of Label ids attached to the Epic. |
+| `labels` | `Array` | Yes | An array of Labels attached to the Epic. |
+| `member_mention_ids` | `Array` | Yes | An array of Member IDs that have been mentioned in the Epic description. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `milestone_id` | `Integer` | Yes | `Deprecated` The ID of the Objective this Epic is related to. |
+| `name` | `String` | Yes | The name of the Epic. |
+| `objective_ids` | `Array` | Yes | An array of IDs for Objectives to which this epic is related. |
+| `owner_ids` | `Array` | Yes | An array of UUIDs for any members you want to add as Owners on this new Epic. |
+| `planned_start_date` | `String` | Yes | The Epic's planned start date. |
+| `position` | `Integer` | Yes | The Epic's relative position in the Epic workflow state. |
+| `productboard_id` | `String` | Yes | The ID of the associated productboard feature. |
+| `productboard_name` | `String` | Yes | The name of the associated productboard feature. |
+| `productboard_plugin_id` | `String` | Yes | The ID of the associated productboard integration. |
+| `productboard_url` | `String` | Yes | The URL of the associated productboard feature. |
+| `project_ids` | `Array` | Yes | The IDs of Projects related to this Epic. |
+| `requested_by_id` | `String` | Yes | The ID of the Member that requested the epic. |
+| `started` | `Boolean` | Yes | A true/false boolean indicating if the Epic has been started. |
+| `started_at` | `String` | Yes | The time/date the Epic was started. |
+| `started_at_override` | `String` | Yes | A manual override for the time/date the Epic was started. |
+| `state` | `String` | Yes | `Deprecated` The workflow state that the Epic is in. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Epic. |
+| `stories_without_projects` | `Integer` | Yes | The number of stories in this epic which are not associated with a project. |
+| `updated_at` | `String` | Yes | The time/date the Epic was updated. |
 
 ### Field Usage by Operation
 
@@ -1105,47 +1105,47 @@ epic_paginated_result = client.EpicPaginatedResult
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `associated_groups` | `Array` | Yes |  |
-| `completed` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `completed_at_override` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `deadline` | `String` | Yes |  |
-| `description` | `String` | No |  |
-| `entity_type` | `String` | Yes |  |
-| `epic_state_id` | `Integer` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `follower_ids` | `Array` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Epic. |
+| `archived` | `Boolean` | Yes | True/false boolean that indicates whether the Epic is archived or not. |
+| `associated_groups` | `Array` | Yes | An array containing Group IDs and Group-owned story counts for the Epic's associated groups. |
+| `completed` | `Boolean` | Yes | A true/false boolean indicating if the Epic has been completed. |
+| `completed_at` | `String` | Yes | The time/date the Epic was completed. |
+| `completed_at_override` | `String` | Yes | A manual override for the time/date the Epic was completed. |
+| `created_at` | `String` | Yes | The time/date the Epic was created. |
+| `deadline` | `String` | Yes | The Epic's deadline. |
+| `description` | `String` | No | The Epic's description. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `epic_state_id` | `Integer` | Yes | The ID of the Epic State. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `follower_ids` | `Array` | Yes | An array of UUIDs for any Members you want to add as Followers on this Epic. |
 | `global_id` | `String` | Yes |  |
-| `group_id` | `String` | Yes |  |
-| `group_ids` | `Array` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `label_ids` | `Array` | Yes |  |
-| `labels` | `Array` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `milestone_id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `objective_ids` | `Array` | Yes |  |
-| `owner_ids` | `Array` | Yes |  |
-| `planned_start_date` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `productboard_id` | `String` | Yes |  |
-| `productboard_name` | `String` | Yes |  |
-| `productboard_plugin_id` | `String` | Yes |  |
-| `productboard_url` | `String` | Yes |  |
-| `project_ids` | `Array` | Yes |  |
-| `requested_by_id` | `String` | Yes |  |
-| `started` | `Boolean` | Yes |  |
-| `started_at` | `String` | Yes |  |
-| `started_at_override` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `stories_without_projects` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `group_id` | `String` | Yes | `Deprecated` The ID of the group to associate with the epic. |
+| `group_ids` | `Array` | Yes | An array of UUIDS for Groups to which this Epic is related. |
+| `group_mention_ids` | `Array` | Yes | An array of Group IDs that have been mentioned in the Epic description. |
+| `id` | `Integer` | Yes | The unique ID of the Epic. |
+| `label_ids` | `Array` | Yes | An array of Label ids attached to the Epic. |
+| `labels` | `Array` | Yes | An array of Labels attached to the Epic. |
+| `member_mention_ids` | `Array` | Yes | An array of Member IDs that have been mentioned in the Epic description. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `milestone_id` | `Integer` | Yes | `Deprecated` The ID of the Objective this Epic is related to. |
+| `name` | `String` | Yes | The name of the Epic. |
+| `objective_ids` | `Array` | Yes | An array of IDs for Objectives to which this epic is related. |
+| `owner_ids` | `Array` | Yes | An array of UUIDs for any members you want to add as Owners on this new Epic. |
+| `planned_start_date` | `String` | Yes | The Epic's planned start date. |
+| `position` | `Integer` | Yes | The Epic's relative position in the Epic workflow state. |
+| `productboard_id` | `String` | Yes | The ID of the associated productboard feature. |
+| `productboard_name` | `String` | Yes | The name of the associated productboard feature. |
+| `productboard_plugin_id` | `String` | Yes | The ID of the associated productboard integration. |
+| `productboard_url` | `String` | Yes | The URL of the associated productboard feature. |
+| `project_ids` | `Array` | Yes | The IDs of Projects related to this Epic. |
+| `requested_by_id` | `String` | Yes | The ID of the Member that requested the epic. |
+| `started` | `Boolean` | Yes | A true/false boolean indicating if the Epic has been started. |
+| `started_at` | `String` | Yes | The time/date the Epic was started. |
+| `started_at_override` | `String` | Yes | A manual override for the time/date the Epic was started. |
+| `state` | `String` | Yes | `Deprecated` The workflow state that the Epic is in. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Epic. |
+| `stories_without_projects` | `Integer` | Yes | The number of stories in this epic which are not associated with a project. |
+| `updated_at` | `String` | Yes | The time/date the Epic was updated. |
 
 ### Operations
 
@@ -1245,16 +1245,16 @@ epic_workflow = client.EpicWorkflow
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `color` | `String` | No |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
+| `color` | `String` | No | The hex color for this Epic State. |
+| `created_at` | `String` | Yes | The time/date the Epic State was created. |
+| `description` | `String` | Yes | The description of what sort of Epics belong in that Epic State. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
 | `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `type` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `id` | `Integer` | Yes | The unique ID of the Epic State. |
+| `name` | `String` | Yes | The Epic State's name. |
+| `position` | `Integer` | Yes | The position that the Epic State is in, starting with 0 at the left. |
+| `type` | `String` | Yes | The type of Epic State (Unstarted, Started, or Done) |
+| `updated_at` | `String` | Yes | When the Epic State was last updated. |
 
 ### Operations
 
@@ -1306,27 +1306,27 @@ group = client.Group
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `color` | `String` | Yes |  |
-| `color_key` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `default_workflow_id` | `Integer` | No |  |
-| `description` | `String` | Yes |  |
-| `display_icon` | `Hash` | Yes |  |
-| `display_icon_id` | `String` | No |  |
-| `entity_type` | `String` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Group. |
+| `archived` | `Boolean` | Yes | Whether or not the Group is archived. |
+| `color` | `String` | Yes | The hex color to be displayed with the Group (for example, "#ff0000"). |
+| `color_key` | `String` | Yes | The color key to be displayed with the Group. |
+| `created_at` | `String` | Yes | The instant when this group was created. |
+| `default_workflow_id` | `Integer` | No | The ID of the default workflow for stories created in this group. |
+| `description` | `String` | Yes | The description of the Group. |
+| `display_icon` | `Hash` | Yes | Icons are used to attach images to Groups, Workspaces, Members, and Loading screens in the Shortcut web application. |
+| `display_icon_id` | `String` | No | The Icon id for the avatar of this Group. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
 | `global_id` | `String` | Yes |  |
-| `id` | `String` | Yes |  |
-| `member_ids` | `Array` | Yes |  |
-| `mention_name` | `String` | Yes |  |
-| `name` | `String` | Yes |  |
-| `num_epics_started` | `Integer` | Yes |  |
-| `num_stories` | `Integer` | Yes |  |
-| `num_stories_backlog` | `Integer` | Yes |  |
-| `num_stories_started` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `workflow_ids` | `Array` | Yes |  |
+| `id` | `String` | Yes | The id of the Group. |
+| `member_ids` | `Array` | Yes | The Member IDs contain within the Group. |
+| `mention_name` | `String` | Yes | The mention name of the Group. |
+| `name` | `String` | Yes | The name of the Group. |
+| `num_epics_started` | `Integer` | Yes | The number of epics assigned to the group which are in the started workflow state. |
+| `num_stories` | `Integer` | Yes | The total number of stories assigned to the group. |
+| `num_stories_backlog` | `Integer` | Yes | The number of stories assigned to the group which are in a backlog workflow state. |
+| `num_stories_started` | `Integer` | Yes | The number of stories assigned to the group which are in a started workflow state. |
+| `updated_at` | `String` | Yes | The last instant when this group was updated. |
+| `workflow_ids` | `Array` | Yes | The Workflow IDs contained within the Group. |
 
 ### Field Usage by Operation
 
@@ -1451,15 +1451,15 @@ health = client.Health
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `author_id` | `String` | No |  |
-| `created_at` | `String` | No |  |
-| `entity_type` | `String` | Yes |  |
-| `epic_id` | `Integer` | No |  |
-| `id` | `String` | Yes |  |
-| `objective_id` | `Integer` | No |  |
-| `status` | `String` | Yes |  |
-| `text` | `String` | No |  |
-| `updated_at` | `String` | No |  |
+| `author_id` | `String` | No | The ID of the permission who created or updated the Health record. |
+| `created_at` | `String` | No | The time that the Health record was created. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `epic_id` | `Integer` | No | The ID of the Epic associated with this Health record. |
+| `id` | `String` | Yes | The unique ID of the Health record. |
+| `objective_id` | `Integer` | No | The ID of the Objective associated with this Health record. |
+| `status` | `String` | Yes | The health status of the Epic or Objective. |
+| `text` | `String` | No | The text of the Health record. |
+| `updated_at` | `String` | No | The time that the Health record was updated. |
 
 ### Field Usage by Operation
 
@@ -1557,17 +1557,17 @@ history = client.History
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `actions` | `Array` | Yes |  |
-| `actor_name` | `String` | No |  |
-| `automation_id` | `String` | No |  |
-| `changed_at` | `String` | Yes |  |
-| `external_id` | `String` | No |  |
-| `id` | `String` | Yes |  |
-| `member_id` | `String` | No |  |
-| `primary_id` | `String` | No |  |
-| `references` | `Array` | No |  |
-| `version` | `String` | Yes |  |
-| `webhook_id` | `String` | No |  |
+| `actions` | `Array` | Yes | An array of actions that were performed for the change. |
+| `actor_name` | `String` | No | The name of the actor that performed the action, if it can be determined. |
+| `automation_id` | `String` | No | The ID of the automation that performed the change. |
+| `changed_at` | `String` | Yes | The date when the change occurred. |
+| `external_id` | `String` | No | The ID of the webhook that handled the change. |
+| `id` | `String` | Yes | The ID representing the change for the story. |
+| `member_id` | `String` | No | The ID of the member who performed the change. |
+| `primary_id` | `String` | No | The ID of the primary entity that has changed, if applicable. |
+| `references` | `Array` | No | An array of objects affected by the change. |
+| `version` | `String` | Yes | The version of the change format. |
+| `webhook_id` | `String` | No | The ID of the webhook that handled the change. |
 
 ### Operations
 
@@ -1619,26 +1619,26 @@ iteration = client.Iteration
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `associated_groups` | `Array` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `end_date` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `follower_ids` | `Array` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Iteration. |
+| `associated_groups` | `Array` | Yes | An array containing Group IDs and Group-owned story counts for the Iteration's associated groups. |
+| `created_at` | `String` | Yes | The instant when this iteration was created. |
+| `description` | `String` | Yes | The description of the iteration. |
+| `end_date` | `String` | Yes | The date this iteration ends. |
+| `entity_type` | `String` | Yes | A string description of this resource |
+| `follower_ids` | `Array` | Yes | An array of UUIDs for any Members listed as Followers. |
 | `global_id` | `String` | Yes |  |
-| `group_ids` | `Array` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `label_ids` | `Array` | Yes |  |
-| `labels` | `Array` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `name` | `String` | Yes |  |
-| `start_date` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `status` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `group_ids` | `Array` | Yes | An array of UUIDs for any Groups you want to add as Followers. |
+| `group_mention_ids` | `Array` | Yes | An array of Group IDs that have been mentioned in the Story description. |
+| `id` | `Integer` | Yes | The ID of the iteration. |
+| `label_ids` | `Array` | Yes | An array of label ids attached to the iteration. |
+| `labels` | `Array` | Yes | An array of labels attached to the iteration. |
+| `member_mention_ids` | `Array` | Yes | An array of Member IDs that have been mentioned in the Story description. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `name` | `String` | Yes | The name of the iteration. |
+| `start_date` | `String` | Yes | The date this iteration begins. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Iteration. |
+| `status` | `String` | Yes | The status of the iteration. |
+| `updated_at` | `String` | Yes | The instant when this iteration was last updated. |
 
 ### Field Usage by Operation
 
@@ -1771,16 +1771,16 @@ key_result = client.KeyResult
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `current_observed_value` | `Hash` | Yes |  |
-| `current_target_value` | `Hash` | Yes |  |
-| `id` | `String` | Yes |  |
-| `initial_observed_value` | `Hash` | Yes |  |
-| `name` | `String` | Yes |  |
-| `objective_id` | `Integer` | Yes |  |
-| `observed_value` | `Hash` | No |  |
-| `progress` | `Integer` | Yes |  |
-| `target_value` | `Hash` | No |  |
-| `type` | `String` | Yes |  |
+| `current_observed_value` | `Hash` | Yes | The starting value of the Key Result. |
+| `current_target_value` | `Hash` | Yes | The starting value of the Key Result. |
+| `id` | `String` | Yes | The ID of the Key Result. |
+| `initial_observed_value` | `Hash` | Yes | The starting value of the Key Result. |
+| `name` | `String` | Yes | The name of the Key Result. |
+| `objective_id` | `Integer` | Yes | The Objective to which this Key Result belongs. |
+| `observed_value` | `Hash` | No | The starting value of the Key Result. |
+| `progress` | `Integer` | Yes | The integer percentage of progress toward completion of the Key Result. |
+| `target_value` | `Hash` | No | The starting value of the Key Result. |
+| `type` | `String` | Yes | The type of the Key Result (numeric, percent, or boolean). |
 
 ### Field Usage by Operation
 
@@ -1858,35 +1858,35 @@ label = client.Label
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | No |  |
-| `color` | `String` | No |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | No |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | No |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Label. |
+| `archived` | `Boolean` | No | A true/false boolean indicating if the Label has been archived. |
+| `color` | `String` | No | The hex color to be displayed with the Label (for example, "#ff0000"). |
+| `created_at` | `String` | Yes | The time/date that the Label was created. |
+| `description` | `String` | No | The description of the new Label. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | No | This field can be set to another unique ID. |
 | `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `num_epics` | `Integer` | Yes |  |
-| `num_epics_completed` | `Integer` | Yes |  |
-| `num_epics_in_progress` | `Integer` | Yes |  |
-| `num_epics_total` | `Integer` | Yes |  |
-| `num_epics_unstarted` | `Integer` | Yes |  |
-| `num_points_backlog` | `Integer` | Yes |  |
-| `num_points_completed` | `Integer` | Yes |  |
-| `num_points_in_progress` | `Integer` | Yes |  |
-| `num_points_total` | `Integer` | Yes |  |
-| `num_points_unstarted` | `Integer` | Yes |  |
-| `num_related_documents` | `Integer` | Yes |  |
-| `num_stories_backlog` | `Integer` | Yes |  |
-| `num_stories_completed` | `Integer` | Yes |  |
-| `num_stories_in_progress` | `Integer` | Yes |  |
-| `num_stories_total` | `Integer` | Yes |  |
-| `num_stories_unestimated` | `Integer` | Yes |  |
-| `num_stories_unstarted` | `Integer` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `id` | `Integer` | Yes | The unique ID of the Label. |
+| `name` | `String` | Yes | The name of the new Label. |
+| `num_epics` | `Integer` | Yes | The total number of Epics with this Label. |
+| `num_epics_completed` | `Integer` | Yes | The number of completed Epics associated with this Label. |
+| `num_epics_in_progress` | `Integer` | Yes | The number of in progress epics associated with this label. |
+| `num_epics_total` | `Integer` | Yes | The total number of Epics associated with this Label. |
+| `num_epics_unstarted` | `Integer` | Yes | The number of unstarted epics associated with this label. |
+| `num_points_backlog` | `Integer` | Yes | The total number of backlog points with this Label. |
+| `num_points_completed` | `Integer` | Yes | The total number of completed points with this Label. |
+| `num_points_in_progress` | `Integer` | Yes | The total number of in-progress points with this Label. |
+| `num_points_total` | `Integer` | Yes | The total number of points with this Label. |
+| `num_points_unstarted` | `Integer` | Yes | The total number of unstarted points with this Label. |
+| `num_related_documents` | `Integer` | Yes | The total number of Documents associated this Label. |
+| `num_stories_backlog` | `Integer` | Yes | The total number of stories backlog Stories with this Label. |
+| `num_stories_completed` | `Integer` | Yes | The total number of completed Stories with this Label. |
+| `num_stories_in_progress` | `Integer` | Yes | The total number of in-progress Stories with this Label. |
+| `num_stories_total` | `Integer` | Yes | The total number of Stories with this Label. |
+| `num_stories_unestimated` | `Integer` | Yes | The total number of Stories with no point estimate with this Label. |
+| `num_stories_unstarted` | `Integer` | Yes | The total number of stories unstarted Stories with this Label. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Label. |
+| `updated_at` | `String` | Yes | The time/date that the Label was updated. |
 
 ### Field Usage by Operation
 
@@ -2033,23 +2033,23 @@ linked_file = client.LinkedFile
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content_type` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `name` | `String` | Yes |  |
-| `size` | `Integer` | Yes |  |
-| `story_id` | `Integer` | No |  |
-| `story_ids` | `Array` | Yes |  |
-| `thumbnail_url` | `String` | Yes |  |
-| `type` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `uploader_id` | `String` | Yes |  |
-| `url` | `String` | Yes |  |
+| `content_type` | `String` | Yes | The content type of the image (e.g. |
+| `created_at` | `String` | Yes | The time/date the LinkedFile was created. |
+| `description` | `String` | Yes | The description of the file. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `group_mention_ids` | `Array` | Yes | The groups that are mentioned in the description of the file. |
+| `id` | `Integer` | Yes | The unique identifier for the file. |
+| `member_mention_ids` | `Array` | Yes | The members that are mentioned in the description of the file. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `name` | `String` | Yes | The name of the linked file. |
+| `size` | `Integer` | Yes | The filesize, if the integration provided it. |
+| `story_id` | `Integer` | No | The ID of the linked story. |
+| `story_ids` | `Array` | Yes | The IDs of the stories this file is attached to. |
+| `thumbnail_url` | `String` | Yes | The URL of the file thumbnail, if the integration provided it. |
+| `type` | `String` | Yes | The integration type (e.g. |
+| `updated_at` | `String` | Yes | The time/date the LinkedFile was updated. |
+| `uploader_id` | `String` | Yes | The UUID of the member that uploaded the file. |
+| `url` | `String` | Yes | The URL of the file. |
 
 ### Field Usage by Operation
 
@@ -2175,23 +2175,23 @@ member = client.Member
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | Yes |  |
-| `created_without_invite` | `Boolean` | Yes |  |
-| `disabled` | `Boolean` | Yes |  |
-| `entity_type` | `String` | Yes |  |
+| `created_at` | `String` | Yes | The time/date the Member was created. |
+| `created_without_invite` | `Boolean` | Yes | Whether this member was created as a placeholder entity. |
+| `disabled` | `Boolean` | Yes | True/false boolean indicating whether the Member has been disabled within the Workspace. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
 | `global_id` | `String` | Yes |  |
-| `group_ids` | `Array` | Yes |  |
-| `id` | `String` | Yes |  |
-| `installation_id` | `String` | No |  |
+| `group_ids` | `Array` | Yes | The Member's group ids |
+| `id` | `String` | Yes | The Member's ID in Shortcut. |
+| `installation_id` | `String` | No | Only set for agents. |
 | `is_owner` | `Boolean` | Yes |  |
 | `mention_name` | `String` | Yes |  |
 | `name` | `String` | Yes |  |
 | `organization2` | `Hash` | Yes |  |
-| `profile` | `Hash` | Yes |  |
-| `replaced_by` | `String` | No |  |
-| `role` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `profile` | `Hash` | Yes | A group of Member profile details. |
+| `replaced_by` | `String` | No | The id of the member that replaces this one when merged. |
+| `role` | `String` | Yes | The Member's role in the Workspace. |
+| `state` | `String` | Yes | The user state, one of partial, full, disabled, or imported. |
+| `updated_at` | `String` | Yes | The time/date the Member was last updated. |
 | `workspace2` | `Hash` | Yes |  |
 
 ### Operations
@@ -2252,28 +2252,28 @@ milestone = client.Milestone
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `before_id` | `Integer` | No |  |
-| `categories` | `Array` | Yes |  |
-| `completed` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `completed_at_override` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
+| `after_id` | `Integer` | No | The ID of the Milestone we want to move this Milestone after. |
+| `app_url` | `String` | Yes | The Shortcut application url for the Milestone. |
+| `archived` | `Boolean` | Yes | A boolean indicating whether the Milestone has been archived or not. |
+| `before_id` | `Integer` | No | The ID of the Milestone we want to move this Milestone before. |
+| `categories` | `Array` | Yes | An array of Categories attached to the Milestone. |
+| `completed` | `Boolean` | Yes | A true/false boolean indicating if the Milestone has been completed. |
+| `completed_at` | `String` | Yes | The time/date the Milestone was completed. |
+| `completed_at_override` | `String` | Yes | A manual override for the time/date the Milestone was completed. |
+| `created_at` | `String` | Yes | The time/date the Milestone was created. |
+| `description` | `String` | Yes | The Milestone's description. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
 | `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `key_result_ids` | `Array` | Yes |  |
-| `name` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `started` | `Boolean` | Yes |  |
-| `started_at` | `String` | Yes |  |
-| `started_at_override` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `id` | `Integer` | Yes | The unique ID of the Milestone. |
+| `key_result_ids` | `Array` | Yes | The IDs of the Key Results associated with the Objective. |
+| `name` | `String` | Yes | The name of the Milestone. |
+| `position` | `Integer` | Yes | A number representing the position of the Milestone in relation to every other Milestone within the Workspace. |
+| `started` | `Boolean` | Yes | A true/false boolean indicating if the Milestone has been started. |
+| `started_at` | `String` | Yes | The time/date the Milestone was started. |
+| `started_at_override` | `String` | Yes | A manual override for the time/date the Milestone was started. |
+| `state` | `String` | Yes | The workflow state that the Milestone is in. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Milestone. |
+| `updated_at` | `String` | Yes | The time/date the Milestone was updated. |
 
 ### Field Usage by Operation
 
@@ -2454,28 +2454,28 @@ objective = client.Objective
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `before_id` | `Integer` | No |  |
-| `categories` | `Array` | Yes |  |
-| `completed` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `completed_at_override` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
+| `after_id` | `Integer` | No | The ID of the Objective we want to move this Objective after. |
+| `app_url` | `String` | Yes | The Shortcut application url for the Objective. |
+| `archived` | `Boolean` | Yes | A boolean indicating whether the Objective has been archived or not. |
+| `before_id` | `Integer` | No | The ID of the Objective we want to move this Objective before. |
+| `categories` | `Array` | Yes | An array of Categories attached to the Objective. |
+| `completed` | `Boolean` | Yes | A true/false boolean indicating if the Objectivehas been completed. |
+| `completed_at` | `String` | Yes | The time/date the Objective was completed. |
+| `completed_at_override` | `String` | Yes | A manual override for the time/date the Objective was completed. |
+| `created_at` | `String` | Yes | The time/date the Objective was created. |
+| `description` | `String` | Yes | The Objective's description. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
 | `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `key_result_ids` | `Array` | Yes |  |
-| `name` | `String` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `started` | `Boolean` | Yes |  |
-| `started_at` | `String` | Yes |  |
-| `started_at_override` | `String` | Yes |  |
-| `state` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `id` | `Integer` | Yes | The unique ID of the Objective. |
+| `key_result_ids` | `Array` | Yes | The IDs of the Key Results associated with the Objective. |
+| `name` | `String` | Yes | The name of the Objective. |
+| `position` | `Integer` | Yes | A number representing the position of the Objective in relation to every other Objective within the Workspace. |
+| `started` | `Boolean` | Yes | A true/false boolean indicating if the Objective has been started. |
+| `started_at` | `String` | Yes | The time/date the Objective was started. |
+| `started_at_override` | `String` | Yes | A manual override for the time/date the Objective was started. |
+| `state` | `String` | Yes | The workflow state that the Objective is in. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Objective. |
+| `updated_at` | `String` | Yes | The time/date the Objective was updated. |
 
 ### Field Usage by Operation
 
@@ -2602,26 +2602,26 @@ project = client.Project
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbreviation` | `String` | Yes |  |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `color` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `days_to_thermometer` | `Integer` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `follower_ids` | `Array` | Yes |  |
-| `global_id` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `iteration_length` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `show_thermometer` | `Boolean` | Yes |  |
-| `start_time` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `team_id` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `workflow_id` | `Integer` | Yes |  |
+| `abbreviation` | `String` | Yes | The Project abbreviation used in Story summaries. |
+| `app_url` | `String` | Yes | The Shortcut application url for the Project. |
+| `archived` | `Boolean` | Yes | True/false boolean indicating whether the Project is in an Archived state. |
+| `color` | `String` | Yes | The color associated with the Project in the Shortcut member interface. |
+| `created_at` | `String` | Yes | The time/date that the Project was created. |
+| `days_to_thermometer` | `Integer` | Yes | The number of days before the thermometer appears in the Story summary. |
+| `description` | `String` | Yes | The description of the Project. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `follower_ids` | `Array` | Yes | An array of UUIDs for any Members listed as Followers. |
+| `global_id` | `String` | Yes | The Global ID of the Project. |
+| `id` | `Integer` | Yes | The unique ID of the Project. |
+| `iteration_length` | `Integer` | Yes | The number of weeks per iteration in this Project. |
+| `name` | `String` | Yes | The name of the Project |
+| `show_thermometer` | `Boolean` | Yes | Configuration to enable or disable thermometers in the Story summary. |
+| `start_time` | `String` | Yes | The date at which the Project was started. |
+| `stats` | `Hash` | Yes | A group of calculated values for this Project. |
+| `team_id` | `Integer` | Yes | The ID of the team the project belongs to. |
+| `updated_at` | `String` | Yes | The time/date that the Project was last updated. |
+| `workflow_id` | `Integer` | Yes | The ID of the workflow the project belongs to. |
 
 ### Field Usage by Operation
 
@@ -2754,15 +2754,15 @@ repository = client.Repository
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `full_name` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `type` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `url` | `String` | Yes |  |
+| `created_at` | `String` | Yes | The time/date the Repository was created. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | The VCS unique identifier for the Repository. |
+| `full_name` | `String` | Yes | The full name of the VCS repository. |
+| `id` | `Integer` | Yes | The ID associated to the VCS repository in Shortcut. |
+| `name` | `String` | Yes | The shorthand name of the VCS repository. |
+| `type` | `String` | Yes | The VCS provider for the Repository. |
+| `updated_at` | `String` | Yes | The time/date the Repository was updated. |
+| `url` | `String` | Yes | The URL of the Repository. |
 
 ### Operations
 
@@ -2822,10 +2822,10 @@ search = client.Search
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `epics` | `Hash` | Yes |  |
-| `iterations` | `Hash` | Yes |  |
-| `milestones` | `Hash` | Yes |  |
-| `stories` | `Hash` | Yes |  |
+| `epics` | `Hash` | Yes | The results of the Epic search query. |
+| `iterations` | `Hash` | Yes | The results of the Iteration search query. |
+| `milestones` | `Hash` | Yes | The results of the Objective search query. |
+| `stories` | `Hash` | Yes | The results of the Story search query. |
 
 ### Operations
 
@@ -2877,89 +2877,89 @@ story = client.Story
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `app_url` | `String` | Yes |  |
-| `archived` | `Boolean` | Yes |  |
-| `before_id` | `Integer` | No |  |
-| `blocked` | `Boolean` | Yes |  |
-| `blocker` | `Boolean` | Yes |  |
-| `branch_ids` | `Array` | No |  |
-| `branches` | `Array` | Yes |  |
-| `comment_ids` | `Array` | No |  |
-| `comments` | `Array` | Yes |  |
-| `commit_ids` | `Array` | No |  |
-| `commits` | `Array` | Yes |  |
-| `completed` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `completed_at_override` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `custom_fields` | `Array` | No |  |
-| `custom_fields_add` | `Array` | No |  |
-| `custom_fields_remove` | `Array` | No |  |
-| `cycle_time` | `Integer` | No |  |
-| `deadline` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `epic_id` | `Integer` | Yes |  |
-| `estimate` | `Integer` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `external_links` | `Array` | Yes |  |
-| `external_links_add` | `Array` | No |  |
-| `external_links_remove` | `Array` | No |  |
-| `file_ids` | `Array` | No |  |
-| `file_ids_add` | `Array` | No |  |
-| `file_ids_remove` | `Array` | No |  |
-| `files` | `Array` | Yes |  |
-| `follower_ids` | `Array` | Yes |  |
-| `follower_ids_add` | `Array` | No |  |
-| `follower_ids_remove` | `Array` | No |  |
-| `formatted_vcs_branch_name` | `String` | No |  |
+| `after_id` | `Integer` | No | The ID of the story we want to move this story after. |
+| `app_url` | `String` | Yes | The Shortcut application url for the Story. |
+| `archived` | `Boolean` | Yes | True if the story has been archived or not. |
+| `before_id` | `Integer` | No | The ID of the story we want to move this story before. |
+| `blocked` | `Boolean` | Yes | A true/false boolean indicating if the Story is currently blocked. |
+| `blocker` | `Boolean` | Yes | A true/false boolean indicating if the Story is currently a blocker of another story. |
+| `branch_ids` | `Array` | No | An array of IDs of Branches attached to the story. |
+| `branches` | `Array` | Yes | An array of Git branches attached to the story. |
+| `comment_ids` | `Array` | No | An array of IDs of Comments attached to the story. |
+| `comments` | `Array` | Yes | An array of comments attached to the story. |
+| `commit_ids` | `Array` | No | An array of IDs of Commits attached to the story. |
+| `commits` | `Array` | Yes | An array of commits attached to the story. |
+| `completed` | `Boolean` | Yes | A true/false boolean indicating if the Story has been completed. |
+| `completed_at` | `String` | Yes | The time/date the Story was completed. |
+| `completed_at_override` | `String` | Yes | A manual override for the time/date the Story was completed. |
+| `created_at` | `String` | Yes | The time/date the Story was created. |
+| `custom_fields` | `Array` | No | An array of CustomField value assertions for the story. |
+| `custom_fields_add` | `Array` | No | A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField. |
+| `custom_fields_remove` | `Array` | No | A map specifying a CustomField ID. |
+| `cycle_time` | `Integer` | No | The cycle time (in seconds) of this story when complete. |
+| `deadline` | `String` | Yes | The due date of the story. |
+| `description` | `String` | Yes | The description of the story. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `epic_id` | `Integer` | Yes | The ID of the epic the story belongs to. |
+| `estimate` | `Integer` | Yes | The numeric point estimate of the story. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `external_links` | `Array` | Yes | An array of external links (strings) associated with a Story |
+| `external_links_add` | `Array` | No | An array of External Links associated with this story. |
+| `external_links_remove` | `Array` | No | An array of External Links associated with this story. |
+| `file_ids` | `Array` | No | An array of IDs of files attached to the story. |
+| `file_ids_add` | `Array` | No | An array of IDs of files attached to the story in addition to files from the template. |
+| `file_ids_remove` | `Array` | No | An array of IDs of files removed from files from the template. |
+| `files` | `Array` | Yes | An array of files attached to the story. |
+| `follower_ids` | `Array` | Yes | An array of UUIDs for any Members listed as Followers. |
+| `follower_ids_add` | `Array` | No | The UUIDs of the new followers to be added in addition to followers from the template. |
+| `follower_ids_remove` | `Array` | No | The UUIDs of the new followers to be removed from followers from the template. |
+| `formatted_vcs_branch_name` | `String` | No | The formatted branch name for this story. |
 | `global_id` | `String` | Yes |  |
-| `group_id` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `iteration_id` | `Integer` | Yes |  |
-| `label_ids` | `Array` | Yes |  |
-| `labels` | `Array` | Yes |  |
-| `labels_add` | `Array` | No |  |
-| `labels_remove` | `Array` | No |  |
-| `lead_time` | `Integer` | No |  |
-| `linked_file_ids` | `Array` | No |  |
-| `linked_file_ids_add` | `Array` | No |  |
-| `linked_file_ids_remove` | `Array` | No |  |
-| `linked_files` | `Array` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `move_to` | `String` | No |  |
-| `moved_at` | `String` | Yes |  |
-| `name` | `String` | Yes |  |
-| `num_tasks_completed` | `Integer` | No |  |
-| `owner_ids` | `Array` | Yes |  |
-| `owner_ids_add` | `Array` | No |  |
-| `owner_ids_remove` | `Array` | No |  |
-| `parent_story_id` | `Integer` | No |  |
-| `position` | `Integer` | Yes |  |
-| `previous_iteration_ids` | `Array` | Yes |  |
-| `project_id` | `Integer` | Yes |  |
-| `pull_request_ids` | `Array` | No |  |
-| `pull_requests` | `Array` | Yes |  |
-| `requested_by_id` | `String` | Yes |  |
-| `source_task_id` | `Integer` | No |  |
-| `started` | `Boolean` | Yes |  |
-| `started_at` | `String` | Yes |  |
-| `started_at_override` | `String` | Yes |  |
-| `stats` | `Hash` | Yes |  |
-| `story_links` | `Array` | Yes |  |
-| `story_template_id` | `String` | Yes |  |
-| `story_type` | `String` | Yes |  |
+| `group_id` | `String` | Yes | The ID of the group associated with the story. |
+| `group_mention_ids` | `Array` | Yes | An array of Group IDs that have been mentioned in the Story description. |
+| `id` | `Integer` | Yes | The unique ID of the Story. |
+| `iteration_id` | `Integer` | Yes | The ID of the iteration the story belongs to. |
+| `label_ids` | `Array` | Yes | An array of label ids attached to the story. |
+| `labels` | `Array` | Yes | An array of labels attached to the story. |
+| `labels_add` | `Array` | No | An array of labels attached to the story in addition to the labels provided by the template. |
+| `labels_remove` | `Array` | No | An array of labels to remove from the labels provided by the template. |
+| `lead_time` | `Integer` | No | The lead time (in seconds) of this story when complete. |
+| `linked_file_ids` | `Array` | No | An array of IDs of linked files attached to the story. |
+| `linked_file_ids_add` | `Array` | No | An array of IDs of linked files attached to the story in addition to files from the template. |
+| `linked_file_ids_remove` | `Array` | No | An array of IDs of linked files removed from files from the template. |
+| `linked_files` | `Array` | Yes | An array of linked files attached to the story. |
+| `member_mention_ids` | `Array` | Yes | An array of Member IDs that have been mentioned in the Story description. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `move_to` | `String` | No | One of "first" or "last". |
+| `moved_at` | `String` | Yes | The time/date the Story was last changed workflow-state. |
+| `name` | `String` | Yes | The name of the story. |
+| `num_tasks_completed` | `Integer` | No | The number of tasks on the story which are complete. |
+| `owner_ids` | `Array` | Yes | An array of UUIDs of the owners of this story. |
+| `owner_ids_add` | `Array` | No | The UUIDs of the new owners to be added in addition to owners from the template. |
+| `owner_ids_remove` | `Array` | No | The UUIDs of the new owners to be removed from owners from the template. |
+| `parent_story_id` | `Integer` | No | The id of the parent story to associate with this story. |
+| `position` | `Integer` | Yes | A number representing the position of the story in relation to every other story in the current project. |
+| `previous_iteration_ids` | `Array` | Yes | The IDs of the iteration the story belongs to. |
+| `project_id` | `Integer` | Yes | The ID of the project the story belongs to. |
+| `pull_request_ids` | `Array` | No | An array of IDs of Pull/Merge Requests attached to the story. |
+| `pull_requests` | `Array` | Yes | An array of Pull/Merge Requests attached to the story. |
+| `requested_by_id` | `String` | Yes | The ID of the Member that requested the story. |
+| `source_task_id` | `Integer` | No | Given this story was converted from a task in another story, this is the original task ID that was converted to this story. |
+| `started` | `Boolean` | Yes | A true/false boolean indicating if the Story has been started. |
+| `started_at` | `String` | Yes | The time/date the Story was started. |
+| `started_at_override` | `String` | Yes | A manual override for the time/date the Story was started. |
+| `stats` | `Hash` | Yes | The stats object for Stories |
+| `story_links` | `Array` | Yes | An array of story links attached to the Story. |
+| `story_template_id` | `String` | Yes | The ID of the story template used to create this story, or null if not created using a template. |
+| `story_type` | `String` | Yes | The type of story (feature, bug, chore). |
 | `sub_task_story_ids` | `Array` | No |  |
-| `sub_tasks` | `Array` | No |  |
-| `synced_item` | `Hash` | Yes |  |
-| `task_ids` | `Array` | No |  |
-| `tasks` | `Array` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `workflow_id` | `Integer` | Yes |  |
-| `workflow_state_id` | `Integer` | Yes |  |
+| `sub_tasks` | `Array` | No | A list of either params to create a new sub-task or link an existing story as a sub-task |
+| `synced_item` | `Hash` | Yes | The synced item for the story. |
+| `task_ids` | `Array` | No | An array of IDs of Tasks attached to the story. |
+| `tasks` | `Array` | Yes | An array of tasks connected to the story. |
+| `updated_at` | `String` | Yes | The time/date the Story was updated. |
+| `workflow_id` | `Integer` | Yes | The ID of the workflow the story belongs to. |
+| `workflow_state_id` | `Integer` | Yes | The ID of the workflow state the story is currently in. |
 
 ### Field Usage by Operation
 
@@ -3185,25 +3185,25 @@ story_comment = client.StoryComment
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `author_id` | `String` | Yes |  |
-| `blocker` | `Boolean` | No |  |
-| `created_at` | `String` | Yes |  |
-| `deleted` | `Boolean` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `linked_to_slack` | `Boolean` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `parent_id` | `Integer` | No |  |
-| `position` | `Integer` | Yes |  |
-| `reactions` | `Array` | Yes |  |
-| `story_id` | `Integer` | Yes |  |
-| `text` | `String` | Yes |  |
-| `unblocks_parent` | `Boolean` | No |  |
-| `updated_at` | `String` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Comment. |
+| `author_id` | `String` | Yes | The unique ID of the Member who is the Comment's author. |
+| `blocker` | `Boolean` | No | Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. |
+| `created_at` | `String` | Yes | The time/date when the Comment was created. |
+| `deleted` | `Boolean` | Yes | True/false boolean indicating whether the Comment has been deleted. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `group_mention_ids` | `Array` | Yes | The unique IDs of the Group who are mentioned in the Comment. |
+| `id` | `Integer` | Yes | The unique ID of the Comment. |
+| `linked_to_slack` | `Boolean` | Yes | Whether the Comment is currently the root of a thread that is linked to Slack. |
+| `member_mention_ids` | `Array` | Yes | The unique IDs of the Member who are mentioned in the Comment. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `parent_id` | `Integer` | No | The ID of the parent Comment this Comment is threaded under. |
+| `position` | `Integer` | Yes | The Comments numerical position in the list from oldest to newest. |
+| `reactions` | `Array` | Yes | A set of Reactions to this Comment. |
+| `story_id` | `Integer` | Yes | The ID of the Story on which the Comment appears. |
+| `text` | `String` | Yes | The text of the Comment. |
+| `unblocks_parent` | `Boolean` | No | Marks the comment as an unblocker to its blocker parent. |
+| `updated_at` | `String` | Yes | The time/date when the Comment was updated. |
 
 ### Field Usage by Operation
 
@@ -3237,6 +3237,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.StoryComment.create({
+  "id" => 1, # Integer
   "app_url" => "example_app_url", # String
   "author_id" => "example_author_id", # String
   "created_at" => "example_created_at", # String
@@ -3249,6 +3250,7 @@ result = client.StoryComment.create({
   "mention_ids" => [], # Array
   "position" => 1, # Integer
   "reactions" => [], # Array
+  "story_id" => 1, # Integer
   "text" => "example_text", # String
   "updated_at" => "example_updated_at", # String
 })
@@ -3322,14 +3324,14 @@ story_link = client.StoryLink
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `object_id` | `Integer` | Yes |  |
-| `subject_id` | `Integer` | Yes |  |
-| `subject_workflow_state_id` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `verb` | `String` | Yes |  |
+| `created_at` | `String` | Yes | The time/date when the Story Link was created. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `id` | `Integer` | Yes | The unique identifier of the Story Link. |
+| `object_id` | `Integer` | Yes | The ID of the object Story. |
+| `subject_id` | `Integer` | Yes | The ID of the subject Story. |
+| `subject_workflow_state_id` | `Integer` | Yes | The workflow state of the "subject" story. |
+| `updated_at` | `String` | Yes | The time/date when the Story Link was last updated. |
+| `verb` | `String` | Yes | How the subject Story acts on the object Story. |
 
 ### Field Usage by Operation
 
@@ -3430,7 +3432,7 @@ story_reaction = client.StoryReaction
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `emoji` | `String` | Yes |  |
+| `emoji` | `String` | Yes | The emoji short-code to add / remove. |
 
 ### Operations
 
@@ -3494,49 +3496,49 @@ story_slim = client.StorySlim
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `archived` | `Boolean` | No |  |
-| `before_id` | `Integer` | No |  |
-| `completed_at_end` | `String` | No |  |
-| `completed_at_start` | `String` | No |  |
-| `created_at_end` | `String` | No |  |
-| `created_at_start` | `String` | No |  |
-| `custom_fields_add` | `Array` | No |  |
-| `custom_fields_remove` | `Array` | No |  |
-| `deadline` | `String` | No |  |
-| `deadline_end` | `String` | No |  |
-| `deadline_start` | `String` | No |  |
-| `epic_id` | `Integer` | No |  |
-| `epic_ids` | `Array` | No |  |
-| `estimate` | `Integer` | No |  |
-| `external_id` | `String` | No |  |
-| `external_links` | `Array` | No |  |
-| `follower_ids_add` | `Array` | No |  |
-| `follower_ids_remove` | `Array` | No |  |
-| `group_id` | `String` | No |  |
-| `group_ids` | `Array` | No |  |
-| `includes_description` | `Boolean` | No |  |
-| `iteration_id` | `Integer` | No |  |
-| `iteration_ids` | `Array` | No |  |
-| `label_ids` | `Array` | No |  |
-| `label_name` | `String` | No |  |
-| `labels_add` | `Array` | No |  |
-| `labels_remove` | `Array` | No |  |
-| `move_to` | `String` | No |  |
-| `owner_id` | `String` | No |  |
-| `owner_ids` | `Array` | No |  |
-| `owner_ids_add` | `Array` | No |  |
-| `owner_ids_remove` | `Array` | No |  |
-| `project_id` | `Integer` | No |  |
-| `project_ids` | `Array` | No |  |
-| `requested_by_id` | `String` | No |  |
-| `stories` | `Array` | Yes |  |
-| `story_ids` | `Array` | Yes |  |
-| `story_type` | `String` | No |  |
-| `updated_at_end` | `String` | No |  |
-| `updated_at_start` | `String` | No |  |
-| `workflow_state_id` | `Integer` | No |  |
-| `workflow_state_types` | `Array` | No |  |
+| `after_id` | `Integer` | No | The ID of the story that the stories are to be moved below. |
+| `archived` | `Boolean` | No | A true/false boolean indicating whether the Story is in archived state. |
+| `before_id` | `Integer` | No | The ID of the story that the stories are to be moved before. |
+| `completed_at_end` | `String` | No | Stories should have been completed on or before this date. |
+| `completed_at_start` | `String` | No | Stories should have been completed on or after this date. |
+| `created_at_end` | `String` | No | Stories should have been created on or before this date. |
+| `created_at_start` | `String` | No | Stories should have been created on or after this date. |
+| `custom_fields_add` | `Array` | No | A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField. |
+| `custom_fields_remove` | `Array` | No | A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField. |
+| `deadline` | `String` | No | The due date of the story. |
+| `deadline_end` | `String` | No | Stories should have a deadline on or before this date. |
+| `deadline_start` | `String` | No | Stories should have a deadline on or after this date. |
+| `epic_id` | `Integer` | No | The Epic IDs that may be associated with the Stories. |
+| `epic_ids` | `Array` | No | The Epic IDs that may be associated with the Stories. |
+| `estimate` | `Integer` | No | The number of estimate points associate with the Stories. |
+| `external_id` | `String` | No | An ID or URL that references an external resource. |
+| `external_links` | `Array` | No | An array of External Links associated with this story. |
+| `follower_ids_add` | `Array` | No | The UUIDs of the new followers to be added. |
+| `follower_ids_remove` | `Array` | No | The UUIDs of the followers to be removed. |
+| `group_id` | `String` | No | The Group ID that is associated with the Stories |
+| `group_ids` | `Array` | No | The Group IDs that are associated with the Stories |
+| `includes_description` | `Boolean` | No | Whether to include the story description in the response. |
+| `iteration_id` | `Integer` | No | The Iteration ID that may be associated with the Stories. |
+| `iteration_ids` | `Array` | No | The Iteration IDs that may be associated with the Stories. |
+| `label_ids` | `Array` | No | The Label IDs that may be associated with the Stories. |
+| `label_name` | `String` | No | The name of any associated Labels. |
+| `labels_add` | `Array` | No | An array of labels to be added. |
+| `labels_remove` | `Array` | No | An array of labels to be removed. |
+| `move_to` | `String` | No | One of "first" or "last". |
+| `owner_id` | `String` | No | An array of UUIDs for any Users who may be Owners of the Stories. |
+| `owner_ids` | `Array` | No | An array of UUIDs for any Users who may be Owners of the Stories. |
+| `owner_ids_add` | `Array` | No | The UUIDs of the new owners to be added. |
+| `owner_ids_remove` | `Array` | No | The UUIDs of the owners to be removed. |
+| `project_id` | `Integer` | No | The IDs for the Projects the Stories may be assigned to. |
+| `project_ids` | `Array` | No | The IDs for the Projects the Stories may be assigned to. |
+| `requested_by_id` | `String` | No | The UUID of any Users who may have requested the Stories. |
+| `stories` | `Array` | Yes | An array of stories to be created. |
+| `story_ids` | `Array` | Yes | The Ids of the Stories you wish to update. |
+| `story_type` | `String` | No | The type of Stories that you want returned. |
+| `updated_at_end` | `String` | No | Stories should have been updated on or before this date. |
+| `updated_at_start` | `String` | No | Stories should have been updated on or after this date. |
+| `workflow_state_id` | `Integer` | No | The unique IDs of the specific Workflow States that the Stories should be in. |
+| `workflow_state_types` | `Array` | No | The type of Workflow State the Stories may be in. |
 
 ### Operations
 
@@ -3601,23 +3603,23 @@ task = client.Task
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `after_id` | `Integer` | No |  |
-| `before_id` | `Integer` | No |  |
-| `complete` | `Boolean` | Yes |  |
-| `completed_at` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
+| `after_id` | `Integer` | No | Move task after this task ID. |
+| `before_id` | `Integer` | No | Move task before this task ID. |
+| `complete` | `Boolean` | Yes | True/false boolean indicating whether the Task has been completed. |
+| `completed_at` | `String` | Yes | The time/date the Task was completed. |
+| `created_at` | `String` | Yes | The time/date the Task was created. |
+| `description` | `String` | Yes | Full text of the Task. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
 | `global_id` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `owner_ids` | `Array` | Yes |  |
-| `position` | `Integer` | Yes |  |
-| `story_id` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `group_mention_ids` | `Array` | Yes | An array of UUIDs of Groups mentioned in this Task. |
+| `id` | `Integer` | Yes | The unique ID of the Task. |
+| `member_mention_ids` | `Array` | Yes | An array of UUIDs of Members mentioned in this Task. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `owner_ids` | `Array` | Yes | An array of UUIDs of the Owners of this Task. |
+| `position` | `Integer` | Yes | The number corresponding to the Task's position within a list of Tasks on a Story. |
+| `story_id` | `Integer` | Yes | The unique identifier of the parent Story. |
+| `updated_at` | `String` | Yes | The time/date the Task was updated. |
 
 ### Field Usage by Operation
 
@@ -3735,19 +3737,19 @@ threaded_comment = client.ThreadedComment
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `app_url` | `String` | Yes |  |
-| `author_id` | `String` | Yes |  |
-| `comments` | `Array` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `deleted` | `Boolean` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `text` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `app_url` | `String` | Yes | The Shortcut application url for the Comment. |
+| `author_id` | `String` | Yes | The unique ID of the Member that authored the Comment. |
+| `comments` | `Array` | Yes | A nested array of threaded comments. |
+| `created_at` | `String` | Yes | The time/date the Comment was created. |
+| `deleted` | `Boolean` | Yes | True/false boolean indicating whether the Comment is deleted. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `group_mention_ids` | `Array` | Yes | An array of Group IDs that have been mentioned in this Comment. |
+| `id` | `Integer` | Yes | The unique ID of the Comment. |
+| `member_mention_ids` | `Array` | Yes | An array of Member IDs that have been mentioned in this Comment. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `text` | `String` | Yes | The text of the Comment. |
+| `updated_at` | `String` | Yes | The time/date the Comment was updated. |
 
 ### Field Usage by Operation
 
@@ -3867,23 +3869,23 @@ uploaded_file = client.UploadedFile
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content_type` | `String` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `external_id` | `String` | Yes |  |
-| `filename` | `String` | Yes |  |
-| `group_mention_ids` | `Array` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `member_mention_ids` | `Array` | Yes |  |
-| `mention_ids` | `Array` | Yes |  |
-| `name` | `String` | Yes |  |
-| `size` | `Integer` | Yes |  |
-| `story_ids` | `Array` | Yes |  |
-| `thumbnail_url` | `String` | Yes |  |
-| `updated_at` | `String` | Yes |  |
-| `uploader_id` | `String` | Yes |  |
-| `url` | `String` | Yes |  |
+| `content_type` | `String` | Yes | Free form string corresponding to a text or image file. |
+| `created_at` | `String` | Yes | The time/date that the file was created. |
+| `description` | `String` | Yes | The description of the file. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `external_id` | `String` | Yes | This field can be set to another unique ID. |
+| `filename` | `String` | Yes | The name assigned to the file in Shortcut upon upload. |
+| `group_mention_ids` | `Array` | Yes | The unique IDs of the Groups who are mentioned in the file description. |
+| `id` | `Integer` | Yes | The unique ID for the file. |
+| `member_mention_ids` | `Array` | Yes | The unique IDs of the Members who are mentioned in the file description. |
+| `mention_ids` | `Array` | Yes | `Deprecated:` use `member_mention_ids`. |
+| `name` | `String` | Yes | The optional User-specified name of the file. |
+| `size` | `Integer` | Yes | The size of the file. |
+| `story_ids` | `Array` | Yes | The unique IDs of the Stories associated with this file. |
+| `thumbnail_url` | `String` | Yes | The url where the thumbnail of the file can be found in Shortcut. |
+| `updated_at` | `String` | Yes | The time/date that the file was updated. |
+| `uploader_id` | `String` | Yes | The unique ID of the Member who uploaded the file. |
+| `url` | `String` | Yes | The URL for the file. |
 
 ### Field Usage by Operation
 
@@ -4081,17 +4083,17 @@ workflow = client.Workflow
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `auto_assign_owner` | `Boolean` | Yes |  |
-| `created_at` | `String` | Yes |  |
-| `default_state_id` | `Integer` | Yes |  |
-| `description` | `String` | Yes |  |
-| `entity_type` | `String` | Yes |  |
-| `id` | `Integer` | Yes |  |
-| `name` | `String` | Yes |  |
-| `project_ids` | `Array` | Yes |  |
-| `states` | `Array` | Yes |  |
-| `team_id` | `Integer` | Yes |  |
-| `updated_at` | `String` | Yes |  |
+| `auto_assign_owner` | `Boolean` | Yes | Indicates if an owner is automatically assigned when an unowned story is started. |
+| `created_at` | `String` | Yes | The date the Workflow was created. |
+| `default_state_id` | `Integer` | Yes | The unique ID of the default state that new Stories are entered into. |
+| `description` | `String` | Yes | A description of the workflow. |
+| `entity_type` | `String` | Yes | A string description of this resource. |
+| `id` | `Integer` | Yes | The unique ID of the Workflow. |
+| `name` | `String` | Yes | The name of the workflow. |
+| `project_ids` | `Array` | Yes | An array of IDs of projects within the Workflow. |
+| `states` | `Array` | Yes | A map of the states in this Workflow. |
+| `team_id` | `Integer` | Yes | The ID of the team the workflow belongs to. |
+| `updated_at` | `String` | Yes | The date the Workflow was updated. |
 
 ### Operations
 

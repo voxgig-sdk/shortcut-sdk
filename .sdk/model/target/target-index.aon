@@ -1,0 +1,10 @@
+# SDK Targets.
+
+
+@"go.aon"
+@"js.aon"
+@"lua.aon"
+@"php.aon"
+@"py.aon"
+@"rb.aon"
+@"ts.aon"

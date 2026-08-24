@@ -42,7 +42,7 @@ describe("TaskEntity", function()
 
     local task_ref01_data_result, err = task_ref01_ent:create(task_ref01_data, nil)
     assert.is_nil(err)
-    task_ref01_data = helpers.to_map(task_ref01_data_result)
+    task_ref01_data = helpers.to_map(type(task_ref01_data_result) == 'table' and task_ref01_data_result.data_get and task_ref01_data_result:data_get() or task_ref01_data_result)
     assert.is_not_nil(task_ref01_data)
     assert.is_not_nil(task_ref01_data["id"])
 
@@ -58,7 +58,7 @@ describe("TaskEntity", function()
 
     local task_ref01_resdata_up0_result, err = task_ref01_ent:update(task_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local task_ref01_resdata_up0 = helpers.to_map(task_ref01_resdata_up0_result)
+    local task_ref01_resdata_up0 = helpers.to_map(type(task_ref01_resdata_up0_result) == 'table' and task_ref01_resdata_up0_result.data_get and task_ref01_resdata_up0_result:data_get() or task_ref01_resdata_up0_result)
     assert.is_not_nil(task_ref01_resdata_up0)
     assert.are.equal(task_ref01_resdata_up0["id"], task_ref01_data_up0_up["id"])
     assert.are.equal(task_ref01_resdata_up0[task_ref01_markdef_up0_name], task_ref01_markdef_up0_value)
@@ -69,7 +69,7 @@ describe("TaskEntity", function()
     }
     local task_ref01_data_dt0_loaded, err = task_ref01_ent:load(task_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local task_ref01_data_dt0_load_result = helpers.to_map(task_ref01_data_dt0_loaded)
+    local task_ref01_data_dt0_load_result = helpers.to_map(type(task_ref01_data_dt0_loaded) == 'table' and task_ref01_data_dt0_loaded.data_get and task_ref01_data_dt0_loaded:data_get() or task_ref01_data_dt0_loaded)
     assert.is_not_nil(task_ref01_data_dt0_load_result)
     assert.are.equal(task_ref01_data_dt0_load_result["id"], task_ref01_data["id"])
 

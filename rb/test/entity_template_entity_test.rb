@@ -33,7 +33,7 @@ class EntityTemplateEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class EntityTemplateEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.entity_template"), "entity_template_ref01"))
 
     entity_template_ref01_data_result = entity_template_ref01_ent.create(entity_template_ref01_data, nil)
-    entity_template_ref01_data = Helpers.to_map(entity_template_ref01_data_result)
+    entity_template_ref01_data = Helpers.to_map(entity_template_ref01_data_result.respond_to?(:data_get) ? entity_template_ref01_data_result.data_get : entity_template_ref01_data_result)
     assert !entity_template_ref01_data.nil?
     assert !entity_template_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class EntityTemplateEntityTest < Minitest::Test
     entity_template_ref01_data_up0_up[entity_template_ref01_markdef_up0_name] = entity_template_ref01_markdef_up0_value
 
     entity_template_ref01_resdata_up0_result = entity_template_ref01_ent.update(entity_template_ref01_data_up0_up, nil)
-    entity_template_ref01_resdata_up0 = Helpers.to_map(entity_template_ref01_resdata_up0_result)
+    entity_template_ref01_resdata_up0 = Helpers.to_map(entity_template_ref01_resdata_up0_result.respond_to?(:data_get) ? entity_template_ref01_resdata_up0_result.data_get : entity_template_ref01_resdata_up0_result)
     assert !entity_template_ref01_resdata_up0.nil?
     assert_equal entity_template_ref01_resdata_up0["id"], entity_template_ref01_data_up0_up["id"]
     assert_equal entity_template_ref01_resdata_up0[entity_template_ref01_markdef_up0_name], entity_template_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class EntityTemplateEntityTest < Minitest::Test
       "id" => entity_template_ref01_data["id"],
     }
     entity_template_ref01_data_dt0_loaded = entity_template_ref01_ent.load(entity_template_ref01_match_dt0, nil)
-    entity_template_ref01_data_dt0_load_result = Helpers.to_map(entity_template_ref01_data_dt0_loaded)
+    entity_template_ref01_data_dt0_load_result = Helpers.to_map(entity_template_ref01_data_dt0_loaded.respond_to?(:data_get) ? entity_template_ref01_data_dt0_loaded.data_get : entity_template_ref01_data_dt0_loaded)
     assert !entity_template_ref01_data_dt0_load_result.nil?
     assert_equal entity_template_ref01_data_dt0_load_result["id"], entity_template_ref01_data["id"]
 

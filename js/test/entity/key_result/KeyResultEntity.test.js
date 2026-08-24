@@ -49,7 +49,7 @@ describe('KeyResultEntity', async () => {
     const key_result_ref01_markdef_up0 = { name: 'name', value: 'Mark01-key_result_ref01_' + setup.now }
     key_result_ref01_data_up0 [key_result_ref01_markdef_up0.name] = key_result_ref01_markdef_up0.value
 
-    const key_result_ref01_resdata_up0 = await key_result_ref01_ent.update(key_result_ref01_data_up0)
+    const key_result_ref01_resdata_up0 = (await key_result_ref01_ent.update(key_result_ref01_data_up0)).data()
     assert(key_result_ref01_resdata_up0.id === key_result_ref01_data_up0.id)
 
     assert(key_result_ref01_resdata_up0[key_result_ref01_markdef_up0.name] === key_result_ref01_markdef_up0.value)
@@ -58,7 +58,7 @@ describe('KeyResultEntity', async () => {
     // LOAD
     const key_result_ref01_match_dt0 = {}
     key_result_ref01_match_dt0.id = key_result_ref01_data.id
-    const key_result_ref01_data_dt0 = await key_result_ref01_ent.load(key_result_ref01_match_dt0)
+    const key_result_ref01_data_dt0 = (await key_result_ref01_ent.load(key_result_ref01_match_dt0)).data()
     assert(key_result_ref01_data_dt0.id === key_result_ref01_data.id)
 
 

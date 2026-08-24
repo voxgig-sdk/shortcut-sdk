@@ -33,7 +33,7 @@ class WorkflowEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -87,7 +87,7 @@ class WorkflowEntityTest < Minitest::Test
       "id" => workflow_ref01_data["id"],
     }
     workflow_ref01_data_dt0_loaded = workflow_ref01_ent.load(workflow_ref01_match_dt0, nil)
-    workflow_ref01_data_dt0_load_result = Helpers.to_map(workflow_ref01_data_dt0_loaded)
+    workflow_ref01_data_dt0_load_result = Helpers.to_map(workflow_ref01_data_dt0_loaded.respond_to?(:data_get) ? workflow_ref01_data_dt0_loaded.data_get : workflow_ref01_data_dt0_loaded)
     assert !workflow_ref01_data_dt0_load_result.nil?
     assert_equal workflow_ref01_data_dt0_load_result["id"], workflow_ref01_data["id"]
 

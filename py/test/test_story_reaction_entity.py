@@ -46,7 +46,7 @@ class TestStoryReactionEntity:
         story_reaction_ref01_data["comment_id"] = setup["idmap"]["comment01"]
         story_reaction_ref01_data["story_id"] = setup["idmap"]["story01"]
 
-        story_reaction_ref01_data = helpers.to_map(story_reaction_ref01_ent.create(story_reaction_ref01_data, None))
+        story_reaction_ref01_data = helpers.to_map(runner.entity_data(story_reaction_ref01_ent.create(story_reaction_ref01_data, None)))
         assert story_reaction_ref01_data is not None
 
 

@@ -33,7 +33,7 @@ class MemberEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -87,7 +87,7 @@ class MemberEntityTest < Minitest::Test
       "id" => member_ref01_data["id"],
     }
     member_ref01_data_dt0_loaded = member_ref01_ent.load(member_ref01_match_dt0, nil)
-    member_ref01_data_dt0_load_result = Helpers.to_map(member_ref01_data_dt0_loaded)
+    member_ref01_data_dt0_load_result = Helpers.to_map(member_ref01_data_dt0_loaded.respond_to?(:data_get) ? member_ref01_data_dt0_loaded.data_get : member_ref01_data_dt0_loaded)
     assert !member_ref01_data_dt0_load_result.nil?
     assert_equal member_ref01_data_dt0_load_result["id"], member_ref01_data["id"]
 

@@ -63,7 +63,7 @@ describe('HealthEntity', async () => {
     let health_ref01_data = setup.data.new.health['health_ref01']
     health_ref01_data['epic_id'] = setup.idmap['epic01']
 
-    health_ref01_data = await health_ref01_ent.create(health_ref01_data)
+    health_ref01_data = (await health_ref01_ent.create(health_ref01_data)).data()
     assert(null != health_ref01_data.id)
 
 
@@ -71,7 +71,7 @@ describe('HealthEntity', async () => {
     const health_ref01_match: any = {}
     health_ref01_match['epic_id'] = setup.idmap['epic01']
 
-    const health_ref01_list = await health_ref01_ent.list(health_ref01_match)
+    const health_ref01_list = (await health_ref01_ent.list(health_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(health_ref01_list, { id: health_ref01_data.id })))
 
@@ -83,7 +83,7 @@ describe('HealthEntity', async () => {
     const health_ref01_markdef_up0 = { name: 'author_id', value: 'Mark01-health_ref01_' + setup.now }
     ;(health_ref01_data_up0 as any)[health_ref01_markdef_up0.name] = health_ref01_markdef_up0.value
 
-    const health_ref01_resdata_up0 = await health_ref01_ent.update(health_ref01_data_up0)
+    const health_ref01_resdata_up0 = (await health_ref01_ent.update(health_ref01_data_up0)).data()
     assert(health_ref01_resdata_up0.id === health_ref01_data_up0.id)
 
     assert((health_ref01_resdata_up0 as any)[health_ref01_markdef_up0.name] === health_ref01_markdef_up0.value)
@@ -92,7 +92,7 @@ describe('HealthEntity', async () => {
     // LOAD
     const health_ref01_match_dt0: any = {}
     health_ref01_match_dt0.id = health_ref01_data.id
-    const health_ref01_data_dt0 = await health_ref01_ent.load(health_ref01_match_dt0)
+    const health_ref01_data_dt0 = (await health_ref01_ent.load(health_ref01_match_dt0)).data()
     assert(health_ref01_data_dt0.id === health_ref01_data.id)
 
 

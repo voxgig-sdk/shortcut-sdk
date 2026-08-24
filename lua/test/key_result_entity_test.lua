@@ -54,7 +54,7 @@ describe("KeyResultEntity", function()
 
     local key_result_ref01_resdata_up0_result, err = key_result_ref01_ent:update(key_result_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local key_result_ref01_resdata_up0 = helpers.to_map(key_result_ref01_resdata_up0_result)
+    local key_result_ref01_resdata_up0 = helpers.to_map(type(key_result_ref01_resdata_up0_result) == 'table' and key_result_ref01_resdata_up0_result.data_get and key_result_ref01_resdata_up0_result:data_get() or key_result_ref01_resdata_up0_result)
     assert.is_not_nil(key_result_ref01_resdata_up0)
     assert.are.equal(key_result_ref01_resdata_up0["id"], key_result_ref01_data_up0_up["id"])
     assert.are.equal(key_result_ref01_resdata_up0[key_result_ref01_markdef_up0_name], key_result_ref01_markdef_up0_value)
@@ -65,7 +65,7 @@ describe("KeyResultEntity", function()
     }
     local key_result_ref01_data_dt0_loaded, err = key_result_ref01_ent:load(key_result_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local key_result_ref01_data_dt0_load_result = helpers.to_map(key_result_ref01_data_dt0_loaded)
+    local key_result_ref01_data_dt0_load_result = helpers.to_map(type(key_result_ref01_data_dt0_loaded) == 'table' and key_result_ref01_data_dt0_loaded.data_get and key_result_ref01_data_dt0_loaded:data_get() or key_result_ref01_data_dt0_loaded)
     assert.is_not_nil(key_result_ref01_data_dt0_load_result)
     assert.are.equal(key_result_ref01_data_dt0_load_result["id"], key_result_ref01_data["id"])
 

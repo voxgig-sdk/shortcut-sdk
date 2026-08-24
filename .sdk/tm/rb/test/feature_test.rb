@@ -15,7 +15,7 @@ require_relative "../Shortcut_sdk"
 module ShortcutFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = ShortcutConfig.make_config["feature"]
+    f = ShortcutConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

@@ -40,7 +40,7 @@ class EpicEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -86,7 +86,7 @@ class EpicEntityTest extends TestCase
         $epic_ref01_data["objectif_id"] = $setup["idmap"]["objectif01"];
 
         $epic_ref01_data_result = $epic_ref01_ent->create($epic_ref01_data, null);
-        $epic_ref01_data = Helpers::to_map($epic_ref01_data_result);
+        $epic_ref01_data = Helpers::to_map(is_object($epic_ref01_data_result) && method_exists($epic_ref01_data_result, 'data_get') ? $epic_ref01_data_result->data_get() : $epic_ref01_data_result);
         $this->assertNotNull($epic_ref01_data);
         $this->assertNotNull($epic_ref01_data["id"]);
 
@@ -113,7 +113,7 @@ class EpicEntityTest extends TestCase
         $epic_ref01_data_up0_up[$epic_ref01_markdef_up0_name] = $epic_ref01_markdef_up0_value;
 
         $epic_ref01_resdata_up0_result = $epic_ref01_ent->update($epic_ref01_data_up0_up, null);
-        $epic_ref01_resdata_up0 = Helpers::to_map($epic_ref01_resdata_up0_result);
+        $epic_ref01_resdata_up0 = Helpers::to_map(is_object($epic_ref01_resdata_up0_result) && method_exists($epic_ref01_resdata_up0_result, 'data_get') ? $epic_ref01_resdata_up0_result->data_get() : $epic_ref01_resdata_up0_result);
         $this->assertNotNull($epic_ref01_resdata_up0);
         $this->assertEquals($epic_ref01_resdata_up0["id"], $epic_ref01_data_up0_up["id"]);
         $this->assertEquals($epic_ref01_resdata_up0[$epic_ref01_markdef_up0_name], $epic_ref01_markdef_up0_value);
@@ -123,7 +123,7 @@ class EpicEntityTest extends TestCase
             "id" => $epic_ref01_data["id"],
         ];
         $epic_ref01_data_dt0_loaded = $epic_ref01_ent->load($epic_ref01_match_dt0, null);
-        $epic_ref01_data_dt0_load_result = Helpers::to_map($epic_ref01_data_dt0_loaded);
+        $epic_ref01_data_dt0_load_result = Helpers::to_map(is_object($epic_ref01_data_dt0_loaded) && method_exists($epic_ref01_data_dt0_loaded, 'data_get') ? $epic_ref01_data_dt0_loaded->data_get() : $epic_ref01_data_dt0_loaded);
         $this->assertNotNull($epic_ref01_data_dt0_load_result);
         $this->assertEquals($epic_ref01_data_dt0_load_result["id"], $epic_ref01_data["id"]);
 

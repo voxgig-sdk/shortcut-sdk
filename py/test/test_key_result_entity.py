@@ -56,7 +56,7 @@ class TestKeyResultEntity:
         key_result_ref01_markdef_up0_value = "Mark01-key_result_ref01_" + str(setup["now"])
         key_result_ref01_data_up0_up[key_result_ref01_markdef_up0_name] = key_result_ref01_markdef_up0_value
 
-        key_result_ref01_resdata_up0 = helpers.to_map(key_result_ref01_ent.update(key_result_ref01_data_up0_up, None))
+        key_result_ref01_resdata_up0 = helpers.to_map(runner.entity_data(key_result_ref01_ent.update(key_result_ref01_data_up0_up, None)))
         assert key_result_ref01_resdata_up0 is not None
         assert key_result_ref01_resdata_up0["id"] == key_result_ref01_data_up0_up["id"]
         assert key_result_ref01_resdata_up0[key_result_ref01_markdef_up0_name] == key_result_ref01_markdef_up0_value
@@ -66,7 +66,7 @@ class TestKeyResultEntity:
             "id": key_result_ref01_data["id"],
         }
         key_result_ref01_data_dt0_loaded = key_result_ref01_ent.load(key_result_ref01_match_dt0, None)
-        key_result_ref01_data_dt0_load_result = helpers.to_map(key_result_ref01_data_dt0_loaded)
+        key_result_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(key_result_ref01_data_dt0_loaded))
         assert key_result_ref01_data_dt0_load_result is not None
         assert key_result_ref01_data_dt0_load_result["id"] == key_result_ref01_data["id"]
 

@@ -391,9 +391,52 @@
 
 /**
  * @typedef {Object} EpicListMatch
- * @property {number} [label_id]
+ * @property {number} [after_id]
+ * @property {string} [app_url]
+ * @property {boolean} [archived]
+ * @property {Array} [associated_groups]
+ * @property {number} [before_id]
+ * @property {Array} [comments]
+ * @property {boolean} [completed]
+ * @property {string} [completed_at]
+ * @property {string} [completed_at_override]
+ * @property {number} [converted_from_story_id]
+ * @property {string} [created_at]
+ * @property {string} [deadline]
+ * @property {string} [description]
+ * @property {string} [entity_type]
+ * @property {number} [epic_state_id]
+ * @property {string} [external_id]
+ * @property {Array} [follower_ids]
+ * @property {string} [global_id]
+ * @property {string} [group_id]
+ * @property {Array} [group_ids]
+ * @property {Array} [group_mention_ids]
+ * @property {Object} [health]
+ * @property {number} [id]
+ * @property {Array} [label_ids]
+ * @property {Array} [labels]
+ * @property {Array} [member_mention_ids]
+ * @property {Array} [mention_ids]
  * @property {number} [milestone_id]
- * @property {number} [objectif_id]
+ * @property {string} [name]
+ * @property {Array} [objective_ids]
+ * @property {Array} [owner_ids]
+ * @property {string} [planned_start_date]
+ * @property {number} [position]
+ * @property {string} [productboard_id]
+ * @property {string} [productboard_name]
+ * @property {string} [productboard_plugin_id]
+ * @property {string} [productboard_url]
+ * @property {Array} [project_ids]
+ * @property {string} [requested_by_id]
+ * @property {boolean} [started]
+ * @property {string} [started_at]
+ * @property {string} [started_at_override]
+ * @property {string} [state]
+ * @property {Object} [stats]
+ * @property {number} [stories_without_projects]
+ * @property {string} [updated_at]
  */
 
 /**
@@ -1201,7 +1244,7 @@
 
 /**
  * @typedef {Object} MemberLoadMatch
- * @property {string} [id]
+ * @property {string} id
  */
 
 /**
@@ -1259,7 +1302,28 @@
 
 /**
  * @typedef {Object} MilestoneListMatch
- * @property {number} [category_id]
+ * @property {number} [after_id]
+ * @property {string} [app_url]
+ * @property {boolean} [archived]
+ * @property {number} [before_id]
+ * @property {Array} [categories]
+ * @property {boolean} [completed]
+ * @property {string} [completed_at]
+ * @property {string} [completed_at_override]
+ * @property {string} [created_at]
+ * @property {string} [description]
+ * @property {string} [entity_type]
+ * @property {string} [global_id]
+ * @property {number} [id]
+ * @property {Array} [key_result_ids]
+ * @property {string} [name]
+ * @property {number} [position]
+ * @property {boolean} [started]
+ * @property {string} [started_at]
+ * @property {string} [started_at_override]
+ * @property {string} [state]
+ * @property {Object} [stats]
+ * @property {string} [updated_at]
  */
 
 /**
@@ -1685,11 +1749,89 @@
 
 /**
  * @typedef {Object} StoryListMatch
- * @property {string} [group_id]
+ * @property {number} [after_id]
+ * @property {string} [app_url]
+ * @property {boolean} [archived]
+ * @property {number} [before_id]
+ * @property {boolean} [blocked]
+ * @property {boolean} [blocker]
+ * @property {Array} [branch_ids]
+ * @property {Array} [branches]
+ * @property {Array} [comment_ids]
+ * @property {Array} [comments]
+ * @property {Array} [commit_ids]
+ * @property {Array} [commits]
+ * @property {boolean} [completed]
+ * @property {string} [completed_at]
+ * @property {string} [completed_at_override]
+ * @property {string} [created_at]
+ * @property {Array} [custom_fields]
+ * @property {Array} [custom_fields_add]
+ * @property {Array} [custom_fields_remove]
+ * @property {number} [cycle_time]
+ * @property {string} [deadline]
+ * @property {string} [description]
+ * @property {string} [entity_type]
  * @property {number} [epic_id]
+ * @property {number} [estimate]
+ * @property {string} [external_id]
+ * @property {Array} [external_links]
+ * @property {Array} [external_links_add]
+ * @property {Array} [external_links_remove]
+ * @property {Array} [file_ids]
+ * @property {Array} [file_ids_add]
+ * @property {Array} [file_ids_remove]
+ * @property {Array} [files]
+ * @property {Array} [follower_ids]
+ * @property {Array} [follower_ids_add]
+ * @property {Array} [follower_ids_remove]
+ * @property {string} [formatted_vcs_branch_name]
+ * @property {string} [global_id]
+ * @property {string} [group_id]
+ * @property {Array} [group_mention_ids]
+ * @property {number} [id]
  * @property {number} [iteration_id]
- * @property {number} [label_id]
+ * @property {Array} [label_ids]
+ * @property {Array} [labels]
+ * @property {Array} [labels_add]
+ * @property {Array} [labels_remove]
+ * @property {number} [lead_time]
+ * @property {Array} [linked_file_ids]
+ * @property {Array} [linked_file_ids_add]
+ * @property {Array} [linked_file_ids_remove]
+ * @property {Array} [linked_files]
+ * @property {Array} [member_mention_ids]
+ * @property {Array} [mention_ids]
+ * @property {string} [move_to]
+ * @property {string} [moved_at]
+ * @property {string} [name]
+ * @property {number} [num_tasks_completed]
+ * @property {Array} [owner_ids]
+ * @property {Array} [owner_ids_add]
+ * @property {Array} [owner_ids_remove]
+ * @property {number} [parent_story_id]
+ * @property {number} [position]
+ * @property {Array} [previous_iteration_ids]
  * @property {number} [project_id]
+ * @property {Array} [pull_request_ids]
+ * @property {Array} [pull_requests]
+ * @property {string} [requested_by_id]
+ * @property {number} [source_task_id]
+ * @property {boolean} [started]
+ * @property {string} [started_at]
+ * @property {string} [started_at_override]
+ * @property {Object} [stats]
+ * @property {Array} [story_links]
+ * @property {string} [story_template_id]
+ * @property {string} [story_type]
+ * @property {Array} [sub_task_story_ids]
+ * @property {Array} [sub_tasks]
+ * @property {Object} [synced_item]
+ * @property {Array} [task_ids]
+ * @property {Array} [tasks]
+ * @property {string} [updated_at]
+ * @property {number} [workflow_id]
+ * @property {number} [workflow_state_id]
  */
 
 /**
@@ -1907,9 +2049,7 @@
 
 /**
  * @typedef {Object} StoryCommentCreateData
- * @property {number} [comment_id]
- * @property {number} [story_id]
- * @property {number} [id]
+ * @property {number} id
  * @property {string} app_url
  * @property {string} author_id
  * @property {boolean} [blocker]
@@ -1924,6 +2064,7 @@
  * @property {number} [parent_id]
  * @property {number} position
  * @property {Array} reactions
+ * @property {number} story_id
  * @property {string} text
  * @property {boolean} [unblocks_parent]
  * @property {string} updated_at

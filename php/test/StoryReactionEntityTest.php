@@ -46,7 +46,7 @@ class StoryReactionEntityTest extends TestCase
         $story_reaction_ref01_data["story_id"] = $setup["idmap"]["story01"];
 
         $story_reaction_ref01_data_result = $story_reaction_ref01_ent->create($story_reaction_ref01_data, null);
-        $story_reaction_ref01_data = Helpers::to_map($story_reaction_ref01_data_result);
+        $story_reaction_ref01_data = Helpers::to_map(is_object($story_reaction_ref01_data_result) && method_exists($story_reaction_ref01_data_result, 'data_get') ? $story_reaction_ref01_data_result->data_get() : $story_reaction_ref01_data_result);
         $this->assertNotNull($story_reaction_ref01_data);
 
 

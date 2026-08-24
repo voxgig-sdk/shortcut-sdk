@@ -40,7 +40,7 @@ class DocSlimEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -83,7 +83,7 @@ class DocSlimEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.doc_slim"), "doc_slim_ref01"));
 
         $doc_slim_ref01_data_result = $doc_slim_ref01_ent->create($doc_slim_ref01_data, null);
-        $doc_slim_ref01_data = Helpers::to_map($doc_slim_ref01_data_result);
+        $doc_slim_ref01_data = Helpers::to_map(is_object($doc_slim_ref01_data_result) && method_exists($doc_slim_ref01_data_result, 'data_get') ? $doc_slim_ref01_data_result->data_get() : $doc_slim_ref01_data_result);
         $this->assertNotNull($doc_slim_ref01_data);
         $this->assertNotNull($doc_slim_ref01_data["id"]);
 

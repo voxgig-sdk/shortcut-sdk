@@ -45,7 +45,7 @@ describe('EpicWorkflowEntity', async () => {
     const epic_workflow_ref01_ent = client.EpicWorkflow()
     const epic_workflow_ref01_match = {}
 
-    const epic_workflow_ref01_list = await epic_workflow_ref01_ent.list(epic_workflow_ref01_match)
+    const epic_workflow_ref01_list = (await epic_workflow_ref01_ent.list(epic_workflow_ref01_match)).map((e) => e.data())
 
 
   })

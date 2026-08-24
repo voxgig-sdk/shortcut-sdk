@@ -33,7 +33,7 @@ class HealthEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -74,7 +74,7 @@ class HealthEntityTest < Minitest::Test
     health_ref01_data["epic_id"] = setup[:idmap]["epic01"]
 
     health_ref01_data_result = health_ref01_ent.create(health_ref01_data, nil)
-    health_ref01_data = Helpers.to_map(health_ref01_data_result)
+    health_ref01_data = Helpers.to_map(health_ref01_data_result.respond_to?(:data_get) ? health_ref01_data_result.data_get : health_ref01_data_result)
     assert !health_ref01_data.nil?
     assert !health_ref01_data["id"].nil?
 
@@ -101,7 +101,7 @@ class HealthEntityTest < Minitest::Test
     health_ref01_data_up0_up[health_ref01_markdef_up0_name] = health_ref01_markdef_up0_value
 
     health_ref01_resdata_up0_result = health_ref01_ent.update(health_ref01_data_up0_up, nil)
-    health_ref01_resdata_up0 = Helpers.to_map(health_ref01_resdata_up0_result)
+    health_ref01_resdata_up0 = Helpers.to_map(health_ref01_resdata_up0_result.respond_to?(:data_get) ? health_ref01_resdata_up0_result.data_get : health_ref01_resdata_up0_result)
     assert !health_ref01_resdata_up0.nil?
     assert_equal health_ref01_resdata_up0["id"], health_ref01_data_up0_up["id"]
     assert_equal health_ref01_resdata_up0[health_ref01_markdef_up0_name], health_ref01_markdef_up0_value
@@ -111,7 +111,7 @@ class HealthEntityTest < Minitest::Test
       "id" => health_ref01_data["id"],
     }
     health_ref01_data_dt0_loaded = health_ref01_ent.load(health_ref01_match_dt0, nil)
-    health_ref01_data_dt0_load_result = Helpers.to_map(health_ref01_data_dt0_loaded)
+    health_ref01_data_dt0_load_result = Helpers.to_map(health_ref01_data_dt0_loaded.respond_to?(:data_get) ? health_ref01_data_dt0_loaded.data_get : health_ref01_data_dt0_loaded)
     assert !health_ref01_data_dt0_load_result.nil?
     assert_equal health_ref01_data_dt0_load_result["id"], health_ref01_data["id"]
 

@@ -37,7 +37,7 @@ class RepositoryEntity extends ShortcutEntityBase<Repository> {
 
 
 
-  async load(this: any, reqmatch?: RepositoryLoadMatch, ctrl?: Control): Promise<Repository> {
+  async load(this: any, reqmatch?: RepositoryLoadMatch, ctrl?: Control): Promise<RepositoryEntity> {
 
     const utility = this._utility
 
@@ -128,7 +128,15 @@ class RepositoryEntity extends ShortcutEntityBase<Repository> {
         }
       }
 
-      return done(ctx)
+      const out = done(ctx)
+
+      // An operation resolves to the ENTITY, not the raw data — the record
+      // has just been absorbed into this instance and is reached through
+      // data(). `done` still runs: it completes the pipeline and raises on
+      // failure, and when throwing is disabled it hands back the error
+      // payload, which passes through unchanged. See AGENTS.md "Entity
+      // operations return ENTITIES".
+      return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err: any) {
 
@@ -150,7 +158,7 @@ class RepositoryEntity extends ShortcutEntityBase<Repository> {
 
 
 
-  async list(this: any, reqmatch?: RepositoryListMatch, ctrl?: Control): Promise<Repository[]> {
+  async list(this: any, reqmatch?: RepositoryListMatch, ctrl?: Control): Promise<RepositoryEntity[]> {
 
     const utility = this._utility
 

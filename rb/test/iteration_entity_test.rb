@@ -33,7 +33,7 @@ class IterationEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class IterationEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.iteration"), "iteration_ref01"))
 
     iteration_ref01_data_result = iteration_ref01_ent.create(iteration_ref01_data, nil)
-    iteration_ref01_data = Helpers.to_map(iteration_ref01_data_result)
+    iteration_ref01_data = Helpers.to_map(iteration_ref01_data_result.respond_to?(:data_get) ? iteration_ref01_data_result.data_get : iteration_ref01_data_result)
     assert !iteration_ref01_data.nil?
     assert !iteration_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class IterationEntityTest < Minitest::Test
     iteration_ref01_data_up0_up[iteration_ref01_markdef_up0_name] = iteration_ref01_markdef_up0_value
 
     iteration_ref01_resdata_up0_result = iteration_ref01_ent.update(iteration_ref01_data_up0_up, nil)
-    iteration_ref01_resdata_up0 = Helpers.to_map(iteration_ref01_resdata_up0_result)
+    iteration_ref01_resdata_up0 = Helpers.to_map(iteration_ref01_resdata_up0_result.respond_to?(:data_get) ? iteration_ref01_resdata_up0_result.data_get : iteration_ref01_resdata_up0_result)
     assert !iteration_ref01_resdata_up0.nil?
     assert_equal iteration_ref01_resdata_up0["id"], iteration_ref01_data_up0_up["id"]
     assert_equal iteration_ref01_resdata_up0[iteration_ref01_markdef_up0_name], iteration_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class IterationEntityTest < Minitest::Test
       "id" => iteration_ref01_data["id"],
     }
     iteration_ref01_data_dt0_loaded = iteration_ref01_ent.load(iteration_ref01_match_dt0, nil)
-    iteration_ref01_data_dt0_load_result = Helpers.to_map(iteration_ref01_data_dt0_loaded)
+    iteration_ref01_data_dt0_load_result = Helpers.to_map(iteration_ref01_data_dt0_loaded.respond_to?(:data_get) ? iteration_ref01_data_dt0_loaded.data_get : iteration_ref01_data_dt0_loaded)
     assert !iteration_ref01_data_dt0_load_result.nil?
     assert_equal iteration_ref01_data_dt0_load_result["id"], iteration_ref01_data["id"]
 

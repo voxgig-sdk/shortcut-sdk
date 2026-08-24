@@ -38,7 +38,7 @@ class TaskEntityTest < Minitest::Test
     task_ref01_data["story_id"] = setup[:idmap]["story01"]
 
     task_ref01_data_result = task_ref01_ent.create(task_ref01_data, nil)
-    task_ref01_data = Helpers.to_map(task_ref01_data_result)
+    task_ref01_data = Helpers.to_map(task_ref01_data_result.respond_to?(:data_get) ? task_ref01_data_result.data_get : task_ref01_data_result)
     assert !task_ref01_data.nil?
     assert !task_ref01_data["id"].nil?
 
@@ -53,7 +53,7 @@ class TaskEntityTest < Minitest::Test
     task_ref01_data_up0_up[task_ref01_markdef_up0_name] = task_ref01_markdef_up0_value
 
     task_ref01_resdata_up0_result = task_ref01_ent.update(task_ref01_data_up0_up, nil)
-    task_ref01_resdata_up0 = Helpers.to_map(task_ref01_resdata_up0_result)
+    task_ref01_resdata_up0 = Helpers.to_map(task_ref01_resdata_up0_result.respond_to?(:data_get) ? task_ref01_resdata_up0_result.data_get : task_ref01_resdata_up0_result)
     assert !task_ref01_resdata_up0.nil?
     assert_equal task_ref01_resdata_up0["id"], task_ref01_data_up0_up["id"]
     assert_equal task_ref01_resdata_up0[task_ref01_markdef_up0_name], task_ref01_markdef_up0_value
@@ -63,7 +63,7 @@ class TaskEntityTest < Minitest::Test
       "id" => task_ref01_data["id"],
     }
     task_ref01_data_dt0_loaded = task_ref01_ent.load(task_ref01_match_dt0, nil)
-    task_ref01_data_dt0_load_result = Helpers.to_map(task_ref01_data_dt0_loaded)
+    task_ref01_data_dt0_load_result = Helpers.to_map(task_ref01_data_dt0_loaded.respond_to?(:data_get) ? task_ref01_data_dt0_loaded.data_get : task_ref01_data_dt0_loaded)
     assert !task_ref01_data_dt0_load_result.nil?
     assert_equal task_ref01_data_dt0_load_result["id"], task_ref01_data["id"]
 

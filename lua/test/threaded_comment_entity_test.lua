@@ -39,7 +39,7 @@ describe("ThreadedCommentEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -83,7 +83,7 @@ describe("ThreadedCommentEntity", function()
 
     local threaded_comment_ref01_data_result, err = threaded_comment_ref01_ent:create(threaded_comment_ref01_data, nil)
     assert.is_nil(err)
-    threaded_comment_ref01_data = helpers.to_map(threaded_comment_ref01_data_result)
+    threaded_comment_ref01_data = helpers.to_map(type(threaded_comment_ref01_data_result) == 'table' and threaded_comment_ref01_data_result.data_get and threaded_comment_ref01_data_result:data_get() or threaded_comment_ref01_data_result)
     assert.is_not_nil(threaded_comment_ref01_data)
     assert.is_not_nil(threaded_comment_ref01_data["id"])
 
@@ -113,7 +113,7 @@ describe("ThreadedCommentEntity", function()
 
     local threaded_comment_ref01_resdata_up0_result, err = threaded_comment_ref01_ent:update(threaded_comment_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local threaded_comment_ref01_resdata_up0 = helpers.to_map(threaded_comment_ref01_resdata_up0_result)
+    local threaded_comment_ref01_resdata_up0 = helpers.to_map(type(threaded_comment_ref01_resdata_up0_result) == 'table' and threaded_comment_ref01_resdata_up0_result.data_get and threaded_comment_ref01_resdata_up0_result:data_get() or threaded_comment_ref01_resdata_up0_result)
     assert.is_not_nil(threaded_comment_ref01_resdata_up0)
     assert.are.equal(threaded_comment_ref01_resdata_up0["id"], threaded_comment_ref01_data_up0_up["id"])
     assert.are.equal(threaded_comment_ref01_resdata_up0[threaded_comment_ref01_markdef_up0_name], threaded_comment_ref01_markdef_up0_value)
@@ -124,7 +124,7 @@ describe("ThreadedCommentEntity", function()
     }
     local threaded_comment_ref01_data_dt0_loaded, err = threaded_comment_ref01_ent:load(threaded_comment_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local threaded_comment_ref01_data_dt0_load_result = helpers.to_map(threaded_comment_ref01_data_dt0_loaded)
+    local threaded_comment_ref01_data_dt0_load_result = helpers.to_map(type(threaded_comment_ref01_data_dt0_loaded) == 'table' and threaded_comment_ref01_data_dt0_loaded.data_get and threaded_comment_ref01_data_dt0_loaded:data_get() or threaded_comment_ref01_data_dt0_loaded)
     assert.is_not_nil(threaded_comment_ref01_data_dt0_load_result)
     assert.are.equal(threaded_comment_ref01_data_dt0_load_result["id"], threaded_comment_ref01_data["id"])
 

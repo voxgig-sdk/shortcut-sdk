@@ -45,7 +45,7 @@ describe('TaskEntity', async () => {
     let task_ref01_data = setup.data.new.task['task_ref01']
     task_ref01_data['story_id'] = setup.idmap['story01']
 
-    task_ref01_data = await task_ref01_ent.create(task_ref01_data)
+    task_ref01_data = (await task_ref01_ent.create(task_ref01_data)).data()
     assert(null != task_ref01_data.id)
 
 
@@ -57,7 +57,7 @@ describe('TaskEntity', async () => {
     const task_ref01_markdef_up0 = { name: 'completed_at', value: 'Mark01-task_ref01_' + setup.now }
     task_ref01_data_up0 [task_ref01_markdef_up0.name] = task_ref01_markdef_up0.value
 
-    const task_ref01_resdata_up0 = await task_ref01_ent.update(task_ref01_data_up0)
+    const task_ref01_resdata_up0 = (await task_ref01_ent.update(task_ref01_data_up0)).data()
     assert(task_ref01_resdata_up0.id === task_ref01_data_up0.id)
 
     assert(task_ref01_resdata_up0[task_ref01_markdef_up0.name] === task_ref01_markdef_up0.value)
@@ -66,7 +66,7 @@ describe('TaskEntity', async () => {
     // LOAD
     const task_ref01_match_dt0 = {}
     task_ref01_match_dt0.id = task_ref01_data.id
-    const task_ref01_data_dt0 = await task_ref01_ent.load(task_ref01_match_dt0)
+    const task_ref01_data_dt0 = (await task_ref01_ent.load(task_ref01_match_dt0)).data()
     assert(task_ref01_data_dt0.id === task_ref01_data.id)
 
 

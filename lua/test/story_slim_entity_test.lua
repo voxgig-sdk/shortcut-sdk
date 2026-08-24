@@ -41,7 +41,7 @@ describe("StorySlimEntity", function()
 
     local story_slim_ref01_data_result, err = story_slim_ref01_ent:create(story_slim_ref01_data, nil)
     assert.is_nil(err)
-    story_slim_ref01_data = helpers.to_map(story_slim_ref01_data_result)
+    story_slim_ref01_data = helpers.to_map(type(story_slim_ref01_data_result) == 'table' and story_slim_ref01_data_result.data_get and story_slim_ref01_data_result:data_get() or story_slim_ref01_data_result)
     assert.is_not_nil(story_slim_ref01_data)
 
     -- UPDATE
@@ -54,7 +54,7 @@ describe("StorySlimEntity", function()
 
     local story_slim_ref01_resdata_up0_result, err = story_slim_ref01_ent:update(story_slim_ref01_data_up0_up, nil)
     assert.is_nil(err)
-    local story_slim_ref01_resdata_up0 = helpers.to_map(story_slim_ref01_resdata_up0_result)
+    local story_slim_ref01_resdata_up0 = helpers.to_map(type(story_slim_ref01_resdata_up0_result) == 'table' and story_slim_ref01_resdata_up0_result.data_get and story_slim_ref01_resdata_up0_result:data_get() or story_slim_ref01_resdata_up0_result)
     assert.is_not_nil(story_slim_ref01_resdata_up0)
     assert.are.equal(story_slim_ref01_resdata_up0[story_slim_ref01_markdef_up0_name], story_slim_ref01_markdef_up0_value)
 

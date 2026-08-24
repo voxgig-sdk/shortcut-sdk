@@ -40,7 +40,7 @@ class CustomFieldEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -102,7 +102,7 @@ class CustomFieldEntityTest extends TestCase
         $custom_field_ref01_data_up0_up[$custom_field_ref01_markdef_up0_name] = $custom_field_ref01_markdef_up0_value;
 
         $custom_field_ref01_resdata_up0_result = $custom_field_ref01_ent->update($custom_field_ref01_data_up0_up, null);
-        $custom_field_ref01_resdata_up0 = Helpers::to_map($custom_field_ref01_resdata_up0_result);
+        $custom_field_ref01_resdata_up0 = Helpers::to_map(is_object($custom_field_ref01_resdata_up0_result) && method_exists($custom_field_ref01_resdata_up0_result, 'data_get') ? $custom_field_ref01_resdata_up0_result->data_get() : $custom_field_ref01_resdata_up0_result);
         $this->assertNotNull($custom_field_ref01_resdata_up0);
         $this->assertEquals($custom_field_ref01_resdata_up0["id"], $custom_field_ref01_data_up0_up["id"]);
         $this->assertEquals($custom_field_ref01_resdata_up0[$custom_field_ref01_markdef_up0_name], $custom_field_ref01_markdef_up0_value);
@@ -112,7 +112,7 @@ class CustomFieldEntityTest extends TestCase
             "id" => $custom_field_ref01_data["id"],
         ];
         $custom_field_ref01_data_dt0_loaded = $custom_field_ref01_ent->load($custom_field_ref01_match_dt0, null);
-        $custom_field_ref01_data_dt0_load_result = Helpers::to_map($custom_field_ref01_data_dt0_loaded);
+        $custom_field_ref01_data_dt0_load_result = Helpers::to_map(is_object($custom_field_ref01_data_dt0_loaded) && method_exists($custom_field_ref01_data_dt0_loaded, 'data_get') ? $custom_field_ref01_data_dt0_loaded->data_get() : $custom_field_ref01_data_dt0_loaded);
         $this->assertNotNull($custom_field_ref01_data_dt0_load_result);
         $this->assertEquals($custom_field_ref01_data_dt0_load_result["id"], $custom_field_ref01_data["id"]);
 

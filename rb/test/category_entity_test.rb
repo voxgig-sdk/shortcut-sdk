@@ -33,7 +33,7 @@ class CategoryEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -73,7 +73,7 @@ class CategoryEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.category"), "category_ref01"))
 
     category_ref01_data_result = category_ref01_ent.create(category_ref01_data, nil)
-    category_ref01_data = Helpers.to_map(category_ref01_data_result)
+    category_ref01_data = Helpers.to_map(category_ref01_data_result.respond_to?(:data_get) ? category_ref01_data_result.data_get : category_ref01_data_result)
     assert !category_ref01_data.nil?
     assert !category_ref01_data["id"].nil?
 
@@ -98,7 +98,7 @@ class CategoryEntityTest < Minitest::Test
     category_ref01_data_up0_up[category_ref01_markdef_up0_name] = category_ref01_markdef_up0_value
 
     category_ref01_resdata_up0_result = category_ref01_ent.update(category_ref01_data_up0_up, nil)
-    category_ref01_resdata_up0 = Helpers.to_map(category_ref01_resdata_up0_result)
+    category_ref01_resdata_up0 = Helpers.to_map(category_ref01_resdata_up0_result.respond_to?(:data_get) ? category_ref01_resdata_up0_result.data_get : category_ref01_resdata_up0_result)
     assert !category_ref01_resdata_up0.nil?
     assert_equal category_ref01_resdata_up0["id"], category_ref01_data_up0_up["id"]
     assert_equal category_ref01_resdata_up0[category_ref01_markdef_up0_name], category_ref01_markdef_up0_value
@@ -108,7 +108,7 @@ class CategoryEntityTest < Minitest::Test
       "id" => category_ref01_data["id"],
     }
     category_ref01_data_dt0_loaded = category_ref01_ent.load(category_ref01_match_dt0, nil)
-    category_ref01_data_dt0_load_result = Helpers.to_map(category_ref01_data_dt0_loaded)
+    category_ref01_data_dt0_load_result = Helpers.to_map(category_ref01_data_dt0_loaded.respond_to?(:data_get) ? category_ref01_data_dt0_loaded.data_get : category_ref01_data_dt0_loaded)
     assert !category_ref01_data_dt0_load_result.nil?
     assert_equal category_ref01_data_dt0_load_result["id"], category_ref01_data["id"]
 

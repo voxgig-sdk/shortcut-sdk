@@ -42,8 +42,8 @@ class TestEntityTemplateEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestEntityTemplateEntity:
         entity_template_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.entity_template"), "entity_template_ref01"))
 
-        entity_template_ref01_data = helpers.to_map(entity_template_ref01_ent.create(entity_template_ref01_data, None))
+        entity_template_ref01_data = helpers.to_map(runner.entity_data(entity_template_ref01_ent.create(entity_template_ref01_data, None)))
         assert entity_template_ref01_data is not None
         assert entity_template_ref01_data["id"] is not None
 
@@ -102,7 +102,7 @@ class TestEntityTemplateEntity:
         entity_template_ref01_markdef_up0_value = "Mark01-entity_template_ref01_" + str(setup["now"])
         entity_template_ref01_data_up0_up[entity_template_ref01_markdef_up0_name] = entity_template_ref01_markdef_up0_value
 
-        entity_template_ref01_resdata_up0 = helpers.to_map(entity_template_ref01_ent.update(entity_template_ref01_data_up0_up, None))
+        entity_template_ref01_resdata_up0 = helpers.to_map(runner.entity_data(entity_template_ref01_ent.update(entity_template_ref01_data_up0_up, None)))
         assert entity_template_ref01_resdata_up0 is not None
         assert entity_template_ref01_resdata_up0["id"] == entity_template_ref01_data_up0_up["id"]
         assert entity_template_ref01_resdata_up0[entity_template_ref01_markdef_up0_name] == entity_template_ref01_markdef_up0_value
@@ -112,7 +112,7 @@ class TestEntityTemplateEntity:
             "id": entity_template_ref01_data["id"],
         }
         entity_template_ref01_data_dt0_loaded = entity_template_ref01_ent.load(entity_template_ref01_match_dt0, None)
-        entity_template_ref01_data_dt0_load_result = helpers.to_map(entity_template_ref01_data_dt0_loaded)
+        entity_template_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(entity_template_ref01_data_dt0_loaded))
         assert entity_template_ref01_data_dt0_load_result is not None
         assert entity_template_ref01_data_dt0_load_result["id"] == entity_template_ref01_data["id"]
 

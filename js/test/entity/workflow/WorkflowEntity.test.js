@@ -45,13 +45,13 @@ describe('WorkflowEntity', async () => {
     const workflow_ref01_ent = client.Workflow()
     const workflow_ref01_match = {}
 
-    const workflow_ref01_list = await workflow_ref01_ent.list(workflow_ref01_match)
+    const workflow_ref01_list = (await workflow_ref01_ent.list(workflow_ref01_match)).map((e) => e.data())
 
 
     // LOAD
     const workflow_ref01_match_dt0 = {}
     workflow_ref01_match_dt0.id = workflow_ref01_data.id
-    const workflow_ref01_data_dt0 = await workflow_ref01_ent.load(workflow_ref01_match_dt0)
+    const workflow_ref01_data_dt0 = (await workflow_ref01_ent.load(workflow_ref01_match_dt0)).data()
     assert(workflow_ref01_data_dt0.id === workflow_ref01_data.id)
 
 

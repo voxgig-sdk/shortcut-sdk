@@ -57,7 +57,7 @@ class KeyResultEntityTest extends TestCase
         $key_result_ref01_data_up0_up[$key_result_ref01_markdef_up0_name] = $key_result_ref01_markdef_up0_value;
 
         $key_result_ref01_resdata_up0_result = $key_result_ref01_ent->update($key_result_ref01_data_up0_up, null);
-        $key_result_ref01_resdata_up0 = Helpers::to_map($key_result_ref01_resdata_up0_result);
+        $key_result_ref01_resdata_up0 = Helpers::to_map(is_object($key_result_ref01_resdata_up0_result) && method_exists($key_result_ref01_resdata_up0_result, 'data_get') ? $key_result_ref01_resdata_up0_result->data_get() : $key_result_ref01_resdata_up0_result);
         $this->assertNotNull($key_result_ref01_resdata_up0);
         $this->assertEquals($key_result_ref01_resdata_up0["id"], $key_result_ref01_data_up0_up["id"]);
         $this->assertEquals($key_result_ref01_resdata_up0[$key_result_ref01_markdef_up0_name], $key_result_ref01_markdef_up0_value);
@@ -67,7 +67,7 @@ class KeyResultEntityTest extends TestCase
             "id" => $key_result_ref01_data["id"],
         ];
         $key_result_ref01_data_dt0_loaded = $key_result_ref01_ent->load($key_result_ref01_match_dt0, null);
-        $key_result_ref01_data_dt0_load_result = Helpers::to_map($key_result_ref01_data_dt0_loaded);
+        $key_result_ref01_data_dt0_load_result = Helpers::to_map(is_object($key_result_ref01_data_dt0_loaded) && method_exists($key_result_ref01_data_dt0_loaded, 'data_get') ? $key_result_ref01_data_dt0_loaded->data_get() : $key_result_ref01_data_dt0_loaded);
         $this->assertNotNull($key_result_ref01_data_dt0_load_result);
         $this->assertEquals($key_result_ref01_data_dt0_load_result["id"], $key_result_ref01_data["id"]);
 

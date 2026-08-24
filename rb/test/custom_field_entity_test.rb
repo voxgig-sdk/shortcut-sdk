@@ -33,7 +33,7 @@ class CustomFieldEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ShortcutConfig.make_config
+    cfg = ShortcutConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ShortcutSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -92,7 +92,7 @@ class CustomFieldEntityTest < Minitest::Test
     custom_field_ref01_data_up0_up[custom_field_ref01_markdef_up0_name] = custom_field_ref01_markdef_up0_value
 
     custom_field_ref01_resdata_up0_result = custom_field_ref01_ent.update(custom_field_ref01_data_up0_up, nil)
-    custom_field_ref01_resdata_up0 = Helpers.to_map(custom_field_ref01_resdata_up0_result)
+    custom_field_ref01_resdata_up0 = Helpers.to_map(custom_field_ref01_resdata_up0_result.respond_to?(:data_get) ? custom_field_ref01_resdata_up0_result.data_get : custom_field_ref01_resdata_up0_result)
     assert !custom_field_ref01_resdata_up0.nil?
     assert_equal custom_field_ref01_resdata_up0["id"], custom_field_ref01_data_up0_up["id"]
     assert_equal custom_field_ref01_resdata_up0[custom_field_ref01_markdef_up0_name], custom_field_ref01_markdef_up0_value
@@ -102,7 +102,7 @@ class CustomFieldEntityTest < Minitest::Test
       "id" => custom_field_ref01_data["id"],
     }
     custom_field_ref01_data_dt0_loaded = custom_field_ref01_ent.load(custom_field_ref01_match_dt0, nil)
-    custom_field_ref01_data_dt0_load_result = Helpers.to_map(custom_field_ref01_data_dt0_loaded)
+    custom_field_ref01_data_dt0_load_result = Helpers.to_map(custom_field_ref01_data_dt0_loaded.respond_to?(:data_get) ? custom_field_ref01_data_dt0_loaded.data_get : custom_field_ref01_data_dt0_loaded)
     assert !custom_field_ref01_data_dt0_load_result.nil?
     assert_equal custom_field_ref01_data_dt0_load_result["id"], custom_field_ref01_data["id"]
 

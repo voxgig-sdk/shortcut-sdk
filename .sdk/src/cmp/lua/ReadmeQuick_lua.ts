@@ -1,5 +1,5 @@
 
-import { cmp, each, Content, isAuthActive, envName, canonKey, opRequestShape, entityIdField, entityDataIdField, entityOps, safeVarName, exampleVarName } from '@voxgig/sdkgen'
+import { cmp, each, Content, isAuthActive, envName, canonKey, canonScalarKey, opRequestShape, entityIdField, entityDataIdField, entityOps, safeVarName, exampleVarName } from '@voxgig/sdkgen'
 
 import {
   KIT,
@@ -59,7 +59,7 @@ local client = ${ctor}
     // placeholder (the doc test EXECUTES these blocks, so a comment
     // placeholder would not parse). Non-identifier keys use bracket syntax.
     const luaLit = (type: any, placeholder: string = 'example'): string => {
-      const k = canonKey(type)
+      const k = canonScalarKey(type)
       if ('INTEGER' === k || 'NUMBER' === k) return '1'
       if ('BOOLEAN' === k) return 'true'
       if ('ARRAY' === k || 'OBJECT' === k) return '{}'
@@ -190,7 +190,7 @@ print(${eVar})
       return it && it.type
     }
     const idValueFor = (opname: string): string => (null != dataIdF && opnames.includes('create'))
-      ? `created["${dataIdF}"]`
+      ? `created:data_get()["${dataIdF}"]`
       : luaLit(idParamType(opname), 'example_id')
 
     if (opnames.includes('create') || opnames.includes('update') || opnames.includes('remove')) {

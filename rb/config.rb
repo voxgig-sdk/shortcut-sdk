@@ -1,10 +1,27 @@
 # Shortcut SDK configuration
 
 module ShortcutConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
         "name" => "Shortcut",
+        "slug" => "shortcut",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -70,7 +87,6 @@ module ShortcutConfig
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "DELETE",
@@ -88,10 +104,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
           },
           "relations" => {
@@ -101,108 +115,92 @@ module ShortcutConfig
         "category" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "A true/false boolean indicating if the Category has been archived.",
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "color",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The hex color to be displayed with the Category (for example, \"#ff0000\").",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date that the Category was created.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
+              "short" => "The Global ID of the Category.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Category.",
               "type" => "`$INTEGER`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Category.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "type",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ANY`",
                 },
               },
               "req" => true,
+              "short" => "The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date that the Category was updated.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
           ],
           "name" => "category",
@@ -212,7 +210,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -232,17 +229,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -257,27 +251,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "category_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -304,27 +293,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "category_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -351,27 +335,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "category_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -402,10 +381,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -421,26 +398,21 @@ module ShortcutConfig
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -471,10 +443,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
           },
           "relations" => {
@@ -488,128 +458,102 @@ module ShortcutConfig
         "custom_field" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the CustomField we want to move this CustomField after.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the CustomField we want to move this CustomField before.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "canonical_name",
-              "req" => false,
+              "short" => "The canonical name for a Shortcut-defined field.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The instant when this CustomField was created.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "description",
-              "req" => false,
+              "short" => "A string description of the CustomField",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "enabled",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "When true, the CustomField can be applied to entities in the Workspace.",
               "type" => "`$BOOLEAN`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "field_type",
               "req" => true,
+              "short" => "The type of Custom Field, eg.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "fixed_position",
-              "req" => false,
+              "short" => "When true, the CustomFieldEnumValues may not be reordered.",
               "type" => "`$BOOLEAN`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "icon_set_identifier",
-              "req" => false,
+              "short" => "A string that represents the icon that corresponds to this custom field.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique public ID for the CustomField.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Custom Field.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "An integer indicating the position of this Custom Field with respect to the other CustomField",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "story_types",
-              "req" => false,
+              "short" => "The types of stories this CustomField is scoped to.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The instant when this CustomField was last updated.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "values",
-              "req" => false,
+              "short" => "A collection of legal values for a CustomField.",
               "type" => "`$ARRAY`",
-              "index$" => 15,
             },
           ],
           "name" => "custom_field",
@@ -619,7 +563,6 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -634,27 +577,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "custom_field_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -681,27 +619,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "custom_field_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -728,27 +661,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "custom_field_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -783,10 +711,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -802,7 +728,6 @@ module ShortcutConfig
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
@@ -818,10 +743,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
@@ -837,10 +760,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -850,32 +771,28 @@ module ShortcutConfig
         "doc_slim" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Doc.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "content",
               "req" => true,
+              "short" => "The content for the new document",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The public id of the Doc",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "title",
               "req" => true,
+              "short" => "The title for the new document",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
           ],
           "name" => "doc_slim",
@@ -885,7 +802,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -903,17 +819,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -928,10 +841,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -947,7 +858,6 @@ module ShortcutConfig
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
@@ -963,10 +873,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
@@ -982,10 +890,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -995,7 +901,6 @@ module ShortcutConfig
         "entity_template" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "author_id",
               "op" => {
                 "list" => {
@@ -1003,40 +908,31 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "The id of the user creating this template.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date when the entity template was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "custom_fields",
-              "req" => false,
+              "short" => "An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
               "type" => "`$ARRAY`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "deadline",
-              "req" => false,
+              "short" => "The due date of the story.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "description",
-              "req" => false,
+              "short" => "The description of the story.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "op" => {
                 "list" => {
@@ -1044,96 +940,72 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "epic_id",
-              "req" => false,
+              "short" => "The ID of the epic the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "estimate",
-              "req" => false,
+              "short" => "The numeric point estimate of the story.",
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "external_links",
-              "req" => false,
+              "short" => "An array of external links connected to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "files",
-              "req" => false,
+              "short" => "An array of files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
-              "req" => false,
+              "short" => "An array of UUIDs for any Members listed as Followers.",
               "type" => "`$ARRAY`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "group_id",
-              "req" => false,
+              "short" => "The ID of the group to which the story is assigned.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique identifier for the entity template.",
               "type" => "`$STRING`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "iteration_id",
-              "req" => false,
+              "short" => "The ID of the iteration the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "label_ids",
-              "req" => false,
+              "short" => "An array of label ids attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "labels",
-              "req" => false,
+              "short" => "An array of labels attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "last_used_at",
               "req" => true,
+              "short" => "The last time that someone created an entity using this template.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "linked_files",
-              "req" => false,
+              "short" => "An array of linked files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "create" => {
@@ -1145,71 +1017,55 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "The name of the story.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
-              "req" => false,
+              "short" => "An array of UUIDs of the owners of this story.",
               "type" => "`$ARRAY`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "project_id",
-              "req" => false,
+              "short" => "The ID of the project the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "story_contents",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$OBJECT`",
                 },
               },
               "req" => true,
+              "short" => "A map of story attributes this template populates.",
               "type" => "`$OBJECT`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "story_type",
-              "req" => false,
+              "short" => "The type of story (feature, bug, chore).",
               "type" => "`$STRING`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "sub_tasks",
-              "req" => false,
+              "short" => "An array of sub-tasks connected to the story",
               "type" => "`$ARRAY`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "tasks",
-              "req" => false,
+              "short" => "An array of tasks connected to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date when the entity template was last updated.",
               "type" => "`$STRING`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "workflow_state_id",
-              "req" => false,
+              "short" => "The ID of the workflow state the story is currently in.",
               "type" => "`$INTEGER`",
-              "index$" => 26,
             },
           ],
           "name" => "entity_template",
@@ -1219,7 +1075,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -1238,17 +1093,14 @@ module ShortcutConfig
                     },
                     "res" => "`body.story_contents`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -1263,27 +1115,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "entity_template_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -1310,27 +1157,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.story_contents`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "entity_template_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -1357,27 +1199,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "entity_template_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -1407,10 +1244,8 @@ module ShortcutConfig
                     },
                     "res" => "`body.story_contents`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -1420,520 +1255,432 @@ module ShortcutConfig
         "epic" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the Epic we want to move this Epic after.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Epic.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "True/false boolean that indicates whether the Epic is archived or not.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "associated_groups",
               "req" => true,
+              "short" => "An array containing Group IDs and Group-owned story counts for the Epic's associated groups.",
               "type" => "`$ARRAY`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the Epic we want to move this Epic before.",
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "comments",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "A nested array of threaded comments.",
               "type" => "`$ARRAY`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "completed",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Epic has been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Epic was completed.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Epic was completed.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "converted_from_story_id",
-              "req" => false,
+              "short" => "The ID of the Story that was converted to an Epic.",
               "type" => "`$INTEGER`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Epic was created.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "deadline",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Epic's deadline.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "list" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Epic's description.",
               "type" => "`$STRING`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "epic_state_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the Epic State.",
               "type" => "`$INTEGER`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any Members you want to add as Followers on this Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "group_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "`Deprecated` The ID of the group to associate with the epic.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "group_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDS for Groups to which this Epic is related.",
               "type" => "`$ARRAY`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of Group IDs that have been mentioned in the Epic description.",
               "type" => "`$ARRAY`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "health",
               "req" => true,
+              "short" => "The current health status of the Epic.",
               "type" => "`$OBJECT`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Epic.",
               "type" => "`$INTEGER`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "label_ids",
               "req" => true,
+              "short" => "An array of Label ids attached to the Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "labels",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of Labels attached to the Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of Member IDs that have been mentioned in the Epic description.",
               "type" => "`$ARRAY`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 26,
             },
             {
-              "active" => true,
               "name" => "milestone_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "`Deprecated` The ID of the Objective this Epic is related to.",
               "type" => "`$INTEGER`",
-              "index$" => 27,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Epic.",
               "type" => "`$STRING`",
-              "index$" => 28,
             },
             {
-              "active" => true,
               "name" => "objective_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of IDs for Objectives to which this epic is related.",
               "type" => "`$ARRAY`",
-              "index$" => 29,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any members you want to add as Owners on this new Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 30,
             },
             {
-              "active" => true,
               "name" => "planned_start_date",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Epic's planned start date.",
               "type" => "`$STRING`",
-              "index$" => 31,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "The Epic's relative position in the Epic workflow state.",
               "type" => "`$INTEGER`",
-              "index$" => 32,
             },
             {
-              "active" => true,
               "name" => "productboard_id",
               "req" => true,
+              "short" => "The ID of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 33,
             },
             {
-              "active" => true,
               "name" => "productboard_name",
               "req" => true,
+              "short" => "The name of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 34,
             },
             {
-              "active" => true,
               "name" => "productboard_plugin_id",
               "req" => true,
+              "short" => "The ID of the associated productboard integration.",
               "type" => "`$STRING`",
-              "index$" => 35,
             },
             {
-              "active" => true,
               "name" => "productboard_url",
               "req" => true,
+              "short" => "The URL of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 36,
             },
             {
-              "active" => true,
               "name" => "project_ids",
               "req" => true,
+              "short" => "The IDs of Projects related to this Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 37,
             },
             {
-              "active" => true,
               "name" => "requested_by_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the Member that requested the epic.",
               "type" => "`$STRING`",
-              "index$" => 38,
             },
             {
-              "active" => true,
               "name" => "started",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Epic has been started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 39,
             },
             {
-              "active" => true,
               "name" => "started_at",
               "req" => true,
+              "short" => "The time/date the Epic was started.",
               "type" => "`$STRING`",
-              "index$" => 40,
             },
             {
-              "active" => true,
               "name" => "started_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Epic was started.",
               "type" => "`$STRING`",
-              "index$" => 41,
             },
             {
-              "active" => true,
               "name" => "state",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "`Deprecated` The workflow state that the Epic is in.",
               "type" => "`$STRING`",
-              "index$" => 42,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Epic.",
               "type" => "`$OBJECT`",
-              "index$" => 43,
             },
             {
-              "active" => true,
               "name" => "stories_without_projects",
               "req" => true,
+              "short" => "The number of stories in this epic which are not associated with a project.",
               "type" => "`$INTEGER`",
-              "index$" => 44,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Epic was updated.",
               "type" => "`$STRING`",
-              "index$" => 45,
             },
           ],
           "name" => "epic",
@@ -1943,7 +1690,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -1979,53 +1725,41 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -2056,18 +1790,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -2089,20 +1819,16 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "label_id",
                         "orig" => "label_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2130,20 +1856,16 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "milestone_id",
                         "orig" => "milestone_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2171,20 +1893,16 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 3,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "objectif_id",
                         "orig" => "objective_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2212,27 +1930,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 4,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2259,27 +1972,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2306,27 +2014,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2374,10 +2077,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -2397,291 +2098,248 @@ module ShortcutConfig
         "epic_paginated_result" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Epic.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "archived",
               "req" => true,
+              "short" => "True/false boolean that indicates whether the Epic is archived or not.",
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "associated_groups",
               "req" => true,
+              "short" => "An array containing Group IDs and Group-owned story counts for the Epic's associated groups.",
               "type" => "`$ARRAY`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "completed",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Epic has been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Epic was completed.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "completed_at_override",
               "req" => true,
+              "short" => "A manual override for the time/date the Epic was completed.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Epic was created.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "deadline",
               "req" => true,
+              "short" => "The Epic's deadline.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "description",
-              "req" => false,
+              "short" => "The Epic's description.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "epic_state_id",
               "req" => true,
+              "short" => "The ID of the Epic State.",
               "type" => "`$INTEGER`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
               "req" => true,
+              "short" => "An array of UUIDs for any Members you want to add as Followers on this Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "group_id",
               "req" => true,
+              "short" => "`Deprecated` The ID of the group to associate with the epic.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "group_ids",
               "req" => true,
+              "short" => "An array of UUIDS for Groups to which this Epic is related.",
               "type" => "`$ARRAY`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of Group IDs that have been mentioned in the Epic description.",
               "type" => "`$ARRAY`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Epic.",
               "type" => "`$INTEGER`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "label_ids",
               "req" => true,
+              "short" => "An array of Label ids attached to the Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "labels",
               "req" => true,
+              "short" => "An array of Labels attached to the Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of Member IDs that have been mentioned in the Epic description.",
               "type" => "`$ARRAY`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "milestone_id",
               "req" => true,
+              "short" => "`Deprecated` The ID of the Objective this Epic is related to.",
               "type" => "`$INTEGER`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "name",
               "req" => true,
+              "short" => "The name of the Epic.",
               "type" => "`$STRING`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "objective_ids",
               "req" => true,
+              "short" => "An array of IDs for Objectives to which this epic is related.",
               "type" => "`$ARRAY`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
               "req" => true,
+              "short" => "An array of UUIDs for any members you want to add as Owners on this new Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "planned_start_date",
               "req" => true,
+              "short" => "The Epic's planned start date.",
               "type" => "`$STRING`",
-              "index$" => 26,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "The Epic's relative position in the Epic workflow state.",
               "type" => "`$INTEGER`",
-              "index$" => 27,
             },
             {
-              "active" => true,
               "name" => "productboard_id",
               "req" => true,
+              "short" => "The ID of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 28,
             },
             {
-              "active" => true,
               "name" => "productboard_name",
               "req" => true,
+              "short" => "The name of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 29,
             },
             {
-              "active" => true,
               "name" => "productboard_plugin_id",
               "req" => true,
+              "short" => "The ID of the associated productboard integration.",
               "type" => "`$STRING`",
-              "index$" => 30,
             },
             {
-              "active" => true,
               "name" => "productboard_url",
               "req" => true,
+              "short" => "The URL of the associated productboard feature.",
               "type" => "`$STRING`",
-              "index$" => 31,
             },
             {
-              "active" => true,
               "name" => "project_ids",
               "req" => true,
+              "short" => "The IDs of Projects related to this Epic.",
               "type" => "`$ARRAY`",
-              "index$" => 32,
             },
             {
-              "active" => true,
               "name" => "requested_by_id",
               "req" => true,
+              "short" => "The ID of the Member that requested the epic.",
               "type" => "`$STRING`",
-              "index$" => 33,
             },
             {
-              "active" => true,
               "name" => "started",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Epic has been started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 34,
             },
             {
-              "active" => true,
               "name" => "started_at",
               "req" => true,
+              "short" => "The time/date the Epic was started.",
               "type" => "`$STRING`",
-              "index$" => 35,
             },
             {
-              "active" => true,
               "name" => "started_at_override",
               "req" => true,
+              "short" => "A manual override for the time/date the Epic was started.",
               "type" => "`$STRING`",
-              "index$" => 36,
             },
             {
-              "active" => true,
               "name" => "state",
               "req" => true,
+              "short" => "`Deprecated` The workflow state that the Epic is in.",
               "type" => "`$STRING`",
-              "index$" => 37,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Epic.",
               "type" => "`$OBJECT`",
-              "index$" => 38,
             },
             {
-              "active" => true,
               "name" => "stories_without_projects",
               "req" => true,
+              "short" => "The number of stories in this epic which are not associated with a project.",
               "type" => "`$INTEGER`",
-              "index$" => 39,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the Epic was updated.",
               "type" => "`$STRING`",
-              "index$" => 40,
             },
           ],
           "name" => "epic_paginated_result",
@@ -2691,31 +2349,24 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page",
                         "orig" => "page",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                     ],
@@ -2740,10 +2391,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -2759,17 +2408,14 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -2797,10 +2443,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
           },
           "relations" => {
@@ -2810,74 +2454,62 @@ module ShortcutConfig
         "epic_workflow" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "color",
-              "req" => false,
+              "short" => "The hex color for this Epic State.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Epic State was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "description",
               "req" => true,
+              "short" => "The description of what sort of Epics belong in that Epic State.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Epic State.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "name",
               "req" => true,
+              "short" => "The Epic State's name.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "The position that the Epic State is in, starting with 0 at the left.",
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "type",
               "req" => true,
+              "short" => "The type of Epic State (Unstarted, Started, or Done)",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "When the Epic State was last updated.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
           ],
           "name" => "epic_workflow",
@@ -2887,7 +2519,6 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -2902,10 +2533,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.epic_states`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -2915,219 +2544,182 @@ module ShortcutConfig
         "group" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Group.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "Whether or not the Group is archived.",
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "color",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The hex color to be displayed with the Group (for example, \"#ff0000\").",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "color_key",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The color key to be displayed with the Group.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The instant when this group was created.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "default_workflow_id",
-              "req" => false,
+              "short" => "The ID of the default workflow for stories created in this group.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the Group.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "display_icon",
               "req" => true,
+              "short" => "Icons are used to attach images to Groups, Workspaces, Members, and Loading screens in the Shortcut web application.",
               "type" => "`$OBJECT`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "display_icon_id",
-              "req" => false,
+              "short" => "The Icon id for the avatar of this Group.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The id of the Group.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "member_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "The Member IDs contain within the Group.",
               "type" => "`$ARRAY`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "mention_name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The mention name of the Group.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Group.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "num_epics_started",
               "req" => true,
+              "short" => "The number of epics assigned to the group which are in the started workflow state.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "num_stories",
               "req" => true,
+              "short" => "The total number of stories assigned to the group.",
               "type" => "`$INTEGER`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "num_stories_backlog",
               "req" => true,
+              "short" => "The number of stories assigned to the group which are in a backlog workflow state.",
               "type" => "`$INTEGER`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "num_stories_started",
               "req" => true,
+              "short" => "The number of stories assigned to the group which are in a started workflow state.",
               "type" => "`$INTEGER`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The last instant when this group was updated.",
               "type" => "`$STRING`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "workflow_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "The Workflow IDs contained within the Group.",
               "type" => "`$ARRAY`",
-              "index$" => 20,
             },
           ],
           "name" => "group",
@@ -3137,7 +2729,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -3161,17 +2752,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -3186,27 +2774,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "group_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3233,27 +2816,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "group_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3291,10 +2869,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -3304,73 +2880,57 @@ module ShortcutConfig
         "health" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "author_id",
-              "req" => false,
+              "short" => "The ID of the permission who created or updated the Health record.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
-              "req" => false,
+              "short" => "The time that the Health record was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "epic_id",
-              "req" => false,
+              "short" => "The ID of the Epic associated with this Health record.",
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Health record.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "objective_id",
-              "req" => false,
+              "short" => "The ID of the Objective associated with this Health record.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "status",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The health status of the Epic or Objective.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "text",
-              "req" => false,
+              "short" => "The text of the Health record.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "updated_at",
-              "req" => false,
+              "short" => "The time that the Health record was updated.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
           ],
           "name" => "health",
@@ -3380,17 +2940,14 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3421,27 +2978,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3469,27 +3021,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3517,27 +3064,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "health_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3567,10 +3109,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -3584,81 +3124,78 @@ module ShortcutConfig
         "history" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "actions",
               "req" => true,
+              "short" => "An array of actions that were performed for the change.",
               "type" => "`$ARRAY`",
-              "index$" => 0,
+              "union" => {
+                "branches" => 19,
+                "count" => 1,
+                "depth" => 1,
+              },
             },
             {
-              "active" => true,
               "name" => "actor_name",
-              "req" => false,
+              "short" => "The name of the actor that performed the action, if it can be determined.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "automation_id",
-              "req" => false,
+              "short" => "The ID of the automation that performed the change.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "changed_at",
               "req" => true,
+              "short" => "The date when the change occurred.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "external_id",
-              "req" => false,
+              "short" => "The ID of the webhook that handled the change.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The ID representing the change for the story.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "member_id",
-              "req" => false,
+              "short" => "The ID of the member who performed the change.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "primary_id",
-              "req" => false,
+              "short" => "The ID of the primary entity that has changed, if applicable.",
               "type" => "`$STRING`",
-              "index$" => 7,
+              "union" => {
+                "branches" => 2,
+                "count" => 1,
+                "depth" => 0,
+              },
             },
             {
-              "active" => true,
               "name" => "references",
-              "req" => false,
+              "short" => "An array of objects affected by the change.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
+              "union" => {
+                "branches" => 12,
+                "count" => 12,
+                "depth" => 5,
+              },
             },
             {
-              "active" => true,
               "name" => "version",
               "req" => true,
+              "short" => "The version of the change format.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "webhook_id",
-              "req" => false,
+              "short" => "The ID of the webhook that handled the change.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
           ],
           "name" => "history",
@@ -3668,17 +3205,14 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -3706,10 +3240,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
@@ -3723,202 +3255,170 @@ module ShortcutConfig
         "iteration" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Iteration.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "associated_groups",
               "req" => true,
+              "short" => "An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.",
               "type" => "`$ARRAY`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The instant when this iteration was created.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the iteration.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "end_date",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The date this iteration ends.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any Members listed as Followers.",
               "type" => "`$ARRAY`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "group_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any Groups you want to add as Followers.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of Group IDs that have been mentioned in the Story description.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The ID of the iteration.",
               "type" => "`$INTEGER`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "label_ids",
               "req" => true,
+              "short" => "An array of label ids attached to the iteration.",
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "labels",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of labels attached to the iteration.",
               "type" => "`$ARRAY`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of Member IDs that have been mentioned in the Story description.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the iteration.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "start_date",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The date this iteration begins.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Iteration.",
               "type" => "`$OBJECT`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "status",
               "req" => true,
+              "short" => "The status of the iteration.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The instant when this iteration was last updated.",
               "type" => "`$STRING`",
-              "index$" => 19,
             },
           ],
           "name" => "iteration",
@@ -3928,7 +3428,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -3951,53 +3450,41 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -4028,10 +3515,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -4046,27 +3531,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "iteration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4093,27 +3573,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "iteration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4140,27 +3615,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "iteration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4195,10 +3665,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -4208,86 +3676,72 @@ module ShortcutConfig
         "key_result" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "current_observed_value",
               "req" => true,
+              "short" => "The starting value of the Key Result.",
               "type" => "`$OBJECT`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "current_target_value",
               "req" => true,
+              "short" => "The starting value of the Key Result.",
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The ID of the Key Result.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "initial_observed_value",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$OBJECT`",
                 },
               },
               "req" => true,
+              "short" => "The starting value of the Key Result.",
               "type" => "`$OBJECT`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Key Result.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "objective_id",
               "req" => true,
+              "short" => "The Objective to which this Key Result belongs.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "observed_value",
-              "req" => false,
+              "short" => "The starting value of the Key Result.",
               "type" => "`$OBJECT`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "progress",
               "req" => true,
+              "short" => "The integer percentage of progress toward completion of the Key Result.",
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "target_value",
-              "req" => false,
+              "short" => "The starting value of the Key Result.",
               "type" => "`$OBJECT`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "type",
               "req" => true,
+              "short" => "The type of the Key Result (numeric, percent, or boolean).",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
           ],
           "name" => "key_result",
@@ -4297,17 +3751,14 @@ module ShortcutConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "key_result_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4334,27 +3785,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "key_result_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4386,10 +3832,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -4399,14 +3843,12 @@ module ShortcutConfig
         "label" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Label.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "list" => {
@@ -4414,12 +3856,10 @@ module ShortcutConfig
                   "type" => "`$BOOLEAN`",
                 },
               },
-              "req" => false,
+              "short" => "A true/false boolean indicating if the Label has been archived.",
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "color",
               "op" => {
                 "list" => {
@@ -4427,19 +3867,16 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "The hex color to be displayed with the Label (for example, \"#ff0000\").",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date that the Label was created.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "list" => {
@@ -4447,19 +3884,16 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "The description of the new Label.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "list" => {
@@ -4467,169 +3901,144 @@ module ShortcutConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Label.",
               "type" => "`$INTEGER`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the new Label.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "num_epics",
               "req" => true,
+              "short" => "The total number of Epics with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "num_epics_completed",
               "req" => true,
+              "short" => "The number of completed Epics associated with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "num_epics_in_progress",
               "req" => true,
+              "short" => "The number of in progress epics associated with this label.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "num_epics_total",
               "req" => true,
+              "short" => "The total number of Epics associated with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "num_epics_unstarted",
               "req" => true,
+              "short" => "The number of unstarted epics associated with this label.",
               "type" => "`$INTEGER`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "num_points_backlog",
               "req" => true,
+              "short" => "The total number of backlog points with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "num_points_completed",
               "req" => true,
+              "short" => "The total number of completed points with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "num_points_in_progress",
               "req" => true,
+              "short" => "The total number of in-progress points with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "num_points_total",
               "req" => true,
+              "short" => "The total number of points with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "num_points_unstarted",
               "req" => true,
+              "short" => "The total number of unstarted points with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "num_related_documents",
               "req" => true,
+              "short" => "The total number of Documents associated this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "num_stories_backlog",
               "req" => true,
+              "short" => "The total number of stories backlog Stories with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "num_stories_completed",
               "req" => true,
+              "short" => "The total number of completed Stories with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "num_stories_in_progress",
               "req" => true,
+              "short" => "The total number of in-progress Stories with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "num_stories_total",
               "req" => true,
+              "short" => "The total number of Stories with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "num_stories_unestimated",
               "req" => true,
+              "short" => "The total number of Stories with no point estimate with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "num_stories_unstarted",
               "req" => true,
+              "short" => "The total number of stories unstarted Stories with this Label.",
               "type" => "`$INTEGER`",
-              "index$" => 26,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Label.",
               "type" => "`$OBJECT`",
-              "index$" => 27,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date that the Label was updated.",
               "type" => "`$STRING`",
-              "index$" => 28,
             },
           ],
           "name" => "label",
@@ -4639,7 +4048,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -4659,25 +4067,20 @@ module ShortcutConfig
                     },
                     "res" => "`body.stats`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "slim",
                         "orig" => "slim",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -4699,27 +4102,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "label_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4746,27 +4144,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.stats`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "label_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4793,27 +4186,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "label_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -4845,10 +4233,8 @@ module ShortcutConfig
                     },
                     "res" => "`body.stats`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -4858,187 +4244,157 @@ module ShortcutConfig
         "linked_file" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "content_type",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The content type of the image (e.g.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the LinkedFile was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the file.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "The groups that are mentioned in the description of the file.",
               "type" => "`$ARRAY`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique identifier for the file.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "The members that are mentioned in the description of the file.",
               "type" => "`$ARRAY`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the linked file.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "size",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The filesize, if the integration provided it.",
               "type" => "`$INTEGER`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "story_id",
-              "req" => false,
+              "short" => "The ID of the linked story.",
               "type" => "`$INTEGER`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "story_ids",
               "req" => true,
+              "short" => "The IDs of the stories this file is attached to.",
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "thumbnail_url",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The URL of the file thumbnail, if the integration provided it.",
               "type" => "`$STRING`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "type",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The integration type (e.g.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the LinkedFile was updated.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "uploader_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The UUID of the member that uploaded the file.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "url",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The URL of the file.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
           ],
           "name" => "linked_file",
@@ -5048,7 +4404,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -5073,17 +4428,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -5098,27 +4450,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "linked_file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5145,27 +4492,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "linked_file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5192,27 +4534,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "linked_file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5248,10 +4585,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -5261,130 +4596,104 @@ module ShortcutConfig
         "member" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Member was created.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_without_invite",
               "req" => true,
+              "short" => "Whether this member was created as a placeholder entity.",
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "disabled",
               "req" => true,
+              "short" => "True/false boolean indicating whether the Member has been disabled within the Workspace.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "group_ids",
               "req" => true,
+              "short" => "The Member's group ids",
               "type" => "`$ARRAY`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The Member's ID in Shortcut.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "installation_id",
-              "req" => false,
+              "short" => "Only set for agents.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "is_owner",
               "req" => true,
               "type" => "`$BOOLEAN`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "mention_name",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "name",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "organization2",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "profile",
               "req" => true,
+              "short" => "A group of Member profile details.",
               "type" => "`$OBJECT`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "replaced_by",
-              "req" => false,
+              "short" => "The id of the member that replaces this one when merged.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "role",
               "req" => true,
+              "short" => "The Member's role in the Workspace.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "state",
               "req" => true,
+              "short" => "The user state, one of partial, full, disabled, or imported.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the Member was last updated.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "workspace2",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 17,
             },
           ],
           "name" => "member",
@@ -5394,23 +4703,18 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "disabled",
                         "orig" => "disabled",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "org_public_id",
                         "orig" => "org_public_id",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -5433,36 +4737,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "member_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "org_public_id",
                         "orig" => "org_public_id",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -5491,10 +4788,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -5509,10 +4804,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -5522,220 +4815,183 @@ module ShortcutConfig
         "milestone" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the Milestone we want to move this Milestone after.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Milestone.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "A boolean indicating whether the Milestone has been archived or not.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the Milestone we want to move this Milestone before.",
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "categories",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of Categories attached to the Milestone.",
               "type" => "`$ARRAY`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "completed",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Milestone has been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Milestone was completed.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Milestone was completed.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Milestone was created.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Milestone's description.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Milestone.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "key_result_ids",
               "req" => true,
+              "short" => "The IDs of the Key Results associated with the Objective.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Milestone.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "started",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Milestone has been started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "started_at",
               "req" => true,
+              "short" => "The time/date the Milestone was started.",
               "type" => "`$STRING`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "started_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Milestone was started.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "state",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The workflow state that the Milestone is in.",
               "type" => "`$STRING`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Milestone.",
               "type" => "`$OBJECT`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the Milestone was updated.",
               "type" => "`$STRING`",
-              "index$" => 21,
             },
           ],
           "name" => "milestone",
@@ -5745,7 +5001,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -5767,27 +5022,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "category_id",
                         "orig" => "category_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5815,20 +5065,16 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "category_id",
                         "orig" => "category_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5856,10 +5102,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -5874,27 +5118,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "milestone_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5921,27 +5160,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "milestone_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -5968,27 +5202,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "milestone_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -6025,10 +5254,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -6048,17 +5275,14 @@ module ShortcutConfig
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "objective_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -6085,10 +5309,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
           },
           "relations" => {
@@ -6098,224 +5320,186 @@ module ShortcutConfig
         "objective" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the Objective we want to move this Objective after.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Objective.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "A boolean indicating whether the Objective has been archived or not.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the Objective we want to move this Objective before.",
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "categories",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of Categories attached to the Objective.",
               "type" => "`$ARRAY`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "completed",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Objectivehas been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Objective was completed.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Objective was completed.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Objective was created.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "list" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Objective's description.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Objective.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "key_result_ids",
               "req" => true,
+              "short" => "The IDs of the Key Results associated with the Objective.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Objective.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "started",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Objective has been started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "started_at",
               "req" => true,
+              "short" => "The time/date the Objective was started.",
               "type" => "`$STRING`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "started_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Objective was started.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "state",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The workflow state that the Objective is in.",
               "type" => "`$STRING`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Objective.",
               "type" => "`$OBJECT`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the Objective was updated.",
               "type" => "`$STRING`",
-              "index$" => 21,
             },
           ],
           "name" => "objective",
@@ -6325,7 +5509,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -6347,53 +5530,41 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -6424,46 +5595,35 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -6494,10 +5654,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -6512,27 +5670,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "objective_public_id",
                         "orig" => "objective_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -6559,27 +5712,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "objective_public_id",
                         "orig" => "objective_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -6616,10 +5764,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -6633,244 +5779,206 @@ module ShortcutConfig
         "project" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "abbreviation",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The Project abbreviation used in Story summaries.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Project.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "True/false boolean indicating whether the Project is in an Archived state.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "color",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The color associated with the Project in the Shortcut member interface.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date that the Project was created.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "days_to_thermometer",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The number of days before the thermometer appears in the Story summary.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the Project.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any Members listed as Followers.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
+              "short" => "The Global ID of the Project.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Project.",
               "type" => "`$INTEGER`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "iteration_length",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The number of weeks per iteration in this Project.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the Project",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "show_thermometer",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "Configuration to enable or disable thermometers in the Story summary.",
               "type" => "`$BOOLEAN`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "start_time",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The date at which the Project was started.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "A group of calculated values for this Project.",
               "type" => "`$OBJECT`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "team_id",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the team the project belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date that the Project was last updated.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "workflow_id",
               "req" => true,
+              "short" => "The ID of the workflow the project belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 19,
             },
           ],
           "name" => "project",
@@ -6880,7 +5988,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -6907,17 +6014,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -6932,27 +6036,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "project_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -6979,27 +6078,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "project_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -7026,27 +6120,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "project_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -7083,10 +6172,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -7096,67 +6183,58 @@ module ShortcutConfig
         "repository" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date the Repository was created.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "req" => true,
+              "short" => "The VCS unique identifier for the Repository.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "full_name",
               "req" => true,
+              "short" => "The full name of the VCS repository.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The ID associated to the VCS repository in Shortcut.",
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "name",
               "req" => true,
+              "short" => "The shorthand name of the VCS repository.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "type",
               "req" => true,
+              "short" => "The VCS provider for the Repository.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date the Repository was updated.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "url",
               "req" => true,
+              "short" => "The URL of the Repository.",
               "type" => "`$STRING`",
-              "index$" => 8,
             },
           ],
           "name" => "repository",
@@ -7166,7 +6244,6 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -7181,27 +6258,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "repo_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -7228,10 +6300,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -7241,32 +6311,28 @@ module ShortcutConfig
         "search" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "epics",
               "req" => true,
+              "short" => "The results of the Epic search query.",
               "type" => "`$OBJECT`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "iterations",
               "req" => true,
+              "short" => "The results of the Iteration search query.",
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "milestones",
               "req" => true,
+              "short" => "The results of the Objective search query.",
               "type" => "`$OBJECT`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "stories",
               "req" => true,
+              "short" => "The results of the Story search query.",
               "type" => "`$OBJECT`",
-              "index$" => 3,
             },
           ],
           "name" => "search",
@@ -7276,43 +6342,33 @@ module ShortcutConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -7342,10 +6398,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -7355,79 +6409,64 @@ module ShortcutConfig
         "story" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the story we want to move this story after.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Story.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "archived",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "True if the story has been archived or not.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the story we want to move this story before.",
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "blocked",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Story is currently blocked.",
               "type" => "`$BOOLEAN`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "blocker",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Story is currently a blocker of another story.",
               "type" => "`$BOOLEAN`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "branch_ids",
-              "req" => false,
+              "short" => "An array of IDs of Branches attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "branches",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of Git branches attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "comment_ids",
               "op" => {
                 "list" => {
@@ -7435,244 +6474,197 @@ module ShortcutConfig
                   "type" => "`$ARRAY`",
                 },
               },
-              "req" => false,
+              "short" => "An array of IDs of Comments attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "comments",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of comments attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "commit_ids",
-              "req" => false,
+              "short" => "An array of IDs of Commits attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "commits",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of commits attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "completed",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Story has been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Story was completed.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Story was completed.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Story was created.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "custom_fields",
-              "req" => false,
+              "short" => "An array of CustomField value assertions for the story.",
               "type" => "`$ARRAY`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "custom_fields_add",
-              "req" => false,
+              "short" => "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
               "type" => "`$ARRAY`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "custom_fields_remove",
-              "req" => false,
+              "short" => "A map specifying a CustomField ID.",
               "type" => "`$ARRAY`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "cycle_time",
-              "req" => false,
+              "short" => "The cycle time (in seconds) of this story when complete.",
               "type" => "`$INTEGER`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "deadline",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The due date of the story.",
               "type" => "`$STRING`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "list" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the story.",
               "type" => "`$STRING`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "epic_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the epic the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "estimate",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The numeric point estimate of the story.",
               "type" => "`$INTEGER`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "external_links",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of external links (strings) associated with a Story",
               "type" => "`$ARRAY`",
-              "index$" => 26,
             },
             {
-              "active" => true,
               "name" => "external_links_add",
-              "req" => false,
+              "short" => "An array of External Links associated with this story.",
               "type" => "`$ARRAY`",
-              "index$" => 27,
             },
             {
-              "active" => true,
               "name" => "external_links_remove",
-              "req" => false,
+              "short" => "An array of External Links associated with this story.",
               "type" => "`$ARRAY`",
-              "index$" => 28,
             },
             {
-              "active" => true,
               "name" => "file_ids",
               "op" => {
                 "list" => {
@@ -7680,177 +6672,140 @@ module ShortcutConfig
                   "type" => "`$ARRAY`",
                 },
               },
-              "req" => false,
+              "short" => "An array of IDs of files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 29,
             },
             {
-              "active" => true,
               "name" => "file_ids_add",
-              "req" => false,
+              "short" => "An array of IDs of files attached to the story in addition to files from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 30,
             },
             {
-              "active" => true,
               "name" => "file_ids_remove",
-              "req" => false,
+              "short" => "An array of IDs of files removed from files from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 31,
             },
             {
-              "active" => true,
               "name" => "files",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 32,
             },
             {
-              "active" => true,
               "name" => "follower_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs for any Members listed as Followers.",
               "type" => "`$ARRAY`",
-              "index$" => 33,
             },
             {
-              "active" => true,
               "name" => "follower_ids_add",
-              "req" => false,
+              "short" => "The UUIDs of the new followers to be added in addition to followers from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 34,
             },
             {
-              "active" => true,
               "name" => "follower_ids_remove",
-              "req" => false,
+              "short" => "The UUIDs of the new followers to be removed from followers from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 35,
             },
             {
-              "active" => true,
               "name" => "formatted_vcs_branch_name",
-              "req" => false,
+              "short" => "The formatted branch name for this story.",
               "type" => "`$STRING`",
-              "index$" => 36,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 37,
             },
             {
-              "active" => true,
               "name" => "group_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the group associated with the story.",
               "type" => "`$STRING`",
-              "index$" => 38,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of Group IDs that have been mentioned in the Story description.",
               "type" => "`$ARRAY`",
-              "index$" => 39,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Story.",
               "type" => "`$INTEGER`",
-              "index$" => 40,
             },
             {
-              "active" => true,
               "name" => "iteration_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the iteration the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 41,
             },
             {
-              "active" => true,
               "name" => "label_ids",
               "req" => true,
+              "short" => "An array of label ids attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 42,
             },
             {
-              "active" => true,
               "name" => "labels",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of labels attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 43,
             },
             {
-              "active" => true,
               "name" => "labels_add",
-              "req" => false,
+              "short" => "An array of labels attached to the story in addition to the labels provided by the template.",
               "type" => "`$ARRAY`",
-              "index$" => 44,
             },
             {
-              "active" => true,
               "name" => "labels_remove",
-              "req" => false,
+              "short" => "An array of labels to remove from the labels provided by the template.",
               "type" => "`$ARRAY`",
-              "index$" => 45,
             },
             {
-              "active" => true,
               "name" => "lead_time",
-              "req" => false,
+              "short" => "The lead time (in seconds) of this story when complete.",
               "type" => "`$INTEGER`",
-              "index$" => 46,
             },
             {
-              "active" => true,
               "name" => "linked_file_ids",
               "op" => {
                 "list" => {
@@ -7858,84 +6813,68 @@ module ShortcutConfig
                   "type" => "`$ARRAY`",
                 },
               },
-              "req" => false,
+              "short" => "An array of IDs of linked files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 47,
             },
             {
-              "active" => true,
               "name" => "linked_file_ids_add",
-              "req" => false,
+              "short" => "An array of IDs of linked files attached to the story in addition to files from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 48,
             },
             {
-              "active" => true,
               "name" => "linked_file_ids_remove",
-              "req" => false,
+              "short" => "An array of IDs of linked files removed from files from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 49,
             },
             {
-              "active" => true,
               "name" => "linked_files",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of linked files attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 50,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of Member IDs that have been mentioned in the Story description.",
               "type" => "`$ARRAY`",
-              "index$" => 51,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 52,
             },
             {
-              "active" => true,
               "name" => "move_to",
-              "req" => false,
+              "short" => "One of \"first\" or \"last\".",
               "type" => "`$STRING`",
-              "index$" => 53,
             },
             {
-              "active" => true,
               "name" => "moved_at",
               "req" => true,
+              "short" => "The time/date the Story was last changed workflow-state.",
               "type" => "`$STRING`",
-              "index$" => 54,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The name of the story.",
               "type" => "`$STRING`",
-              "index$" => 55,
             },
             {
-              "active" => true,
               "name" => "num_tasks_completed",
               "op" => {
                 "list" => {
@@ -7943,227 +6882,188 @@ module ShortcutConfig
                   "type" => "`$INTEGER`",
                 },
               },
-              "req" => false,
+              "short" => "The number of tasks on the story which are complete.",
               "type" => "`$INTEGER`",
-              "index$" => 56,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs of the owners of this story.",
               "type" => "`$ARRAY`",
-              "index$" => 57,
             },
             {
-              "active" => true,
               "name" => "owner_ids_add",
-              "req" => false,
+              "short" => "The UUIDs of the new owners to be added in addition to owners from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 58,
             },
             {
-              "active" => true,
               "name" => "owner_ids_remove",
-              "req" => false,
+              "short" => "The UUIDs of the new owners to be removed from owners from the template.",
               "type" => "`$ARRAY`",
-              "index$" => 59,
             },
             {
-              "active" => true,
               "name" => "parent_story_id",
-              "req" => false,
+              "short" => "The id of the parent story to associate with this story.",
               "type" => "`$INTEGER`",
-              "index$" => 60,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "A number representing the position of the story in relation to every other story in the current project.",
               "type" => "`$INTEGER`",
-              "index$" => 61,
             },
             {
-              "active" => true,
               "name" => "previous_iteration_ids",
               "req" => true,
+              "short" => "The IDs of the iteration the story belongs to.",
               "type" => "`$ARRAY`",
-              "index$" => 62,
             },
             {
-              "active" => true,
               "name" => "project_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the project the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 63,
             },
             {
-              "active" => true,
               "name" => "pull_request_ids",
-              "req" => false,
+              "short" => "An array of IDs of Pull/Merge Requests attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 64,
             },
             {
-              "active" => true,
               "name" => "pull_requests",
               "op" => {
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of Pull/Merge Requests attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 65,
             },
             {
-              "active" => true,
               "name" => "requested_by_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the Member that requested the story.",
               "type" => "`$STRING`",
-              "index$" => 66,
             },
             {
-              "active" => true,
               "name" => "source_task_id",
-              "req" => false,
+              "short" => "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
               "type" => "`$INTEGER`",
-              "index$" => 67,
             },
             {
-              "active" => true,
               "name" => "started",
               "req" => true,
+              "short" => "A true/false boolean indicating if the Story has been started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 68,
             },
             {
-              "active" => true,
               "name" => "started_at",
               "req" => true,
+              "short" => "The time/date the Story was started.",
               "type" => "`$STRING`",
-              "index$" => 69,
             },
             {
-              "active" => true,
               "name" => "started_at_override",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "A manual override for the time/date the Story was started.",
               "type" => "`$STRING`",
-              "index$" => 70,
             },
             {
-              "active" => true,
               "name" => "stats",
               "req" => true,
+              "short" => "The stats object for Stories",
               "type" => "`$OBJECT`",
-              "index$" => 71,
             },
             {
-              "active" => true,
               "name" => "story_links",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of story links attached to the Story.",
               "type" => "`$ARRAY`",
-              "index$" => 72,
             },
             {
-              "active" => true,
               "name" => "story_template_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the story template used to create this story, or null if not created using a template.",
               "type" => "`$STRING`",
-              "index$" => 73,
             },
             {
-              "active" => true,
               "name" => "story_type",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The type of story (feature, bug, chore).",
               "type" => "`$STRING`",
-              "index$" => 74,
             },
             {
-              "active" => true,
               "name" => "sub_task_story_ids",
-              "req" => false,
               "type" => "`$ARRAY`",
-              "index$" => 75,
             },
             {
-              "active" => true,
               "name" => "sub_tasks",
-              "req" => false,
+              "short" => "A list of either params to create a new sub-task or link an existing story as a sub-task",
               "type" => "`$ARRAY`",
-              "index$" => 76,
+              "union" => {
+                "branches" => 2,
+                "count" => 1,
+                "depth" => 1,
+              },
             },
             {
-              "active" => true,
               "name" => "synced_item",
               "req" => true,
+              "short" => "The synced item for the story.",
               "type" => "`$OBJECT`",
-              "index$" => 77,
             },
             {
-              "active" => true,
               "name" => "task_ids",
               "op" => {
                 "list" => {
@@ -8171,63 +7071,53 @@ module ShortcutConfig
                   "type" => "`$ARRAY`",
                 },
               },
-              "req" => false,
+              "short" => "An array of IDs of Tasks attached to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 78,
             },
             {
-              "active" => true,
               "name" => "tasks",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "list" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of tasks connected to the story.",
               "type" => "`$ARRAY`",
-              "index$" => 79,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Story was updated.",
               "type" => "`$STRING`",
-              "index$" => 80,
             },
             {
-              "active" => true,
               "name" => "workflow_id",
               "req" => true,
+              "short" => "The ID of the workflow the story belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 81,
             },
             {
-              "active" => true,
               "name" => "workflow_state_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the workflow state the story is currently in.",
               "type" => "`$INTEGER`",
-              "index$" => 82,
             },
           ],
           "name" => "story",
@@ -8237,7 +7127,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -8285,10 +7174,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -8353,53 +7240,41 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "detail",
                         "orig" => "detail",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "entity_type",
                         "orig" => "entity_type",
-                        "reqd" => false,
                         "type" => "`$ARRAY`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "next",
                         "orig" => "next",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "page_size",
                         "orig" => "page_size",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "query",
                         "orig" => "query",
@@ -8430,37 +7305,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "group_id",
                         "orig" => "group_public_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "limit",
                         "orig" => "limit",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "offset",
                         "orig" => "offset",
-                        "reqd" => false,
                         "type" => "`$INTEGER`",
                       },
                     ],
@@ -8491,29 +7358,23 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -8543,29 +7404,23 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 2,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "iteration_id",
                         "orig" => "iteration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -8595,29 +7450,23 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 3,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "label_id",
                         "orig" => "label_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -8647,29 +7496,23 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 4,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "project_id",
                         "orig" => "project_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "includes_description",
                         "orig" => "includes_description",
-                        "reqd" => false,
                         "type" => "`$BOOLEAN`",
                       },
                     ],
@@ -8699,14 +7542,11 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 5,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "external_link",
                         "orig" => "external_link",
@@ -8733,27 +7573,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 6,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -8780,27 +7615,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -8827,27 +7657,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -8903,10 +7728,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -8932,161 +7755,135 @@ module ShortcutConfig
         "story_comment" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Comment.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "author_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The unique ID of the Member who is the Comment's author.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "blocker",
-              "req" => false,
+              "short" => "Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date when the Comment was created.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "deleted",
               "req" => true,
+              "short" => "True/false boolean indicating whether the Comment has been deleted.",
               "type" => "`$BOOLEAN`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "The unique IDs of the Group who are mentioned in the Comment.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Comment.",
               "type" => "`$INTEGER`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "linked_to_slack",
               "req" => true,
+              "short" => "Whether the Comment is currently the root of a thread that is linked to Slack.",
               "type" => "`$BOOLEAN`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "The unique IDs of the Member who are mentioned in the Comment.",
               "type" => "`$ARRAY`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "parent_id",
-              "req" => false,
+              "short" => "The ID of the parent Comment this Comment is threaded under.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "The Comments numerical position in the list from oldest to newest.",
               "type" => "`$INTEGER`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "reactions",
               "req" => true,
+              "short" => "A set of Reactions to this Comment.",
               "type" => "`$ARRAY`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "story_id",
               "req" => true,
+              "short" => "The ID of the Story on which the Comment appears.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "text",
               "req" => true,
+              "short" => "The text of the Comment.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "unblocks_parent",
-              "req" => false,
+              "short" => "Marks the comment as an unblocker to its blocker parent.",
               "type" => "`$BOOLEAN`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date when the Comment was updated.",
               "type" => "`$STRING`",
-              "index$" => 18,
             },
           ],
           "name" => "story_comment",
@@ -9096,26 +7893,21 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "comment_id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -9147,20 +7939,16 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -9195,27 +7983,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -9243,36 +8026,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -9303,36 +8079,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -9365,10 +8134,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -9386,78 +8153,67 @@ module ShortcutConfig
         "story_link" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The time/date when the Story Link was created.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique identifier of the Story Link.",
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "object_id",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the object Story.",
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "subject_id",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$INTEGER`",
                 },
               },
               "req" => true,
+              "short" => "The ID of the subject Story.",
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "subject_workflow_state_id",
               "req" => true,
+              "short" => "The workflow state of the \"subject\" story.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The time/date when the Story Link was last updated.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "verb",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "How the subject Story acts on the object Story.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
           ],
           "name" => "story_link",
@@ -9467,7 +8223,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -9486,27 +8241,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_link_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -9533,27 +8283,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_link_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -9580,27 +8325,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "story_link_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -9631,10 +8371,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -9644,11 +8382,10 @@ module ShortcutConfig
         "story_reaction" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "emoji",
               "req" => true,
+              "short" => "The emoji short-code to add / remove.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
           ],
           "name" => "story_reaction",
@@ -9658,26 +8395,21 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "comment_id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -9711,36 +8443,29 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "comment_id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -9774,10 +8499,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
           },
           "relations" => {
@@ -9792,305 +8515,226 @@ module ShortcutConfig
         "story_slim" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "The ID of the story that the stories are to be moved below.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "archived",
-              "req" => false,
+              "short" => "A true/false boolean indicating whether the Story is in archived state.",
               "type" => "`$BOOLEAN`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "The ID of the story that the stories are to be moved before.",
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "completed_at_end",
-              "req" => false,
+              "short" => "Stories should have been completed on or before this date.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "completed_at_start",
-              "req" => false,
+              "short" => "Stories should have been completed on or after this date.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "created_at_end",
-              "req" => false,
+              "short" => "Stories should have been created on or before this date.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "created_at_start",
-              "req" => false,
+              "short" => "Stories should have been created on or after this date.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "custom_fields_add",
-              "req" => false,
+              "short" => "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "custom_fields_remove",
-              "req" => false,
+              "short" => "A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "deadline",
-              "req" => false,
+              "short" => "The due date of the story.",
               "type" => "`$STRING`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "deadline_end",
-              "req" => false,
+              "short" => "Stories should have a deadline on or before this date.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "deadline_start",
-              "req" => false,
+              "short" => "Stories should have a deadline on or after this date.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "epic_id",
-              "req" => false,
+              "short" => "The Epic IDs that may be associated with the Stories.",
               "type" => "`$INTEGER`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "epic_ids",
-              "req" => false,
+              "short" => "The Epic IDs that may be associated with the Stories.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "estimate",
-              "req" => false,
+              "short" => "The number of estimate points associate with the Stories.",
               "type" => "`$INTEGER`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "external_id",
-              "req" => false,
+              "short" => "An ID or URL that references an external resource.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "external_links",
-              "req" => false,
+              "short" => "An array of External Links associated with this story.",
               "type" => "`$ARRAY`",
-              "index$" => 16,
             },
             {
-              "active" => true,
               "name" => "follower_ids_add",
-              "req" => false,
+              "short" => "The UUIDs of the new followers to be added.",
               "type" => "`$ARRAY`",
-              "index$" => 17,
             },
             {
-              "active" => true,
               "name" => "follower_ids_remove",
-              "req" => false,
+              "short" => "The UUIDs of the followers to be removed.",
               "type" => "`$ARRAY`",
-              "index$" => 18,
             },
             {
-              "active" => true,
               "name" => "group_id",
-              "req" => false,
+              "short" => "The Group ID that is associated with the Stories",
               "type" => "`$STRING`",
-              "index$" => 19,
             },
             {
-              "active" => true,
               "name" => "group_ids",
-              "req" => false,
+              "short" => "The Group IDs that are associated with the Stories",
               "type" => "`$ARRAY`",
-              "index$" => 20,
             },
             {
-              "active" => true,
               "name" => "includes_description",
-              "req" => false,
+              "short" => "Whether to include the story description in the response.",
               "type" => "`$BOOLEAN`",
-              "index$" => 21,
             },
             {
-              "active" => true,
               "name" => "iteration_id",
-              "req" => false,
+              "short" => "The Iteration ID that may be associated with the Stories.",
               "type" => "`$INTEGER`",
-              "index$" => 22,
             },
             {
-              "active" => true,
               "name" => "iteration_ids",
-              "req" => false,
+              "short" => "The Iteration IDs that may be associated with the Stories.",
               "type" => "`$ARRAY`",
-              "index$" => 23,
             },
             {
-              "active" => true,
               "name" => "label_ids",
-              "req" => false,
+              "short" => "The Label IDs that may be associated with the Stories.",
               "type" => "`$ARRAY`",
-              "index$" => 24,
             },
             {
-              "active" => true,
               "name" => "label_name",
-              "req" => false,
+              "short" => "The name of any associated Labels.",
               "type" => "`$STRING`",
-              "index$" => 25,
             },
             {
-              "active" => true,
               "name" => "labels_add",
-              "req" => false,
+              "short" => "An array of labels to be added.",
               "type" => "`$ARRAY`",
-              "index$" => 26,
             },
             {
-              "active" => true,
               "name" => "labels_remove",
-              "req" => false,
+              "short" => "An array of labels to be removed.",
               "type" => "`$ARRAY`",
-              "index$" => 27,
             },
             {
-              "active" => true,
               "name" => "move_to",
-              "req" => false,
+              "short" => "One of \"first\" or \"last\".",
               "type" => "`$STRING`",
-              "index$" => 28,
             },
             {
-              "active" => true,
               "name" => "owner_id",
-              "req" => false,
+              "short" => "An array of UUIDs for any Users who may be Owners of the Stories.",
               "type" => "`$STRING`",
-              "index$" => 29,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
-              "req" => false,
+              "short" => "An array of UUIDs for any Users who may be Owners of the Stories.",
               "type" => "`$ARRAY`",
-              "index$" => 30,
             },
             {
-              "active" => true,
               "name" => "owner_ids_add",
-              "req" => false,
+              "short" => "The UUIDs of the new owners to be added.",
               "type" => "`$ARRAY`",
-              "index$" => 31,
             },
             {
-              "active" => true,
               "name" => "owner_ids_remove",
-              "req" => false,
+              "short" => "The UUIDs of the owners to be removed.",
               "type" => "`$ARRAY`",
-              "index$" => 32,
             },
             {
-              "active" => true,
               "name" => "project_id",
-              "req" => false,
+              "short" => "The IDs for the Projects the Stories may be assigned to.",
               "type" => "`$INTEGER`",
-              "index$" => 33,
             },
             {
-              "active" => true,
               "name" => "project_ids",
-              "req" => false,
+              "short" => "The IDs for the Projects the Stories may be assigned to.",
               "type" => "`$ARRAY`",
-              "index$" => 34,
             },
             {
-              "active" => true,
               "name" => "requested_by_id",
-              "req" => false,
+              "short" => "The UUID of any Users who may have requested the Stories.",
               "type" => "`$STRING`",
-              "index$" => 35,
             },
             {
-              "active" => true,
               "name" => "stories",
               "req" => true,
+              "short" => "An array of stories to be created.",
               "type" => "`$ARRAY`",
-              "index$" => 36,
+              "union" => {
+                "branches" => 2,
+                "count" => 1,
+                "depth" => 4,
+              },
             },
             {
-              "active" => true,
               "name" => "story_ids",
               "req" => true,
+              "short" => "The Ids of the Stories you wish to update.",
               "type" => "`$ARRAY`",
-              "index$" => 37,
             },
             {
-              "active" => true,
               "name" => "story_type",
-              "req" => false,
+              "short" => "The type of Stories that you want returned.",
               "type" => "`$STRING`",
-              "index$" => 38,
             },
             {
-              "active" => true,
               "name" => "updated_at_end",
-              "req" => false,
+              "short" => "Stories should have been updated on or before this date.",
               "type" => "`$STRING`",
-              "index$" => 39,
             },
             {
-              "active" => true,
               "name" => "updated_at_start",
-              "req" => false,
+              "short" => "Stories should have been updated on or after this date.",
               "type" => "`$STRING`",
-              "index$" => 40,
             },
             {
-              "active" => true,
               "name" => "workflow_state_id",
-              "req" => false,
+              "short" => "The unique IDs of the specific Workflow States that the Stories should be in.",
               "type" => "`$INTEGER`",
-              "index$" => 41,
             },
             {
-              "active" => true,
               "name" => "workflow_state_types",
-              "req" => false,
+              "short" => "The type of Workflow State the Stories may be in.",
               "type" => "`$ARRAY`",
-              "index$" => 42,
             },
           ],
           "name" => "story_slim",
@@ -10100,7 +8744,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -10118,10 +8761,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -10166,17 +8807,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "create",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
@@ -10216,10 +8854,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -10229,167 +8865,139 @@ module ShortcutConfig
         "task" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "after_id",
-              "req" => false,
+              "short" => "Move task after this task ID.",
               "type" => "`$INTEGER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "before_id",
-              "req" => false,
+              "short" => "Move task before this task ID.",
               "type" => "`$INTEGER`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "complete",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$BOOLEAN`",
                 },
               },
               "req" => true,
+              "short" => "True/false boolean indicating whether the Task has been completed.",
               "type" => "`$BOOLEAN`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "completed_at",
               "req" => true,
+              "short" => "The time/date the Task was completed.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Task was created.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "Full text of the Task.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "global_id",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of UUIDs of Groups mentioned in this Task.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Task.",
               "type" => "`$INTEGER`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of UUIDs of Members mentioned in this Task.",
               "type" => "`$ARRAY`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "owner_ids",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
                 "update" => {
-                  "req" => false,
                   "type" => "`$ARRAY`",
                 },
               },
               "req" => true,
+              "short" => "An array of UUIDs of the Owners of this Task.",
               "type" => "`$ARRAY`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "position",
               "req" => true,
+              "short" => "The number corresponding to the Task's position within a list of Tasks on a Story.",
               "type" => "`$INTEGER`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "story_id",
               "req" => true,
+              "short" => "The unique identifier of the parent Story.",
               "type" => "`$INTEGER`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Task was updated.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
           ],
           "name" => "task",
@@ -10399,17 +9007,14 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -10444,36 +9049,29 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "task_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -10504,36 +9102,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "task_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -10564,36 +9155,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "task_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "story_id",
                         "orig" => "story_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -10630,10 +9214,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -10647,119 +9229,102 @@ module ShortcutConfig
         "threaded_comment" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "app_url",
               "req" => true,
+              "short" => "The Shortcut application url for the Comment.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "author_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The unique ID of the Member that authored the Comment.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "comments",
               "req" => true,
+              "short" => "A nested array of threaded comments.",
               "type" => "`$ARRAY`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Comment was created.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "deleted",
               "req" => true,
+              "short" => "True/false boolean indicating whether the Comment is deleted.",
               "type" => "`$BOOLEAN`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "An array of Group IDs that have been mentioned in this Comment.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Comment.",
               "type" => "`$INTEGER`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "An array of Member IDs that have been mentioned in this Comment.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "text",
               "req" => true,
+              "short" => "The text of the Comment.",
               "type" => "`$STRING`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "create" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date the Comment was updated.",
               "type" => "`$STRING`",
-              "index$" => 12,
             },
           ],
           "name" => "threaded_comment",
@@ -10769,26 +9334,21 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -10825,20 +9385,16 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -10872,27 +9428,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 1,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -10920,36 +9471,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -10980,36 +9524,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -11040,36 +9577,29 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "epic_id",
                         "orig" => "epic_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "comment_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 1,
                       },
                     ],
                   },
@@ -11102,10 +9632,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -11119,159 +9647,136 @@ module ShortcutConfig
         "uploaded_file" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "content_type",
               "req" => true,
+              "short" => "Free form string corresponding to a text or image file.",
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date that the file was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "description",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The description of the file.",
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "external_id",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "This field can be set to another unique ID.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "filename",
               "req" => true,
+              "short" => "The name assigned to the file in Shortcut upon upload.",
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "group_mention_ids",
               "req" => true,
+              "short" => "The unique IDs of the Groups who are mentioned in the file description.",
               "type" => "`$ARRAY`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID for the file.",
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "member_mention_ids",
               "req" => true,
+              "short" => "The unique IDs of the Members who are mentioned in the file description.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "mention_ids",
               "req" => true,
+              "short" => "`Deprecated:` use `member_mention_ids`.",
               "type" => "`$ARRAY`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "name",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The optional User-specified name of the file.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
             {
-              "active" => true,
               "name" => "size",
               "req" => true,
+              "short" => "The size of the file.",
               "type" => "`$INTEGER`",
-              "index$" => 11,
             },
             {
-              "active" => true,
               "name" => "story_ids",
               "req" => true,
+              "short" => "The unique IDs of the Stories associated with this file.",
               "type" => "`$ARRAY`",
-              "index$" => 12,
             },
             {
-              "active" => true,
               "name" => "thumbnail_url",
               "req" => true,
+              "short" => "The url where the thumbnail of the file can be found in Shortcut.",
               "type" => "`$STRING`",
-              "index$" => 13,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The time/date that the file was updated.",
               "type" => "`$STRING`",
-              "index$" => 14,
             },
             {
-              "active" => true,
               "name" => "uploader_id",
               "op" => {
                 "update" => {
-                  "req" => false,
                   "type" => "`$STRING`",
                 },
               },
               "req" => true,
+              "short" => "The unique ID of the Member who uploaded the file.",
               "type" => "`$STRING`",
-              "index$" => 15,
             },
             {
-              "active" => true,
               "name" => "url",
               "req" => true,
+              "short" => "The URL for the file.",
               "type" => "`$STRING`",
-              "index$" => 16,
             },
           ],
           "name" => "uploaded_file",
@@ -11281,7 +9786,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -11296,17 +9800,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "list" => {
               "input" => "data",
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -11321,27 +9822,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11368,27 +9864,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11415,27 +9906,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
             "update" => {
               "input" => "data",
               "name" => "update",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "file_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11469,10 +9955,8 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "update",
             },
           },
           "relations" => {
@@ -11482,18 +9966,13 @@ module ShortcutConfig
         "webhook" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "secret",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "webhook_url",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
           ],
           "name" => "webhook",
@@ -11503,7 +9982,6 @@ module ShortcutConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -11522,27 +10000,22 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "integration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11570,27 +10043,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
             "remove" => {
               "input" => "data",
               "name" => "remove",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "integration_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11618,10 +10086,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "remove",
             },
           },
           "relations" => {
@@ -11631,81 +10097,70 @@ module ShortcutConfig
         "workflow" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "auto_assign_owner",
               "req" => true,
+              "short" => "Indicates if an owner is automatically assigned when an unowned story is started.",
               "type" => "`$BOOLEAN`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "created_at",
               "req" => true,
+              "short" => "The date the Workflow was created.",
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "default_state_id",
               "req" => true,
+              "short" => "The unique ID of the default state that new Stories are entered into.",
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "description",
               "req" => true,
+              "short" => "A description of the workflow.",
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "entity_type",
               "req" => true,
+              "short" => "A string description of this resource.",
               "type" => "`$STRING`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "id",
               "req" => true,
+              "short" => "The unique ID of the Workflow.",
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "name",
               "req" => true,
+              "short" => "The name of the workflow.",
               "type" => "`$STRING`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "project_ids",
               "req" => true,
+              "short" => "An array of IDs of projects within the Workflow.",
               "type" => "`$ARRAY`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "states",
               "req" => true,
+              "short" => "A map of the states in this Workflow.",
               "type" => "`$ARRAY`",
-              "index$" => 8,
             },
             {
-              "active" => true,
               "name" => "team_id",
               "req" => true,
+              "short" => "The ID of the team the workflow belongs to.",
               "type" => "`$INTEGER`",
-              "index$" => 9,
             },
             {
-              "active" => true,
               "name" => "updated_at",
               "req" => true,
+              "short" => "The date the Workflow was updated.",
               "type" => "`$STRING`",
-              "index$" => 10,
             },
           ],
           "name" => "workflow",
@@ -11715,7 +10170,6 @@ module ShortcutConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -11730,27 +10184,22 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "workflow_public_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -11777,10 +10226,8 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {

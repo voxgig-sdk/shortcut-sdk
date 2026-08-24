@@ -1,0 +1,467 @@
+# Entity: milestone
+
+main: kit: entity: milestone: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "after_id"
+      req: false
+      short: "The ID of the Milestone we want to move this Milestone after."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "app_url"
+      req: true
+      short: "The Shortcut application url for the Milestone."
+      type: "`$STRING`"
+    }
+    {
+      name: "archived"
+      op: {
+        update: {
+          req: false
+          type: "`$BOOLEAN`"
+        }
+      }
+      req: true
+      short: "A boolean indicating whether the Milestone has been archived or not."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "before_id"
+      req: false
+      short: "The ID of the Milestone we want to move this Milestone before."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "categories"
+      op: {
+        create: {
+          req: false
+          type: "`$ARRAY`"
+        }
+        update: {
+          req: false
+          type: "`$ARRAY`"
+        }
+      }
+      req: true
+      short: "An array of Categories attached to the Milestone."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "completed"
+      req: true
+      short: "A true/false boolean indicating if the Milestone has been completed."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "completed_at"
+      req: true
+      short: "The time/date the Milestone was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "completed_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Milestone was completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      short: "The time/date the Milestone was created."
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The Milestone's description."
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      short: "A string description of this resource."
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      short: "The unique ID of the Milestone."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "key_result_ids"
+      req: true
+      short: "The IDs of the Key Results associated with the Objective."
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The name of the Milestone."
+      type: "`$STRING`"
+    }
+    {
+      name: "position"
+      req: true
+      short: "A number representing the position of the Milestone in relation to every other Milestone within the Workspace."
+      type: "`$INTEGER`"
+    }
+    {
+      name: "started"
+      req: true
+      short: "A true/false boolean indicating if the Milestone has been started."
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "started_at"
+      req: true
+      short: "The time/date the Milestone was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "started_at_override"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "A manual override for the time/date the Milestone was started."
+      type: "`$STRING`"
+    }
+    {
+      name: "state"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      short: "The workflow state that the Milestone is in."
+      type: "`$STRING`"
+    }
+    {
+      name: "stats"
+      req: true
+      short: "A group of calculated values for this Milestone."
+      type: "`$OBJECT`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      short: "The time/date the Milestone was updated."
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "milestone"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/milestones"
+          parts: [
+            "api"
+            "v3"
+            "milestones"
+          ]
+          transform: {
+            req: {
+              categories: "`reqdata.category`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              started_at_override: "`reqdata.started_at_override`"
+              state: "`reqdata.state`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "category_id"
+                orig: "category_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/categories/{category-public-id}/milestones"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+            "{category_id}"
+            "milestones"
+          ]
+          rename: {
+            param: {
+              "category-public-id": "category_id"
+            }
+          }
+          select: {
+            exist: [
+              "category_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "category_id"
+                orig: "category_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/categories/{category-public-id}/objectives"
+          parts: [
+            "api"
+            "v3"
+            "categories"
+            "{category_id}"
+            "objectives"
+          ]
+          rename: {
+            param: {
+              "category-public-id": "category_id"
+            }
+          }
+          select: {
+            exist: [
+              "category_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "GET"
+          orig: "/api/v3/milestones"
+          parts: [
+            "api"
+            "v3"
+            "milestones"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "milestone_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/milestones/{milestone-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "milestones"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "milestone-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "milestone_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/milestones/{milestone-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "milestones"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "milestone-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "milestone_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/milestones/{milestone-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "milestones"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "milestone-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              after_id: "`reqdata.after_id`"
+              archived: "`reqdata.archived`"
+              before_id: "`reqdata.before_id`"
+              categories: "`reqdata.category`"
+              completed_at_override: "`reqdata.completed_at_override`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              started_at_override: "`reqdata.started_at_override`"
+              state: "`reqdata.state`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "category"
+      ]
+    ]
+  }
+
+
+
+}

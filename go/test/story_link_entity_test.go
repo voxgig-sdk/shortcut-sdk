@@ -59,7 +59,7 @@ func TestStoryLinkEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		storyLinkRef01Data = core.ToMapAny(storyLinkRef01DataResult)
+		storyLinkRef01Data = core.ToMapAny(entityData(storyLinkRef01DataResult))
 		if storyLinkRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -80,7 +80,7 @@ func TestStoryLinkEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		storyLinkRef01ResdataUp0 := core.ToMapAny(storyLinkRef01ResdataUp0Result)
+		storyLinkRef01ResdataUp0 := core.ToMapAny(entityData(storyLinkRef01ResdataUp0Result))
 		if storyLinkRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -99,7 +99,7 @@ func TestStoryLinkEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		storyLinkRef01DataDt0LoadResult := core.ToMapAny(storyLinkRef01DataDt0Loaded)
+		storyLinkRef01DataDt0LoadResult := core.ToMapAny(entityData(storyLinkRef01DataDt0Loaded))
 		if storyLinkRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

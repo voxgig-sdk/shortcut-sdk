@@ -52,7 +52,7 @@ func TestLinkedFileEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -107,7 +107,7 @@ func TestLinkedFileEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		linkedFileRef01Data = core.ToMapAny(linkedFileRef01DataResult)
+		linkedFileRef01Data = core.ToMapAny(entityData(linkedFileRef01DataResult))
 		if linkedFileRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -145,7 +145,7 @@ func TestLinkedFileEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("update failed: %v", err)
 		}
-		linkedFileRef01ResdataUp0 := core.ToMapAny(linkedFileRef01ResdataUp0Result)
+		linkedFileRef01ResdataUp0 := core.ToMapAny(entityData(linkedFileRef01ResdataUp0Result))
 		if linkedFileRef01ResdataUp0 == nil {
 			t.Fatal("expected update result to be a map")
 		}
@@ -164,7 +164,7 @@ func TestLinkedFileEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		linkedFileRef01DataDt0LoadResult := core.ToMapAny(linkedFileRef01DataDt0Loaded)
+		linkedFileRef01DataDt0LoadResult := core.ToMapAny(entityData(linkedFileRef01DataDt0Loaded))
 		if linkedFileRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

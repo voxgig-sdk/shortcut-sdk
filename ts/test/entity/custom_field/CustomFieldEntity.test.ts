@@ -63,7 +63,7 @@ describe('CustomFieldEntity', async () => {
     const custom_field_ref01_ent = client.CustomField()
     const custom_field_ref01_match: any = {}
 
-    const custom_field_ref01_list = await custom_field_ref01_ent.list(custom_field_ref01_match)
+    const custom_field_ref01_list = (await custom_field_ref01_ent.list(custom_field_ref01_match)).map((e: any) => e.data())
 
 
     // UPDATE
@@ -73,7 +73,7 @@ describe('CustomFieldEntity', async () => {
     const custom_field_ref01_markdef_up0 = { name: 'after_id', value: 'Mark01-custom_field_ref01_' + setup.now }
     ;(custom_field_ref01_data_up0 as any)[custom_field_ref01_markdef_up0.name] = custom_field_ref01_markdef_up0.value
 
-    const custom_field_ref01_resdata_up0 = await custom_field_ref01_ent.update(custom_field_ref01_data_up0)
+    const custom_field_ref01_resdata_up0 = (await custom_field_ref01_ent.update(custom_field_ref01_data_up0)).data()
     assert(custom_field_ref01_resdata_up0.id === custom_field_ref01_data_up0.id)
 
     assert((custom_field_ref01_resdata_up0 as any)[custom_field_ref01_markdef_up0.name] === custom_field_ref01_markdef_up0.value)
@@ -82,7 +82,7 @@ describe('CustomFieldEntity', async () => {
     // LOAD
     const custom_field_ref01_match_dt0: any = {}
     custom_field_ref01_match_dt0.id = custom_field_ref01_data.id
-    const custom_field_ref01_data_dt0 = await custom_field_ref01_ent.load(custom_field_ref01_match_dt0)
+    const custom_field_ref01_data_dt0 = (await custom_field_ref01_ent.load(custom_field_ref01_match_dt0)).data()
     assert(custom_field_ref01_data_dt0.id === custom_field_ref01_data.id)
 
 

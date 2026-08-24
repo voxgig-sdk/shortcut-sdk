@@ -44,7 +44,7 @@ class TestStoryLinkEntity:
         story_link_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.story_link"), "story_link_ref01"))
 
-        story_link_ref01_data = helpers.to_map(story_link_ref01_ent.create(story_link_ref01_data, None))
+        story_link_ref01_data = helpers.to_map(runner.entity_data(story_link_ref01_ent.create(story_link_ref01_data, None)))
         assert story_link_ref01_data is not None
         assert story_link_ref01_data["id"] is not None
 
@@ -57,7 +57,7 @@ class TestStoryLinkEntity:
         story_link_ref01_markdef_up0_value = "Mark01-story_link_ref01_" + str(setup["now"])
         story_link_ref01_data_up0_up[story_link_ref01_markdef_up0_name] = story_link_ref01_markdef_up0_value
 
-        story_link_ref01_resdata_up0 = helpers.to_map(story_link_ref01_ent.update(story_link_ref01_data_up0_up, None))
+        story_link_ref01_resdata_up0 = helpers.to_map(runner.entity_data(story_link_ref01_ent.update(story_link_ref01_data_up0_up, None)))
         assert story_link_ref01_resdata_up0 is not None
         assert story_link_ref01_resdata_up0["id"] == story_link_ref01_data_up0_up["id"]
         assert story_link_ref01_resdata_up0[story_link_ref01_markdef_up0_name] == story_link_ref01_markdef_up0_value
@@ -67,7 +67,7 @@ class TestStoryLinkEntity:
             "id": story_link_ref01_data["id"],
         }
         story_link_ref01_data_dt0_loaded = story_link_ref01_ent.load(story_link_ref01_match_dt0, None)
-        story_link_ref01_data_dt0_load_result = helpers.to_map(story_link_ref01_data_dt0_loaded)
+        story_link_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(story_link_ref01_data_dt0_loaded))
         assert story_link_ref01_data_dt0_load_result is not None
         assert story_link_ref01_data_dt0_load_result["id"] == story_link_ref01_data["id"]
 

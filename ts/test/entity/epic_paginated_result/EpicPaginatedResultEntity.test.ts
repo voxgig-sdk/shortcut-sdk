@@ -63,7 +63,7 @@ describe('EpicPaginatedResultEntity', async () => {
     const epic_paginated_result_ref01_ent = client.EpicPaginatedResult()
     const epic_paginated_result_ref01_match: any = {}
 
-    const epic_paginated_result_ref01_list = await epic_paginated_result_ref01_ent.list(epic_paginated_result_ref01_match)
+    const epic_paginated_result_ref01_list = (await epic_paginated_result_ref01_ent.list(epic_paginated_result_ref01_match)).map((e: any) => e.data())
 
 
   })

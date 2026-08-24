@@ -44,7 +44,7 @@ class StorySlimEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.story_slim"), "story_slim_ref01"));
 
         $story_slim_ref01_data_result = $story_slim_ref01_ent->create($story_slim_ref01_data, null);
-        $story_slim_ref01_data = Helpers::to_map($story_slim_ref01_data_result);
+        $story_slim_ref01_data = Helpers::to_map(is_object($story_slim_ref01_data_result) && method_exists($story_slim_ref01_data_result, 'data_get') ? $story_slim_ref01_data_result->data_get() : $story_slim_ref01_data_result);
         $this->assertNotNull($story_slim_ref01_data);
 
         // UPDATE
@@ -56,7 +56,7 @@ class StorySlimEntityTest extends TestCase
         $story_slim_ref01_data_up0_up[$story_slim_ref01_markdef_up0_name] = $story_slim_ref01_markdef_up0_value;
 
         $story_slim_ref01_resdata_up0_result = $story_slim_ref01_ent->update($story_slim_ref01_data_up0_up, null);
-        $story_slim_ref01_resdata_up0 = Helpers::to_map($story_slim_ref01_resdata_up0_result);
+        $story_slim_ref01_resdata_up0 = Helpers::to_map(is_object($story_slim_ref01_resdata_up0_result) && method_exists($story_slim_ref01_resdata_up0_result, 'data_get') ? $story_slim_ref01_resdata_up0_result->data_get() : $story_slim_ref01_resdata_up0_result);
         $this->assertNotNull($story_slim_ref01_resdata_up0);
         $this->assertEquals($story_slim_ref01_resdata_up0[$story_slim_ref01_markdef_up0_name], $story_slim_ref01_markdef_up0_value);
 

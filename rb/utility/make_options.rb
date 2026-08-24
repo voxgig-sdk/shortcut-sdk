@@ -49,6 +49,12 @@ module ShortcutUtilities
       "entity" => { "`$CHILD`" => { "`$OPEN`" => true, "active" => false, "alias" => {} } },
       "feature" => { "`$CHILD`" => { "`$OPEN`" => true, "active" => false } },
       "utility" => {},
+      # Feature INSTANCES supplied at construction (the station adopt
+      # path): consumed by the constructor's feature_add loop, so they are
+      # class instances, not data — `$ANY` accepts them verbatim. Without
+      # this entry the seam is dead: the constructor reads
+      # options["extend"], but validate rejected the key.
+      "extend" => "`$ANY`",
       "system" => {},
       "test" => { "active" => false, "entity" => { "`$OPEN`" => true } },
       "clean" => { "keys" => "key,token,id" },
@@ -61,7 +67,11 @@ module ShortcutUtilities
 
     sys_fetch = VoxgigStruct.getpath(opts, "system.fetch")
 
-    merged = VoxgigStruct.merge([{}, cfgopts, opts])
+    # Clone the config side before merging: `config` is a process-wide
+    # singleton (see Config.shared_config), and merge would otherwise use its
+    # nested hashes as merge TARGETS — one instance's options (server,
+    # headers, ...) would contaminate every instance constructed after it.
+    merged = VoxgigStruct.merge([{}, VoxgigStruct.clone(cfgopts), opts])
     validated = VoxgigStruct.validate(merged, optspec)
     opts = validated.is_a?(Hash) ? validated : {}
 
@@ -117,6 +127,18 @@ module ShortcutUtilities
         featureorder = ["test"] + names.reject { |n| n == "test" }
       else
         featureorder = names
+      end
+      # Station special case, mirroring test's: its transport wrap must
+      # sit immediately outside the base transport (inside retry/cache/
+      # netsim), so map-form activation hoists it to just after test -
+      # or first, when no test entry exists. Without this the sorted
+      # default would init station last and wrap OUTSIDE the recording
+      # features, turning its wire-truth events into fiction.
+      si = featureorder.index("station")
+      unless si.nil?
+        featureorder.delete_at(si)
+        ti = featureorder.index("test")
+        featureorder.insert(ti.nil? ? 0 : ti + 1, "station")
       end
     end
 

@@ -44,13 +44,13 @@ describe('WebhookEntity', async () => {
     const webhook_ref01_ent = client.Webhook()
     let webhook_ref01_data = setup.data.new.webhook['webhook_ref01']
 
-    webhook_ref01_data = await webhook_ref01_ent.create(webhook_ref01_data)
+    webhook_ref01_data = (await webhook_ref01_ent.create(webhook_ref01_data)).data()
     assert(null != webhook_ref01_data)
 
 
     // LOAD
     const webhook_ref01_match_dt0 = {}
-    const webhook_ref01_data_dt0 = await webhook_ref01_ent.load(webhook_ref01_match_dt0)
+    const webhook_ref01_data_dt0 = (await webhook_ref01_ent.load(webhook_ref01_match_dt0)).data()
     assert(null != webhook_ref01_data_dt0)
 
 

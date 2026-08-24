@@ -40,7 +40,7 @@ class StoryEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -88,7 +88,7 @@ class StoryEntityTest extends TestCase
         $story_ref01_data["project_id"] = $setup["idmap"]["project01"];
 
         $story_ref01_data_result = $story_ref01_ent->create($story_ref01_data, null);
-        $story_ref01_data = Helpers::to_map($story_ref01_data_result);
+        $story_ref01_data = Helpers::to_map(is_object($story_ref01_data_result) && method_exists($story_ref01_data_result, 'data_get') ? $story_ref01_data_result->data_get() : $story_ref01_data_result);
         $this->assertNotNull($story_ref01_data);
         $this->assertNotNull($story_ref01_data["id"]);
 
@@ -113,7 +113,7 @@ class StoryEntityTest extends TestCase
         $story_ref01_data_up0_up[$story_ref01_markdef_up0_name] = $story_ref01_markdef_up0_value;
 
         $story_ref01_resdata_up0_result = $story_ref01_ent->update($story_ref01_data_up0_up, null);
-        $story_ref01_resdata_up0 = Helpers::to_map($story_ref01_resdata_up0_result);
+        $story_ref01_resdata_up0 = Helpers::to_map(is_object($story_ref01_resdata_up0_result) && method_exists($story_ref01_resdata_up0_result, 'data_get') ? $story_ref01_resdata_up0_result->data_get() : $story_ref01_resdata_up0_result);
         $this->assertNotNull($story_ref01_resdata_up0);
         $this->assertEquals($story_ref01_resdata_up0["id"], $story_ref01_data_up0_up["id"]);
         $this->assertEquals($story_ref01_resdata_up0[$story_ref01_markdef_up0_name], $story_ref01_markdef_up0_value);
@@ -123,7 +123,7 @@ class StoryEntityTest extends TestCase
             "id" => $story_ref01_data["id"],
         ];
         $story_ref01_data_dt0_loaded = $story_ref01_ent->load($story_ref01_match_dt0, null);
-        $story_ref01_data_dt0_load_result = Helpers::to_map($story_ref01_data_dt0_loaded);
+        $story_ref01_data_dt0_load_result = Helpers::to_map(is_object($story_ref01_data_dt0_loaded) && method_exists($story_ref01_data_dt0_loaded, 'data_get') ? $story_ref01_data_dt0_loaded->data_get() : $story_ref01_data_dt0_loaded);
         $this->assertNotNull($story_ref01_data_dt0_load_result);
         $this->assertEquals($story_ref01_data_dt0_load_result["id"], $story_ref01_data["id"]);
 

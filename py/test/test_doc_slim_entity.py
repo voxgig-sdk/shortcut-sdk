@@ -42,8 +42,8 @@ class TestDocSlimEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestDocSlimEntity:
         doc_slim_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.doc_slim"), "doc_slim_ref01"))
 
-        doc_slim_ref01_data = helpers.to_map(doc_slim_ref01_ent.create(doc_slim_ref01_data, None))
+        doc_slim_ref01_data = helpers.to_map(runner.entity_data(doc_slim_ref01_ent.create(doc_slim_ref01_data, None)))
         assert doc_slim_ref01_data is not None
         assert doc_slim_ref01_data["id"] is not None
 

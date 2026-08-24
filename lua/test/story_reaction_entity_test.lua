@@ -43,7 +43,7 @@ describe("StoryReactionEntity", function()
 
     local story_reaction_ref01_data_result, err = story_reaction_ref01_ent:create(story_reaction_ref01_data, nil)
     assert.is_nil(err)
-    story_reaction_ref01_data = helpers.to_map(story_reaction_ref01_data_result)
+    story_reaction_ref01_data = helpers.to_map(type(story_reaction_ref01_data_result) == 'table' and story_reaction_ref01_data_result.data_get and story_reaction_ref01_data_result:data_get() or story_reaction_ref01_data_result)
     assert.is_not_nil(story_reaction_ref01_data)
 
 

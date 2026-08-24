@@ -37,7 +37,7 @@ class EpicWorkflowEntity extends ShortcutEntityBase<EpicWorkflow> {
 
 
 
-  async list(this: any, reqmatch?: EpicWorkflowListMatch, ctrl?: Control): Promise<EpicWorkflow[]> {
+  async list(this: any, reqmatch?: EpicWorkflowListMatch, ctrl?: Control): Promise<EpicWorkflowEntity[]> {
 
     const utility = this._utility
 

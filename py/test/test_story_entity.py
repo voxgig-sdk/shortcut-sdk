@@ -42,8 +42,8 @@ class TestStoryEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from shortcut_sdk.config import make_config
-        cfg = make_config()
+        from shortcut_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ShortcutSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -83,7 +83,7 @@ class TestStoryEntity:
         story_ref01_data["label_id"] = setup["idmap"]["label01"]
         story_ref01_data["project_id"] = setup["idmap"]["project01"]
 
-        story_ref01_data = helpers.to_map(story_ref01_ent.create(story_ref01_data, None))
+        story_ref01_data = helpers.to_map(runner.entity_data(story_ref01_ent.create(story_ref01_data, None)))
         assert story_ref01_data is not None
         assert story_ref01_data["id"] is not None
 
@@ -107,7 +107,7 @@ class TestStoryEntity:
         story_ref01_markdef_up0_value = "Mark01-story_ref01_" + str(setup["now"])
         story_ref01_data_up0_up[story_ref01_markdef_up0_name] = story_ref01_markdef_up0_value
 
-        story_ref01_resdata_up0 = helpers.to_map(story_ref01_ent.update(story_ref01_data_up0_up, None))
+        story_ref01_resdata_up0 = helpers.to_map(runner.entity_data(story_ref01_ent.update(story_ref01_data_up0_up, None)))
         assert story_ref01_resdata_up0 is not None
         assert story_ref01_resdata_up0["id"] == story_ref01_data_up0_up["id"]
         assert story_ref01_resdata_up0[story_ref01_markdef_up0_name] == story_ref01_markdef_up0_value
@@ -117,7 +117,7 @@ class TestStoryEntity:
             "id": story_ref01_data["id"],
         }
         story_ref01_data_dt0_loaded = story_ref01_ent.load(story_ref01_match_dt0, None)
-        story_ref01_data_dt0_load_result = helpers.to_map(story_ref01_data_dt0_loaded)
+        story_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(story_ref01_data_dt0_loaded))
         assert story_ref01_data_dt0_load_result is not None
         assert story_ref01_data_dt0_load_result["id"] == story_ref01_data["id"]
 

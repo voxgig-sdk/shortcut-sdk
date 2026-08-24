@@ -40,7 +40,7 @@ class HealthEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -84,7 +84,7 @@ class HealthEntityTest extends TestCase
         $health_ref01_data["epic_id"] = $setup["idmap"]["epic01"];
 
         $health_ref01_data_result = $health_ref01_ent->create($health_ref01_data, null);
-        $health_ref01_data = Helpers::to_map($health_ref01_data_result);
+        $health_ref01_data = Helpers::to_map(is_object($health_ref01_data_result) && method_exists($health_ref01_data_result, 'data_get') ? $health_ref01_data_result->data_get() : $health_ref01_data_result);
         $this->assertNotNull($health_ref01_data);
         $this->assertNotNull($health_ref01_data["id"]);
 
@@ -111,7 +111,7 @@ class HealthEntityTest extends TestCase
         $health_ref01_data_up0_up[$health_ref01_markdef_up0_name] = $health_ref01_markdef_up0_value;
 
         $health_ref01_resdata_up0_result = $health_ref01_ent->update($health_ref01_data_up0_up, null);
-        $health_ref01_resdata_up0 = Helpers::to_map($health_ref01_resdata_up0_result);
+        $health_ref01_resdata_up0 = Helpers::to_map(is_object($health_ref01_resdata_up0_result) && method_exists($health_ref01_resdata_up0_result, 'data_get') ? $health_ref01_resdata_up0_result->data_get() : $health_ref01_resdata_up0_result);
         $this->assertNotNull($health_ref01_resdata_up0);
         $this->assertEquals($health_ref01_resdata_up0["id"], $health_ref01_data_up0_up["id"]);
         $this->assertEquals($health_ref01_resdata_up0[$health_ref01_markdef_up0_name], $health_ref01_markdef_up0_value);
@@ -121,7 +121,7 @@ class HealthEntityTest extends TestCase
             "id" => $health_ref01_data["id"],
         ];
         $health_ref01_data_dt0_loaded = $health_ref01_ent->load($health_ref01_match_dt0, null);
-        $health_ref01_data_dt0_load_result = Helpers::to_map($health_ref01_data_dt0_loaded);
+        $health_ref01_data_dt0_load_result = Helpers::to_map(is_object($health_ref01_data_dt0_loaded) && method_exists($health_ref01_data_dt0_loaded, 'data_get') ? $health_ref01_data_dt0_loaded->data_get() : $health_ref01_data_dt0_loaded);
         $this->assertNotNull($health_ref01_data_dt0_load_result);
         $this->assertEquals($health_ref01_data_dt0_load_result["id"], $health_ref01_data["id"]);
 

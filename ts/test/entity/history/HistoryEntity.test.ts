@@ -64,7 +64,7 @@ describe('HistoryEntity', async () => {
     const history_ref01_match: any = {}
     history_ref01_match['story_id'] = setup.idmap['story01']
 
-    const history_ref01_list = await history_ref01_ent.list(history_ref01_match)
+    const history_ref01_list = (await history_ref01_ent.list(history_ref01_match)).map((e: any) => e.data())
 
 
   })

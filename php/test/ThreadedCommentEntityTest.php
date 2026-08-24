@@ -40,7 +40,7 @@ class ThreadedCommentEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ShortcutConfig::make_config();
+        $cfg = ShortcutConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ShortcutSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -84,7 +84,7 @@ class ThreadedCommentEntityTest extends TestCase
         $threaded_comment_ref01_data["epic_id"] = $setup["idmap"]["epic01"];
 
         $threaded_comment_ref01_data_result = $threaded_comment_ref01_ent->create($threaded_comment_ref01_data, null);
-        $threaded_comment_ref01_data = Helpers::to_map($threaded_comment_ref01_data_result);
+        $threaded_comment_ref01_data = Helpers::to_map(is_object($threaded_comment_ref01_data_result) && method_exists($threaded_comment_ref01_data_result, 'data_get') ? $threaded_comment_ref01_data_result->data_get() : $threaded_comment_ref01_data_result);
         $this->assertNotNull($threaded_comment_ref01_data);
         $this->assertNotNull($threaded_comment_ref01_data["id"]);
 
@@ -112,7 +112,7 @@ class ThreadedCommentEntityTest extends TestCase
         $threaded_comment_ref01_data_up0_up[$threaded_comment_ref01_markdef_up0_name] = $threaded_comment_ref01_markdef_up0_value;
 
         $threaded_comment_ref01_resdata_up0_result = $threaded_comment_ref01_ent->update($threaded_comment_ref01_data_up0_up, null);
-        $threaded_comment_ref01_resdata_up0 = Helpers::to_map($threaded_comment_ref01_resdata_up0_result);
+        $threaded_comment_ref01_resdata_up0 = Helpers::to_map(is_object($threaded_comment_ref01_resdata_up0_result) && method_exists($threaded_comment_ref01_resdata_up0_result, 'data_get') ? $threaded_comment_ref01_resdata_up0_result->data_get() : $threaded_comment_ref01_resdata_up0_result);
         $this->assertNotNull($threaded_comment_ref01_resdata_up0);
         $this->assertEquals($threaded_comment_ref01_resdata_up0["id"], $threaded_comment_ref01_data_up0_up["id"]);
         $this->assertEquals($threaded_comment_ref01_resdata_up0[$threaded_comment_ref01_markdef_up0_name], $threaded_comment_ref01_markdef_up0_value);
@@ -122,7 +122,7 @@ class ThreadedCommentEntityTest extends TestCase
             "id" => $threaded_comment_ref01_data["id"],
         ];
         $threaded_comment_ref01_data_dt0_loaded = $threaded_comment_ref01_ent->load($threaded_comment_ref01_match_dt0, null);
-        $threaded_comment_ref01_data_dt0_load_result = Helpers::to_map($threaded_comment_ref01_data_dt0_loaded);
+        $threaded_comment_ref01_data_dt0_load_result = Helpers::to_map(is_object($threaded_comment_ref01_data_dt0_loaded) && method_exists($threaded_comment_ref01_data_dt0_loaded, 'data_get') ? $threaded_comment_ref01_data_dt0_loaded->data_get() : $threaded_comment_ref01_data_dt0_loaded);
         $this->assertNotNull($threaded_comment_ref01_data_dt0_load_result);
         $this->assertEquals($threaded_comment_ref01_data_dt0_load_result["id"], $threaded_comment_ref01_data["id"]);
 

@@ -62,14 +62,14 @@ describe('ObjectiveEntity', async () => {
     const objective_ref01_ent = client.Objective()
     let objective_ref01_data = setup.data.new.objective['objective_ref01']
 
-    objective_ref01_data = await objective_ref01_ent.create(objective_ref01_data)
+    objective_ref01_data = (await objective_ref01_ent.create(objective_ref01_data)).data()
     assert(null != objective_ref01_data.id)
 
 
     // LIST
     const objective_ref01_match: any = {}
 
-    const objective_ref01_list = await objective_ref01_ent.list(objective_ref01_match)
+    const objective_ref01_list = (await objective_ref01_ent.list(objective_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(objective_ref01_list, { id: objective_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('ObjectiveEntity', async () => {
     const objective_ref01_markdef_up0 = { name: 'app_url', value: 'Mark01-objective_ref01_' + setup.now }
     ;(objective_ref01_data_up0 as any)[objective_ref01_markdef_up0.name] = objective_ref01_markdef_up0.value
 
-    const objective_ref01_resdata_up0 = await objective_ref01_ent.update(objective_ref01_data_up0)
+    const objective_ref01_resdata_up0 = (await objective_ref01_ent.update(objective_ref01_data_up0)).data()
     assert(objective_ref01_resdata_up0.id === objective_ref01_data_up0.id)
 
     assert((objective_ref01_resdata_up0 as any)[objective_ref01_markdef_up0.name] === objective_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('ObjectiveEntity', async () => {
     // LOAD
     const objective_ref01_match_dt0: any = {}
     objective_ref01_match_dt0.id = objective_ref01_data.id
-    const objective_ref01_data_dt0 = await objective_ref01_ent.load(objective_ref01_match_dt0)
+    const objective_ref01_data_dt0 = (await objective_ref01_ent.load(objective_ref01_match_dt0)).data()
     assert(objective_ref01_data_dt0.id === objective_ref01_data.id)
 
 

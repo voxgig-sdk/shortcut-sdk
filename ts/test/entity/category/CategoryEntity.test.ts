@@ -62,14 +62,14 @@ describe('CategoryEntity', async () => {
     const category_ref01_ent = client.Category()
     let category_ref01_data = setup.data.new.category['category_ref01']
 
-    category_ref01_data = await category_ref01_ent.create(category_ref01_data)
+    category_ref01_data = (await category_ref01_ent.create(category_ref01_data)).data()
     assert(null != category_ref01_data.id)
 
 
     // LIST
     const category_ref01_match: any = {}
 
-    const category_ref01_list = await category_ref01_ent.list(category_ref01_match)
+    const category_ref01_list = (await category_ref01_ent.list(category_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(category_ref01_list, { id: category_ref01_data.id })))
 
@@ -81,7 +81,7 @@ describe('CategoryEntity', async () => {
     const category_ref01_markdef_up0 = { name: 'color', value: 'Mark01-category_ref01_' + setup.now }
     ;(category_ref01_data_up0 as any)[category_ref01_markdef_up0.name] = category_ref01_markdef_up0.value
 
-    const category_ref01_resdata_up0 = await category_ref01_ent.update(category_ref01_data_up0)
+    const category_ref01_resdata_up0 = (await category_ref01_ent.update(category_ref01_data_up0)).data()
     assert(category_ref01_resdata_up0.id === category_ref01_data_up0.id)
 
     assert((category_ref01_resdata_up0 as any)[category_ref01_markdef_up0.name] === category_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('CategoryEntity', async () => {
     // LOAD
     const category_ref01_match_dt0: any = {}
     category_ref01_match_dt0.id = category_ref01_data.id
-    const category_ref01_data_dt0 = await category_ref01_ent.load(category_ref01_match_dt0)
+    const category_ref01_data_dt0 = (await category_ref01_ent.load(category_ref01_match_dt0)).data()
     assert(category_ref01_data_dt0.id === category_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('CategoryEntity', async () => {
     // LIST
     const category_ref01_match_rt0: any = {}
 
-    const category_ref01_list_rt0 = await category_ref01_ent.list(category_ref01_match_rt0)
+    const category_ref01_list_rt0 = (await category_ref01_ent.list(category_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(category_ref01_list_rt0, { id: category_ref01_data.id })))
 
