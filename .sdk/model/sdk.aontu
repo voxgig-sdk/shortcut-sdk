@@ -1,0 +1,35 @@
+
+# Model definitions.
+@"@voxgig/apidef/model/apidef.aontu"
+@"@voxgig/sdkgen/model/sdkgen.aontu"
+
+
+# SDK Details.
+name: 'shortcut'
+origin: 'voxgig-sdk'
+def: 'shortcut-v3-openapi-3.0.0.json'
+
+
+# API Information
+@"api/api-info.aontu"
+
+
+# SDK Configuration.
+@"config.aontu"
+
+
+# SDK Entities
+@"entity/entity-index.aontu"
+
+
+# SDK Features.
+@"feature/feature-index.aontu"
+ 
+
+# SDK Targets.
+@"target/target-index.aontu"
+
+
+# Operation workflows.
+@"flow/flow-index.aontu"
+

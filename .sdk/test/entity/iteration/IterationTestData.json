@@ -1,0 +1,97 @@
+{
+  "existing": {
+    "iteration": {
+      "ITERATION00": {
+        "app_url": "sc8",
+        "associated_groups": [],
+        "created_at": "sca",
+        "description": "scb",
+        "end_date": "scc",
+        "entity_type": "scd",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "group_mention_ids": [],
+        "id": "ITERATION00",
+        "label_ids": [],
+        "labels": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "sd7",
+        "start_date": "sd8",
+        "stats": {},
+        "status": "sda",
+        "updated_at": "sdb"
+      },
+      "ITERATION01": {
+        "app_url": "s190",
+        "associated_groups": [],
+        "created_at": "s192",
+        "description": "s193",
+        "end_date": "s194",
+        "entity_type": "s195",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "group_mention_ids": [],
+        "id": "ITERATION01",
+        "label_ids": [],
+        "labels": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s19f",
+        "start_date": "s1a0",
+        "stats": {},
+        "status": "s1a2",
+        "updated_at": "s1a3"
+      },
+      "ITERATION02": {
+        "app_url": "s258",
+        "associated_groups": [],
+        "created_at": "s25a",
+        "description": "s25b",
+        "end_date": "s25c",
+        "entity_type": "s25d",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "group_mention_ids": [],
+        "id": "ITERATION02",
+        "label_ids": [],
+        "labels": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s267",
+        "start_date": "s268",
+        "stats": {},
+        "status": "s26a",
+        "updated_at": "s26b"
+      }
+    }
+  },
+  "new": {
+    "iteration": {
+      "iteration_ref01": {
+        "app_url": "s320",
+        "associated_groups": [],
+        "created_at": "s322",
+        "description": "s323",
+        "end_date": "s324",
+        "entity_type": "s325",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "group_mention_ids": [],
+        "label_ids": [],
+        "labels": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s32f",
+        "start_date": "s330",
+        "stats": {},
+        "status": "s332",
+        "updated_at": "s333"
+      }
+    }
+  }
+}

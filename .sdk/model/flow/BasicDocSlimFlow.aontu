@@ -1,0 +1,30 @@
+# BasicDocSlimFlow
+
+main: kit: flow: BasicDocSlimFlow:
+{
+  entity: "doc_slim",
+  kind: "basic",
+  name: "BasicDocSlimFlow",
+  step: [
+    {
+      input: {
+        ref: "doc_slim_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "doc_slim_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDocSlimFlow"
+}

@@ -1,0 +1,22 @@
+# BasicEpicUnlinkProductboardFlow
+
+main: kit: flow: BasicEpicUnlinkProductboardFlow:
+{
+  entity: "epic_unlink_productboard",
+  kind: "basic",
+  name: "BasicEpicUnlinkProductboardFlow",
+  step: [
+    {
+      input: {
+        ref: "epic_unlink_productboard_ref01"
+      }
+
+      match: {
+        "epic-public-id": "epic-public-id01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicEpicUnlinkProductboardFlow"
+}

@@ -1,0 +1,100 @@
+# BasicEntityTemplateFlow
+
+main: kit: flow: BasicEntityTemplateFlow:
+{
+  entity: "entity_template",
+  kind: "basic",
+  name: "BasicEntityTemplateFlow",
+  step: [
+    {
+      input: {
+        ref: "entity_template_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "entity_template_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "entity_template_ref01",
+        srcdatavar: "entity_template_ref01_data",
+        suffix: "_up0",
+        textfield: "author_id"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-entity_template_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "entity_template_ref01",
+        srcdatavar: "entity_template_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "entity_template01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-entity_template_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "entity_template_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "entity_template01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "entity_template_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEntityTemplateFlow"
+}

@@ -1,0 +1,100 @@
+# BasicLinkedFileFlow
+
+main: kit: flow: BasicLinkedFileFlow:
+{
+  entity: "linked_file",
+  kind: "basic",
+  name: "BasicLinkedFileFlow",
+  step: [
+    {
+      input: {
+        ref: "linked_file_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "linked_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "linked_file_ref01",
+        srcdatavar: "linked_file_ref01_data",
+        suffix: "_up0",
+        textfield: "content_type"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-linked_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "linked_file_ref01",
+        srcdatavar: "linked_file_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "linked_file01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-linked_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "linked_file_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "linked_file01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "linked_file_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLinkedFileFlow"
+}

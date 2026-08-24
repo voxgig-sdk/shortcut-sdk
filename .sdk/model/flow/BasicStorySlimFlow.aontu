@@ -1,0 +1,37 @@
+# BasicStorySlimFlow
+
+main: kit: flow: BasicStorySlimFlow:
+{
+  entity: "story_slim",
+  kind: "basic",
+  name: "BasicStorySlimFlow",
+  step: [
+    {
+      input: {
+        ref: "story_slim_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "story_slim_ref01",
+        srcdatavar: "story_slim_ref01_data",
+        suffix: "_up0",
+        textfield: "completed_at_end"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-story_slim_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStorySlimFlow"
+}

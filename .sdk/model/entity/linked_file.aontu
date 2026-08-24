@@ -1,0 +1,345 @@
+# Entity: linked_file
+
+main: kit: entity: linked_file: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "content_type"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "group_mention_ids"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "member_mention_ids"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "mention_ids"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "size"
+      op: {
+        create: {
+          req: false
+          type: "`$INTEGER`"
+        }
+        update: {
+          req: false
+          type: "`$INTEGER`"
+        }
+      }
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "story_id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "story_ids"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "thumbnail_url"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "uploader_id"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "url"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "linked_file"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/linked-files"
+          parts: [
+            "api"
+            "v3"
+            "linked-files"
+          ]
+          transform: {
+            req: {
+              content_type: "`reqdata.content_type`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              size: "`reqdata.size`"
+              story_id: "`reqdata.story_id`"
+              thumbnail_url: "`reqdata.thumbnail_url`"
+              type: "`reqdata.type`"
+              uploader_id: "`reqdata.uploader_id`"
+              url: "`reqdata.url`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/v3/linked-files"
+          parts: [
+            "api"
+            "v3"
+            "linked-files"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "linked_file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/linked-files/{linked-file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "linked-files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "linked-file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "linked_file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/linked-files/{linked-file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "linked-files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "linked-file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "linked_file_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/linked-files/{linked-file-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "linked-files"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "linked-file-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+              size: "`reqdata.size`"
+              story_id: "`reqdata.story_id`"
+              thumbnail_url: "`reqdata.thumbnail_url`"
+              type: "`reqdata.type`"
+              uploader_id: "`reqdata.uploader_id`"
+              url: "`reqdata.url`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

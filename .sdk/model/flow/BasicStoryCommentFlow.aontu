@@ -1,0 +1,85 @@
+# BasicStoryCommentFlow
+
+main: kit: flow: BasicStoryCommentFlow:
+{
+  entity: "story_comment",
+  kind: "basic",
+  name: "BasicStoryCommentFlow",
+  step: [
+    {
+      input: {
+        ref: "story_comment_ref01"
+      }
+
+      match: {
+        "story-public-id": "story-public-id01",
+        story_id: "story01"
+      }
+
+      op: "create"
+    }
+
+    {
+      match: {
+        "story-public-id": "story-public-id01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "story_comment_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      data: {
+        story_id: "story01"
+      }
+
+      input: {
+        ref: "story_comment_ref01",
+        srcdatavar: "story_comment_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-story_comment_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "story_comment_ref01",
+        srcdatavar: "story_comment_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "story_comment01",
+        story_id: "story01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-story_comment_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStoryCommentFlow"
+}

@@ -1,0 +1,702 @@
+// Shortcut Ts SDK
+
+import { BulkEntity } from './entity/BulkEntity'
+import { CategoryEntity } from './entity/CategoryEntity'
+import { CommentEntity } from './entity/CommentEntity'
+import { CustomFieldEntity } from './entity/CustomFieldEntity'
+import { DisableEntity } from './entity/DisableEntity'
+import { DocSlimEntity } from './entity/DocSlimEntity'
+import { EnableEntity } from './entity/EnableEntity'
+import { EntityTemplateEntity } from './entity/EntityTemplateEntity'
+import { EpicEntity } from './entity/EpicEntity'
+import { EpicPaginatedResultEntity } from './entity/EpicPaginatedResultEntity'
+import { EpicUnlinkProductboardEntity } from './entity/EpicUnlinkProductboardEntity'
+import { EpicWorkflowEntity } from './entity/EpicWorkflowEntity'
+import { GroupEntity } from './entity/GroupEntity'
+import { HealthEntity } from './entity/HealthEntity'
+import { HistoryEntity } from './entity/HistoryEntity'
+import { IterationEntity } from './entity/IterationEntity'
+import { KeyResultEntity } from './entity/KeyResultEntity'
+import { LabelEntity } from './entity/LabelEntity'
+import { LinkedFileEntity } from './entity/LinkedFileEntity'
+import { MemberEntity } from './entity/MemberEntity'
+import { MilestoneEntity } from './entity/MilestoneEntity'
+import { ObjectifEntity } from './entity/ObjectifEntity'
+import { ObjectiveEntity } from './entity/ObjectiveEntity'
+import { ProjectEntity } from './entity/ProjectEntity'
+import { RepositoryEntity } from './entity/RepositoryEntity'
+import { SearchEntity } from './entity/SearchEntity'
+import { StoryEntity } from './entity/StoryEntity'
+import { StoryCommentEntity } from './entity/StoryCommentEntity'
+import { StoryLinkEntity } from './entity/StoryLinkEntity'
+import { StoryReactionEntity } from './entity/StoryReactionEntity'
+import { StorySlimEntity } from './entity/StorySlimEntity'
+import { TaskEntity } from './entity/TaskEntity'
+import { ThreadedCommentEntity } from './entity/ThreadedCommentEntity'
+import { UploadedFileEntity } from './entity/UploadedFileEntity'
+import { WebhookEntity } from './entity/WebhookEntity'
+import { WorkflowEntity } from './entity/WorkflowEntity'
+
+export type * from './ShortcutTypes'
+
+
+import { inspect } from 'node:util'
+
+import type { Context, Feature } from './types'
+
+import { config } from './Config'
+import { ShortcutEntityBase } from './ShortcutEntityBase'
+import { Utility } from './utility/Utility'
+
+
+import { BaseFeature } from './feature/base/BaseFeature'
+
+
+const stdutil = new Utility()
+
+
+class ShortcutSDK {
+  _mode: string = 'live'
+  _options: any
+  _utility = new Utility()
+  _features: Feature[]
+  _rootctx: Context
+
+  constructor(options?: any) {
+
+    this._rootctx = this._utility.makeContext({
+      client: this,
+      utility: this._utility,
+      config,
+      options,
+      shared: new WeakMap()
+    })
+
+    this._options = this._utility.makeOptions(this._rootctx)
+
+    const struct = this._utility.struct
+    const getpath = struct.getpath
+
+    if (true === getpath(this._options.feature, 'test.active')) {
+      this._mode = 'test'
+    }
+
+    this._rootctx.options = this._options
+
+    this._features = []
+
+    const featureAdd = this._utility.featureAdd
+    const featureInit = this._utility.featureInit
+
+    // Add features in the resolved order (makeOptions puts an explicit
+    // array order first, else defaults to test-first). Ordering matters:
+    // the `test` feature installs the base mock transport and the transport
+    // features (retry/cache/netsim/proxy/ratelimit) wrap whatever is current,
+    // so `test` must be added before them to sit at the base of the chain.
+    const featureorder = getpath(this._options, '__derived__.featureorder') || []
+    for (const fname of featureorder) {
+      const fopts = this._options.feature[fname] || {}
+      if (fopts.active) {
+        featureAdd(this._rootctx, this._rootctx.config.makeFeature(fname))
+      }
+    }
+
+    if (null != this._options.extend) {
+      for (let f of this._options.extend) {
+        featureAdd(this._rootctx, f)
+      }
+    }
+
+    for (let f of this._features) {
+      featureInit(this._rootctx, f)
+    }
+
+    const featureHook = this._utility.featureHook
+    featureHook(this._rootctx, 'PostConstruct')
+  }
+
+
+  options() {
+    return this._utility.struct.clone(this._options)
+  }
+
+
+  utility() {
+    return this._utility.struct.clone(this._utility)
+  }
+
+
+  async prepare(fetchargs?: any) {
+    const utility = this._utility
+    const struct = utility.struct
+    const clone = struct.clone
+
+    const {
+      makeContext,
+      makeFetchDef,
+      prepareHeaders,
+      prepareAuth,
+    } = utility
+
+    fetchargs = fetchargs || {}
+
+    let ctx: Context = makeContext({
+      opname: 'prepare',
+      ctrl: fetchargs.ctrl || {},
+    }, this._rootctx)
+
+    const options = this._options
+
+    // Build spec directly from SDK options + user-provided fetch args.
+    const spec: any = {
+      base: options.base,
+      prefix: options.prefix,
+      suffix: options.suffix,
+      path: fetchargs.path || '',
+      method: fetchargs.method || 'GET',
+      params: fetchargs.params || {},
+      query: fetchargs.query || {},
+      headers: prepareHeaders(ctx),
+      body: fetchargs.body,
+      step: 'start',
+    }
+
+    ctx.spec = spec
+
+    // Merge user-provided headers over SDK defaults.
+    if (fetchargs.headers) {
+      const uheaders = fetchargs.headers
+      for (let key in uheaders) {
+        spec.headers[key] = uheaders[key]
+      }
+    }
+
+    // Apply SDK auth (apikey, auth prefix, etc.)
+    const authResult = prepareAuth(ctx)
+    if (authResult instanceof Error) {
+      return authResult
+    }
+
+    return makeFetchDef(ctx)
+  }
+
+
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
+  async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('ShortcutSDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
+    const utility = this._utility
+
+    const fetcher = utility.fetcher
+    const makeContext = utility.makeContext
+
+    const fetchdef = await this.prepare(fetchargs)
+    if (fetchdef instanceof Error) {
+      return fetchdef
+    }
+
+    let ctx: Context = makeContext({
+      opname: 'direct',
+      ctrl: (fetchargs || {}).ctrl || {},
+    }, this._rootctx)
+
+    try {
+      const fetched = await fetcher(ctx, fetchdef.url, fetchdef)
+
+      if (null == fetched) {
+        return { ok: false, err: ctx.error('direct_no_response', 'response: undefined') }
+      }
+      else if (fetched instanceof Error) {
+        return { ok: false, err: fetched }
+      }
+
+      const status = fetched.status
+
+      // No body responses (204 No Content, 304 Not Modified) and explicit
+      // zero content-length must skip JSON parsing — fetched.json() would
+      // throw `Unexpected end of JSON input` on an empty body.
+      const headers = fetched.headers
+      const contentLength = headers && 'function' === typeof headers.get
+        ? headers.get('content-length')
+        : (headers || {})['content-length']
+      const noBody = 204 === status || 304 === status || '0' === String(contentLength)
+
+      let json: any = undefined
+      if (!noBody) {
+        try {
+          json = 'function' === typeof fetched.json ? await fetched.json() : fetched.json
+        }
+        catch (parseErr) {
+          // Body wasn't valid JSON — surface the raw response rather than
+          // throwing. data stays undefined; callers can inspect status/headers.
+          json = undefined
+        }
+      }
+
+      return {
+        ok: status >= 200 && status < 300,
+        status,
+        headers: fetched.headers,
+        data: json,
+      }
+    }
+    catch (err: any) {
+      return { ok: false, err }
+    }
+  }
+
+
+
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('ShortcutSDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('ShortcutSDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
+  // Entity access: `client.Bulk().list()` / `client.Bulk().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Bulk(entopts?: Record<string, any>) {
+    const self = this
+    return new BulkEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Category().list()` / `client.Category().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Category(entopts?: Record<string, any>) {
+    const self = this
+    return new CategoryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Comment().list()` / `client.Comment().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Comment(entopts?: Record<string, any>) {
+    const self = this
+    return new CommentEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.CustomField().list()` / `client.CustomField().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  CustomField(entopts?: Record<string, any>) {
+    const self = this
+    return new CustomFieldEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Disable().list()` / `client.Disable().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Disable(entopts?: Record<string, any>) {
+    const self = this
+    return new DisableEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.DocSlim().list()` / `client.DocSlim().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  DocSlim(entopts?: Record<string, any>) {
+    const self = this
+    return new DocSlimEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Enable().list()` / `client.Enable().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Enable(entopts?: Record<string, any>) {
+    const self = this
+    return new EnableEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EntityTemplate().list()` / `client.EntityTemplate().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EntityTemplate(entopts?: Record<string, any>) {
+    const self = this
+    return new EntityTemplateEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Epic().list()` / `client.Epic().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Epic(entopts?: Record<string, any>) {
+    const self = this
+    return new EpicEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EpicPaginatedResult().list()` / `client.EpicPaginatedResult().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EpicPaginatedResult(entopts?: Record<string, any>) {
+    const self = this
+    return new EpicPaginatedResultEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EpicUnlinkProductboard().list()` / `client.EpicUnlinkProductboard().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EpicUnlinkProductboard(entopts?: Record<string, any>) {
+    const self = this
+    return new EpicUnlinkProductboardEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.EpicWorkflow().list()` / `client.EpicWorkflow().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  EpicWorkflow(entopts?: Record<string, any>) {
+    const self = this
+    return new EpicWorkflowEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Group().list()` / `client.Group().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Group(entopts?: Record<string, any>) {
+    const self = this
+    return new GroupEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Health().list()` / `client.Health().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Health(entopts?: Record<string, any>) {
+    const self = this
+    return new HealthEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.History().list()` / `client.History().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  History(entopts?: Record<string, any>) {
+    const self = this
+    return new HistoryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Iteration().list()` / `client.Iteration().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Iteration(entopts?: Record<string, any>) {
+    const self = this
+    return new IterationEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.KeyResult().list()` / `client.KeyResult().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  KeyResult(entopts?: Record<string, any>) {
+    const self = this
+    return new KeyResultEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Label().list()` / `client.Label().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Label(entopts?: Record<string, any>) {
+    const self = this
+    return new LabelEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.LinkedFile().list()` / `client.LinkedFile().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  LinkedFile(entopts?: Record<string, any>) {
+    const self = this
+    return new LinkedFileEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Member().list()` / `client.Member().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Member(entopts?: Record<string, any>) {
+    const self = this
+    return new MemberEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Milestone().list()` / `client.Milestone().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Milestone(entopts?: Record<string, any>) {
+    const self = this
+    return new MilestoneEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Objectif().list()` / `client.Objectif().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Objectif(entopts?: Record<string, any>) {
+    const self = this
+    return new ObjectifEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Objective().list()` / `client.Objective().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Objective(entopts?: Record<string, any>) {
+    const self = this
+    return new ObjectiveEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Project().list()` / `client.Project().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Project(entopts?: Record<string, any>) {
+    const self = this
+    return new ProjectEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Repository().list()` / `client.Repository().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Repository(entopts?: Record<string, any>) {
+    const self = this
+    return new RepositoryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Search().list()` / `client.Search().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Search(entopts?: Record<string, any>) {
+    const self = this
+    return new SearchEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Story().list()` / `client.Story().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Story(entopts?: Record<string, any>) {
+    const self = this
+    return new StoryEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.StoryComment().list()` / `client.StoryComment().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  StoryComment(entopts?: Record<string, any>) {
+    const self = this
+    return new StoryCommentEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.StoryLink().list()` / `client.StoryLink().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  StoryLink(entopts?: Record<string, any>) {
+    const self = this
+    return new StoryLinkEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.StoryReaction().list()` / `client.StoryReaction().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  StoryReaction(entopts?: Record<string, any>) {
+    const self = this
+    return new StoryReactionEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.StorySlim().list()` / `client.StorySlim().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  StorySlim(entopts?: Record<string, any>) {
+    const self = this
+    return new StorySlimEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Task().list()` / `client.Task().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Task(entopts?: Record<string, any>) {
+    const self = this
+    return new TaskEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.ThreadedComment().list()` / `client.ThreadedComment().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ThreadedComment(entopts?: Record<string, any>) {
+    const self = this
+    return new ThreadedCommentEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.UploadedFile().list()` / `client.UploadedFile().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  UploadedFile(entopts?: Record<string, any>) {
+    const self = this
+    return new UploadedFileEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Webhook().list()` / `client.Webhook().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Webhook(entopts?: Record<string, any>) {
+    const self = this
+    return new WebhookEntity(self, entopts)
+  }
+
+
+  // Entity access: `client.Workflow().list()` / `client.Workflow().load({ id })`.
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Workflow(entopts?: Record<string, any>) {
+    const self = this
+    return new WorkflowEntity(self, entopts)
+  }
+
+
+
+
+  static test(testoptsarg?: any, sdkoptsarg?: any) {
+    const struct = stdutil.struct
+    const setpath = struct.setpath
+    const getdef = struct.getdef
+    const clone = struct.clone
+    const setprop = struct.setprop
+
+    const sdkopts = getdef(clone(sdkoptsarg), {})
+    const testopts = getdef(clone(testoptsarg), {})
+    setprop(testopts, 'active', true)
+    setpath(sdkopts, 'feature.test', testopts)
+
+    const testsdk = new ShortcutSDK(sdkopts)
+    testsdk._mode = 'test'
+
+    return testsdk
+  }
+
+
+  tester(testopts?: any, sdkopts?: any) {
+    return ShortcutSDK.test(testopts, sdkopts)
+  }
+
+
+  toJSON() {
+    return { name: 'Shortcut' }
+  }
+
+  toString() {
+    return 'Shortcut ' + this._utility.struct.jsonify(this.toJSON())
+  }
+
+  [inspect.custom]() {
+    return this.toString()
+  }
+
+}
+
+
+
+
+const SDK = ShortcutSDK
+
+
+export {
+  stdutil,
+  config,
+
+  BaseFeature,
+  ShortcutEntityBase,
+
+  ShortcutSDK,
+  SDK,
+}
+
+

@@ -1,0 +1,44 @@
+# BasicRepositoryFlow
+
+main: kit: flow: BasicRepositoryFlow:
+{
+  entity: "repository",
+  kind: "basic",
+  name: "BasicRepositoryFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "repository_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "repository_ref01",
+        srcdatavar: "repository_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "repository01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-repository_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRepositoryFlow"
+}

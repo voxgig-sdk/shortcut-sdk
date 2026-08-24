@@ -1,0 +1,138 @@
+# Entity: story_reaction
+
+main: kit: entity: story_reaction: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "emoji"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "story_reaction"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "comment_id"
+                orig: "comment_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "param"
+                name: "story_id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "POST"
+          orig: "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{story_id}"
+            "comments"
+            "{comment_id}"
+            "reactions"
+          ]
+          rename: {
+            param: {
+              "comment-public-id": "comment_id"
+              "story-public-id": "story_id"
+            }
+          }
+          select: {
+            exist: [
+              "comment_id"
+              "story_id"
+            ]
+          }
+          transform: {
+            req: {
+              emoji: "`reqdata.emoji`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "comment_id"
+                orig: "comment_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "param"
+                name: "story_id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{story_id}"
+            "comments"
+            "{comment_id}"
+            "reactions"
+          ]
+          rename: {
+            param: {
+              "comment-public-id": "comment_id"
+              "story-public-id": "story_id"
+            }
+          }
+          select: {
+            exist: [
+              "comment_id"
+              "story_id"
+            ]
+          }
+          transform: {
+            req: {
+              emoji: "`reqdata.emoji`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "story"
+        "comment"
+      ]
+    ]
+  }
+
+
+
+}

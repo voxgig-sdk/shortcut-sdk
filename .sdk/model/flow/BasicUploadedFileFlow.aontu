@@ -1,0 +1,100 @@
+# BasicUploadedFileFlow
+
+main: kit: flow: BasicUploadedFileFlow:
+{
+  entity: "uploaded_file",
+  kind: "basic",
+  name: "BasicUploadedFileFlow",
+  step: [
+    {
+      input: {
+        ref: "uploaded_file_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "uploaded_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "uploaded_file_ref01",
+        srcdatavar: "uploaded_file_ref01_data",
+        suffix: "_up0",
+        textfield: "content_type"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-uploaded_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "uploaded_file_ref01",
+        srcdatavar: "uploaded_file_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "uploaded_file01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-uploaded_file_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "uploaded_file_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "uploaded_file01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "uploaded_file_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUploadedFileFlow"
+}

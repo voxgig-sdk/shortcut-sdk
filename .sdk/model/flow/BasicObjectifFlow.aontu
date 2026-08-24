@@ -1,0 +1,9 @@
+# BasicObjectifFlow
+
+main: kit: flow: BasicObjectifFlow:
+{
+  entity: "objectif",
+  kind: "basic",
+  name: "BasicObjectifFlow",
+  "key$": "BasicObjectifFlow"
+}

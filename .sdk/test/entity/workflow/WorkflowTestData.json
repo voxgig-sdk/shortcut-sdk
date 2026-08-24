@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "workflow": {
+      "WORKFLOW00": {
+        "auto_assign_owner": true,
+        "created_at": "s6f",
+        "default_state_id": "DEFAULT_STATE01",
+        "description": "s71",
+        "entity_type": "s72",
+        "id": "WORKFLOW00",
+        "name": "s74",
+        "project_ids": [],
+        "states": [],
+        "team_id": "TEAM01",
+        "updated_at": "s78"
+      },
+      "WORKFLOW01": {
+        "auto_assign_owner": true,
+        "created_at": "sdd",
+        "default_state_id": "DEFAULT_STATE01",
+        "description": "sdf",
+        "entity_type": "se0",
+        "id": "WORKFLOW01",
+        "name": "se2",
+        "project_ids": [],
+        "states": [],
+        "team_id": "TEAM01",
+        "updated_at": "se6"
+      },
+      "WORKFLOW02": {
+        "auto_assign_owner": true,
+        "created_at": "s14b",
+        "default_state_id": "DEFAULT_STATE01",
+        "description": "s14d",
+        "entity_type": "s14e",
+        "id": "WORKFLOW02",
+        "name": "s150",
+        "project_ids": [],
+        "states": [],
+        "team_id": "TEAM01",
+        "updated_at": "s154"
+      }
+    }
+  },
+  "new": {
+    "workflow": {
+      "workflow_ref01": {
+        "auto_assign_owner": true,
+        "created_at": "s1b9",
+        "default_state_id": "DEFAULT_STATE01",
+        "description": "s1bb",
+        "entity_type": "s1bc",
+        "name": "s1be",
+        "project_ids": [],
+        "states": [],
+        "team_id": "TEAM01",
+        "updated_at": "s1c2"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# BasicEnableFlow
+
+main: kit: flow: BasicEnableFlow:
+{
+  entity: "enable",
+  kind: "basic",
+  name: "BasicEnableFlow",
+  step: [
+    {
+      input: {
+        ref: "enable_ref01",
+        srcdatavar: "enable_ref01_data",
+        suffix: "_up0"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-enable_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEnableFlow"
+}

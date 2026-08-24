@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "category": {
+      "CATEGORY00": {
+        "archived": true,
+        "color": "s65",
+        "created_at": "s66",
+        "entity_type": "s67",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "id": "CATEGORY00",
+        "name": "s6b",
+        "type": "s6c",
+        "updated_at": "s6d"
+      },
+      "CATEGORY01": {
+        "archived": true,
+        "color": "sc9",
+        "created_at": "sca",
+        "entity_type": "scb",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "id": "CATEGORY01",
+        "name": "scf",
+        "type": "sd0",
+        "updated_at": "sd1"
+      },
+      "CATEGORY02": {
+        "archived": true,
+        "color": "s12d",
+        "created_at": "s12e",
+        "entity_type": "s12f",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "id": "CATEGORY02",
+        "name": "s133",
+        "type": "s134",
+        "updated_at": "s135"
+      }
+    }
+  },
+  "new": {
+    "category": {
+      "category_ref01": {
+        "archived": true,
+        "color": "s191",
+        "created_at": "s192",
+        "entity_type": "s193",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "name": "s197",
+        "type": "s198",
+        "updated_at": "s199"
+      }
+    }
+  }
+}

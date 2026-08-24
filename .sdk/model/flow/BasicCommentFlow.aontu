@@ -1,0 +1,9 @@
+# BasicCommentFlow
+
+main: kit: flow: BasicCommentFlow:
+{
+  entity: "comment",
+  kind: "basic",
+  name: "BasicCommentFlow",
+  "key$": "BasicCommentFlow"
+}

@@ -1,0 +1,51 @@
+# BasicKeyResultFlow
+
+main: kit: flow: BasicKeyResultFlow:
+{
+  entity: "key_result",
+  kind: "basic",
+  name: "BasicKeyResultFlow",
+  step: [
+    {
+      input: {
+        ref: "key_result_ref01",
+        srcdatavar: "key_result_ref01_data",
+        suffix: "_up0",
+        textfield: "name"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-key_result_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "key_result_ref01",
+        srcdatavar: "key_result_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "key_result01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-key_result_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicKeyResultFlow"
+}

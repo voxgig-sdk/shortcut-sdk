@@ -1,0 +1,130 @@
+# Entity: webhook
+
+main: kit: entity: webhook: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "secret"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "webhook_url"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "webhook"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/integrations/webhook"
+          parts: [
+            "api"
+            "v3"
+            "integrations"
+            "webhook"
+          ]
+          transform: {
+            req: {
+              secret: "`reqdata.secret`"
+              webhook_url: "`reqdata.webhook_url`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "integration_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/integrations/webhook/{integration-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "integrations"
+            "webhook"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "integration-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "integration_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/integrations/webhook/{integration-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "integrations"
+            "webhook"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "integration-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

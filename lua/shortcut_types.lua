@@ -1,0 +1,2166 @@
+-- Typed models for the Shortcut SDK (LuaLS annotations).
+--
+-- GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
+-- params (op.<name>.points[].args.params[]). Field/param types come from the
+-- canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
+-- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
+-- edit by hand.
+
+---@class Bulk
+
+---@class BulkRemoveMatch
+
+---@class Category
+---@field archived boolean
+---@field color string
+---@field created_at string
+---@field entity_type string
+---@field external_id string
+---@field global_id string
+---@field id number
+---@field name string
+---@field type string
+---@field updated_at string
+
+---@class CategoryLoadMatch
+---@field id number
+
+---@class CategoryListMatch
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field entity_type? string
+---@field external_id? string
+---@field global_id? string
+---@field id? number
+---@field name? string
+---@field type? string
+---@field updated_at? string
+
+---@class CategoryCreateData
+---@field archived boolean
+---@field color string
+---@field created_at string
+---@field entity_type string
+---@field external_id string
+---@field global_id string
+---@field id number
+---@field name string
+---@field type string
+---@field updated_at string
+
+---@class CategoryUpdateData
+---@field id number
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field entity_type? string
+---@field external_id? string
+---@field global_id? string
+---@field name? string
+---@field type? string
+---@field updated_at? string
+
+---@class CategoryRemoveMatch
+---@field id number
+
+---@class Comment
+
+---@class CommentRemoveMatch
+---@field id number
+---@field story_id number
+
+---@class CustomField
+---@field after_id? string
+---@field before_id? string
+---@field canonical_name? string
+---@field created_at string
+---@field description? string
+---@field enabled boolean
+---@field entity_type string
+---@field field_type string
+---@field fixed_position? boolean
+---@field icon_set_identifier? string
+---@field id string
+---@field name string
+---@field position number
+---@field story_types? table
+---@field updated_at string
+---@field values? table
+
+---@class CustomFieldLoadMatch
+---@field id string
+
+---@class CustomFieldListMatch
+---@field after_id? string
+---@field before_id? string
+---@field canonical_name? string
+---@field created_at? string
+---@field description? string
+---@field enabled? boolean
+---@field entity_type? string
+---@field field_type? string
+---@field fixed_position? boolean
+---@field icon_set_identifier? string
+---@field id? string
+---@field name? string
+---@field position? number
+---@field story_types? table
+---@field updated_at? string
+---@field values? table
+
+---@class CustomFieldUpdateData
+---@field id string
+---@field after_id? string
+---@field before_id? string
+---@field canonical_name? string
+---@field created_at? string
+---@field description? string
+---@field enabled? boolean
+---@field entity_type? string
+---@field field_type? string
+---@field fixed_position? boolean
+---@field icon_set_identifier? string
+---@field name? string
+---@field position? number
+---@field story_types? table
+---@field updated_at? string
+---@field values? table
+
+---@class CustomFieldRemoveMatch
+---@field id string
+
+---@class Disable
+
+---@class DisableUpdateData
+
+---@class DocSlim
+---@field app_url string
+---@field content string
+---@field id string
+---@field title string
+
+---@class DocSlimListMatch
+---@field app_url? string
+---@field content? string
+---@field id? string
+---@field title? string
+
+---@class DocSlimCreateData
+---@field app_url string
+---@field content string
+---@field id string
+---@field title string
+
+---@class Enable
+
+---@class EnableUpdateData
+
+---@class EntityTemplate
+---@field author_id? string
+---@field created_at string
+---@field custom_fields? table
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_id? number
+---@field estimate? number
+---@field external_links? table
+---@field files? table
+---@field follower_ids? table
+---@field group_id? string
+---@field id string
+---@field iteration_id? number
+---@field label_ids? table
+---@field labels? table
+---@field last_used_at string
+---@field linked_files? table
+---@field name? string
+---@field owner_ids? table
+---@field project_id? number
+---@field story_contents table
+---@field story_type? string
+---@field sub_tasks? table
+---@field tasks? table
+---@field updated_at string
+---@field workflow_state_id? number
+
+---@class EntityTemplateLoadMatch
+---@field id string
+
+---@class EntityTemplateListMatch
+---@field author_id? string
+---@field created_at? string
+---@field custom_fields? table
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_id? number
+---@field estimate? number
+---@field external_links? table
+---@field files? table
+---@field follower_ids? table
+---@field group_id? string
+---@field id? string
+---@field iteration_id? number
+---@field label_ids? table
+---@field labels? table
+---@field last_used_at? string
+---@field linked_files? table
+---@field name? string
+---@field owner_ids? table
+---@field project_id? number
+---@field story_contents? table
+---@field story_type? string
+---@field sub_tasks? table
+---@field tasks? table
+---@field updated_at? string
+---@field workflow_state_id? number
+
+---@class EntityTemplateCreateData
+---@field author_id? string
+---@field created_at string
+---@field custom_fields? table
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_id? number
+---@field estimate? number
+---@field external_links? table
+---@field files? table
+---@field follower_ids? table
+---@field group_id? string
+---@field id string
+---@field iteration_id? number
+---@field label_ids? table
+---@field labels? table
+---@field last_used_at string
+---@field linked_files? table
+---@field name? string
+---@field owner_ids? table
+---@field project_id? number
+---@field story_contents table
+---@field story_type? string
+---@field sub_tasks? table
+---@field tasks? table
+---@field updated_at string
+---@field workflow_state_id? number
+
+---@class EntityTemplateUpdateData
+---@field id string
+---@field author_id? string
+---@field created_at? string
+---@field custom_fields? table
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_id? number
+---@field estimate? number
+---@field external_links? table
+---@field files? table
+---@field follower_ids? table
+---@field group_id? string
+---@field iteration_id? number
+---@field label_ids? table
+---@field labels? table
+---@field last_used_at? string
+---@field linked_files? table
+---@field name? string
+---@field owner_ids? table
+---@field project_id? number
+---@field story_contents? table
+---@field story_type? string
+---@field sub_tasks? table
+---@field tasks? table
+---@field updated_at? string
+---@field workflow_state_id? number
+
+---@class EntityTemplateRemoveMatch
+---@field id string
+
+---@class Epic
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field associated_groups table
+---@field before_id? number
+---@field comments table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field converted_from_story_id? number
+---@field created_at string
+---@field deadline string
+---@field description string
+---@field entity_type string
+---@field epic_state_id number
+---@field external_id string
+---@field follower_ids table
+---@field global_id string
+---@field group_id string
+---@field group_ids table
+---@field group_mention_ids table
+---@field health table
+---@field id number
+---@field label_ids table
+---@field labels table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field milestone_id number
+---@field name string
+---@field objective_ids table
+---@field owner_ids table
+---@field planned_start_date string
+---@field position number
+---@field productboard_id string
+---@field productboard_name string
+---@field productboard_plugin_id string
+---@field productboard_url string
+---@field project_ids table
+---@field requested_by_id string
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field stories_without_projects number
+---@field updated_at string
+
+---@class EpicLoadMatch
+---@field id number
+
+---@class EpicListMatch
+---@field label_id? number
+---@field milestone_id? number
+---@field objectif_id? number
+
+---@class EpicCreateData
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field associated_groups table
+---@field before_id? number
+---@field comments table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field converted_from_story_id? number
+---@field created_at string
+---@field deadline string
+---@field description string
+---@field entity_type string
+---@field epic_state_id number
+---@field external_id string
+---@field follower_ids table
+---@field global_id string
+---@field group_id string
+---@field group_ids table
+---@field group_mention_ids table
+---@field health table
+---@field id number
+---@field label_ids table
+---@field labels table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field milestone_id number
+---@field name string
+---@field objective_ids table
+---@field owner_ids table
+---@field planned_start_date string
+---@field position number
+---@field productboard_id string
+---@field productboard_name string
+---@field productboard_plugin_id string
+---@field productboard_url string
+---@field project_ids table
+---@field requested_by_id string
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field stories_without_projects number
+---@field updated_at string
+
+---@class EpicUpdateData
+---@field id number
+---@field after_id? number
+---@field app_url? string
+---@field archived? boolean
+---@field associated_groups? table
+---@field before_id? number
+---@field comments? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field converted_from_story_id? number
+---@field created_at? string
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_state_id? number
+---@field external_id? string
+---@field follower_ids? table
+---@field global_id? string
+---@field group_id? string
+---@field group_ids? table
+---@field group_mention_ids? table
+---@field health? table
+---@field label_ids? table
+---@field labels? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field milestone_id? number
+---@field name? string
+---@field objective_ids? table
+---@field owner_ids? table
+---@field planned_start_date? string
+---@field position? number
+---@field productboard_id? string
+---@field productboard_name? string
+---@field productboard_plugin_id? string
+---@field productboard_url? string
+---@field project_ids? table
+---@field requested_by_id? string
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field state? string
+---@field stats? table
+---@field stories_without_projects? number
+---@field updated_at? string
+
+---@class EpicRemoveMatch
+---@field id number
+
+---@class EpicPaginatedResult
+---@field app_url string
+---@field archived boolean
+---@field associated_groups table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field deadline string
+---@field description? string
+---@field entity_type string
+---@field epic_state_id number
+---@field external_id string
+---@field follower_ids table
+---@field global_id string
+---@field group_id string
+---@field group_ids table
+---@field group_mention_ids table
+---@field id number
+---@field label_ids table
+---@field labels table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field milestone_id number
+---@field name string
+---@field objective_ids table
+---@field owner_ids table
+---@field planned_start_date string
+---@field position number
+---@field productboard_id string
+---@field productboard_name string
+---@field productboard_plugin_id string
+---@field productboard_url string
+---@field project_ids table
+---@field requested_by_id string
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field stories_without_projects number
+---@field updated_at string
+
+---@class EpicPaginatedResultListMatch
+---@field app_url? string
+---@field archived? boolean
+---@field associated_groups? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field created_at? string
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_state_id? number
+---@field external_id? string
+---@field follower_ids? table
+---@field global_id? string
+---@field group_id? string
+---@field group_ids? table
+---@field group_mention_ids? table
+---@field id? number
+---@field label_ids? table
+---@field labels? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field milestone_id? number
+---@field name? string
+---@field objective_ids? table
+---@field owner_ids? table
+---@field planned_start_date? string
+---@field position? number
+---@field productboard_id? string
+---@field productboard_name? string
+---@field productboard_plugin_id? string
+---@field productboard_url? string
+---@field project_ids? table
+---@field requested_by_id? string
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field state? string
+---@field stats? table
+---@field stories_without_projects? number
+---@field updated_at? string
+
+---@class EpicUnlinkProductboard
+
+---@class EpicUnlinkProductboardCreateData
+---@field id number
+
+---@class EpicWorkflow
+---@field color? string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field global_id string
+---@field id number
+---@field name string
+---@field position number
+---@field type string
+---@field updated_at string
+
+---@class EpicWorkflowListMatch
+---@field color? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field global_id? string
+---@field id? number
+---@field name? string
+---@field position? number
+---@field type? string
+---@field updated_at? string
+
+---@class Group
+---@field app_url string
+---@field archived boolean
+---@field color string
+---@field color_key string
+---@field created_at string
+---@field default_workflow_id? number
+---@field description string
+---@field display_icon table
+---@field display_icon_id? string
+---@field entity_type string
+---@field global_id string
+---@field id string
+---@field member_ids table
+---@field mention_name string
+---@field name string
+---@field num_epics_started number
+---@field num_stories number
+---@field num_stories_backlog number
+---@field num_stories_started number
+---@field updated_at string
+---@field workflow_ids table
+
+---@class GroupLoadMatch
+---@field id string
+
+---@class GroupListMatch
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field color_key? string
+---@field created_at? string
+---@field default_workflow_id? number
+---@field description? string
+---@field display_icon? table
+---@field display_icon_id? string
+---@field entity_type? string
+---@field global_id? string
+---@field id? string
+---@field member_ids? table
+---@field mention_name? string
+---@field name? string
+---@field num_epics_started? number
+---@field num_stories? number
+---@field num_stories_backlog? number
+---@field num_stories_started? number
+---@field updated_at? string
+---@field workflow_ids? table
+
+---@class GroupCreateData
+---@field app_url string
+---@field archived boolean
+---@field color string
+---@field color_key string
+---@field created_at string
+---@field default_workflow_id? number
+---@field description string
+---@field display_icon table
+---@field display_icon_id? string
+---@field entity_type string
+---@field global_id string
+---@field id string
+---@field member_ids table
+---@field mention_name string
+---@field name string
+---@field num_epics_started number
+---@field num_stories number
+---@field num_stories_backlog number
+---@field num_stories_started number
+---@field updated_at string
+---@field workflow_ids table
+
+---@class GroupUpdateData
+---@field id string
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field color_key? string
+---@field created_at? string
+---@field default_workflow_id? number
+---@field description? string
+---@field display_icon? table
+---@field display_icon_id? string
+---@field entity_type? string
+---@field global_id? string
+---@field member_ids? table
+---@field mention_name? string
+---@field name? string
+---@field num_epics_started? number
+---@field num_stories? number
+---@field num_stories_backlog? number
+---@field num_stories_started? number
+---@field updated_at? string
+---@field workflow_ids? table
+
+---@class Health
+---@field author_id? string
+---@field created_at? string
+---@field entity_type string
+---@field epic_id? number
+---@field id string
+---@field objective_id? number
+---@field status string
+---@field text? string
+---@field updated_at? string
+
+---@class HealthLoadMatch
+---@field epic_id number
+
+---@class HealthListMatch
+---@field epic_id number
+
+---@class HealthCreateData
+---@field epic_id number
+---@field author_id? string
+---@field created_at? string
+---@field entity_type string
+---@field id string
+---@field objective_id? number
+---@field status string
+---@field text? string
+---@field updated_at? string
+
+---@class HealthUpdateData
+---@field id string
+---@field author_id? string
+---@field created_at? string
+---@field entity_type? string
+---@field epic_id? number
+---@field objective_id? number
+---@field status? string
+---@field text? string
+---@field updated_at? string
+
+---@class History
+---@field actions table
+---@field actor_name? string
+---@field automation_id? string
+---@field changed_at string
+---@field external_id? string
+---@field id string
+---@field member_id? string
+---@field primary_id? string
+---@field references? table
+---@field version string
+---@field webhook_id? string
+
+---@class HistoryListMatch
+---@field story_id number
+
+---@class Iteration
+---@field app_url string
+---@field associated_groups table
+---@field created_at string
+---@field description string
+---@field end_date string
+---@field entity_type string
+---@field follower_ids table
+---@field global_id string
+---@field group_ids table
+---@field group_mention_ids table
+---@field id number
+---@field label_ids table
+---@field labels table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field start_date string
+---@field stats table
+---@field status string
+---@field updated_at string
+
+---@class IterationLoadMatch
+---@field id number
+
+---@class IterationListMatch
+---@field app_url? string
+---@field associated_groups? table
+---@field created_at? string
+---@field description? string
+---@field end_date? string
+---@field entity_type? string
+---@field follower_ids? table
+---@field global_id? string
+---@field group_ids? table
+---@field group_mention_ids? table
+---@field id? number
+---@field label_ids? table
+---@field labels? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field start_date? string
+---@field stats? table
+---@field status? string
+---@field updated_at? string
+
+---@class IterationCreateData
+---@field app_url string
+---@field associated_groups table
+---@field created_at string
+---@field description string
+---@field end_date string
+---@field entity_type string
+---@field follower_ids table
+---@field global_id string
+---@field group_ids table
+---@field group_mention_ids table
+---@field id number
+---@field label_ids table
+---@field labels table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field start_date string
+---@field stats table
+---@field status string
+---@field updated_at string
+
+---@class IterationUpdateData
+---@field id number
+---@field app_url? string
+---@field associated_groups? table
+---@field created_at? string
+---@field description? string
+---@field end_date? string
+---@field entity_type? string
+---@field follower_ids? table
+---@field global_id? string
+---@field group_ids? table
+---@field group_mention_ids? table
+---@field label_ids? table
+---@field labels? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field start_date? string
+---@field stats? table
+---@field status? string
+---@field updated_at? string
+
+---@class IterationRemoveMatch
+---@field id number
+
+---@class KeyResult
+---@field current_observed_value table
+---@field current_target_value table
+---@field id string
+---@field initial_observed_value table
+---@field name string
+---@field objective_id number
+---@field observed_value? table
+---@field progress number
+---@field target_value? table
+---@field type string
+
+---@class KeyResultLoadMatch
+---@field id string
+
+---@class KeyResultUpdateData
+---@field id string
+---@field current_observed_value? table
+---@field current_target_value? table
+---@field initial_observed_value? table
+---@field name? string
+---@field objective_id? number
+---@field observed_value? table
+---@field progress? number
+---@field target_value? table
+---@field type? string
+
+---@class Label
+---@field app_url string
+---@field archived? boolean
+---@field color? string
+---@field created_at string
+---@field description? string
+---@field entity_type string
+---@field external_id? string
+---@field global_id string
+---@field id number
+---@field name string
+---@field num_epics number
+---@field num_epics_completed number
+---@field num_epics_in_progress number
+---@field num_epics_total number
+---@field num_epics_unstarted number
+---@field num_points_backlog number
+---@field num_points_completed number
+---@field num_points_in_progress number
+---@field num_points_total number
+---@field num_points_unstarted number
+---@field num_related_documents number
+---@field num_stories_backlog number
+---@field num_stories_completed number
+---@field num_stories_in_progress number
+---@field num_stories_total number
+---@field num_stories_unestimated number
+---@field num_stories_unstarted number
+---@field stats table
+---@field updated_at string
+
+---@class LabelLoadMatch
+---@field id number
+
+---@class LabelListMatch
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field global_id? string
+---@field id? number
+---@field name? string
+---@field num_epics? number
+---@field num_epics_completed? number
+---@field num_epics_in_progress? number
+---@field num_epics_total? number
+---@field num_epics_unstarted? number
+---@field num_points_backlog? number
+---@field num_points_completed? number
+---@field num_points_in_progress? number
+---@field num_points_total? number
+---@field num_points_unstarted? number
+---@field num_related_documents? number
+---@field num_stories_backlog? number
+---@field num_stories_completed? number
+---@field num_stories_in_progress? number
+---@field num_stories_total? number
+---@field num_stories_unestimated? number
+---@field num_stories_unstarted? number
+---@field stats? table
+---@field updated_at? string
+
+---@class LabelCreateData
+---@field app_url string
+---@field archived? boolean
+---@field color? string
+---@field created_at string
+---@field description? string
+---@field entity_type string
+---@field external_id? string
+---@field global_id string
+---@field id number
+---@field name string
+---@field num_epics number
+---@field num_epics_completed number
+---@field num_epics_in_progress number
+---@field num_epics_total number
+---@field num_epics_unstarted number
+---@field num_points_backlog number
+---@field num_points_completed number
+---@field num_points_in_progress number
+---@field num_points_total number
+---@field num_points_unstarted number
+---@field num_related_documents number
+---@field num_stories_backlog number
+---@field num_stories_completed number
+---@field num_stories_in_progress number
+---@field num_stories_total number
+---@field num_stories_unestimated number
+---@field num_stories_unstarted number
+---@field stats table
+---@field updated_at string
+
+---@class LabelUpdateData
+---@field id number
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field global_id? string
+---@field name? string
+---@field num_epics? number
+---@field num_epics_completed? number
+---@field num_epics_in_progress? number
+---@field num_epics_total? number
+---@field num_epics_unstarted? number
+---@field num_points_backlog? number
+---@field num_points_completed? number
+---@field num_points_in_progress? number
+---@field num_points_total? number
+---@field num_points_unstarted? number
+---@field num_related_documents? number
+---@field num_stories_backlog? number
+---@field num_stories_completed? number
+---@field num_stories_in_progress? number
+---@field num_stories_total? number
+---@field num_stories_unestimated? number
+---@field num_stories_unstarted? number
+---@field stats? table
+---@field updated_at? string
+
+---@class LabelRemoveMatch
+---@field id number
+
+---@class LinkedFile
+---@field content_type string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field size number
+---@field story_id? number
+---@field story_ids table
+---@field thumbnail_url string
+---@field type string
+---@field updated_at string
+---@field uploader_id string
+---@field url string
+
+---@class LinkedFileLoadMatch
+---@field id number
+
+---@class LinkedFileListMatch
+---@field content_type? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field group_mention_ids? table
+---@field id? number
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field size? number
+---@field story_id? number
+---@field story_ids? table
+---@field thumbnail_url? string
+---@field type? string
+---@field updated_at? string
+---@field uploader_id? string
+---@field url? string
+
+---@class LinkedFileCreateData
+---@field content_type string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field size number
+---@field story_id? number
+---@field story_ids table
+---@field thumbnail_url string
+---@field type string
+---@field updated_at string
+---@field uploader_id string
+---@field url string
+
+---@class LinkedFileUpdateData
+---@field id number
+---@field content_type? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field group_mention_ids? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field size? number
+---@field story_id? number
+---@field story_ids? table
+---@field thumbnail_url? string
+---@field type? string
+---@field updated_at? string
+---@field uploader_id? string
+---@field url? string
+
+---@class LinkedFileRemoveMatch
+---@field id number
+
+---@class Member
+---@field created_at string
+---@field created_without_invite boolean
+---@field disabled boolean
+---@field entity_type string
+---@field global_id string
+---@field group_ids table
+---@field id string
+---@field installation_id? string
+---@field is_owner boolean
+---@field mention_name string
+---@field name string
+---@field organization2 table
+---@field profile table
+---@field replaced_by? string
+---@field role string
+---@field state string
+---@field updated_at string
+---@field workspace2 table
+
+---@class MemberLoadMatch
+---@field id? string
+
+---@class MemberListMatch
+---@field created_at? string
+---@field created_without_invite? boolean
+---@field disabled? boolean
+---@field entity_type? string
+---@field global_id? string
+---@field group_ids? table
+---@field id? string
+---@field installation_id? string
+---@field is_owner? boolean
+---@field mention_name? string
+---@field name? string
+---@field organization2? table
+---@field profile? table
+---@field replaced_by? string
+---@field role? string
+---@field state? string
+---@field updated_at? string
+---@field workspace2? table
+
+---@class Milestone
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field categories table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field global_id string
+---@field id number
+---@field key_result_ids table
+---@field name string
+---@field position number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field updated_at string
+
+---@class MilestoneLoadMatch
+---@field id number
+
+---@class MilestoneListMatch
+---@field category_id? number
+
+---@class MilestoneCreateData
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field categories table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field global_id string
+---@field id number
+---@field key_result_ids table
+---@field name string
+---@field position number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field updated_at string
+
+---@class MilestoneUpdateData
+---@field id number
+---@field after_id? number
+---@field app_url? string
+---@field archived? boolean
+---@field before_id? number
+---@field categories? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field global_id? string
+---@field key_result_ids? table
+---@field name? string
+---@field position? number
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field state? string
+---@field stats? table
+---@field updated_at? string
+
+---@class MilestoneRemoveMatch
+---@field id number
+
+---@class Objectif
+
+---@class ObjectifRemoveMatch
+---@field id number
+
+---@class Objective
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field categories table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field global_id string
+---@field id number
+---@field key_result_ids table
+---@field name string
+---@field position number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field updated_at string
+
+---@class ObjectiveLoadMatch
+---@field objective_public_id number
+
+---@class ObjectiveListMatch
+---@field after_id? number
+---@field app_url? string
+---@field archived? boolean
+---@field before_id? number
+---@field categories? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field global_id? string
+---@field id? number
+---@field key_result_ids? table
+---@field name? string
+---@field position? number
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field state? string
+---@field stats? table
+---@field updated_at? string
+
+---@class ObjectiveCreateData
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field categories table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field global_id string
+---@field id number
+---@field key_result_ids table
+---@field name string
+---@field position number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field state string
+---@field stats table
+---@field updated_at string
+
+---@class ObjectiveUpdateData
+---@field objective_public_id number
+---@field after_id? number
+---@field app_url? string
+---@field archived? boolean
+---@field before_id? number
+---@field categories? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field global_id? string
+---@field id? number
+---@field key_result_ids? table
+---@field name? string
+---@field position? number
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field state? string
+---@field stats? table
+---@field updated_at? string
+
+---@class Project
+---@field abbreviation string
+---@field app_url string
+---@field archived boolean
+---@field color string
+---@field created_at string
+---@field days_to_thermometer number
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field follower_ids table
+---@field global_id string
+---@field id number
+---@field iteration_length number
+---@field name string
+---@field show_thermometer boolean
+---@field start_time string
+---@field stats table
+---@field team_id number
+---@field updated_at string
+---@field workflow_id number
+
+---@class ProjectLoadMatch
+---@field id number
+
+---@class ProjectListMatch
+---@field abbreviation? string
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field days_to_thermometer? number
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field follower_ids? table
+---@field global_id? string
+---@field id? number
+---@field iteration_length? number
+---@field name? string
+---@field show_thermometer? boolean
+---@field start_time? string
+---@field stats? table
+---@field team_id? number
+---@field updated_at? string
+---@field workflow_id? number
+
+---@class ProjectCreateData
+---@field abbreviation string
+---@field app_url string
+---@field archived boolean
+---@field color string
+---@field created_at string
+---@field days_to_thermometer number
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field follower_ids table
+---@field global_id string
+---@field id number
+---@field iteration_length number
+---@field name string
+---@field show_thermometer boolean
+---@field start_time string
+---@field stats table
+---@field team_id number
+---@field updated_at string
+---@field workflow_id number
+
+---@class ProjectUpdateData
+---@field id number
+---@field abbreviation? string
+---@field app_url? string
+---@field archived? boolean
+---@field color? string
+---@field created_at? string
+---@field days_to_thermometer? number
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field follower_ids? table
+---@field global_id? string
+---@field iteration_length? number
+---@field name? string
+---@field show_thermometer? boolean
+---@field start_time? string
+---@field stats? table
+---@field team_id? number
+---@field updated_at? string
+---@field workflow_id? number
+
+---@class ProjectRemoveMatch
+---@field id number
+
+---@class Repository
+---@field created_at string
+---@field entity_type string
+---@field external_id string
+---@field full_name string
+---@field id number
+---@field name string
+---@field type string
+---@field updated_at string
+---@field url string
+
+---@class RepositoryLoadMatch
+---@field id number
+
+---@class RepositoryListMatch
+---@field created_at? string
+---@field entity_type? string
+---@field external_id? string
+---@field full_name? string
+---@field id? number
+---@field name? string
+---@field type? string
+---@field updated_at? string
+---@field url? string
+
+---@class Search
+---@field epics table
+---@field iterations table
+---@field milestones table
+---@field stories table
+
+---@class SearchLoadMatch
+---@field epics? table
+---@field iterations? table
+---@field milestones? table
+---@field stories? table
+
+---@class Story
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field blocked boolean
+---@field blocker boolean
+---@field branch_ids? table
+---@field branches table
+---@field comment_ids? table
+---@field comments table
+---@field commit_ids? table
+---@field commits table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field custom_fields? table
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field cycle_time? number
+---@field deadline string
+---@field description string
+---@field entity_type string
+---@field epic_id number
+---@field estimate number
+---@field external_id string
+---@field external_links table
+---@field external_links_add? table
+---@field external_links_remove? table
+---@field file_ids? table
+---@field file_ids_add? table
+---@field file_ids_remove? table
+---@field files table
+---@field follower_ids table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field formatted_vcs_branch_name? string
+---@field global_id string
+---@field group_id string
+---@field group_mention_ids table
+---@field id number
+---@field iteration_id number
+---@field label_ids table
+---@field labels table
+---@field labels_add? table
+---@field labels_remove? table
+---@field lead_time? number
+---@field linked_file_ids? table
+---@field linked_file_ids_add? table
+---@field linked_file_ids_remove? table
+---@field linked_files table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field move_to? string
+---@field moved_at string
+---@field name string
+---@field num_tasks_completed? number
+---@field owner_ids table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field parent_story_id? number
+---@field position number
+---@field previous_iteration_ids table
+---@field project_id number
+---@field pull_request_ids? table
+---@field pull_requests table
+---@field requested_by_id string
+---@field source_task_id? number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field stats table
+---@field story_links table
+---@field story_template_id string
+---@field story_type string
+---@field sub_task_story_ids? table
+---@field sub_tasks? table
+---@field synced_item table
+---@field task_ids? table
+---@field tasks table
+---@field updated_at string
+---@field workflow_id number
+---@field workflow_state_id number
+
+---@class StoryLoadMatch
+---@field id number
+
+---@class StoryListMatch
+---@field group_id? string
+---@field epic_id? number
+---@field iteration_id? number
+---@field label_id? number
+---@field project_id? number
+
+---@class StoryCreateData
+---@field after_id? number
+---@field app_url string
+---@field archived boolean
+---@field before_id? number
+---@field blocked boolean
+---@field blocker boolean
+---@field branch_ids? table
+---@field branches table
+---@field comment_ids? table
+---@field comments table
+---@field commit_ids? table
+---@field commits table
+---@field completed boolean
+---@field completed_at string
+---@field completed_at_override string
+---@field created_at string
+---@field custom_fields? table
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field cycle_time? number
+---@field deadline string
+---@field description string
+---@field entity_type string
+---@field epic_id number
+---@field estimate number
+---@field external_id string
+---@field external_links table
+---@field external_links_add? table
+---@field external_links_remove? table
+---@field file_ids? table
+---@field file_ids_add? table
+---@field file_ids_remove? table
+---@field files table
+---@field follower_ids table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field formatted_vcs_branch_name? string
+---@field global_id string
+---@field group_id string
+---@field group_mention_ids table
+---@field id number
+---@field iteration_id number
+---@field label_ids table
+---@field labels table
+---@field labels_add? table
+---@field labels_remove? table
+---@field lead_time? number
+---@field linked_file_ids? table
+---@field linked_file_ids_add? table
+---@field linked_file_ids_remove? table
+---@field linked_files table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field move_to? string
+---@field moved_at string
+---@field name string
+---@field num_tasks_completed? number
+---@field owner_ids table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field parent_story_id? number
+---@field position number
+---@field previous_iteration_ids table
+---@field project_id number
+---@field pull_request_ids? table
+---@field pull_requests table
+---@field requested_by_id string
+---@field source_task_id? number
+---@field started boolean
+---@field started_at string
+---@field started_at_override string
+---@field stats table
+---@field story_links table
+---@field story_template_id string
+---@field story_type string
+---@field sub_task_story_ids? table
+---@field sub_tasks? table
+---@field synced_item table
+---@field task_ids? table
+---@field tasks table
+---@field updated_at string
+---@field workflow_id number
+---@field workflow_state_id number
+
+---@class StoryUpdateData
+---@field id number
+---@field after_id? number
+---@field app_url? string
+---@field archived? boolean
+---@field before_id? number
+---@field blocked? boolean
+---@field blocker? boolean
+---@field branch_ids? table
+---@field branches? table
+---@field comment_ids? table
+---@field comments? table
+---@field commit_ids? table
+---@field commits? table
+---@field completed? boolean
+---@field completed_at? string
+---@field completed_at_override? string
+---@field created_at? string
+---@field custom_fields? table
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field cycle_time? number
+---@field deadline? string
+---@field description? string
+---@field entity_type? string
+---@field epic_id? number
+---@field estimate? number
+---@field external_id? string
+---@field external_links? table
+---@field external_links_add? table
+---@field external_links_remove? table
+---@field file_ids? table
+---@field file_ids_add? table
+---@field file_ids_remove? table
+---@field files? table
+---@field follower_ids? table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field formatted_vcs_branch_name? string
+---@field global_id? string
+---@field group_id? string
+---@field group_mention_ids? table
+---@field iteration_id? number
+---@field label_ids? table
+---@field labels? table
+---@field labels_add? table
+---@field labels_remove? table
+---@field lead_time? number
+---@field linked_file_ids? table
+---@field linked_file_ids_add? table
+---@field linked_file_ids_remove? table
+---@field linked_files? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field move_to? string
+---@field moved_at? string
+---@field name? string
+---@field num_tasks_completed? number
+---@field owner_ids? table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field parent_story_id? number
+---@field position? number
+---@field previous_iteration_ids? table
+---@field project_id? number
+---@field pull_request_ids? table
+---@field pull_requests? table
+---@field requested_by_id? string
+---@field source_task_id? number
+---@field started? boolean
+---@field started_at? string
+---@field started_at_override? string
+---@field stats? table
+---@field story_links? table
+---@field story_template_id? string
+---@field story_type? string
+---@field sub_task_story_ids? table
+---@field sub_tasks? table
+---@field synced_item? table
+---@field task_ids? table
+---@field tasks? table
+---@field updated_at? string
+---@field workflow_id? number
+---@field workflow_state_id? number
+
+---@class StoryRemoveMatch
+---@field id number
+
+---@class StoryComment
+---@field app_url string
+---@field author_id string
+---@field blocker? boolean
+---@field created_at string
+---@field deleted boolean
+---@field entity_type string
+---@field external_id string
+---@field group_mention_ids table
+---@field id number
+---@field linked_to_slack boolean
+---@field member_mention_ids table
+---@field mention_ids table
+---@field parent_id? number
+---@field position number
+---@field reactions table
+---@field story_id number
+---@field text string
+---@field unblocks_parent? boolean
+---@field updated_at string
+
+---@class StoryCommentLoadMatch
+---@field id number
+---@field story_id number
+
+---@class StoryCommentListMatch
+---@field id number
+
+---@class StoryCommentCreateData
+---@field comment_id? number
+---@field story_id? number
+---@field id? number
+---@field app_url string
+---@field author_id string
+---@field blocker? boolean
+---@field created_at string
+---@field deleted boolean
+---@field entity_type string
+---@field external_id string
+---@field group_mention_ids table
+---@field linked_to_slack boolean
+---@field member_mention_ids table
+---@field mention_ids table
+---@field parent_id? number
+---@field position number
+---@field reactions table
+---@field text string
+---@field unblocks_parent? boolean
+---@field updated_at string
+
+---@class StoryCommentUpdateData
+---@field id number
+---@field story_id number
+---@field app_url? string
+---@field author_id? string
+---@field blocker? boolean
+---@field created_at? string
+---@field deleted? boolean
+---@field entity_type? string
+---@field external_id? string
+---@field group_mention_ids? table
+---@field linked_to_slack? boolean
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field parent_id? number
+---@field position? number
+---@field reactions? table
+---@field text? string
+---@field unblocks_parent? boolean
+---@field updated_at? string
+
+---@class StoryLink
+---@field created_at string
+---@field entity_type string
+---@field id number
+---@field object_id number
+---@field subject_id number
+---@field subject_workflow_state_id number
+---@field updated_at string
+---@field verb string
+
+---@class StoryLinkLoadMatch
+---@field id number
+
+---@class StoryLinkCreateData
+---@field created_at string
+---@field entity_type string
+---@field id number
+---@field object_id number
+---@field subject_id number
+---@field subject_workflow_state_id number
+---@field updated_at string
+---@field verb string
+
+---@class StoryLinkUpdateData
+---@field id number
+---@field created_at? string
+---@field entity_type? string
+---@field object_id? number
+---@field subject_id? number
+---@field subject_workflow_state_id? number
+---@field updated_at? string
+---@field verb? string
+
+---@class StoryLinkRemoveMatch
+---@field id number
+
+---@class StoryReaction
+---@field emoji string
+
+---@class StoryReactionCreateData
+---@field comment_id number
+---@field story_id number
+---@field emoji string
+
+---@class StoryReactionRemoveMatch
+---@field comment_id number
+---@field story_id number
+
+---@class StorySlim
+---@field after_id? number
+---@field archived? boolean
+---@field before_id? number
+---@field completed_at_end? string
+---@field completed_at_start? string
+---@field created_at_end? string
+---@field created_at_start? string
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field deadline? string
+---@field deadline_end? string
+---@field deadline_start? string
+---@field epic_id? number
+---@field epic_ids? table
+---@field estimate? number
+---@field external_id? string
+---@field external_links? table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field group_id? string
+---@field group_ids? table
+---@field includes_description? boolean
+---@field iteration_id? number
+---@field iteration_ids? table
+---@field label_ids? table
+---@field label_name? string
+---@field labels_add? table
+---@field labels_remove? table
+---@field move_to? string
+---@field owner_id? string
+---@field owner_ids? table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field project_id? number
+---@field project_ids? table
+---@field requested_by_id? string
+---@field stories table
+---@field story_ids table
+---@field story_type? string
+---@field updated_at_end? string
+---@field updated_at_start? string
+---@field workflow_state_id? number
+---@field workflow_state_types? table
+
+---@class StorySlimCreateData
+---@field after_id? number
+---@field archived? boolean
+---@field before_id? number
+---@field completed_at_end? string
+---@field completed_at_start? string
+---@field created_at_end? string
+---@field created_at_start? string
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field deadline? string
+---@field deadline_end? string
+---@field deadline_start? string
+---@field epic_id? number
+---@field epic_ids? table
+---@field estimate? number
+---@field external_id? string
+---@field external_links? table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field group_id? string
+---@field group_ids? table
+---@field includes_description? boolean
+---@field iteration_id? number
+---@field iteration_ids? table
+---@field label_ids? table
+---@field label_name? string
+---@field labels_add? table
+---@field labels_remove? table
+---@field move_to? string
+---@field owner_id? string
+---@field owner_ids? table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field project_id? number
+---@field project_ids? table
+---@field requested_by_id? string
+---@field stories table
+---@field story_ids table
+---@field story_type? string
+---@field updated_at_end? string
+---@field updated_at_start? string
+---@field workflow_state_id? number
+---@field workflow_state_types? table
+
+---@class StorySlimUpdateData
+---@field after_id? number
+---@field archived? boolean
+---@field before_id? number
+---@field completed_at_end? string
+---@field completed_at_start? string
+---@field created_at_end? string
+---@field created_at_start? string
+---@field custom_fields_add? table
+---@field custom_fields_remove? table
+---@field deadline? string
+---@field deadline_end? string
+---@field deadline_start? string
+---@field epic_id? number
+---@field epic_ids? table
+---@field estimate? number
+---@field external_id? string
+---@field external_links? table
+---@field follower_ids_add? table
+---@field follower_ids_remove? table
+---@field group_id? string
+---@field group_ids? table
+---@field includes_description? boolean
+---@field iteration_id? number
+---@field iteration_ids? table
+---@field label_ids? table
+---@field label_name? string
+---@field labels_add? table
+---@field labels_remove? table
+---@field move_to? string
+---@field owner_id? string
+---@field owner_ids? table
+---@field owner_ids_add? table
+---@field owner_ids_remove? table
+---@field project_id? number
+---@field project_ids? table
+---@field requested_by_id? string
+---@field stories? table
+---@field story_ids? table
+---@field story_type? string
+---@field updated_at_end? string
+---@field updated_at_start? string
+---@field workflow_state_id? number
+---@field workflow_state_types? table
+
+---@class Task
+---@field after_id? number
+---@field before_id? number
+---@field complete boolean
+---@field completed_at string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field global_id string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field owner_ids table
+---@field position number
+---@field story_id number
+---@field updated_at string
+
+---@class TaskLoadMatch
+---@field id number
+---@field story_id number
+
+---@class TaskCreateData
+---@field story_id number
+---@field after_id? number
+---@field before_id? number
+---@field complete boolean
+---@field completed_at string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field global_id string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field owner_ids table
+---@field position number
+---@field updated_at string
+
+---@class TaskUpdateData
+---@field id number
+---@field story_id number
+---@field after_id? number
+---@field before_id? number
+---@field complete? boolean
+---@field completed_at? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field global_id? string
+---@field group_mention_ids? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field owner_ids? table
+---@field position? number
+---@field updated_at? string
+
+---@class TaskRemoveMatch
+---@field id number
+---@field story_id number
+
+---@class ThreadedComment
+---@field app_url string
+---@field author_id string
+---@field comments table
+---@field created_at string
+---@field deleted boolean
+---@field entity_type string
+---@field external_id string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field text string
+---@field updated_at string
+
+---@class ThreadedCommentLoadMatch
+---@field epic_id number
+---@field id number
+
+---@class ThreadedCommentListMatch
+---@field epic_id number
+
+---@class ThreadedCommentCreateData
+---@field epic_id number
+---@field id? number
+---@field app_url string
+---@field author_id string
+---@field comments table
+---@field created_at string
+---@field deleted boolean
+---@field entity_type string
+---@field external_id string
+---@field group_mention_ids table
+---@field member_mention_ids table
+---@field mention_ids table
+---@field text string
+---@field updated_at string
+
+---@class ThreadedCommentUpdateData
+---@field epic_id number
+---@field id number
+---@field app_url? string
+---@field author_id? string
+---@field comments? table
+---@field created_at? string
+---@field deleted? boolean
+---@field entity_type? string
+---@field external_id? string
+---@field group_mention_ids? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field text? string
+---@field updated_at? string
+
+---@class ThreadedCommentRemoveMatch
+---@field epic_id number
+---@field id number
+
+---@class UploadedFile
+---@field content_type string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field filename string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field size number
+---@field story_ids table
+---@field thumbnail_url string
+---@field updated_at string
+---@field uploader_id string
+---@field url string
+
+---@class UploadedFileLoadMatch
+---@field id number
+
+---@class UploadedFileListMatch
+---@field content_type? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field filename? string
+---@field group_mention_ids? table
+---@field id? number
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field size? number
+---@field story_ids? table
+---@field thumbnail_url? string
+---@field updated_at? string
+---@field uploader_id? string
+---@field url? string
+
+---@class UploadedFileCreateData
+---@field content_type string
+---@field created_at string
+---@field description string
+---@field entity_type string
+---@field external_id string
+---@field filename string
+---@field group_mention_ids table
+---@field id number
+---@field member_mention_ids table
+---@field mention_ids table
+---@field name string
+---@field size number
+---@field story_ids table
+---@field thumbnail_url string
+---@field updated_at string
+---@field uploader_id string
+---@field url string
+
+---@class UploadedFileUpdateData
+---@field id number
+---@field content_type? string
+---@field created_at? string
+---@field description? string
+---@field entity_type? string
+---@field external_id? string
+---@field filename? string
+---@field group_mention_ids? table
+---@field member_mention_ids? table
+---@field mention_ids? table
+---@field name? string
+---@field size? number
+---@field story_ids? table
+---@field thumbnail_url? string
+---@field updated_at? string
+---@field uploader_id? string
+---@field url? string
+
+---@class UploadedFileRemoveMatch
+---@field id number
+
+---@class Webhook
+---@field secret? string
+---@field webhook_url string
+
+---@class WebhookLoadMatch
+---@field id number
+
+---@class WebhookCreateData
+---@field secret? string
+---@field webhook_url string
+
+---@class WebhookRemoveMatch
+---@field id number
+
+---@class Workflow
+---@field auto_assign_owner boolean
+---@field created_at string
+---@field default_state_id number
+---@field description string
+---@field entity_type string
+---@field id number
+---@field name string
+---@field project_ids table
+---@field states table
+---@field team_id number
+---@field updated_at string
+
+---@class WorkflowLoadMatch
+---@field id number
+
+---@class WorkflowListMatch
+---@field auto_assign_owner? boolean
+---@field created_at? string
+---@field default_state_id? number
+---@field description? string
+---@field entity_type? string
+---@field id? number
+---@field name? string
+---@field project_ids? table
+---@field states? table
+---@field team_id? number
+---@field updated_at? string
+
+local M = {}
+
+return M

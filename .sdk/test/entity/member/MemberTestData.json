@@ -1,0 +1,89 @@
+{
+  "existing": {
+    "member": {
+      "MEMBER00": {
+        "created_at": "sb4",
+        "created_without_invite": false,
+        "disabled": true,
+        "entity_type": "sb7",
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "id": "MEMBER00",
+        "installation_id": "INSTALLATION01",
+        "is_owner": true,
+        "mention_name": "sbd",
+        "name": "sbe",
+        "organization2": {},
+        "profile": {},
+        "replaced_by": "sc1",
+        "role": "sc2",
+        "state": "sc3",
+        "updated_at": "sc4",
+        "workspace2": {}
+      },
+      "MEMBER01": {
+        "created_at": "s168",
+        "created_without_invite": false,
+        "disabled": true,
+        "entity_type": "s16b",
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "id": "MEMBER01",
+        "installation_id": "INSTALLATION01",
+        "is_owner": true,
+        "mention_name": "s171",
+        "name": "s172",
+        "organization2": {},
+        "profile": {},
+        "replaced_by": "s175",
+        "role": "s176",
+        "state": "s177",
+        "updated_at": "s178",
+        "workspace2": {}
+      },
+      "MEMBER02": {
+        "created_at": "s21c",
+        "created_without_invite": false,
+        "disabled": true,
+        "entity_type": "s21f",
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "id": "MEMBER02",
+        "installation_id": "INSTALLATION01",
+        "is_owner": true,
+        "mention_name": "s225",
+        "name": "s226",
+        "organization2": {},
+        "profile": {},
+        "replaced_by": "s229",
+        "role": "s22a",
+        "state": "s22b",
+        "updated_at": "s22c",
+        "workspace2": {}
+      }
+    }
+  },
+  "new": {
+    "member": {
+      "member_ref01": {
+        "created_at": "s2d0",
+        "created_without_invite": false,
+        "disabled": true,
+        "entity_type": "s2d3",
+        "global_id": "GLOBAL01",
+        "group_ids": [],
+        "installation_id": "INSTALLATION01",
+        "is_owner": true,
+        "mention_name": "s2d9",
+        "name": "s2da",
+        "organization2": {},
+        "profile": {},
+        "replaced_by": "s2dd",
+        "role": "s2de",
+        "state": "s2df",
+        "updated_at": "s2e0",
+        "workspace2": {}
+      }
+    }
+  }
+}

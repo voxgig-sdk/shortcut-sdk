@@ -1,0 +1,85 @@
+{
+  "existing": {
+    "uploaded_file": {
+      "UPLOADED_FILE00": {
+        "content_type": "saa",
+        "created_at": "sab",
+        "description": "sac",
+        "entity_type": "sad",
+        "external_id": "EXTERNAL01",
+        "filename": "saf",
+        "group_mention_ids": [],
+        "id": "UPLOADED_FILE00",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "sb4",
+        "size": "sb5",
+        "story_ids": [],
+        "thumbnail_url": "sb7",
+        "updated_at": "sb8",
+        "uploader_id": "UPLOADER01",
+        "url": "sba"
+      },
+      "UPLOADED_FILE01": {
+        "content_type": "s154",
+        "created_at": "s155",
+        "description": "s156",
+        "entity_type": "s157",
+        "external_id": "EXTERNAL01",
+        "filename": "s159",
+        "group_mention_ids": [],
+        "id": "UPLOADED_FILE01",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s15e",
+        "size": "s15f",
+        "story_ids": [],
+        "thumbnail_url": "s161",
+        "updated_at": "s162",
+        "uploader_id": "UPLOADER01",
+        "url": "s164"
+      },
+      "UPLOADED_FILE02": {
+        "content_type": "s1fe",
+        "created_at": "s1ff",
+        "description": "s200",
+        "entity_type": "s201",
+        "external_id": "EXTERNAL01",
+        "filename": "s203",
+        "group_mention_ids": [],
+        "id": "UPLOADED_FILE02",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s208",
+        "size": "s209",
+        "story_ids": [],
+        "thumbnail_url": "s20b",
+        "updated_at": "s20c",
+        "uploader_id": "UPLOADER01",
+        "url": "s20e"
+      }
+    }
+  },
+  "new": {
+    "uploaded_file": {
+      "uploaded_file_ref01": {
+        "content_type": "s2a8",
+        "created_at": "s2a9",
+        "description": "s2aa",
+        "entity_type": "s2ab",
+        "external_id": "EXTERNAL01",
+        "filename": "s2ad",
+        "group_mention_ids": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "name": "s2b2",
+        "size": "s2b3",
+        "story_ids": [],
+        "thumbnail_url": "s2b5",
+        "updated_at": "s2b6",
+        "uploader_id": "UPLOADER01",
+        "url": "s2b8"
+      }
+    }
+  }
+}

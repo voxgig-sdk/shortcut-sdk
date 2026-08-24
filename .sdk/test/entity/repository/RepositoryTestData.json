@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "repository": {
+      "REPOSITORY00": {
+        "created_at": "s5a",
+        "entity_type": "s5b",
+        "external_id": "EXTERNAL01",
+        "full_name": "s5d",
+        "id": "REPOSITORY00",
+        "name": "s5f",
+        "type": "s60",
+        "updated_at": "s61",
+        "url": "s62"
+      },
+      "REPOSITORY01": {
+        "created_at": "sb4",
+        "entity_type": "sb5",
+        "external_id": "EXTERNAL01",
+        "full_name": "sb7",
+        "id": "REPOSITORY01",
+        "name": "sb9",
+        "type": "sba",
+        "updated_at": "sbb",
+        "url": "sbc"
+      },
+      "REPOSITORY02": {
+        "created_at": "s10e",
+        "entity_type": "s10f",
+        "external_id": "EXTERNAL01",
+        "full_name": "s111",
+        "id": "REPOSITORY02",
+        "name": "s113",
+        "type": "s114",
+        "updated_at": "s115",
+        "url": "s116"
+      }
+    }
+  },
+  "new": {
+    "repository": {
+      "repository_ref01": {
+        "created_at": "s168",
+        "entity_type": "s169",
+        "external_id": "EXTERNAL01",
+        "full_name": "s16b",
+        "name": "s16d",
+        "type": "s16e",
+        "updated_at": "s16f",
+        "url": "s170"
+      }
+    }
+  }
+}

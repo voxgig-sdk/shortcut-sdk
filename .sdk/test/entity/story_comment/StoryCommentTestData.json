@@ -1,0 +1,96 @@
+{
+  "existing": {
+    "story_comment": {
+      "STORY_COMMENT00": {
+        "app_url": "sbe",
+        "author_id": "AUTHOR01",
+        "blocker": true,
+        "created_at": "sc1",
+        "deleted": true,
+        "entity_type": "sc3",
+        "external_id": "EXTERNAL01",
+        "group_mention_ids": [],
+        "id": "STORY_COMMENT00",
+        "linked_to_slack": false,
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "parent_id": "PARENT01",
+        "position": "scb",
+        "reactions": [],
+        "story_id": "STORY01",
+        "text": "sce",
+        "unblocks_parent": false,
+        "updated_at": "sd0",
+        "comment_id": "COMMENT01"
+      },
+      "STORY_COMMENT01": {
+        "app_url": "s17c",
+        "author_id": "AUTHOR01",
+        "blocker": true,
+        "created_at": "s17f",
+        "deleted": true,
+        "entity_type": "s181",
+        "external_id": "EXTERNAL01",
+        "group_mention_ids": [],
+        "id": "STORY_COMMENT01",
+        "linked_to_slack": false,
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "parent_id": "PARENT01",
+        "position": "s189",
+        "reactions": [],
+        "story_id": "STORY01",
+        "text": "s18c",
+        "unblocks_parent": false,
+        "updated_at": "s18e",
+        "comment_id": "COMMENT01"
+      },
+      "STORY_COMMENT02": {
+        "app_url": "s23a",
+        "author_id": "AUTHOR01",
+        "blocker": true,
+        "created_at": "s23d",
+        "deleted": true,
+        "entity_type": "s23f",
+        "external_id": "EXTERNAL01",
+        "group_mention_ids": [],
+        "id": "STORY_COMMENT02",
+        "linked_to_slack": false,
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "parent_id": "PARENT01",
+        "position": "s247",
+        "reactions": [],
+        "story_id": "STORY01",
+        "text": "s24a",
+        "unblocks_parent": false,
+        "updated_at": "s24c",
+        "comment_id": "COMMENT01"
+      }
+    }
+  },
+  "new": {
+    "story_comment": {
+      "story_comment_ref01": {
+        "app_url": "s2f8",
+        "author_id": "AUTHOR01",
+        "blocker": true,
+        "created_at": "s2fb",
+        "deleted": true,
+        "entity_type": "s2fd",
+        "external_id": "EXTERNAL01",
+        "group_mention_ids": [],
+        "linked_to_slack": false,
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "parent_id": "PARENT01",
+        "position": "s305",
+        "reactions": [],
+        "story_id": "STORY01",
+        "text": "s308",
+        "unblocks_parent": false,
+        "updated_at": "s30a"
+      }
+    }
+  }
+}

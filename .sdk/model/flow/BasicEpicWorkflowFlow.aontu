@@ -1,0 +1,22 @@
+# BasicEpicWorkflowFlow
+
+main: kit: flow: BasicEpicWorkflowFlow:
+{
+  entity: "epic_workflow",
+  kind: "basic",
+  name: "BasicEpicWorkflowFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "epic_workflow_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEpicWorkflowFlow"
+}

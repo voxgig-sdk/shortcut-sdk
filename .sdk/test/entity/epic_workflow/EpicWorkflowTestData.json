@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "epic_workflow": {
+      "EPIC_WORKFLOW00": {
+        "color": "s64",
+        "created_at": "s65",
+        "description": "s66",
+        "entity_type": "s67",
+        "global_id": "GLOBAL01",
+        "id": "EPIC_WORKFLOW00",
+        "name": "s6a",
+        "position": "s6b",
+        "type": "s6c",
+        "updated_at": "s6d"
+      },
+      "EPIC_WORKFLOW01": {
+        "color": "sc8",
+        "created_at": "sc9",
+        "description": "sca",
+        "entity_type": "scb",
+        "global_id": "GLOBAL01",
+        "id": "EPIC_WORKFLOW01",
+        "name": "sce",
+        "position": "scf",
+        "type": "sd0",
+        "updated_at": "sd1"
+      },
+      "EPIC_WORKFLOW02": {
+        "color": "s12c",
+        "created_at": "s12d",
+        "description": "s12e",
+        "entity_type": "s12f",
+        "global_id": "GLOBAL01",
+        "id": "EPIC_WORKFLOW02",
+        "name": "s132",
+        "position": "s133",
+        "type": "s134",
+        "updated_at": "s135"
+      }
+    }
+  },
+  "new": {
+    "epic_workflow": {
+      "epic_workflow_ref01": {
+        "color": "s190",
+        "created_at": "s191",
+        "description": "s192",
+        "entity_type": "s193",
+        "global_id": "GLOBAL01",
+        "name": "s196",
+        "position": "s197",
+        "type": "s198",
+        "updated_at": "s199"
+      }
+    }
+  }
+}

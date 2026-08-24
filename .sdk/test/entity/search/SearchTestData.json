@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "search": {
+      "SEARCH00": {
+        "epics": {},
+        "iterations": {},
+        "milestones": {},
+        "stories": {},
+        "id": "SEARCH00"
+      },
+      "SEARCH01": {
+        "epics": {},
+        "iterations": {},
+        "milestones": {},
+        "stories": {},
+        "id": "SEARCH01"
+      },
+      "SEARCH02": {
+        "epics": {},
+        "iterations": {},
+        "milestones": {},
+        "stories": {},
+        "id": "SEARCH02"
+      }
+    }
+  },
+  "new": {
+    "search": {
+      "search_ref01": {
+        "epics": {},
+        "iterations": {},
+        "milestones": {},
+        "stories": {}
+      }
+    }
+  }
+}

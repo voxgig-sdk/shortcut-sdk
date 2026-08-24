@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "custom_field": {
+      "CUSTOM_FIELD00": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "canonical_name": "sa2",
+        "created_at": "sa3",
+        "description": "sa4",
+        "enabled": false,
+        "entity_type": "sa6",
+        "field_type": "sa7",
+        "fixed_position": true,
+        "icon_set_identifier": "sa9",
+        "id": "CUSTOM_FIELD00",
+        "name": "sab",
+        "position": "sac",
+        "story_types": [],
+        "updated_at": "sae",
+        "values": []
+      },
+      "CUSTOM_FIELD01": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "canonical_name": "s142",
+        "created_at": "s143",
+        "description": "s144",
+        "enabled": false,
+        "entity_type": "s146",
+        "field_type": "s147",
+        "fixed_position": true,
+        "icon_set_identifier": "s149",
+        "id": "CUSTOM_FIELD01",
+        "name": "s14b",
+        "position": "s14c",
+        "story_types": [],
+        "updated_at": "s14e",
+        "values": []
+      },
+      "CUSTOM_FIELD02": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "canonical_name": "s1e2",
+        "created_at": "s1e3",
+        "description": "s1e4",
+        "enabled": false,
+        "entity_type": "s1e6",
+        "field_type": "s1e7",
+        "fixed_position": true,
+        "icon_set_identifier": "s1e9",
+        "id": "CUSTOM_FIELD02",
+        "name": "s1eb",
+        "position": "s1ec",
+        "story_types": [],
+        "updated_at": "s1ee",
+        "values": []
+      }
+    }
+  },
+  "new": {
+    "custom_field": {
+      "custom_field_ref01": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "canonical_name": "s282",
+        "created_at": "s283",
+        "description": "s284",
+        "enabled": false,
+        "entity_type": "s286",
+        "field_type": "s287",
+        "fixed_position": true,
+        "icon_set_identifier": "s289",
+        "name": "s28b",
+        "position": "s28c",
+        "story_types": [],
+        "updated_at": "s28e",
+        "values": []
+      }
+    }
+  }
+}

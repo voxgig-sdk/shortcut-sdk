@@ -1,0 +1,118 @@
+# BasicThreadedCommentFlow
+
+main: kit: flow: BasicThreadedCommentFlow:
+{
+  entity: "threaded_comment",
+  kind: "basic",
+  name: "BasicThreadedCommentFlow",
+  step: [
+    {
+      input: {
+        ref: "threaded_comment_ref01"
+      }
+
+      match: {
+        epic_id: "epic01"
+      }
+
+      op: "create"
+    }
+
+    {
+      match: {
+        epic_id: "epic01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "threaded_comment_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      data: {
+        epic_id: "epic01"
+      }
+
+      input: {
+        ref: "threaded_comment_ref01",
+        srcdatavar: "threaded_comment_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-threaded_comment_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "threaded_comment_ref01",
+        srcdatavar: "threaded_comment_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        epic_id: "epic01",
+        id: "threaded_comment01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-threaded_comment_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "threaded_comment_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        epic_id: "epic01",
+        id: "threaded_comment01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      match: {
+        epic_id: "epic01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "threaded_comment_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicThreadedCommentFlow"
+}

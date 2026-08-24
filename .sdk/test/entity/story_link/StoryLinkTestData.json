@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "story_link": {
+      "STORY_LINK00": {
+        "created_at": "s50",
+        "entity_type": "s51",
+        "id": "STORY_LINK00",
+        "object_id": "OBJECT01",
+        "subject_id": "SUBJECT01",
+        "subject_workflow_state_id": "SUBJECT_WORKFLOW_STATE01",
+        "updated_at": "s56",
+        "verb": "s57"
+      },
+      "STORY_LINK01": {
+        "created_at": "sa0",
+        "entity_type": "sa1",
+        "id": "STORY_LINK01",
+        "object_id": "OBJECT01",
+        "subject_id": "SUBJECT01",
+        "subject_workflow_state_id": "SUBJECT_WORKFLOW_STATE01",
+        "updated_at": "sa6",
+        "verb": "sa7"
+      },
+      "STORY_LINK02": {
+        "created_at": "sf0",
+        "entity_type": "sf1",
+        "id": "STORY_LINK02",
+        "object_id": "OBJECT01",
+        "subject_id": "SUBJECT01",
+        "subject_workflow_state_id": "SUBJECT_WORKFLOW_STATE01",
+        "updated_at": "sf6",
+        "verb": "sf7"
+      }
+    }
+  },
+  "new": {
+    "story_link": {
+      "story_link_ref01": {
+        "created_at": "s140",
+        "entity_type": "s141",
+        "object_id": "OBJECT01",
+        "subject_id": "SUBJECT01",
+        "subject_workflow_state_id": "SUBJECT_WORKFLOW_STATE01",
+        "updated_at": "s146",
+        "verb": "s147"
+      }
+    }
+  }
+}

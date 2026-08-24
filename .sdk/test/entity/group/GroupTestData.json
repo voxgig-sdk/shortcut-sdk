@@ -1,0 +1,101 @@
+{
+  "existing": {
+    "group": {
+      "GROUP00": {
+        "app_url": "sd2",
+        "archived": false,
+        "color": "sd4",
+        "color_key": "sd5",
+        "created_at": "sd6",
+        "default_workflow_id": "DEFAULT_WORKFLOW01",
+        "description": "sd8",
+        "display_icon": {},
+        "display_icon_id": "DISPLAY_ICON01",
+        "entity_type": "sdb",
+        "global_id": "GLOBAL01",
+        "id": "GROUP00",
+        "member_ids": [],
+        "mention_name": "sdf",
+        "name": "se0",
+        "num_epics_started": "se1",
+        "num_stories": "se2",
+        "num_stories_backlog": "se3",
+        "num_stories_started": "se4",
+        "updated_at": "se5",
+        "workflow_ids": []
+      },
+      "GROUP01": {
+        "app_url": "s1a4",
+        "archived": false,
+        "color": "s1a6",
+        "color_key": "s1a7",
+        "created_at": "s1a8",
+        "default_workflow_id": "DEFAULT_WORKFLOW01",
+        "description": "s1aa",
+        "display_icon": {},
+        "display_icon_id": "DISPLAY_ICON01",
+        "entity_type": "s1ad",
+        "global_id": "GLOBAL01",
+        "id": "GROUP01",
+        "member_ids": [],
+        "mention_name": "s1b1",
+        "name": "s1b2",
+        "num_epics_started": "s1b3",
+        "num_stories": "s1b4",
+        "num_stories_backlog": "s1b5",
+        "num_stories_started": "s1b6",
+        "updated_at": "s1b7",
+        "workflow_ids": []
+      },
+      "GROUP02": {
+        "app_url": "s276",
+        "archived": false,
+        "color": "s278",
+        "color_key": "s279",
+        "created_at": "s27a",
+        "default_workflow_id": "DEFAULT_WORKFLOW01",
+        "description": "s27c",
+        "display_icon": {},
+        "display_icon_id": "DISPLAY_ICON01",
+        "entity_type": "s27f",
+        "global_id": "GLOBAL01",
+        "id": "GROUP02",
+        "member_ids": [],
+        "mention_name": "s283",
+        "name": "s284",
+        "num_epics_started": "s285",
+        "num_stories": "s286",
+        "num_stories_backlog": "s287",
+        "num_stories_started": "s288",
+        "updated_at": "s289",
+        "workflow_ids": []
+      }
+    }
+  },
+  "new": {
+    "group": {
+      "group_ref01": {
+        "app_url": "s348",
+        "archived": false,
+        "color": "s34a",
+        "color_key": "s34b",
+        "created_at": "s34c",
+        "default_workflow_id": "DEFAULT_WORKFLOW01",
+        "description": "s34e",
+        "display_icon": {},
+        "display_icon_id": "DISPLAY_ICON01",
+        "entity_type": "s351",
+        "global_id": "GLOBAL01",
+        "member_ids": [],
+        "mention_name": "s355",
+        "name": "s356",
+        "num_epics_started": "s357",
+        "num_stories": "s358",
+        "num_stories_backlog": "s359",
+        "num_stories_started": "s35a",
+        "updated_at": "s35b",
+        "workflow_ids": []
+      }
+    }
+  }
+}

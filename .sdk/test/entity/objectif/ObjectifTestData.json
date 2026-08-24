@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "objectif": {
+      "OBJECTIF00": {
+        "id": "OBJECTIF00"
+      },
+      "OBJECTIF01": {
+        "id": "OBJECTIF01"
+      },
+      "OBJECTIF02": {
+        "id": "OBJECTIF02"
+      }
+    }
+  },
+  "new": {
+    "objectif": {
+      "objectif_ref01": {}
+    }
+  }
+}

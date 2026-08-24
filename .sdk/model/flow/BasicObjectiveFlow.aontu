@@ -1,0 +1,71 @@
+# BasicObjectiveFlow
+
+main: kit: flow: BasicObjectiveFlow:
+{
+  entity: "objective",
+  kind: "basic",
+  name: "BasicObjectiveFlow",
+  step: [
+    {
+      input: {
+        ref: "objective_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "objective_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "objective_ref01",
+        srcdatavar: "objective_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-objective_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "objective_ref01",
+        srcdatavar: "objective_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "objective01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-objective_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicObjectiveFlow"
+}

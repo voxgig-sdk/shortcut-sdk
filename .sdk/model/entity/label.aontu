@@ -1,0 +1,378 @@
+# Entity: label
+
+main: kit: entity: label: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "app_url"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "archived"
+      op: {
+        list: {
+          req: true
+          type: "`$BOOLEAN`"
+        }
+      }
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "color"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "created_at"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "entity_type"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "external_id"
+      op: {
+        list: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "global_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      op: {
+        update: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "num_epics"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_epics_completed"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_epics_in_progress"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_epics_total"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_epics_unstarted"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_points_backlog"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_points_completed"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_points_in_progress"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_points_total"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_points_unstarted"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_related_documents"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_backlog"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_completed"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_in_progress"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_total"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_unestimated"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "num_stories_unstarted"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "stats"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "updated_at"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "label"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/v3/labels"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+          ]
+          transform: {
+            req: {
+              color: "`reqdata.color`"
+              description: "`reqdata.description`"
+              external_id: "`reqdata.external_id`"
+              name: "`reqdata.name`"
+            }
+            res: "`body.stats`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "slim"
+                orig: "slim"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/labels"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+          ]
+          select: {
+            exist: [
+              "slim"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "label_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v3/labels/{label-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "label-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.stats`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "label_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/labels/{label-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "label-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "label_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "PUT"
+          orig: "/api/v3/labels/{label-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "labels"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "label-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: {
+              archived: "`reqdata.archived`"
+              color: "`reqdata.color`"
+              description: "`reqdata.description`"
+              name: "`reqdata.name`"
+            }
+            res: "`body.stats`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,23 @@
+{
+  "existing": {
+    "comment": {
+      "COMMENT00": {
+        "story_id": "STORY01",
+        "id": "COMMENT00"
+      },
+      "COMMENT01": {
+        "story_id": "STORY01",
+        "id": "COMMENT01"
+      },
+      "COMMENT02": {
+        "story_id": "STORY01",
+        "id": "COMMENT02"
+      }
+    }
+  },
+  "new": {
+    "comment": {
+      "comment_ref01": {}
+    }
+  }
+}

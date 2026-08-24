@@ -1,0 +1,28 @@
+# BasicDisableFlow
+
+main: kit: flow: BasicDisableFlow:
+{
+  entity: "disable",
+  kind: "basic",
+  name: "BasicDisableFlow",
+  step: [
+    {
+      input: {
+        ref: "disable_ref01",
+        srcdatavar: "disable_ref01_data",
+        suffix: "_up0"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-disable_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDisableFlow"
+}

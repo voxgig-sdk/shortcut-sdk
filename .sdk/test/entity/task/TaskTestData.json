@@ -1,0 +1,85 @@
+{
+  "existing": {
+    "task": {
+      "TASK00": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "complete": true,
+        "completed_at": "sad",
+        "created_at": "sae",
+        "description": "saf",
+        "entity_type": "sb0",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "group_mention_ids": [],
+        "id": "TASK00",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "owner_ids": [],
+        "position": "sb8",
+        "story_id": "STORY01",
+        "updated_at": "sba"
+      },
+      "TASK01": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "complete": true,
+        "completed_at": "s157",
+        "created_at": "s158",
+        "description": "s159",
+        "entity_type": "s15a",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "group_mention_ids": [],
+        "id": "TASK01",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "owner_ids": [],
+        "position": "s162",
+        "story_id": "STORY01",
+        "updated_at": "s164"
+      },
+      "TASK02": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "complete": true,
+        "completed_at": "s201",
+        "created_at": "s202",
+        "description": "s203",
+        "entity_type": "s204",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "group_mention_ids": [],
+        "id": "TASK02",
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "owner_ids": [],
+        "position": "s20c",
+        "story_id": "STORY01",
+        "updated_at": "s20e"
+      }
+    }
+  },
+  "new": {
+    "task": {
+      "task_ref01": {
+        "after_id": "AFTER01",
+        "before_id": "BEFORE01",
+        "complete": true,
+        "completed_at": "s2ab",
+        "created_at": "s2ac",
+        "description": "s2ad",
+        "entity_type": "s2ae",
+        "external_id": "EXTERNAL01",
+        "global_id": "GLOBAL01",
+        "group_mention_ids": [],
+        "member_mention_ids": [],
+        "mention_ids": [],
+        "owner_ids": [],
+        "position": "s2b6",
+        "story_id": "STORY01",
+        "updated_at": "s2b8"
+      }
+    }
+  }
+}

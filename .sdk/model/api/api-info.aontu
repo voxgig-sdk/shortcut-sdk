@@ -1,0 +1,27 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Shortcut API"
+      security: {
+        in: "header"
+        name: "Shortcut-Token"
+        prefix: ""
+        scheme: "api_token"
+        type: "apiKey"
+      }
+      servers: [
+        {
+          url: "https://api.app.shortcut.com"
+        }
+      ]
+      summary: "Shortcut API"
+      title: "Shortcut API"
+      version: "3.0"
+      website: "https://app.shortcut.com"
+    }
+  }
+}
+

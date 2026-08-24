@@ -1,0 +1,70 @@
+<?php
+declare(strict_types=1);
+
+// Shortcut SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+ShortcutUtility::setRegistrar(function (ShortcutUtility $u): void {
+    $u->clean = [ShortcutClean::class, 'call'];
+    $u->done = [ShortcutDone::class, 'call'];
+    $u->make_error = [ShortcutMakeError::class, 'call'];
+    $u->feature_add = [ShortcutFeatureAdd::class, 'call'];
+    $u->feature_hook = [ShortcutFeatureHook::class, 'call'];
+    $u->feature_init = [ShortcutFeatureInit::class, 'call'];
+    $u->fetcher = [ShortcutFetcher::class, 'call'];
+    $u->make_fetch_def = [ShortcutMakeFetchDef::class, 'call'];
+    $u->make_context = [ShortcutMakeContext::class, 'call'];
+    $u->make_options = [ShortcutMakeOptions::class, 'call'];
+    $u->make_request = [ShortcutMakeRequest::class, 'call'];
+    $u->make_response = [ShortcutMakeResponse::class, 'call'];
+    $u->make_result = [ShortcutMakeResult::class, 'call'];
+    $u->make_point = [ShortcutMakePoint::class, 'call'];
+    $u->make_spec = [ShortcutMakeSpec::class, 'call'];
+    $u->make_url = [ShortcutMakeUrl::class, 'call'];
+    $u->param = [ShortcutParam::class, 'call'];
+    $u->prepare_auth = [ShortcutPrepareAuth::class, 'call'];
+    $u->prepare_body = [ShortcutPrepareBody::class, 'call'];
+    $u->prepare_headers = [ShortcutPrepareHeaders::class, 'call'];
+    $u->prepare_method = [ShortcutPrepareMethod::class, 'call'];
+    $u->prepare_params = [ShortcutPrepareParams::class, 'call'];
+    $u->prepare_path = [ShortcutPreparePath::class, 'call'];
+    $u->prepare_query = [ShortcutPrepareQuery::class, 'call'];
+    $u->graphql_body = [ShortcutGraphql::class, 'body'];
+    $u->graphql_errors = [ShortcutGraphql::class, 'errors'];
+    $u->result_basic = [ShortcutResultBasic::class, 'call'];
+    $u->result_body = [ShortcutResultBody::class, 'call'];
+    $u->result_headers = [ShortcutResultHeaders::class, 'call'];
+    $u->transform_request = [ShortcutTransformRequest::class, 'call'];
+    $u->transform_response = [ShortcutTransformResponse::class, 'call'];
+});

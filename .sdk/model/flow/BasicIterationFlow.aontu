@@ -1,0 +1,100 @@
+# BasicIterationFlow
+
+main: kit: flow: BasicIterationFlow:
+{
+  entity: "iteration",
+  kind: "basic",
+  name: "BasicIterationFlow",
+  step: [
+    {
+      input: {
+        ref: "iteration_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "iteration_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "iteration_ref01",
+        srcdatavar: "iteration_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-iteration_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "iteration_ref01",
+        srcdatavar: "iteration_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "iteration01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-iteration_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "iteration_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "iteration01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "iteration_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIterationFlow"
+}

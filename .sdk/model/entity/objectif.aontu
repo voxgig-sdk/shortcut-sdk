@@ -1,0 +1,53 @@
+# Entity: objectif
+
+main: kit: entity: objectif: {
+
+  alias: field: {}
+
+  name: "objectif"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "objective_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/objectives/{objective-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "objectives"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "objective-public-id": "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

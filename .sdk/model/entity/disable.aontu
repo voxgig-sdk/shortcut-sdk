@@ -1,0 +1,46 @@
+# Entity: disable
+
+main: kit: entity: disable: {
+
+  alias: field: {}
+
+  name: "disable"
+  op: {
+    update: {
+      name: "update"
+      points: [
+        {
+          method: "PUT"
+          orig: "/api/v3/entity-templates/disable"
+          parts: [
+            "api"
+            "v3"
+            "entity-templates"
+            "disable"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          method: "PUT"
+          orig: "/api/v3/iterations/disable"
+          parts: [
+            "api"
+            "v3"
+            "iterations"
+            "disable"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,20 @@
+{
+  "existing": {
+    "epic_unlink_productboard": {
+      "EPIC_UNLINK_PRODUCTBOARD00": {
+        "id": "EPIC_UNLINK_PRODUCTBOARD00"
+      },
+      "EPIC_UNLINK_PRODUCTBOARD01": {
+        "id": "EPIC_UNLINK_PRODUCTBOARD01"
+      },
+      "EPIC_UNLINK_PRODUCTBOARD02": {
+        "id": "EPIC_UNLINK_PRODUCTBOARD02"
+      }
+    }
+  },
+  "new": {
+    "epic_unlink_productboard": {
+      "epic_unlink_productboard_ref01": {}
+    }
+  }
+}

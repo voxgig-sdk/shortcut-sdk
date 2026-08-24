@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "doc_slim": {
+      "DOC_SLIM00": {
+        "app_url": "s28",
+        "content": "s29",
+        "id": "DOC_SLIM00",
+        "title": "s2b"
+      },
+      "DOC_SLIM01": {
+        "app_url": "s50",
+        "content": "s51",
+        "id": "DOC_SLIM01",
+        "title": "s53"
+      },
+      "DOC_SLIM02": {
+        "app_url": "s78",
+        "content": "s79",
+        "id": "DOC_SLIM02",
+        "title": "s7b"
+      }
+    }
+  },
+  "new": {
+    "doc_slim": {
+      "doc_slim_ref01": {
+        "app_url": "sa0",
+        "content": "sa1",
+        "title": "sa3"
+      }
+    }
+  }
+}

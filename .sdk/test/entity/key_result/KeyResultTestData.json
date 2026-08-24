@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "key_result": {
+      "KEY_RESULT00": {
+        "current_observed_value": {},
+        "current_target_value": {},
+        "id": "KEY_RESULT00",
+        "initial_observed_value": {},
+        "name": "s68",
+        "objective_id": "OBJECTIVE01",
+        "observed_value": {},
+        "progress": "s6b",
+        "target_value": {},
+        "type": "s6d"
+      },
+      "KEY_RESULT01": {
+        "current_observed_value": {},
+        "current_target_value": {},
+        "id": "KEY_RESULT01",
+        "initial_observed_value": {},
+        "name": "scc",
+        "objective_id": "OBJECTIVE01",
+        "observed_value": {},
+        "progress": "scf",
+        "target_value": {},
+        "type": "sd1"
+      },
+      "KEY_RESULT02": {
+        "current_observed_value": {},
+        "current_target_value": {},
+        "id": "KEY_RESULT02",
+        "initial_observed_value": {},
+        "name": "s130",
+        "objective_id": "OBJECTIVE01",
+        "observed_value": {},
+        "progress": "s133",
+        "target_value": {},
+        "type": "s135"
+      }
+    }
+  },
+  "new": {
+    "key_result": {
+      "key_result_ref01": {
+        "current_observed_value": {},
+        "current_target_value": {},
+        "initial_observed_value": {},
+        "name": "s194",
+        "objective_id": "OBJECTIVE01",
+        "observed_value": {},
+        "progress": "s197",
+        "target_value": {},
+        "type": "s199"
+      }
+    }
+  }
+}

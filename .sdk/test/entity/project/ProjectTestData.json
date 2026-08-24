@@ -1,0 +1,97 @@
+{
+  "existing": {
+    "project": {
+      "PROJECT00": {
+        "abbreviation": "sc8",
+        "app_url": "sc9",
+        "archived": true,
+        "color": "scb",
+        "created_at": "scc",
+        "days_to_thermometer": "scd",
+        "description": "sce",
+        "entity_type": "scf",
+        "external_id": "EXTERNAL01",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "id": "PROJECT00",
+        "iteration_length": "sd4",
+        "name": "sd5",
+        "show_thermometer": true,
+        "start_time": "sd7",
+        "stats": {},
+        "team_id": "TEAM01",
+        "updated_at": "sda",
+        "workflow_id": "WORKFLOW01"
+      },
+      "PROJECT01": {
+        "abbreviation": "s190",
+        "app_url": "s191",
+        "archived": true,
+        "color": "s193",
+        "created_at": "s194",
+        "days_to_thermometer": "s195",
+        "description": "s196",
+        "entity_type": "s197",
+        "external_id": "EXTERNAL01",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "id": "PROJECT01",
+        "iteration_length": "s19c",
+        "name": "s19d",
+        "show_thermometer": true,
+        "start_time": "s19f",
+        "stats": {},
+        "team_id": "TEAM01",
+        "updated_at": "s1a2",
+        "workflow_id": "WORKFLOW01"
+      },
+      "PROJECT02": {
+        "abbreviation": "s258",
+        "app_url": "s259",
+        "archived": true,
+        "color": "s25b",
+        "created_at": "s25c",
+        "days_to_thermometer": "s25d",
+        "description": "s25e",
+        "entity_type": "s25f",
+        "external_id": "EXTERNAL01",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "id": "PROJECT02",
+        "iteration_length": "s264",
+        "name": "s265",
+        "show_thermometer": true,
+        "start_time": "s267",
+        "stats": {},
+        "team_id": "TEAM01",
+        "updated_at": "s26a",
+        "workflow_id": "WORKFLOW01"
+      }
+    }
+  },
+  "new": {
+    "project": {
+      "project_ref01": {
+        "abbreviation": "s320",
+        "app_url": "s321",
+        "archived": true,
+        "color": "s323",
+        "created_at": "s324",
+        "days_to_thermometer": "s325",
+        "description": "s326",
+        "entity_type": "s327",
+        "external_id": "EXTERNAL01",
+        "follower_ids": [],
+        "global_id": "GLOBAL01",
+        "iteration_length": "s32c",
+        "name": "s32d",
+        "show_thermometer": true,
+        "start_time": "s32f",
+        "stats": {},
+        "team_id": "TEAM01",
+        "updated_at": "s332",
+        "workflow_id": "WORKFLOW01"
+      }
+    }
+  }
+}

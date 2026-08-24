@@ -1,0 +1,72 @@
+# Entity: comment
+
+main: kit: entity: comment: {
+
+  alias: field: {}
+
+  name: "comment"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "comment_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "param"
+                name: "story_id"
+                orig: "story_public_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/api/v3/stories/{story-public-id}/comments/{comment-public-id}"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "{story_id}"
+            "comments"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              "comment-public-id": "id"
+              "story-public-id": "story_id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+              "story_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "story"
+      ]
+    ]
+  }
+
+
+
+}

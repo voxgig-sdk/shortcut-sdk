@@ -1,0 +1,31 @@
+{
+  "existing": {
+    "story_reaction": {
+      "STORY_REACTION00": {
+        "emoji": "sa",
+        "comment_id": "COMMENT01",
+        "story_id": "STORY01",
+        "id": "STORY_REACTION00"
+      },
+      "STORY_REACTION01": {
+        "emoji": "s14",
+        "comment_id": "COMMENT01",
+        "story_id": "STORY01",
+        "id": "STORY_REACTION01"
+      },
+      "STORY_REACTION02": {
+        "emoji": "s1e",
+        "comment_id": "COMMENT01",
+        "story_id": "STORY01",
+        "id": "STORY_REACTION02"
+      }
+    }
+  },
+  "new": {
+    "story_reaction": {
+      "story_reaction_ref01": {
+        "emoji": "s28"
+      }
+    }
+  }
+}

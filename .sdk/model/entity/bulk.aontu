@@ -1,0 +1,34 @@
+# Entity: bulk
+
+main: kit: entity: bulk: {
+
+  alias: field: {}
+
+  name: "bulk"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          method: "DELETE"
+          orig: "/api/v3/stories/bulk"
+          parts: [
+            "api"
+            "v3"
+            "stories"
+            "bulk"
+          ]
+          transform: {
+            req: {
+              story_ids: "`reqdata.story_id`"
+            }
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

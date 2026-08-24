@@ -1,0 +1,108 @@
+# BasicStoryFlow
+
+main: kit: flow: BasicStoryFlow:
+{
+  entity: "story",
+  kind: "basic",
+  name: "BasicStoryFlow",
+  step: [
+    {
+      input: {
+        ref: "story_ref01"
+      }
+
+      match: {
+        epic_id: "epic01",
+        group_id: "group01",
+        iteration_id: "iteration01",
+        label_id: "label01",
+        project_id: "project01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "story_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "story_ref01",
+        srcdatavar: "story_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-story_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "story_ref01",
+        srcdatavar: "story_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "story01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-story_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "story_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "story01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "story_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicStoryFlow"
+}

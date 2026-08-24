@@ -1,0 +1,114 @@
+# BasicEpicFlow
+
+main: kit: flow: BasicEpicFlow:
+{
+  entity: "epic",
+  kind: "basic",
+  name: "BasicEpicFlow",
+  step: [
+    {
+      input: {
+        ref: "epic_ref01"
+      }
+
+      match: {
+        label_id: "label01",
+        milestone_id: "milestone01",
+        objectif_id: "objectif01"
+      }
+
+      op: "create"
+    }
+
+    {
+      match: {
+        objectif_id: "objectif01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "epic_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "epic_ref01",
+        srcdatavar: "epic_ref01_data",
+        suffix: "_up0",
+        textfield: "app_url"
+      }
+
+      op: "update",
+      spec: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-epic_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "epic_ref01",
+        srcdatavar: "epic_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "epic01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-epic_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "epic_ref01",
+        suffix: "_rm0"
+      }
+
+      match: {
+        id: "epic01"
+      }
+
+      op: "remove"
+    }
+
+    {
+      input: {
+        suffix: "_rt0"
+      }
+
+      match: {
+        objectif_id: "objectif01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "epic_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEpicFlow"
+}

@@ -1,0 +1,22 @@
+# BasicEpicPaginatedResultFlow
+
+main: kit: flow: BasicEpicPaginatedResultFlow:
+{
+  entity: "epic_paginated_result",
+  kind: "basic",
+  name: "BasicEpicPaginatedResultFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "epic_paginated_result_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicEpicPaginatedResultFlow"
+}

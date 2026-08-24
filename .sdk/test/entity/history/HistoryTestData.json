@@ -1,0 +1,64 @@
+{
+  "existing": {
+    "history": {
+      "HISTORY00": {
+        "actions": [],
+        "actor_name": "s6f",
+        "automation_id": "AUTOMATION01",
+        "changed_at": "s71",
+        "external_id": "EXTERNAL01",
+        "id": "HISTORY00",
+        "member_id": "MEMBER01",
+        "primary_id": "PRIMARY01",
+        "references": [],
+        "version": "s77",
+        "webhook_id": "WEBHOOK01",
+        "story_id": "STORY01"
+      },
+      "HISTORY01": {
+        "actions": [],
+        "actor_name": "sdd",
+        "automation_id": "AUTOMATION01",
+        "changed_at": "sdf",
+        "external_id": "EXTERNAL01",
+        "id": "HISTORY01",
+        "member_id": "MEMBER01",
+        "primary_id": "PRIMARY01",
+        "references": [],
+        "version": "se5",
+        "webhook_id": "WEBHOOK01",
+        "story_id": "STORY01"
+      },
+      "HISTORY02": {
+        "actions": [],
+        "actor_name": "s14b",
+        "automation_id": "AUTOMATION01",
+        "changed_at": "s14d",
+        "external_id": "EXTERNAL01",
+        "id": "HISTORY02",
+        "member_id": "MEMBER01",
+        "primary_id": "PRIMARY01",
+        "references": [],
+        "version": "s153",
+        "webhook_id": "WEBHOOK01",
+        "story_id": "STORY01"
+      }
+    }
+  },
+  "new": {
+    "history": {
+      "history_ref01": {
+        "actions": [],
+        "actor_name": "s1b9",
+        "automation_id": "AUTOMATION01",
+        "changed_at": "s1bb",
+        "external_id": "EXTERNAL01",
+        "member_id": "MEMBER01",
+        "primary_id": "PRIMARY01",
+        "references": [],
+        "version": "s1c1",
+        "webhook_id": "WEBHOOK01"
+      }
+    }
+  }
+}
