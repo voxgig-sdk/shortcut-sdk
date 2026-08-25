@@ -328,6 +328,7 @@ API path: `/api/v3/categories`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Remove.
 
@@ -534,6 +535,7 @@ API path: `/api/v3/epics/paginated`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Create.
 
@@ -800,6 +802,7 @@ API path: `/api/v3/milestones`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Remove.
 
@@ -1173,6 +1176,7 @@ API path: `/api/v3/files`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `secret` |  |
 | `webhook_url` |  |
 
@@ -1286,6 +1290,12 @@ Create an instance: `$comment = $client->Comment();`
 | Method | Description |
 | --- | --- |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### CustomField
@@ -1674,6 +1684,12 @@ Create an instance: `$epic_unlink_productboard = $client->EpicUnlinkProductboard
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 #### Example: Create
 
@@ -2309,6 +2325,12 @@ Create an instance: `$objectif = $client->Objectif();`
 | Method | Description |
 | --- | --- |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### Objective
@@ -3159,6 +3181,7 @@ Create an instance: `$webhook = $client->Webhook();`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `secret` | `string` |  |
 | `webhook_url` | `string` |  |
 

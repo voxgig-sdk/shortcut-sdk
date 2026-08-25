@@ -47,6 +47,7 @@ class EpicUnlinkProductboardEntityTest extends TestCase
         $epic_unlink_productboard_ref01_data_result = $epic_unlink_productboard_ref01_ent->create($epic_unlink_productboard_ref01_data, null);
         $epic_unlink_productboard_ref01_data = Helpers::to_map(is_object($epic_unlink_productboard_ref01_data_result) && method_exists($epic_unlink_productboard_ref01_data_result, 'data_get') ? $epic_unlink_productboard_ref01_data_result->data_get() : $epic_unlink_productboard_ref01_data_result);
         $this->assertNotNull($epic_unlink_productboard_ref01_data);
+        $this->assertNotNull($epic_unlink_productboard_ref01_data["id"]);
 
     }
 }

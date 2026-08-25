@@ -88,6 +88,7 @@ type CategoryRemoveMatch struct {
 
 // Comment is the typed data model for the comment entity.
 type Comment struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // CommentRemoveMatch is the typed request payload for Comment.RemoveTyped.
@@ -642,6 +643,7 @@ type EpicPaginatedResultListMatch struct {
 
 // EpicUnlinkProductboard is the typed data model for the epic_unlink_productboard entity.
 type EpicUnlinkProductboard struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // EpicUnlinkProductboardCreateData is the typed request payload for EpicUnlinkProductboard.CreateTyped.
@@ -1391,6 +1393,7 @@ type MilestoneRemoveMatch struct {
 
 // Objectif is the typed data model for the objectif entity.
 type Objectif struct {
+	Id *string `json:"id,omitempty"`
 }
 
 // ObjectifRemoveMatch is the typed request payload for Objectif.RemoveTyped.
@@ -2545,6 +2548,7 @@ type UploadedFileRemoveMatch struct {
 
 // Webhook is the typed data model for the webhook entity.
 type Webhook struct {
+	Id *string `json:"id,omitempty"`
 	Secret *string `json:"secret,omitempty"`
 	WebhookUrl string `json:"webhook_url"`
 }
@@ -2556,6 +2560,7 @@ type WebhookLoadMatch struct {
 
 // WebhookCreateData is the typed request payload for Webhook.CreateTyped.
 type WebhookCreateData struct {
+	Id *string `json:"id,omitempty"`
 	Secret *string `json:"secret,omitempty"`
 	WebhookUrl string `json:"webhook_url"`
 }

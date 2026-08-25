@@ -87,8 +87,8 @@ class CategoryRemoveMatch(TypedDict):
     id: int
 
 
-class Comment(TypedDict):
-    pass
+class Comment(TypedDict, total=False):
+    id: str
 
 
 class CommentRemoveMatch(TypedDict):
@@ -645,8 +645,8 @@ class EpicPaginatedResultListMatch(TypedDict, total=False):
     updated_at: str
 
 
-class EpicUnlinkProductboard(TypedDict):
-    pass
+class EpicUnlinkProductboard(TypedDict, total=False):
+    id: str
 
 
 class EpicUnlinkProductboardCreateData(TypedDict):
@@ -1412,8 +1412,8 @@ class MilestoneRemoveMatch(TypedDict):
     id: int
 
 
-class Objectif(TypedDict):
-    pass
+class Objectif(TypedDict, total=False):
+    id: str
 
 
 class ObjectifRemoveMatch(TypedDict):
@@ -2572,6 +2572,7 @@ class WebhookRequired(TypedDict):
 
 
 class Webhook(WebhookRequired, total=False):
+    id: str
     secret: str
 
 
@@ -2584,6 +2585,7 @@ class WebhookCreateDataRequired(TypedDict):
 
 
 class WebhookCreateData(WebhookCreateDataRequired, total=False):
+    id: str
     secret: str
 
 

@@ -485,7 +485,12 @@ class Config {
       }
     },
     "comment": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "comment",
       "op": {
         "remove": {
@@ -2495,7 +2500,12 @@ class Config {
       }
     },
     "epic_unlink_productboard": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "epic_unlink_productboard",
       "op": {
         "create": {
@@ -5362,7 +5372,12 @@ class Config {
       }
     },
     "objectif": {
-      "fields": [],
+      "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        }
+      ],
       "name": "objectif",
       "op": {
         "remove": {
@@ -10060,6 +10075,10 @@ class Config {
     },
     "webhook": {
       "fields": [
+        {
+          "name": "id",
+          "type": "`$STRING`"
+        },
         {
           "name": "secret",
           "type": "`$STRING`"

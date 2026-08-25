@@ -306,6 +306,7 @@ API path: `/api/v3/categories`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Remove.
 
@@ -512,6 +513,7 @@ API path: `/api/v3/epics/paginated`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Create.
 
@@ -778,6 +780,7 @@ API path: `/api/v3/milestones`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 
 Operations: Remove.
 
@@ -1151,6 +1154,7 @@ API path: `/api/v3/files`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `secret` |  |
 | `webhook_url` |  |
 
@@ -1262,6 +1266,12 @@ Create an instance: `local comment = client:Comment(nil)`
 | Method | Description |
 | --- | --- |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### CustomField
@@ -1642,6 +1652,12 @@ Create an instance: `local epic_unlink_productboard = client:EpicUnlinkProductbo
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 #### Example: Create
 
@@ -2260,6 +2276,12 @@ Create an instance: `local objectif = client:Objectif(nil)`
 | Method | Description |
 | --- | --- |
 | `remove(match)` | Remove the matching entity. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
 
 
 ### Objective
@@ -3093,6 +3115,7 @@ Create an instance: `local webhook = client:Webhook(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `secret` | `string` |  |
 | `webhook_url` | `string` |  |
 

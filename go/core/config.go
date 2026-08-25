@@ -383,7 +383,12 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"comment": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "comment",
 				"op": map[string]any{
 					"remove": map[string]any{
@@ -2393,7 +2398,12 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"epic_unlink_productboard": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "epic_unlink_productboard",
 				"op": map[string]any{
 					"create": map[string]any{
@@ -5260,7 +5270,12 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"objectif": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+				},
 				"name": "objectif",
 				"op": map[string]any{
 					"remove": map[string]any{
@@ -9958,6 +9973,10 @@ func MakeConfig() map[string]any {
 			},
 			"webhook": map[string]any{
 				"fields": []any{
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
 					map[string]any{
 						"name": "secret",
 						"type": "`$STRING`",

@@ -75,7 +75,15 @@ const utility_1 = require("../../utility");
         const webhook_ref01_ent = client.Webhook();
         let webhook_ref01_data = setup.data.new.webhook['webhook_ref01'];
         webhook_ref01_data = (await webhook_ref01_ent.create(webhook_ref01_data)).data();
-        (0, node_assert_1.default)(null != webhook_ref01_data);
+        (0, node_assert_1.default)(null != webhook_ref01_data.id);
+        // LOAD
+        const webhook_ref01_match_dt0 = {};
+        webhook_ref01_match_dt0.id = webhook_ref01_data.id;
+        const webhook_ref01_data_dt0 = (await webhook_ref01_ent.load(webhook_ref01_match_dt0)).data();
+        (0, node_assert_1.default)(webhook_ref01_data_dt0.id === webhook_ref01_data.id);
+        // REMOVE
+        const webhook_ref01_match_rm0 = { id: webhook_ref01_data.id };
+        await webhook_ref01_ent.remove(webhook_ref01_match_rm0);
     });
 });
 function basicSetup(extra) {

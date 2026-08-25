@@ -82,6 +82,7 @@
 
 /**
  * @typedef {Object} Comment
+ * @property {string} [id]
  */
 
 /**
@@ -636,6 +637,7 @@
 
 /**
  * @typedef {Object} EpicUnlinkProductboard
+ * @property {string} [id]
  */
 
 /**
@@ -1385,6 +1387,7 @@
 
 /**
  * @typedef {Object} Objectif
+ * @property {string} [id]
  */
 
 /**
@@ -2539,6 +2542,7 @@
 
 /**
  * @typedef {Object} Webhook
+ * @property {string} [id]
  * @property {string} [secret]
  * @property {string} webhook_url
  */
@@ -2550,6 +2554,7 @@
 
 /**
  * @typedef {Object} WebhookCreateData
+ * @property {string} [id]
  * @property {string} [secret]
  * @property {string} webhook_url
  */

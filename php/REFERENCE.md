@@ -397,6 +397,12 @@ Return the entity name.
 $comment = $client->Comment();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1191,6 +1197,12 @@ Return the entity name.
 ```php
 $epic_unlink_productboard = $client->EpicUnlinkProductboard();
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -2402,6 +2414,12 @@ Return the entity name.
 ```php
 $objectif = $client->Objectif();
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -4011,6 +4029,7 @@ $webhook = $client->Webhook();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `secret` | `string` | No |  |
 | `webhook_url` | `string` | Yes |  |
 

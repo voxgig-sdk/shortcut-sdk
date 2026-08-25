@@ -215,8 +215,13 @@ CategoryRemoveMatch = Struct.new(
 )
 
 # Comment entity data model.
-class Comment
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+Comment = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for Comment#remove.
 #
@@ -2118,8 +2123,13 @@ EpicPaginatedResultListMatch = Struct.new(
 )
 
 # EpicUnlinkProductboard entity data model.
-class EpicUnlinkProductboard
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+EpicUnlinkProductboard = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for EpicUnlinkProductboard#create.
 #
@@ -4607,8 +4617,13 @@ MilestoneRemoveMatch = Struct.new(
 )
 
 # Objectif entity data model.
-class Objectif
-end
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+Objectif = Struct.new(
+  :id,
+  keyword_init: true
+)
 
 # Request payload for Objectif#remove.
 #
@@ -8596,12 +8611,16 @@ UploadedFileRemoveMatch = Struct.new(
 
 # Webhook entity data model.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] secret
 #   @return [String, nil]
 #
 # @!attribute [rw] webhook_url
 #   @return [String]
 Webhook = Struct.new(
+  :id,
   :secret,
   :webhook_url,
   keyword_init: true
@@ -8618,12 +8637,16 @@ WebhookLoadMatch = Struct.new(
 
 # Request payload for Webhook#create.
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] secret
 #   @return [String, nil]
 #
 # @!attribute [rw] webhook_url
 #   @return [String]
 WebhookCreateData = Struct.new(
+  :id,
   :secret,
   :webhook_url,
   keyword_init: true

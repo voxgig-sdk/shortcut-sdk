@@ -392,6 +392,12 @@ Return the entity name.
 comment = client.Comment()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `str` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -1188,6 +1194,12 @@ Return the entity name.
 ```python
 epic_unlink_productboard = client.EpicUnlinkProductboard()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `str` | No |  |
 
 ### Operations
 
@@ -2406,6 +2418,12 @@ Return the entity name.
 ```python
 objectif = client.Objectif()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `str` | No |  |
 
 ### Operations
 
@@ -4016,6 +4034,7 @@ webhook = client.Webhook()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `str` | No |  |
 | `secret` | `str` | No |  |
 | `webhook_url` | `str` | Yes |  |
 

@@ -395,6 +395,12 @@ Return the entity name.
 local comment = client:Comment(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -1189,6 +1195,12 @@ Return the entity name.
 ```lua
 local epic_unlink_productboard = client:EpicUnlinkProductboard(nil)
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -2400,6 +2412,12 @@ Return the entity name.
 ```lua
 local objectif = client:Objectif(nil)
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -4009,6 +4027,7 @@ local webhook = client:Webhook(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `secret` | `string` | No |  |
 | `webhook_url` | `string` | Yes |  |
 

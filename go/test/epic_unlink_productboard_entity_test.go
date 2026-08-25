@@ -63,6 +63,9 @@ func TestEpicUnlinkProductboardEntity(t *testing.T) {
 		if epicUnlinkProductboardRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if epicUnlinkProductboardRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 	})
 }

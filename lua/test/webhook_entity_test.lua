@@ -43,13 +43,24 @@ describe("WebhookEntity", function()
     assert.is_nil(err)
     webhook_ref01_data = helpers.to_map(type(webhook_ref01_data_result) == 'table' and webhook_ref01_data_result.data_get and webhook_ref01_data_result:data_get() or webhook_ref01_data_result)
     assert.is_not_nil(webhook_ref01_data)
+    assert.is_not_nil(webhook_ref01_data["id"])
 
     -- LOAD
-    local webhook_ref01_match_dt0 = {}
+    local webhook_ref01_match_dt0 = {
+      id = webhook_ref01_data["id"],
+    }
     local webhook_ref01_data_dt0_loaded, err = webhook_ref01_ent:load(webhook_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(webhook_ref01_data_dt0_loaded)
+    local webhook_ref01_data_dt0_load_result = helpers.to_map(type(webhook_ref01_data_dt0_loaded) == 'table' and webhook_ref01_data_dt0_loaded.data_get and webhook_ref01_data_dt0_loaded:data_get() or webhook_ref01_data_dt0_loaded)
+    assert.is_not_nil(webhook_ref01_data_dt0_load_result)
+    assert.are.equal(webhook_ref01_data_dt0_load_result["id"], webhook_ref01_data["id"])
 
+    -- REMOVE
+    local webhook_ref01_match_rm0 = {
+      id = webhook_ref01_data["id"],
+    }
+    local _, err = webhook_ref01_ent:remove(webhook_ref01_match_rm0, nil)
+    assert.is_nil(err)
 
   end)
 end)

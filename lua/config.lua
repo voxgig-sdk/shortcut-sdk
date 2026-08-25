@@ -379,7 +379,12 @@ local function make_config()
         },
       },
       ["comment"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "comment",
         ["op"] = {
           ["remove"] = {
@@ -2389,7 +2394,12 @@ local function make_config()
         },
       },
       ["epic_unlink_productboard"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "epic_unlink_productboard",
         ["op"] = {
           ["create"] = {
@@ -5256,7 +5266,12 @@ local function make_config()
         },
       },
       ["objectif"] = {
-        ["fields"] = {},
+        ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
+        },
         ["name"] = "objectif",
         ["op"] = {
           ["remove"] = {
@@ -9954,6 +9969,10 @@ local function make_config()
       },
       ["webhook"] = {
         ["fields"] = {
+          {
+            ["name"] = "id",
+            ["type"] = "`$STRING`",
+          },
           {
             ["name"] = "secret",
             ["type"] = "`$STRING`",

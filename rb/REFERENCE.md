@@ -398,6 +398,12 @@ Return the entity name.
 comment = client.Comment
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
+
 ### Operations
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -1192,6 +1198,12 @@ Return the entity name.
 ```ruby
 epic_unlink_productboard = client.EpicUnlinkProductboard
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
 
 ### Operations
 
@@ -2403,6 +2415,12 @@ Return the entity name.
 ```ruby
 objectif = client.Objectif
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `String` | No |  |
 
 ### Operations
 
@@ -4012,6 +4030,7 @@ webhook = client.Webhook
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `String` | No |  |
 | `secret` | `String` | No |  |
 | `webhook_url` | `String` | Yes |  |
 

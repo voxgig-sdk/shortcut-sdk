@@ -72,6 +72,7 @@ export interface CategoryRemoveMatch {
 }
 
 export interface Comment {
+  id?: string
 }
 
 export interface CommentRemoveMatch {
@@ -598,6 +599,7 @@ export interface EpicPaginatedResultListMatch {
 }
 
 export interface EpicUnlinkProductboard {
+  id?: string
 }
 
 export interface EpicUnlinkProductboardCreateData {
@@ -1301,6 +1303,7 @@ export interface MilestoneRemoveMatch {
 }
 
 export interface Objectif {
+  id?: string
 }
 
 export interface ObjectifRemoveMatch {
@@ -2404,6 +2407,7 @@ export interface UploadedFileRemoveMatch {
 }
 
 export interface Webhook {
+  id?: string
   secret?: string
   webhook_url: string
 }
@@ -2413,6 +2417,7 @@ export interface WebhookLoadMatch {
 }
 
 export interface WebhookCreateData {
+  id?: string
   secret?: string
   webhook_url: string
 }

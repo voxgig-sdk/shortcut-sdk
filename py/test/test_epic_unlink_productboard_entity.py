@@ -47,6 +47,7 @@ class TestEpicUnlinkProductboardEntity:
 
         epic_unlink_productboard_ref01_data = helpers.to_map(runner.entity_data(epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data, None)))
         assert epic_unlink_productboard_ref01_data is not None
+        assert epic_unlink_productboard_ref01_data["id"] is not None
 
 
 

@@ -697,6 +697,12 @@ Return a copy of the entity options.
 const comment = client.Comment()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `remove(match: object, ctrl?: object)`
@@ -1475,6 +1481,12 @@ Return a copy of the entity options.
 ```ts
 const epic_unlink_productboard = client.EpicUnlinkProductboard()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -2664,6 +2676,12 @@ Return a copy of the entity options.
 ```ts
 const objectif = client.Objectif()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -4267,6 +4285,7 @@ const webhook = client.Webhook()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `secret` | `string` | No |  |
 | `webhook_url` | `string` | Yes |  |
 

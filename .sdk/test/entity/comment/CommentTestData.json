@@ -2,16 +2,16 @@
   "existing": {
     "comment": {
       "COMMENT00": {
-        "story_id": "STORY01",
-        "id": "COMMENT00"
+        "id": "COMMENT00",
+        "story_id": "STORY01"
       },
       "COMMENT01": {
-        "story_id": "STORY01",
-        "id": "COMMENT01"
+        "id": "COMMENT01",
+        "story_id": "STORY01"
       },
       "COMMENT02": {
-        "story_id": "STORY01",
-        "id": "COMMENT02"
+        "id": "COMMENT02",
+        "story_id": "STORY01"
       }
     }
   },

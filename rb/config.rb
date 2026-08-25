@@ -391,7 +391,12 @@ module ShortcutConfig
           },
         },
         "comment" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
           "name" => "comment",
           "op" => {
             "remove" => {
@@ -2401,7 +2406,12 @@ module ShortcutConfig
           },
         },
         "epic_unlink_productboard" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
           "name" => "epic_unlink_productboard",
           "op" => {
             "create" => {
@@ -5268,7 +5278,12 @@ module ShortcutConfig
           },
         },
         "objectif" => {
-          "fields" => [],
+          "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
+          ],
           "name" => "objectif",
           "op" => {
             "remove" => {
@@ -9966,6 +9981,10 @@ module ShortcutConfig
         },
         "webhook" => {
           "fields" => [
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
+            },
             {
               "name" => "secret",
               "type" => "`$STRING`",

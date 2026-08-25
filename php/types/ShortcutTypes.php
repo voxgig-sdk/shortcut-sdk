@@ -97,6 +97,7 @@ class CategoryRemoveMatch
 /** Comment entity data model. */
 class Comment
 {
+    public ?string $id = null;
 }
 
 /** Request payload for Comment#remove. */
@@ -679,6 +680,7 @@ class EpicPaginatedResultListMatch
 /** EpicUnlinkProductboard entity data model. */
 class EpicUnlinkProductboard
 {
+    public ?string $id = null;
 }
 
 /** Request payload for EpicUnlinkProductboard#create. */
@@ -1474,6 +1476,7 @@ class MilestoneRemoveMatch
 /** Objectif entity data model. */
 class Objectif
 {
+    public ?string $id = null;
 }
 
 /** Request payload for Objectif#remove. */
@@ -2685,6 +2688,7 @@ class UploadedFileRemoveMatch
 /** Webhook entity data model. */
 class Webhook
 {
+    public ?string $id = null;
     public ?string $secret = null;
     public string $webhook_url;
 }
@@ -2698,6 +2702,7 @@ class WebhookLoadMatch
 /** Request payload for Webhook#create. */
 class WebhookCreateData
 {
+    public ?string $id = null;
     public ?string $secret = null;
     public string $webhook_url;
 }

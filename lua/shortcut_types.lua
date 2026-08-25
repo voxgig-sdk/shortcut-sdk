@@ -65,6 +65,7 @@
 ---@field id number
 
 ---@class Comment
+---@field id? string
 
 ---@class CommentRemoveMatch
 ---@field id number
@@ -563,6 +564,7 @@
 ---@field updated_at? string
 
 ---@class EpicUnlinkProductboard
+---@field id? string
 
 ---@class EpicUnlinkProductboardCreateData
 ---@field id number
@@ -1220,6 +1222,7 @@
 ---@field id number
 
 ---@class Objectif
+---@field id? string
 
 ---@class ObjectifRemoveMatch
 ---@field id number
@@ -2260,6 +2263,7 @@
 ---@field id number
 
 ---@class Webhook
+---@field id? string
 ---@field secret? string
 ---@field webhook_url string
 
@@ -2267,6 +2271,7 @@
 ---@field id number
 
 ---@class WebhookCreateData
+---@field id? string
 ---@field secret? string
 ---@field webhook_url string
 

@@ -46,7 +46,7 @@ describe('EpicUnlinkProductboardEntity', async () => {
     epic_unlink_productboard_ref01_data['epic-public-id'] = setup.idmap['epic-public-id01']
 
     epic_unlink_productboard_ref01_data = (await epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data)).data()
-    assert(null != epic_unlink_productboard_ref01_data)
+    assert(null != epic_unlink_productboard_ref01_data.id)
 
 
   })

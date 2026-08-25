@@ -40,6 +40,7 @@ class EpicUnlinkProductboardEntityTest < Minitest::Test
     epic_unlink_productboard_ref01_data_result = epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data, nil)
     epic_unlink_productboard_ref01_data = Helpers.to_map(epic_unlink_productboard_ref01_data_result.respond_to?(:data_get) ? epic_unlink_productboard_ref01_data_result.data_get : epic_unlink_productboard_ref01_data_result)
     assert !epic_unlink_productboard_ref01_data.nil?
+    assert !epic_unlink_productboard_ref01_data["id"].nil?
 
   end
 end

@@ -379,7 +379,18 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": [
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "comment",
           "op": {
             "remove": {
@@ -2707,7 +2718,18 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": [
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "epic_unlink_productboard",
           "op": {
             "create": {
@@ -5985,7 +6007,18 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": [
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "objectif",
           "op": {
             "remove": {
@@ -11372,6 +11405,12 @@
           "fields": [
             {
               "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
               "name": "secret",
               "req": false,
               "type": "`$STRING`"
@@ -11383,6 +11422,10 @@
               "type": "`$STRING`"
             }
           ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "webhook",
           "op": {
             "create": {

@@ -405,7 +405,12 @@ class ShortcutConfig
           ],
         ],
         'comment' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
           'name' => 'comment',
           'op' => [
             'remove' => [
@@ -2415,7 +2420,12 @@ class ShortcutConfig
           ],
         ],
         'epic_unlink_productboard' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
           'name' => 'epic_unlink_productboard',
           'op' => [
             'create' => [
@@ -5282,7 +5292,12 @@ class ShortcutConfig
           ],
         ],
         'objectif' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
+          ],
           'name' => 'objectif',
           'op' => [
             'remove' => [
@@ -9980,6 +9995,10 @@ class ShortcutConfig
         ],
         'webhook' => [
           'fields' => [
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
+            ],
             [
               'name' => 'secret',
               'type' => '`$STRING`',

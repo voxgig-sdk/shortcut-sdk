@@ -62,17 +62,34 @@ func TestWebhookEntity(t *testing.T) {
 		if webhookRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if webhookRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LOAD
-		webhookRef01MatchDt0 := map[string]any{}
+		webhookRef01MatchDt0 := map[string]any{
+			"id": webhookRef01Data["id"],
+		}
 		webhookRef01DataDt0Loaded, err := webhookRef01Ent.Load(webhookRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if webhookRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		webhookRef01DataDt0LoadResult := core.ToMapAny(entityData(webhookRef01DataDt0Loaded))
+		if webhookRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if webhookRef01DataDt0LoadResult["id"] != webhookRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
+		// REMOVE
+		webhookRef01MatchRm0 := map[string]any{
+			"id": webhookRef01Data["id"],
+		}
+		_, err = webhookRef01Ent.Remove(webhookRef01MatchRm0, nil)
+		if err != nil {
+			t.Fatalf("remove failed: %v", err)
+		}
 
 	})
 }

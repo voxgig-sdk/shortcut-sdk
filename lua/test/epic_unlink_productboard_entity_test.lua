@@ -44,6 +44,7 @@ describe("EpicUnlinkProductboardEntity", function()
     assert.is_nil(err)
     epic_unlink_productboard_ref01_data = helpers.to_map(type(epic_unlink_productboard_ref01_data_result) == 'table' and epic_unlink_productboard_ref01_data_result.data_get and epic_unlink_productboard_ref01_data_result:data_get() or epic_unlink_productboard_ref01_data_result)
     assert.is_not_nil(epic_unlink_productboard_ref01_data)
+    assert.is_not_nil(epic_unlink_productboard_ref01_data["id"])
 
   end)
 end)

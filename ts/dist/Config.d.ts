@@ -276,7 +276,10 @@ declare class Config {
             };
         };
         comment: {
-            fields: never[];
+            fields: {
+                name: string;
+                type: string;
+            }[];
             name: string;
             op: {
                 remove: {
@@ -1172,7 +1175,10 @@ declare class Config {
             };
         };
         epic_unlink_productboard: {
-            fields: never[];
+            fields: {
+                name: string;
+                type: string;
+            }[];
             name: string;
             op: {
                 create: {
@@ -2680,7 +2686,10 @@ declare class Config {
             };
         };
         objectif: {
-            fields: never[];
+            fields: {
+                name: string;
+                type: string;
+            }[];
             name: string;
             op: {
                 remove: {

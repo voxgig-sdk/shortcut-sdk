@@ -417,6 +417,12 @@ comment := client.Comment(nil)
 fmt.Println(comment.GetName()) // "comment"
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
+
 ### Operations
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
@@ -1251,6 +1257,12 @@ Return the entity name.
 epicUnlinkProductboard := client.EpicUnlinkProductboard(nil)
 fmt.Println(epicUnlinkProductboard.GetName()) // "epic_unlink_productboard"
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -2547,6 +2559,12 @@ Return the entity name.
 objectif := client.Objectif(nil)
 fmt.Println(objectif.GetName()) // "objectif"
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `id` | `string` | No |  |
 
 ### Operations
 
@@ -4267,6 +4285,7 @@ fmt.Println(webhook.GetName()) // "webhook"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `secret` | `string` | No |  |
 | `webhook_url` | `string` | Yes |  |
 

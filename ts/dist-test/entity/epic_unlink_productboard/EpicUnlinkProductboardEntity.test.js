@@ -76,7 +76,7 @@ const utility_1 = require("../../utility");
         let epic_unlink_productboard_ref01_data = setup.data.new.epic_unlink_productboard['epic_unlink_productboard_ref01'];
         epic_unlink_productboard_ref01_data['epic-public-id'] = setup.idmap['epic-public-id01'];
         epic_unlink_productboard_ref01_data = (await epic_unlink_productboard_ref01_ent.create(epic_unlink_productboard_ref01_data)).data();
-        (0, node_assert_1.default)(null != epic_unlink_productboard_ref01_data);
+        (0, node_assert_1.default)(null != epic_unlink_productboard_ref01_data.id);
     });
 });
 function basicSetup(extra) {
