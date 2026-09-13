@@ -1,6 +1,15 @@
 {
+  "NAME": "SHORTCUT",
+  "Name": "Shortcut",
   "def": "shortcut-v3-openapi-3.0.0.json",
   "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
     "def": {
       "desc": ""
     },
@@ -16088,5 +16097,8 @@
     }
   },
   "name": "shortcut",
+  "name-": "shortcut",
+  "name_": "shortcut",
+  "name__orig": "shortcut",
   "origin": "voxgig-sdk"
 }
