@@ -92,11 +92,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/stories/bulk",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "bulk",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "lit" => "bulk",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -105,6 +113,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "bulk",
+                  ],
                 },
               ],
             },
@@ -127,6 +141,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "css-color",
               "name" => "color",
               "op" => {
                 "create" => {
@@ -141,6 +156,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date that the Category was created.",
@@ -170,6 +186,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Category.",
@@ -198,12 +215,17 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date that the Category was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "category",
           "op" => {
             "create" => {
@@ -215,10 +237,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/categories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -230,6 +258,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                  ],
                 },
               ],
             },
@@ -242,16 +275,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/categories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                  ],
                 },
               ],
             },
@@ -274,17 +318,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/categories/{category-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "category-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -294,6 +346,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -316,17 +374,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/categories/{category-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "category-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -336,6 +402,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -358,17 +430,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/categories/{category-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "category-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -382,6 +462,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -397,6 +483,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "comment",
           "op" => {
             "remove" => {
@@ -425,20 +515,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -449,6 +551,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -464,11 +574,13 @@ module ShortcutConfig
         "custom_field" => {
           "fields" => [
             {
+              "format" => "uuid",
               "name" => "after_id",
               "short" => "The ID of the CustomField we want to move this CustomField after.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "before_id",
               "short" => "The ID of the CustomField we want to move this CustomField before.",
               "type" => "`$STRING`",
@@ -479,6 +591,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The instant when this CustomField was created.",
@@ -523,6 +636,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The unique public ID for the CustomField.",
@@ -540,6 +654,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "An integer indicating the position of this Custom Field with respect to the other CustomField",
@@ -551,6 +666,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The instant when this CustomField was last updated.",
@@ -562,6 +678,10 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "custom_field",
           "op" => {
             "list" => {
@@ -573,16 +693,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/custom-fields",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "custom-fields",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "custom-fields",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "custom-fields",
+                  ],
                 },
               ],
             },
@@ -605,17 +736,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/custom-fields/{custom-field-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "custom-fields",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "custom-field-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "custom-fields",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -625,6 +764,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "custom-fields",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -647,17 +792,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/custom-fields/{custom-field-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "custom-fields",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "custom-field-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "custom-fields",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -667,6 +820,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "custom-fields",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -689,17 +848,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/custom-fields/{custom-field-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "custom-fields",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "custom-field-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "custom-fields",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -717,6 +884,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "custom-fields",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -738,34 +911,62 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/entity-templates/disable",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
+                    {
+                      "lit" => "disable",
+                    },
+                  ],
+                  "select" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
                   "parts" => [
                     "api",
                     "v3",
                     "entity-templates",
                     "disable",
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/iterations/disable",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "disable",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "lit" => "disable",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "disable",
+                  ],
                 },
               ],
             },
@@ -789,6 +990,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The public id of the Doc",
@@ -801,6 +1003,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "doc_slim",
           "op" => {
             "create" => {
@@ -812,10 +1018,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/documents",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "documents",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "documents",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -825,6 +1037,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "documents",
+                  ],
                 },
               ],
             },
@@ -837,16 +1054,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/documents",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "documents",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "documents",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "documents",
+                  ],
                 },
               ],
             },
@@ -868,34 +1096,62 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/entity-templates/enable",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
+                    {
+                      "lit" => "enable",
+                    },
+                  ],
+                  "select" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
                   "parts" => [
                     "api",
                     "v3",
                     "entity-templates",
                     "enable",
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/iterations/enable",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "enable",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "lit" => "enable",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "enable",
+                  ],
                 },
               ],
             },
@@ -907,6 +1163,7 @@ module ShortcutConfig
         "entity_template" => {
           "fields" => [
             {
+              "format" => "uuid",
               "name" => "author_id",
               "op" => {
                 "list" => {
@@ -918,6 +1175,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date when the entity template was created.",
@@ -929,6 +1187,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline",
               "short" => "The due date of the story.",
               "type" => "`$STRING`",
@@ -950,11 +1209,13 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_id",
               "short" => "The ID of the epic the story belongs to.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "estimate",
               "short" => "The numeric point estimate of the story.",
               "type" => "`$INTEGER`",
@@ -975,17 +1236,20 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "group_id",
               "short" => "The ID of the group to which the story is assigned.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The unique identifier for the entity template.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "iteration_id",
               "short" => "The ID of the iteration the story belongs to.",
               "type" => "`$INTEGER`",
@@ -1001,6 +1265,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "last_used_at",
               "req" => true,
               "short" => "The last time that someone created an entity using this template.",
@@ -1032,6 +1297,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "project_id",
               "short" => "The ID of the project the story belongs to.",
               "type" => "`$INTEGER`",
@@ -1063,17 +1329,23 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date when the entity template was last updated.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "workflow_state_id",
               "short" => "The ID of the workflow state the story is currently in.",
               "type" => "`$INTEGER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "entity_template",
           "op" => {
             "create" => {
@@ -1085,10 +1357,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/entity-templates",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "entity-templates",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -1099,6 +1377,11 @@ module ShortcutConfig
                     },
                     "res" => "`body.story_contents`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "entity-templates",
+                  ],
                 },
               ],
             },
@@ -1111,16 +1394,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/entity-templates",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "entity-templates",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "entity-templates",
+                  ],
                 },
               ],
             },
@@ -1143,17 +1437,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/entity-templates/{entity-template-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "entity-templates",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "entity-template-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -1163,6 +1465,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.story_contents`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "entity-templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1185,17 +1493,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/entity-templates/{entity-template-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "entity-templates",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "entity-template-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -1205,6 +1521,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "entity-templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1227,17 +1549,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/entity-templates/{entity-template-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "entity-templates",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "entity-template-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "entity-templates",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -1250,6 +1580,12 @@ module ShortcutConfig
                     },
                     "res" => "`body.story_contents`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "entity-templates",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1261,6 +1597,7 @@ module ShortcutConfig
         "epic" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "The ID of the Epic we want to move this Epic after.",
               "type" => "`$INTEGER`",
@@ -1289,6 +1626,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "The ID of the Epic we want to move this Epic before.",
               "type" => "`$INTEGER`",
@@ -1311,12 +1649,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Epic was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
@@ -1331,11 +1671,13 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "converted_from_story_id",
               "short" => "The ID of the Story that was converted to an Epic.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -1347,6 +1689,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline",
               "op" => {
                 "create" => {
@@ -1384,6 +1727,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_state_id",
               "op" => {
                 "create" => {
@@ -1431,6 +1775,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "group_id",
               "op" => {
                 "create" => {
@@ -1471,6 +1816,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Epic.",
@@ -1509,6 +1855,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "milestone_id",
               "op" => {
                 "create" => {
@@ -1562,6 +1909,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "planned_start_date",
               "op" => {
                 "create" => {
@@ -1576,12 +1924,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "The Epic's relative position in the Epic workflow state.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "uuid",
               "name" => "productboard_id",
               "req" => true,
               "short" => "The ID of the associated productboard feature.",
@@ -1594,6 +1944,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "productboard_plugin_id",
               "req" => true,
               "short" => "The ID of the associated productboard integration.",
@@ -1612,6 +1963,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "requested_by_id",
               "op" => {
                 "create" => {
@@ -1632,12 +1984,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at",
               "req" => true,
               "short" => "The time/date the Epic was started.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at_override",
               "op" => {
                 "create" => {
@@ -1672,12 +2026,14 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "int64",
               "name" => "stories_without_projects",
               "req" => true,
               "short" => "The number of stories in this epic which are not associated with a project.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -1689,6 +2045,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "epic",
           "op" => {
             "create" => {
@@ -1700,10 +2060,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -1731,6 +2097,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                  ],
                 },
               ],
             },
@@ -1777,11 +2148,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
-                    "epics",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1796,6 +2175,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                    "epics",
+                  ],
                 },
                 {
                   "args" => {
@@ -1811,10 +2196,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1825,6 +2216,11 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                  ],
                 },
                 {
                   "args" => {
@@ -1841,18 +2237,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/labels/{label-public-id}/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
-                    "{label_id}",
-                    "epics",
-                  ],
                   "rename" => {
                     "param" => {
                       "label-public-id" => "label_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
+                    {
+                      "var" => "label_id",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "label_id",
@@ -1862,6 +2268,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                    "{label_id}",
+                    "epics",
+                  ],
                 },
                 {
                   "args" => {
@@ -1878,18 +2291,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/milestones/{milestone-public-id}/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
-                    "{milestone_id}",
-                    "epics",
-                  ],
                   "rename" => {
                     "param" => {
                       "milestone-public-id" => "milestone_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
+                    {
+                      "var" => "milestone_id",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "milestone_id",
@@ -1899,6 +2322,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                    "{milestone_id}",
+                    "epics",
+                  ],
                 },
                 {
                   "args" => {
@@ -1915,18 +2345,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/objectives/{objective-public-id}/epics",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
-                    "{objectif_id}",
-                    "epics",
-                  ],
                   "rename" => {
                     "param" => {
                       "objective-public-id" => "objectif_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
+                    {
+                      "var" => "objectif_id",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "objectif_id",
@@ -1936,6 +2376,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                    "{objectif_id}",
+                    "epics",
+                  ],
                 },
               ],
             },
@@ -1958,17 +2405,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -1978,6 +2433,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2000,17 +2461,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/epics/{epic-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -2020,6 +2489,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2042,17 +2517,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/epics/{epic-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -2083,6 +2566,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2128,24 +2617,28 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Epic was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_override",
               "req" => true,
               "short" => "A manual override for the time/date the Epic was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Epic was created.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline",
               "req" => true,
               "short" => "The Epic's deadline.",
@@ -2163,6 +2656,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_state_id",
               "req" => true,
               "short" => "The ID of the Epic State.",
@@ -2186,6 +2680,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "group_id",
               "req" => true,
               "short" => "`Deprecated` The ID of the group to associate with the epic.",
@@ -2204,6 +2699,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Epic.",
@@ -2234,6 +2730,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "milestone_id",
               "req" => true,
               "short" => "`Deprecated` The ID of the Objective this Epic is related to.",
@@ -2258,18 +2755,21 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "planned_start_date",
               "req" => true,
               "short" => "The Epic's planned start date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "The Epic's relative position in the Epic workflow state.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "uuid",
               "name" => "productboard_id",
               "req" => true,
               "short" => "The ID of the associated productboard feature.",
@@ -2282,6 +2782,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "productboard_plugin_id",
               "req" => true,
               "short" => "The ID of the associated productboard integration.",
@@ -2300,6 +2801,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "requested_by_id",
               "req" => true,
               "short" => "The ID of the Member that requested the epic.",
@@ -2312,12 +2814,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at",
               "req" => true,
               "short" => "The time/date the Epic was started.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at_override",
               "req" => true,
               "short" => "A manual override for the time/date the Epic was started.",
@@ -2336,18 +2840,24 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "int64",
               "name" => "stories_without_projects",
               "req" => true,
               "short" => "The number of stories in this epic which are not associated with a project.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the Epic was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "epic_paginated_result",
           "op" => {
             "list" => {
@@ -2380,11 +2890,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/paginated",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "paginated",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "lit" => "paginated",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -2397,6 +2915,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "paginated",
+                  ],
                 },
               ],
             },
@@ -2412,6 +2936,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "epic_unlink_productboard",
           "op" => {
             "create" => {
@@ -2433,18 +2961,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/epics/{epic-public-id}/unlink-productboard",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{id}",
-                    "unlink-productboard",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "unlink-productboard",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -2454,6 +2992,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{id}",
+                    "unlink-productboard",
+                  ],
                 },
               ],
             },
@@ -2465,11 +3010,13 @@ module ShortcutConfig
         "epic_workflow" => {
           "fields" => [
             {
+              "format" => "css-color",
               "name" => "color",
               "short" => "The hex color for this Epic State.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Epic State was created.",
@@ -2493,6 +3040,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Epic State.",
@@ -2505,6 +3053,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "The position that the Epic State is in, starting with 0 at the left.",
@@ -2517,12 +3066,17 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "When the Epic State was last updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "epic_workflow",
           "op" => {
             "list" => {
@@ -2534,16 +3088,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epic-workflow",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epic-workflow",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epic-workflow",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.epic_states`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epic-workflow",
+                  ],
                 },
               ],
             },
@@ -2572,6 +3137,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "css-color",
               "name" => "color",
               "op" => {
                 "create" => {
@@ -2600,12 +3166,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The instant when this group was created.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "default_workflow_id",
               "short" => "The ID of the default workflow for stories created in this group.",
               "type" => "`$INTEGER`",
@@ -2631,6 +3199,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "uuid",
               "name" => "display_icon_id",
               "short" => "The Icon id for the avatar of this Group.",
               "type" => "`$STRING`",
@@ -2647,6 +3216,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The id of the Group.",
@@ -2689,30 +3259,35 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics_started",
               "req" => true,
               "short" => "The number of epics assigned to the group which are in the started workflow state.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories",
               "req" => true,
               "short" => "The total number of stories assigned to the group.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_backlog",
               "req" => true,
               "short" => "The number of stories assigned to the group which are in a backlog workflow state.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_started",
               "req" => true,
               "short" => "The number of stories assigned to the group which are in a started workflow state.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The last instant when this group was updated.",
@@ -2733,6 +3308,10 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "group",
           "op" => {
             "create" => {
@@ -2744,10 +3323,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/groups",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "groups",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "groups",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -2763,6 +3348,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "groups",
+                  ],
                 },
               ],
             },
@@ -2775,16 +3365,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/groups",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "groups",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "groups",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "groups",
+                  ],
                 },
               ],
             },
@@ -2807,17 +3408,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/groups/{group-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "groups",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "group-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "groups",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -2827,6 +3436,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "groups",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2849,17 +3464,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/groups/{group-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "groups",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "group-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "groups",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -2880,6 +3503,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "groups",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2891,11 +3520,13 @@ module ShortcutConfig
         "health" => {
           "fields" => [
             {
+              "format" => "uuid",
               "name" => "author_id",
               "short" => "The ID of the permission who created or updated the Health record.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "short" => "The time that the Health record was created.",
               "type" => "`$STRING`",
@@ -2907,17 +3538,20 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_id",
               "short" => "The ID of the Epic associated with this Health record.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Health record.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "objective_id",
               "short" => "The ID of the Objective associated with this Health record.",
               "type" => "`$INTEGER`",
@@ -2939,11 +3573,16 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "short" => "The time that the Health record was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "health",
           "op" => {
             "create" => {
@@ -2965,18 +3604,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/epics/{epic-public-id}/health",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "health",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "health",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -2989,6 +3638,13 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "health",
+                  ],
                 },
               ],
             },
@@ -3011,18 +3667,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}/health-history",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "health-history",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "health-history",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -3032,6 +3698,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "health-history",
+                  ],
                 },
               ],
             },
@@ -3054,18 +3727,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}/health",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "health",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "health",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -3075,6 +3758,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "health",
+                  ],
                 },
               ],
             },
@@ -3097,17 +3787,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/health/{health-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "health",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "health-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "health",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3120,6 +3818,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "health",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3151,6 +3855,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "automation_id",
               "short" => "The ID of the automation that performed the change.",
               "type" => "`$STRING`",
@@ -3167,12 +3872,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The ID representing the change for the story.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "member_id",
               "short" => "The ID of the member who performed the change.",
               "type" => "`$STRING`",
@@ -3209,6 +3916,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "history",
           "op" => {
             "list" => {
@@ -3230,18 +3941,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/stories/{story-public-id}/history",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "history",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "history",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "story_id",
@@ -3251,6 +3972,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "history",
+                  ],
                 },
               ],
             },
@@ -3278,6 +4006,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The instant when this iteration was created.",
@@ -3298,6 +4027,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "end_date",
               "op" => {
                 "update" => {
@@ -3354,6 +4084,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The ID of the iteration.",
@@ -3403,6 +4134,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "start_date",
               "op" => {
                 "update" => {
@@ -3426,12 +4158,17 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The instant when this iteration was last updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "iteration",
           "op" => {
             "create" => {
@@ -3443,10 +4180,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/iterations",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -3461,6 +4204,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                  ],
                 },
               ],
             },
@@ -3507,11 +4255,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search/iterations",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
-                    "iterations",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -3526,22 +4282,39 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                    "iterations",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/iterations",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                  ],
                 },
               ],
             },
@@ -3564,17 +4337,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/iterations/{iteration-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "iteration-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3584,6 +4365,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3606,17 +4393,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/iterations/{iteration-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "iteration-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3626,6 +4421,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3648,17 +4449,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/iterations/{iteration-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "iteration-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3676,6 +4485,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3699,6 +4514,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The ID of the Key Result.",
@@ -3727,6 +4543,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "objective_id",
               "req" => true,
               "short" => "The Objective to which this Key Result belongs.",
@@ -3738,6 +4555,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "int64",
               "name" => "progress",
               "req" => true,
               "short" => "The integer percentage of progress toward completion of the Key Result.",
@@ -3755,6 +4573,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "key_result",
           "op" => {
             "load" => {
@@ -3776,17 +4598,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/key-results/{key-result-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "key-results",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "key-result-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "key-results",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3796,6 +4626,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "key-results",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3818,17 +4654,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/key-results/{key-result-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "key-results",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "key-result-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "key-results",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -3843,6 +4687,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "key-results",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -3871,6 +4721,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "css-color",
               "name" => "color",
               "op" => {
                 "list" => {
@@ -3882,6 +4733,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date that the Label was created.",
@@ -3921,6 +4773,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Label.",
@@ -3938,102 +4791,119 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics",
               "req" => true,
               "short" => "The total number of Epics with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics_completed",
               "req" => true,
               "short" => "The number of completed Epics associated with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics_in_progress",
               "req" => true,
               "short" => "The number of in progress epics associated with this label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics_total",
               "req" => true,
               "short" => "The total number of Epics associated with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_epics_unstarted",
               "req" => true,
               "short" => "The number of unstarted epics associated with this label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_points_backlog",
               "req" => true,
               "short" => "The total number of backlog points with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_points_completed",
               "req" => true,
               "short" => "The total number of completed points with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_points_in_progress",
               "req" => true,
               "short" => "The total number of in-progress points with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_points_total",
               "req" => true,
               "short" => "The total number of points with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_points_unstarted",
               "req" => true,
               "short" => "The total number of unstarted points with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_related_documents",
               "req" => true,
               "short" => "The total number of Documents associated this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_backlog",
               "req" => true,
               "short" => "The total number of stories backlog Stories with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_completed",
               "req" => true,
               "short" => "The total number of completed Stories with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_in_progress",
               "req" => true,
               "short" => "The total number of in-progress Stories with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_total",
               "req" => true,
               "short" => "The total number of Stories with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_unestimated",
               "req" => true,
               "short" => "The total number of Stories with no point estimate with this Label.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "num_stories_unstarted",
               "req" => true,
               "short" => "The total number of stories unstarted Stories with this Label.",
@@ -4046,12 +4916,17 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date that the Label was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "label",
           "op" => {
             "create" => {
@@ -4063,10 +4938,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/labels",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -4078,6 +4959,11 @@ module ShortcutConfig
                     },
                     "res" => "`body.stats`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                  ],
                 },
               ],
             },
@@ -4099,10 +4985,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/labels",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -4113,6 +5005,11 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                  ],
                 },
               ],
             },
@@ -4135,17 +5032,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/labels/{label-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "label-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4155,6 +5060,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.stats`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4177,17 +5088,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/labels/{label-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "label-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4197,6 +5116,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4219,17 +5144,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/labels/{label-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "label-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4244,6 +5177,12 @@ module ShortcutConfig
                     },
                     "res" => "`body.stats`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4266,6 +5205,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the LinkedFile was created.",
@@ -4298,6 +5238,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique identifier for the file.",
@@ -4327,6 +5268,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "size",
               "op" => {
                 "create" => {
@@ -4341,6 +5283,7 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "story_id",
               "short" => "The ID of the linked story.",
               "type" => "`$INTEGER`",
@@ -4377,12 +5320,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the LinkedFile was updated.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "uploader_id",
               "op" => {
                 "create" => {
@@ -4408,6 +5353,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "linked_file",
           "op" => {
             "create" => {
@@ -4419,10 +5368,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/linked-files",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "linked-files",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "linked-files",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -4439,6 +5394,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "linked-files",
+                  ],
                 },
               ],
             },
@@ -4451,16 +5411,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/linked-files",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "linked-files",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "linked-files",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "linked-files",
+                  ],
                 },
               ],
             },
@@ -4483,17 +5454,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/linked-files/{linked-file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "linked-files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linked-file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "linked-files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4503,6 +5482,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "linked-files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4525,17 +5510,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/linked-files/{linked-file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "linked-files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linked-file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "linked-files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4545,6 +5538,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "linked-files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4567,17 +5566,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/linked-files/{linked-file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "linked-files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linked-file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "linked-files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4596,6 +5603,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "linked-files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -4607,6 +5620,7 @@ module ShortcutConfig
         "member" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Member was created.",
@@ -4642,12 +5656,14 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "id",
               "req" => true,
               "short" => "The Member's ID in Shortcut.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "installation_id",
               "short" => "Only set for agents.",
               "type" => "`$STRING`",
@@ -4679,6 +5695,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "uuid",
               "name" => "replaced_by",
               "short" => "The id of the member that replaces this one when merged.",
               "type" => "`$STRING`",
@@ -4696,6 +5713,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the Member was last updated.",
@@ -4707,6 +5725,10 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "member",
           "op" => {
             "list" => {
@@ -4733,10 +5755,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/members",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "members",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "members",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -4748,6 +5776,11 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "members",
+                  ],
                 },
               ],
             },
@@ -4778,17 +5811,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/members/{member-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "members",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "member-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "members",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -4799,22 +5840,39 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "members",
+                    "{id}",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/member",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "member",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "member",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "member",
+                  ],
                 },
               ],
             },
@@ -4826,6 +5884,7 @@ module ShortcutConfig
         "milestone" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "The ID of the Milestone we want to move this Milestone after.",
               "type" => "`$INTEGER`",
@@ -4848,6 +5907,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "The ID of the Milestone we want to move this Milestone before.",
               "type" => "`$INTEGER`",
@@ -4873,12 +5933,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Milestone was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
@@ -4893,6 +5955,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Milestone was created.",
@@ -4924,6 +5987,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Milestone.",
@@ -4947,6 +6011,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
@@ -4959,12 +6024,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at",
               "req" => true,
               "short" => "The time/date the Milestone was started.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at_override",
               "op" => {
                 "create" => {
@@ -4999,12 +6066,17 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the Milestone was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "milestone",
           "op" => {
             "create" => {
@@ -5016,10 +6088,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/milestones",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -5033,6 +6111,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                  ],
                 },
               ],
             },
@@ -5055,18 +6138,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/categories/{category-public-id}/milestones",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
-                    "{category_id}",
-                    "milestones",
-                  ],
                   "rename" => {
                     "param" => {
                       "category-public-id" => "category_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
+                    {
+                      "var" => "category_id",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "category_id",
@@ -5076,6 +6169,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                    "{category_id}",
+                    "milestones",
+                  ],
                 },
                 {
                   "args" => {
@@ -5092,18 +6192,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/categories/{category-public-id}/objectives",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "categories",
-                    "{category_id}",
-                    "objectives",
-                  ],
                   "rename" => {
                     "param" => {
                       "category-public-id" => "category_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "categories",
+                    },
+                    {
+                      "var" => "category_id",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "category_id",
@@ -5113,22 +6223,40 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "categories",
+                    "{category_id}",
+                    "objectives",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/milestones",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                  ],
                 },
               ],
             },
@@ -5151,17 +6279,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/milestones/{milestone-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "milestone-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -5171,6 +6307,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -5193,17 +6335,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/milestones/{milestone-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "milestone-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -5213,6 +6363,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -5235,17 +6391,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/milestones/{milestone-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "milestones",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "milestone-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -5265,6 +6429,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "milestones",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -5284,6 +6454,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "objectif",
           "op" => {
             "remove" => {
@@ -5305,17 +6479,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/objectives/{objective-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "objective-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -5325,6 +6507,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -5336,6 +6524,7 @@ module ShortcutConfig
         "objective" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "The ID of the Objective we want to move this Objective after.",
               "type" => "`$INTEGER`",
@@ -5358,6 +6547,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "The ID of the Objective we want to move this Objective before.",
               "type" => "`$INTEGER`",
@@ -5383,12 +6573,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Objective was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
@@ -5403,6 +6595,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Objective was created.",
@@ -5437,6 +6630,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Objective.",
@@ -5460,6 +6654,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
@@ -5472,12 +6667,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at",
               "req" => true,
               "short" => "The time/date the Objective was started.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at_override",
               "op" => {
                 "create" => {
@@ -5512,12 +6709,17 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the Objective was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "objective",
           "op" => {
             "create" => {
@@ -5529,10 +6731,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/objectives",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -5546,6 +6754,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                  ],
                 },
               ],
             },
@@ -5592,11 +6805,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search/milestones",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
-                    "milestones",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
+                    {
+                      "lit" => "milestones",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -5611,6 +6832,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                    "milestones",
+                  ],
                 },
                 {
                   "args" => {
@@ -5651,11 +6878,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search/objectives",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
-                    "objectives",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -5670,22 +6905,39 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                    "objectives",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/objectives",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                  ],
                 },
               ],
             },
@@ -5708,17 +6960,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/objectives/{objective-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
-                    "{objective_public_id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "objective-public-id" => "objective_public_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
+                    {
+                      "var" => "objective_public_id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "objective_public_id",
@@ -5728,6 +6988,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                    "{objective_public_id}",
+                  ],
                 },
               ],
             },
@@ -5750,17 +7016,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/objectives/{objective-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "objectives",
-                    "{objective_public_id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "objective-public-id" => "objective_public_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "objectives",
+                    },
+                    {
+                      "var" => "objective_public_id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "objective_public_id",
@@ -5780,6 +7054,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "objectives",
+                    "{objective_public_id}",
+                  ],
                 },
               ],
             },
@@ -5826,6 +7106,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "css-color",
               "name" => "color",
               "op" => {
                 "create" => {
@@ -5840,6 +7121,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -5851,6 +7133,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "days_to_thermometer",
               "op" => {
                 "update" => {
@@ -5913,12 +7196,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Project.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "iteration_length",
               "op" => {
                 "create" => {
@@ -5952,6 +7237,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "start_time",
               "op" => {
                 "create" => {
@@ -5969,6 +7255,7 @@ module ShortcutConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "int64",
               "name" => "team_id",
               "op" => {
                 "update" => {
@@ -5980,6 +7267,7 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -5991,12 +7279,17 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "workflow_id",
               "req" => true,
               "short" => "The ID of the workflow the project belongs to.",
               "type" => "`$INTEGER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "project",
           "op" => {
             "create" => {
@@ -6008,10 +7301,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/projects",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -6030,6 +7329,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                  ],
                 },
               ],
             },
@@ -6042,16 +7346,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/projects",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                  ],
                 },
               ],
             },
@@ -6074,17 +7389,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/projects/{project-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "project-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -6094,6 +7417,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -6116,17 +7445,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/projects/{project-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "project-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -6136,6 +7473,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -6158,17 +7501,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/projects/{project-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "project-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -6188,6 +7539,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -6199,6 +7556,7 @@ module ShortcutConfig
         "repository" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date the Repository was created.",
@@ -6223,6 +7581,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The ID associated to the VCS repository in Shortcut.",
@@ -6241,6 +7600,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date the Repository was updated.",
@@ -6253,6 +7613,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "repository",
           "op" => {
             "list" => {
@@ -6264,16 +7628,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/repositories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "repositories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "repositories",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "repositories",
+                  ],
                 },
               ],
             },
@@ -6296,17 +7671,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/repositories/{repo-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "repositories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "repo-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "repositories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -6316,6 +7699,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "repositories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -6396,10 +7785,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -6414,6 +7809,11 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                  ],
                 },
               ],
             },
@@ -6425,6 +7825,7 @@ module ShortcutConfig
         "story" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "The ID of the story we want to move this story after.",
               "type" => "`$INTEGER`",
@@ -6450,6 +7851,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "The ID of the story we want to move this story before.",
               "type" => "`$INTEGER`",
@@ -6530,12 +7932,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Story was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_override",
               "op" => {
                 "create" => {
@@ -6550,6 +7954,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -6576,11 +7981,13 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "cycle_time",
               "short" => "The cycle time (in seconds) of this story when complete.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline",
               "op" => {
                 "create" => {
@@ -6618,6 +8025,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_id",
               "op" => {
                 "create" => {
@@ -6632,6 +8040,7 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "estimate",
               "op" => {
                 "create" => {
@@ -6747,6 +8156,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "group_id",
               "op" => {
                 "create" => {
@@ -6767,12 +8177,14 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Story.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "iteration_id",
               "op" => {
                 "create" => {
@@ -6817,6 +8229,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "lead_time",
               "short" => "The lead time (in seconds) of this story when complete.",
               "type" => "`$INTEGER`",
@@ -6871,6 +8284,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "moved_at",
               "req" => true,
               "short" => "The time/date the Story was last changed workflow-state.",
@@ -6891,6 +8305,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "num_tasks_completed",
               "op" => {
                 "list" => {
@@ -6926,11 +8341,13 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "parent_story_id",
               "short" => "The id of the parent story to associate with this story.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "A number representing the position of the story in relation to every other story in the current project.",
@@ -6943,6 +8360,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "project_id",
               "op" => {
                 "create" => {
@@ -6973,6 +8391,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "requested_by_id",
               "op" => {
                 "create" => {
@@ -6987,6 +8406,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "source_task_id",
               "short" => "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
               "type" => "`$INTEGER`",
@@ -6998,12 +8418,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at",
               "req" => true,
               "short" => "The time/date the Story was started.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "started_at_override",
               "op" => {
                 "create" => {
@@ -7035,6 +8457,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "story_template_id",
               "op" => {
                 "create" => {
@@ -7105,6 +8528,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -7116,12 +8540,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "workflow_id",
               "req" => true,
               "short" => "The ID of the workflow the story belongs to.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "workflow_state_id",
               "op" => {
                 "create" => {
@@ -7136,6 +8562,10 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "story",
           "op" => {
             "create" => {
@@ -7147,10 +8577,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -7190,17 +8626,30 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/from-template",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "from-template",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "lit" => "from-template",
+                    },
                   ],
                   "select" => {
                     "$action" => "from_template",
@@ -7256,6 +8705,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "from-template",
+                  ],
                 },
               ],
             },
@@ -7302,11 +8757,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/search/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "search",
-                    "stories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "search",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -7321,6 +8784,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body.data`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "search",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7351,18 +8820,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/groups/{group-public-id}/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "groups",
-                    "{group_id}",
-                    "stories",
-                  ],
                   "rename" => {
                     "param" => {
                       "group-public-id" => "group_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "groups",
+                    },
+                    {
+                      "var" => "group_id",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "group_id",
@@ -7374,6 +8853,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "groups",
+                    "{group_id}",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7398,18 +8884,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "stories",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -7420,6 +8916,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7444,18 +8947,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/iterations/{iteration-public-id}/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "iterations",
-                    "{iteration_id}",
-                    "stories",
-                  ],
                   "rename" => {
                     "param" => {
                       "iteration-public-id" => "iteration_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "iterations",
+                    },
+                    {
+                      "var" => "iteration_id",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "includes_description",
@@ -7466,6 +8979,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "iterations",
+                    "{iteration_id}",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7490,18 +9010,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/labels/{label-public-id}/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "labels",
-                    "{label_id}",
-                    "stories",
-                  ],
                   "rename" => {
                     "param" => {
                       "label-public-id" => "label_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "labels",
+                    },
+                    {
+                      "var" => "label_id",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "includes_description",
@@ -7512,6 +9042,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "labels",
+                    "{label_id}",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7536,18 +9073,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/projects/{project-public-id}/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "projects",
-                    "{project_id}",
-                    "stories",
-                  ],
                   "rename" => {
                     "param" => {
                       "project-public-id" => "project_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "projects",
+                    },
+                    {
+                      "var" => "project_id",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "includes_description",
@@ -7558,6 +9105,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "projects",
+                    "{project_id}",
+                    "stories",
+                  ],
                 },
                 {
                   "args" => {
@@ -7574,11 +9128,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/external-link/stories",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "external-link",
-                    "stories",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "external-link",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -7589,6 +9151,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "external-link",
+                    "stories",
+                  ],
                 },
               ],
             },
@@ -7611,17 +9179,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/stories/{story-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -7631,6 +9207,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -7653,17 +9235,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/stories/{story-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -7673,6 +9263,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -7695,17 +9291,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/stories/{story-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -7744,6 +9348,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -7777,6 +9387,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "author_id",
               "op" => {
                 "create" => {
@@ -7793,6 +9404,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -7833,6 +9445,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Comment.",
@@ -7857,11 +9470,13 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "parent_id",
               "short" => "The ID of the parent Comment this Comment is threaded under.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "The Comments numerical position in the list from oldest to newest.",
@@ -7874,6 +9489,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "story_id",
               "req" => true,
               "short" => "The ID of the Story on which the Comment appears.",
@@ -7891,6 +9507,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -7902,6 +9519,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "story_comment",
           "op" => {
             "create" => {
@@ -7930,21 +9551,35 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{comment_id}",
-                    "unlink-from-slack",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "comment_id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "comment_id",
+                    },
+                    {
+                      "lit" => "unlink-from-slack",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "comment_id",
@@ -7955,6 +9590,15 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{comment_id}",
+                    "unlink-from-slack",
+                  ],
                 },
                 {
                   "args" => {
@@ -7971,18 +9615,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/{story-public-id}/comments",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{id}",
-                    "comments",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -7999,6 +9653,13 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{id}",
+                    "comments",
+                  ],
                 },
               ],
             },
@@ -8021,18 +9682,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/stories/{story-public-id}/comments",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{id}",
-                    "comments",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8042,6 +9713,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{id}",
+                    "comments",
+                  ],
                 },
               ],
             },
@@ -8071,20 +9749,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8095,6 +9785,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -8124,20 +9822,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8150,6 +9860,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -8169,6 +9887,7 @@ module ShortcutConfig
         "story_link" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The time/date when the Story Link was created.",
@@ -8181,12 +9900,14 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique identifier of the Story Link.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "object_id",
               "op" => {
                 "update" => {
@@ -8198,6 +9919,7 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "subject_id",
               "op" => {
                 "update" => {
@@ -8209,12 +9931,14 @@ module ShortcutConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "subject_workflow_state_id",
               "req" => true,
               "short" => "The workflow state of the \"subject\" story.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The time/date when the Story Link was last updated.",
@@ -8232,6 +9956,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "story_link",
           "op" => {
             "create" => {
@@ -8243,10 +9971,16 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/story-links",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "story-links",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "story-links",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -8257,6 +9991,11 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "story-links",
+                  ],
                 },
               ],
             },
@@ -8279,17 +10018,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/story-links/{story-link-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "story-links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-link-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "story-links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8299,6 +10046,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "story-links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -8321,17 +10074,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/story-links/{story-link-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "story-links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-link-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "story-links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8341,6 +10102,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "story-links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -8363,17 +10130,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/story-links/{story-link-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "story-links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-link-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "story-links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -8387,6 +10162,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "story-links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -8432,21 +10213,35 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{comment_id}",
-                    "reactions",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "comment_id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "comment_id",
+                    },
+                    {
+                      "lit" => "reactions",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "comment_id",
@@ -8459,6 +10254,15 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{comment_id}",
+                    "reactions",
+                  ],
                 },
               ],
             },
@@ -8488,21 +10292,35 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "comments",
-                    "{comment_id}",
-                    "reactions",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "comment_id",
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "comment_id",
+                    },
+                    {
+                      "lit" => "reactions",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "comment_id",
@@ -8515,6 +10333,15 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "comments",
+                    "{comment_id}",
+                    "reactions",
+                  ],
                 },
               ],
             },
@@ -8531,6 +10358,7 @@ module ShortcutConfig
         "story_slim" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "The ID of the story that the stories are to be moved below.",
               "type" => "`$INTEGER`",
@@ -8541,26 +10369,31 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "The ID of the story that the stories are to be moved before.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_end",
               "short" => "Stories should have been completed on or before this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at_start",
               "short" => "Stories should have been completed on or after this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at_end",
               "short" => "Stories should have been created on or before this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at_start",
               "short" => "Stories should have been created on or after this date.",
               "type" => "`$STRING`",
@@ -8576,21 +10409,25 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline",
               "short" => "The due date of the story.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline_end",
               "short" => "Stories should have a deadline on or before this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "deadline_start",
               "short" => "Stories should have a deadline on or after this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "epic_id",
               "short" => "The Epic IDs that may be associated with the Stories.",
               "type" => "`$INTEGER`",
@@ -8601,6 +10438,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "estimate",
               "short" => "The number of estimate points associate with the Stories.",
               "type" => "`$INTEGER`",
@@ -8626,6 +10464,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "group_id",
               "short" => "The Group ID that is associated with the Stories",
               "type" => "`$STRING`",
@@ -8641,6 +10480,7 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "int64",
               "name" => "iteration_id",
               "short" => "The Iteration ID that may be associated with the Stories.",
               "type" => "`$INTEGER`",
@@ -8676,6 +10516,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "owner_id",
               "short" => "An array of UUIDs for any Users who may be Owners of the Stories.",
               "type" => "`$STRING`",
@@ -8696,6 +10537,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "project_id",
               "short" => "The IDs for the Projects the Stories may be assigned to.",
               "type" => "`$INTEGER`",
@@ -8706,6 +10548,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "uuid",
               "name" => "requested_by_id",
               "short" => "The UUID of any Users who may have requested the Stories.",
               "type" => "`$STRING`",
@@ -8733,16 +10576,19 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at_end",
               "short" => "Stories should have been updated on or before this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at_start",
               "short" => "Stories should have been updated on or after this date.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "workflow_state_id",
               "short" => "The unique IDs of the specific Workflow States that the Stories should be in.",
               "type" => "`$INTEGER`",
@@ -8764,11 +10610,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/bulk",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "bulk",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "lit" => "bulk",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -8777,17 +10631,31 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "bulk",
+                  ],
                 },
                 {
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/search",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "search",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "lit" => "search",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -8823,6 +10691,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "search",
+                  ],
                 },
               ],
             },
@@ -8835,11 +10709,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/stories/bulk",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "bulk",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "lit" => "bulk",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -8870,6 +10752,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "bulk",
+                  ],
                 },
               ],
             },
@@ -8881,11 +10769,13 @@ module ShortcutConfig
         "task" => {
           "fields" => [
             {
+              "format" => "int64",
               "name" => "after_id",
               "short" => "Move task after this task ID.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "before_id",
               "short" => "Move task before this task ID.",
               "type" => "`$INTEGER`",
@@ -8905,12 +10795,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "completed_at",
               "req" => true,
               "short" => "The time/date the Task was completed.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -8961,6 +10853,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Task.",
@@ -8993,18 +10886,21 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "position",
               "req" => true,
               "short" => "The number corresponding to the Task's position within a list of Tasks on a Story.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "int64",
               "name" => "story_id",
               "req" => true,
               "short" => "The unique identifier of the parent Story.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -9016,6 +10912,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "task",
           "op" => {
             "create" => {
@@ -9037,18 +10937,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/stories/{story-public-id}/tasks",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "tasks",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "story_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "tasks",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "story_id",
@@ -9065,6 +10975,13 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "tasks",
+                  ],
                 },
               ],
             },
@@ -9094,20 +11011,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "tasks",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "story_id",
                       "task-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "tasks",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9118,6 +11047,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "tasks",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9147,20 +11084,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "tasks",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "story_id",
                       "task-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "tasks",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9171,6 +11120,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "tasks",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9200,20 +11157,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "stories",
-                    "{story_id}",
-                    "tasks",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "story-public-id" => "story_id",
                       "task-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "stories",
+                    },
+                    {
+                      "var" => "story_id",
+                    },
+                    {
+                      "lit" => "tasks",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9230,6 +11199,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "stories",
+                    "{story_id}",
+                    "tasks",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9251,6 +11228,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "author_id",
               "op" => {
                 "create" => {
@@ -9268,6 +11246,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "create" => {
@@ -9308,6 +11287,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Comment.",
@@ -9332,6 +11312,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "create" => {
@@ -9343,6 +11324,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "threaded_comment",
           "op" => {
             "create" => {
@@ -9371,20 +11356,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9401,6 +11398,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
                 {
                   "args" => {
@@ -9417,18 +11422,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9444,6 +11459,13 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                  ],
                 },
               ],
             },
@@ -9466,18 +11488,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                  ],
                   "rename" => {
                     "param" => {
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9487,6 +11519,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                  ],
                 },
               ],
             },
@@ -9516,20 +11555,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9540,6 +11591,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9569,20 +11628,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9593,6 +11664,14 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9622,20 +11701,32 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "epics",
-                    "{epic_id}",
-                    "comments",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "comment-public-id" => "id",
                       "epic-public-id" => "epic_id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "epics",
+                    },
+                    {
+                      "var" => "epic_id",
+                    },
+                    {
+                      "lit" => "comments",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "epic_id",
@@ -9648,6 +11739,14 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "epics",
+                    "{epic_id}",
+                    "comments",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9669,6 +11768,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "op" => {
                 "update" => {
@@ -9720,6 +11820,7 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID for the file.",
@@ -9749,6 +11850,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "size",
               "req" => true,
               "short" => "The size of the file.",
@@ -9767,6 +11869,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "op" => {
                 "update" => {
@@ -9778,6 +11881,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uuid",
               "name" => "uploader_id",
               "op" => {
                 "update" => {
@@ -9795,6 +11899,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "uploaded_file",
           "op" => {
             "create" => {
@@ -9806,16 +11914,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/files",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "files",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "files",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "files",
+                  ],
                 },
               ],
             },
@@ -9828,16 +11947,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/files",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "files",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "files",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "files",
+                  ],
                 },
               ],
             },
@@ -9860,17 +11990,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/files/{file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9880,6 +12018,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9902,17 +12046,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/files/{file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9922,6 +12074,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9944,17 +12102,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/api/v3/files/{file-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "files",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "file-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "files",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -9971,6 +12137,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "files",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -9995,6 +12167,10 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "webhook",
           "op" => {
             "create" => {
@@ -10006,11 +12182,19 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/v3/integrations/webhook",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "integrations",
-                    "webhook",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "integrations",
+                    },
+                    {
+                      "lit" => "webhook",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
@@ -10020,6 +12204,12 @@ module ShortcutConfig
                     },
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "integrations",
+                    "webhook",
+                  ],
                 },
               ],
             },
@@ -10042,18 +12232,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/integrations/webhook/{integration-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "integrations",
-                    "webhook",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "integration-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "integrations",
+                    },
+                    {
+                      "lit" => "webhook",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -10063,6 +12263,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "integrations",
+                    "webhook",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -10085,18 +12292,28 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/api/v3/integrations/webhook/{integration-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "integrations",
-                    "webhook",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "integration-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "integrations",
+                    },
+                    {
+                      "lit" => "webhook",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -10106,6 +12323,13 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "integrations",
+                    "webhook",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -10123,12 +12347,14 @@ module ShortcutConfig
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "created_at",
               "req" => true,
               "short" => "The date the Workflow was created.",
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "default_state_id",
               "req" => true,
               "short" => "The unique ID of the default state that new Stories are entered into.",
@@ -10147,6 +12373,7 @@ module ShortcutConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "int64",
               "name" => "id",
               "req" => true,
               "short" => "The unique ID of the Workflow.",
@@ -10171,18 +12398,24 @@ module ShortcutConfig
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "int64",
               "name" => "team_id",
               "req" => true,
               "short" => "The ID of the team the workflow belongs to.",
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "updated_at",
               "req" => true,
               "short" => "The date the Workflow was updated.",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "workflow",
           "op" => {
             "list" => {
@@ -10194,16 +12427,27 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/workflows",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "workflows",
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "workflows",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "workflows",
+                  ],
                 },
               ],
             },
@@ -10226,17 +12470,25 @@ module ShortcutConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v3/workflows/{workflow-public-id}",
-                  "parts" => [
-                    "api",
-                    "v3",
-                    "workflows",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "workflow-public-id" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "api",
+                    },
+                    {
+                      "lit" => "v3",
+                    },
+                    {
+                      "lit" => "workflows",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -10246,6 +12498,12 @@ module ShortcutConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "api",
+                    "v3",
+                    "workflows",
+                    "{id}",
+                  ],
                 },
               ],
             },

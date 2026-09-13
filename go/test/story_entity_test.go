@@ -101,7 +101,7 @@ func TestStoryEntity(t *testing.T) {
 		// CREATE
 		storyRef01Ent := client.Story(nil)
 		storyRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "story"}, setup.data), "story_ref01"))
+			vs.GetPath(setup.data, []any{"new", "story"}), "story_ref01"))
 		storyRef01Data["epic_id"] = setup.idmap["epic01"]
 		storyRef01Data["group_id"] = setup.idmap["group01"]
 		storyRef01Data["iteration_id"] = setup.idmap["iteration01"]
@@ -230,7 +230,7 @@ func storyBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"story01", "story02", "story03", "epic01", "epic02", "epic03", "group01", "group02", "group03", "iteration01", "iteration02", "iteration03", "label01", "label02", "label03", "project01", "project02", "project03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -250,7 +250,7 @@ func storyBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_STORY_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_STORY_ENTID"])
@@ -259,11 +259,23 @@ func storyBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

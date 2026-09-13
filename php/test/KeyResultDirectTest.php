@@ -77,15 +77,17 @@ function key_result_direct_setup($mockres)
     $env = Runner::env_override([
         "SHORTCUT_TEST_KEY_RESULT_ENTID" => [],
         "SHORTCUT_TEST_LIVE" => "FALSE",
-        "SHORTCUT_APIKEY" => "NONE",
+        "SHORTCUT_APIKEY" => "",
     ]);
 
     $live = $env["SHORTCUT_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["SHORTCUT_APIKEY"],
-        ];
+        ]);
         $client = new ShortcutSDK($merged_opts);
         return [
             "client" => $client,

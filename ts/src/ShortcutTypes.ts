@@ -360,52 +360,7 @@ export interface EpicLoadMatch {
 }
 
 export interface EpicListMatch {
-  after_id?: number
-  app_url?: string
-  archived?: boolean
-  associated_groups?: any[]
-  before_id?: number
-  comments?: any[]
-  completed?: boolean
-  completed_at?: string
-  completed_at_override?: string
-  converted_from_story_id?: number
-  created_at?: string
-  deadline?: string
-  description?: string
-  entity_type?: string
-  epic_state_id?: number
-  external_id?: string
-  follower_ids?: any[]
-  global_id?: string
-  group_id?: string
-  group_ids?: any[]
-  group_mention_ids?: any[]
-  health?: Record<string, any>
-  id?: number
-  label_ids?: any[]
-  labels?: any[]
-  member_mention_ids?: any[]
-  mention_ids?: any[]
-  milestone_id?: number
-  name?: string
-  objective_ids?: any[]
-  owner_ids?: any[]
-  planned_start_date?: string
-  position?: number
-  productboard_id?: string
-  productboard_name?: string
-  productboard_plugin_id?: string
-  productboard_url?: string
-  project_ids?: any[]
-  requested_by_id?: string
-  started?: boolean
-  started_at?: string
-  started_at_override?: string
-  state?: string
-  stats?: Record<string, any>
-  stories_without_projects?: number
-  updated_at?: string
+  includes_description?: boolean
 }
 
 export interface EpicCreateData {
@@ -555,47 +510,9 @@ export interface EpicPaginatedResult {
 }
 
 export interface EpicPaginatedResultListMatch {
-  app_url?: string
-  archived?: boolean
-  associated_groups?: any[]
-  completed?: boolean
-  completed_at?: string
-  completed_at_override?: string
-  created_at?: string
-  deadline?: string
-  description?: string
-  entity_type?: string
-  epic_state_id?: number
-  external_id?: string
-  follower_ids?: any[]
-  global_id?: string
-  group_id?: string
-  group_ids?: any[]
-  group_mention_ids?: any[]
-  id?: number
-  label_ids?: any[]
-  labels?: any[]
-  member_mention_ids?: any[]
-  mention_ids?: any[]
-  milestone_id?: number
-  name?: string
-  objective_ids?: any[]
-  owner_ids?: any[]
-  planned_start_date?: string
-  position?: number
-  productboard_id?: string
-  productboard_name?: string
-  productboard_plugin_id?: string
-  productboard_url?: string
-  project_ids?: any[]
-  requested_by_id?: string
-  started?: boolean
-  started_at?: string
-  started_at_override?: string
-  state?: string
-  stats?: Record<string, any>
-  stories_without_projects?: number
-  updated_at?: string
+  includes_description?: boolean
+  page?: number
+  page_size?: number
 }
 
 export interface EpicUnlinkProductboard {
@@ -961,35 +878,7 @@ export interface LabelLoadMatch {
 }
 
 export interface LabelListMatch {
-  app_url?: string
-  archived?: boolean
-  color?: string
-  created_at?: string
-  description?: string
-  entity_type?: string
-  external_id?: string
-  global_id?: string
-  id?: number
-  name?: string
-  num_epics?: number
-  num_epics_completed?: number
-  num_epics_in_progress?: number
-  num_epics_total?: number
-  num_epics_unstarted?: number
-  num_points_backlog?: number
-  num_points_completed?: number
-  num_points_in_progress?: number
-  num_points_total?: number
-  num_points_unstarted?: number
-  num_related_documents?: number
-  num_stories_backlog?: number
-  num_stories_completed?: number
-  num_stories_in_progress?: number
-  num_stories_total?: number
-  num_stories_unestimated?: number
-  num_stories_unstarted?: number
-  stats?: Record<string, any>
-  updated_at?: string
+  slim?: boolean
 }
 
 export interface LabelCreateData {
@@ -1171,27 +1060,12 @@ export interface Member {
 
 export interface MemberLoadMatch {
   id: string
+  org_public_id?: string
 }
 
 export interface MemberListMatch {
-  created_at?: string
-  created_without_invite?: boolean
   disabled?: boolean
-  entity_type?: string
-  global_id?: string
-  group_ids?: any[]
-  id?: string
-  installation_id?: string
-  is_owner?: boolean
-  mention_name?: string
-  name?: string
-  organization2?: Record<string, any>
-  profile?: Record<string, any>
-  replaced_by?: string
-  role?: string
-  state?: string
-  updated_at?: string
-  workspace2?: Record<string, any>
+  org_public_id?: string
 }
 
 export interface Milestone {
@@ -1551,10 +1425,11 @@ export interface Search {
 }
 
 export interface SearchLoadMatch {
-  epics?: Record<string, any>
-  iterations?: Record<string, any>
-  milestones?: Record<string, any>
-  stories?: Record<string, any>
+  detail?: string
+  entity_type?: any[]
+  next?: string
+  page_size?: number
+  query: string
 }
 
 export interface Story {
@@ -1648,89 +1523,11 @@ export interface StoryLoadMatch {
 }
 
 export interface StoryListMatch {
-  after_id?: number
-  app_url?: string
-  archived?: boolean
-  before_id?: number
-  blocked?: boolean
-  blocker?: boolean
-  branch_ids?: any[]
-  branches?: any[]
-  comment_ids?: any[]
-  comments?: any[]
-  commit_ids?: any[]
-  commits?: any[]
-  completed?: boolean
-  completed_at?: string
-  completed_at_override?: string
-  created_at?: string
-  custom_fields?: any[]
-  custom_fields_add?: any[]
-  custom_fields_remove?: any[]
-  cycle_time?: number
-  deadline?: string
-  description?: string
-  entity_type?: string
-  epic_id?: number
-  estimate?: number
-  external_id?: string
-  external_links?: any[]
-  external_links_add?: any[]
-  external_links_remove?: any[]
-  file_ids?: any[]
-  file_ids_add?: any[]
-  file_ids_remove?: any[]
-  files?: any[]
-  follower_ids?: any[]
-  follower_ids_add?: any[]
-  follower_ids_remove?: any[]
-  formatted_vcs_branch_name?: string
-  global_id?: string
-  group_id?: string
-  group_mention_ids?: any[]
-  id?: number
-  iteration_id?: number
-  label_ids?: any[]
-  labels?: any[]
-  labels_add?: any[]
-  labels_remove?: any[]
-  lead_time?: number
-  linked_file_ids?: any[]
-  linked_file_ids_add?: any[]
-  linked_file_ids_remove?: any[]
-  linked_files?: any[]
-  member_mention_ids?: any[]
-  mention_ids?: any[]
-  move_to?: string
-  moved_at?: string
-  name?: string
-  num_tasks_completed?: number
-  owner_ids?: any[]
-  owner_ids_add?: any[]
-  owner_ids_remove?: any[]
-  parent_story_id?: number
-  position?: number
-  previous_iteration_ids?: any[]
-  project_id?: number
-  pull_request_ids?: any[]
-  pull_requests?: any[]
-  requested_by_id?: string
-  source_task_id?: number
-  started?: boolean
-  started_at?: string
-  started_at_override?: string
-  stats?: Record<string, any>
-  story_links?: any[]
-  story_template_id?: string
-  story_type?: string
-  sub_task_story_ids?: any[]
-  sub_tasks?: any[]
-  synced_item?: Record<string, any>
-  task_ids?: any[]
-  tasks?: any[]
-  updated_at?: string
-  workflow_id?: number
-  workflow_state_id?: number
+  detail?: string
+  entity_type?: any[]
+  next?: string
+  page_size?: number
+  query: string
 }
 
 export interface StoryCreateData {

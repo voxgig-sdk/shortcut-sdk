@@ -101,7 +101,7 @@ func TestEntityTemplateEntity(t *testing.T) {
 		// CREATE
 		entityTemplateRef01Ent := client.EntityTemplate(nil)
 		entityTemplateRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "entity_template"}, setup.data), "entity_template_ref01"))
+			vs.GetPath(setup.data, []any{"new", "entity_template"}), "entity_template_ref01"))
 
 		entityTemplateRef01DataResult, err := entityTemplateRef01Ent.Create(entityTemplateRef01Data, nil)
 		if err != nil {
@@ -225,7 +225,7 @@ func entity_templateBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"entity_template01", "entity_template02", "entity_template03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -245,7 +245,7 @@ func entity_templateBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_ENTITY_TEMPLATE_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_ENTITY_TEMPLATE_ENTID"])
@@ -254,11 +254,23 @@ func entity_templateBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

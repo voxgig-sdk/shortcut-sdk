@@ -2568,7 +2568,7 @@ Create an instance: `const search = client.Search()`
 #### Example: Load
 
 ```ts
-const search = await client.Search().load()
+const search = await client.Search().load({ query: 'query' })
 ```
 
 
@@ -2683,7 +2683,7 @@ const story = await client.Story().load({ id: 1 })
 #### Example: List
 
 ```ts
-const storys = await client.Story().list()
+const storys = await client.Story().list({ query: "example" })
 ```
 
 #### Example: Create
@@ -3237,6 +3237,29 @@ const workflow = await client.Workflow().load({ id: 1 })
 ```ts
 const workflows = await client.Workflow().list()
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Open types

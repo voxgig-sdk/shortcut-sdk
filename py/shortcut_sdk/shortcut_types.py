@@ -398,52 +398,7 @@ class EpicLoadMatch(TypedDict):
 
 
 class EpicListMatch(TypedDict, total=False):
-    after_id: int
-    app_url: str
-    archived: bool
-    associated_groups: list
-    before_id: int
-    comments: list
-    completed: bool
-    completed_at: str
-    completed_at_override: str
-    converted_from_story_id: int
-    created_at: str
-    deadline: str
-    description: str
-    entity_type: str
-    epic_state_id: int
-    external_id: str
-    follower_ids: list
-    global_id: str
-    group_id: str
-    group_ids: list
-    group_mention_ids: list
-    health: dict
-    id: int
-    label_ids: list
-    labels: list
-    member_mention_ids: list
-    mention_ids: list
-    milestone_id: int
-    name: str
-    objective_ids: list
-    owner_ids: list
-    planned_start_date: str
-    position: int
-    productboard_id: str
-    productboard_name: str
-    productboard_plugin_id: str
-    productboard_url: str
-    project_ids: list
-    requested_by_id: str
-    started: bool
-    started_at: str
-    started_at_override: str
-    state: str
-    stats: dict
-    stories_without_projects: int
-    updated_at: str
+    includes_description: bool
 
 
 class EpicCreateDataRequired(TypedDict):
@@ -602,47 +557,9 @@ class EpicPaginatedResult(EpicPaginatedResultRequired, total=False):
 
 
 class EpicPaginatedResultListMatch(TypedDict, total=False):
-    app_url: str
-    archived: bool
-    associated_groups: list
-    completed: bool
-    completed_at: str
-    completed_at_override: str
-    created_at: str
-    deadline: str
-    description: str
-    entity_type: str
-    epic_state_id: int
-    external_id: str
-    follower_ids: list
-    global_id: str
-    group_id: str
-    group_ids: list
-    group_mention_ids: list
-    id: int
-    label_ids: list
-    labels: list
-    member_mention_ids: list
-    mention_ids: list
-    milestone_id: int
-    name: str
-    objective_ids: list
-    owner_ids: list
-    planned_start_date: str
-    position: int
-    productboard_id: str
-    productboard_name: str
-    productboard_plugin_id: str
-    productboard_url: str
-    project_ids: list
-    requested_by_id: str
-    started: bool
-    started_at: str
-    started_at_override: str
-    state: str
-    stats: dict
-    stories_without_projects: int
-    updated_at: str
+    includes_description: bool
+    page: int
+    page_size: int
 
 
 class EpicUnlinkProductboard(TypedDict, total=False):
@@ -1044,35 +961,7 @@ class LabelLoadMatch(TypedDict):
 
 
 class LabelListMatch(TypedDict, total=False):
-    app_url: str
-    archived: bool
-    color: str
-    created_at: str
-    description: str
-    entity_type: str
-    external_id: str
-    global_id: str
-    id: int
-    name: str
-    num_epics: int
-    num_epics_completed: int
-    num_epics_in_progress: int
-    num_epics_total: int
-    num_epics_unstarted: int
-    num_points_backlog: int
-    num_points_completed: int
-    num_points_in_progress: int
-    num_points_total: int
-    num_points_unstarted: int
-    num_related_documents: int
-    num_stories_backlog: int
-    num_stories_completed: int
-    num_stories_in_progress: int
-    num_stories_total: int
-    num_stories_unestimated: int
-    num_stories_unstarted: int
-    stats: dict
-    updated_at: str
+    slim: bool
 
 
 class LabelCreateDataRequired(TypedDict):
@@ -1270,29 +1159,17 @@ class Member(MemberRequired, total=False):
     replaced_by: str
 
 
-class MemberLoadMatch(TypedDict):
+class MemberLoadMatchRequired(TypedDict):
     id: str
+
+
+class MemberLoadMatch(MemberLoadMatchRequired, total=False):
+    org_public_id: str
 
 
 class MemberListMatch(TypedDict, total=False):
-    created_at: str
-    created_without_invite: bool
     disabled: bool
-    entity_type: str
-    global_id: str
-    group_ids: list
-    id: str
-    installation_id: str
-    is_owner: bool
-    mention_name: str
-    name: str
-    organization2: dict
-    profile: dict
-    replaced_by: str
-    role: str
-    state: str
-    updated_at: str
-    workspace2: dict
+    org_public_id: str
 
 
 class MilestoneRequired(TypedDict):
@@ -1672,11 +1549,15 @@ class Search(TypedDict):
     stories: dict
 
 
-class SearchLoadMatch(TypedDict, total=False):
-    epics: dict
-    iterations: dict
-    milestones: dict
-    stories: dict
+class SearchLoadMatchRequired(TypedDict):
+    query: str
+
+
+class SearchLoadMatch(SearchLoadMatchRequired, total=False):
+    detail: str
+    entity_type: list
+    next: str
+    page_size: int
 
 
 class StoryRequired(TypedDict):
@@ -1772,90 +1653,15 @@ class StoryLoadMatch(TypedDict):
     id: int
 
 
-class StoryListMatch(TypedDict, total=False):
-    after_id: int
-    app_url: str
-    archived: bool
-    before_id: int
-    blocked: bool
-    blocker: bool
-    branch_ids: list
-    branches: list
-    comment_ids: list
-    comments: list
-    commit_ids: list
-    commits: list
-    completed: bool
-    completed_at: str
-    completed_at_override: str
-    created_at: str
-    custom_fields: list
-    custom_fields_add: list
-    custom_fields_remove: list
-    cycle_time: int
-    deadline: str
-    description: str
-    entity_type: str
-    epic_id: int
-    estimate: int
-    external_id: str
-    external_links: list
-    external_links_add: list
-    external_links_remove: list
-    file_ids: list
-    file_ids_add: list
-    file_ids_remove: list
-    files: list
-    follower_ids: list
-    follower_ids_add: list
-    follower_ids_remove: list
-    formatted_vcs_branch_name: str
-    global_id: str
-    group_id: str
-    group_mention_ids: list
-    id: int
-    iteration_id: int
-    label_ids: list
-    labels: list
-    labels_add: list
-    labels_remove: list
-    lead_time: int
-    linked_file_ids: list
-    linked_file_ids_add: list
-    linked_file_ids_remove: list
-    linked_files: list
-    member_mention_ids: list
-    mention_ids: list
-    move_to: str
-    moved_at: str
-    name: str
-    num_tasks_completed: int
-    owner_ids: list
-    owner_ids_add: list
-    owner_ids_remove: list
-    parent_story_id: int
-    position: int
-    previous_iteration_ids: list
-    project_id: int
-    pull_request_ids: list
-    pull_requests: list
-    requested_by_id: str
-    source_task_id: int
-    started: bool
-    started_at: str
-    started_at_override: str
-    stats: dict
-    story_links: list
-    story_template_id: str
-    story_type: str
-    sub_task_story_ids: list
-    sub_tasks: list
-    synced_item: dict
-    task_ids: list
-    tasks: list
-    updated_at: str
-    workflow_id: int
-    workflow_state_id: int
+class StoryListMatchRequired(TypedDict):
+    query: str
+
+
+class StoryListMatch(StoryListMatchRequired, total=False):
+    detail: str
+    entity_type: list
+    next: str
+    page_size: int
 
 
 class StoryCreateDataRequired(TypedDict):

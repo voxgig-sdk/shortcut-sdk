@@ -80,11 +80,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/stories/bulk",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["lit"] = "bulk",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -92,6 +100,12 @@ local function make_config()
                     ["story_ids"] = "`reqdata.story_id`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
                 },
               },
             },
@@ -115,6 +129,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "css-color",
             ["name"] = "color",
             ["op"] = {
               ["create"] = {
@@ -129,6 +144,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date that the Category was created.",
@@ -158,6 +174,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Category.",
@@ -186,11 +203,16 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date that the Category was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "category",
         ["op"] = {
@@ -203,10 +225,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/categories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -217,6 +245,11 @@ local function make_config()
                     ["type"] = "`reqdata.type`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
                 },
               },
             },
@@ -230,15 +263,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/categories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
                 },
               },
             },
@@ -262,15 +306,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/categories/{category-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["category-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -281,6 +333,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
                 },
               },
             },
@@ -304,15 +362,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/categories/{category-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["category-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -323,6 +389,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
                 },
               },
             },
@@ -346,15 +418,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/categories/{category-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["category-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -370,6 +450,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
+                },
               },
             },
           },
@@ -384,6 +470,10 @@ local function make_config()
             ["name"] = "id",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "comment",
         ["op"] = {
@@ -413,18 +503,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -436,6 +538,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -452,11 +562,13 @@ local function make_config()
       ["custom_field"] = {
         ["fields"] = {
           {
+            ["format"] = "uuid",
             ["name"] = "after_id",
             ["short"] = "The ID of the CustomField we want to move this CustomField after.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "before_id",
             ["short"] = "The ID of the CustomField we want to move this CustomField before.",
             ["type"] = "`$STRING`",
@@ -467,6 +579,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The instant when this CustomField was created.",
@@ -511,6 +624,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique public ID for the CustomField.",
@@ -528,6 +642,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "An integer indicating the position of this Custom Field with respect to the other CustomField",
@@ -539,6 +654,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The instant when this CustomField was last updated.",
@@ -549,6 +665,10 @@ local function make_config()
             ["short"] = "A collection of legal values for a CustomField.",
             ["type"] = "`$ARRAY`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "custom_field",
         ["op"] = {
@@ -561,15 +681,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/custom-fields",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "custom-fields",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "custom-fields",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "custom-fields",
                 },
               },
             },
@@ -593,15 +724,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/custom-fields/{custom-field-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["custom-field-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "custom-fields",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -612,6 +751,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
                 },
               },
             },
@@ -635,15 +780,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/custom-fields/{custom-field-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["custom-field-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "custom-fields",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -654,6 +807,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
                 },
               },
             },
@@ -677,15 +836,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/custom-fields/{custom-field-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["custom-field-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "custom-fields",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -704,6 +871,12 @@ local function make_config()
                     ["values"] = "`reqdata.value`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
                 },
               },
             },
@@ -726,16 +899,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/entity-templates/disable",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "disable",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
+                  {
+                    ["lit"] = "disable",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "disable",
                 },
               },
               {
@@ -743,16 +930,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/iterations/disable",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "disable",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["lit"] = "disable",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "disable",
                 },
               },
             },
@@ -777,6 +978,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The public id of the Doc",
@@ -789,6 +991,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "doc_slim",
         ["op"] = {
           ["create"] = {
@@ -800,10 +1006,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/documents",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "documents",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "documents",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -812,6 +1024,11 @@ local function make_config()
                     ["title"] = "`reqdata.title`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "documents",
                 },
               },
             },
@@ -825,15 +1042,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/documents",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "documents",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "documents",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "documents",
                 },
               },
             },
@@ -856,16 +1084,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/entity-templates/enable",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "enable",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
+                  {
+                    ["lit"] = "enable",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "enable",
                 },
               },
               {
@@ -873,16 +1115,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/iterations/enable",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "enable",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["lit"] = "enable",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "enable",
                 },
               },
             },
@@ -895,6 +1151,7 @@ local function make_config()
       ["entity_template"] = {
         ["fields"] = {
           {
+            ["format"] = "uuid",
             ["name"] = "author_id",
             ["op"] = {
               ["list"] = {
@@ -906,6 +1163,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date when the entity template was created.",
@@ -917,6 +1175,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline",
             ["short"] = "The due date of the story.",
             ["type"] = "`$STRING`",
@@ -938,11 +1197,13 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_id",
             ["short"] = "The ID of the epic the story belongs to.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "estimate",
             ["short"] = "The numeric point estimate of the story.",
             ["type"] = "`$INTEGER`",
@@ -963,17 +1224,20 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "group_id",
             ["short"] = "The ID of the group to which the story is assigned.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique identifier for the entity template.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "iteration_id",
             ["short"] = "The ID of the iteration the story belongs to.",
             ["type"] = "`$INTEGER`",
@@ -989,6 +1253,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "last_used_at",
             ["req"] = true,
             ["short"] = "The last time that someone created an entity using this template.",
@@ -1020,6 +1285,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "project_id",
             ["short"] = "The ID of the project the story belongs to.",
             ["type"] = "`$INTEGER`",
@@ -1051,16 +1317,22 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date when the entity template was last updated.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "workflow_state_id",
             ["short"] = "The ID of the workflow state the story is currently in.",
             ["type"] = "`$INTEGER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "entity_template",
         ["op"] = {
@@ -1073,10 +1345,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/entity-templates",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -1086,6 +1364,11 @@ local function make_config()
                     ["story_contents"] = "`reqdata.story_content`",
                   },
                   ["res"] = "`body.story_contents`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
                 },
               },
             },
@@ -1099,15 +1382,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/entity-templates",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
                 },
               },
             },
@@ -1131,15 +1425,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/entity-templates/{entity-template-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["entity-template-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -1150,6 +1452,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.story_contents`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
                 },
               },
             },
@@ -1173,15 +1481,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/entity-templates/{entity-template-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["entity-template-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -1192,6 +1508,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
                 },
               },
             },
@@ -1215,15 +1537,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/entity-templates/{entity-template-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["entity-template-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "entity-templates",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -1238,6 +1568,12 @@ local function make_config()
                   },
                   ["res"] = "`body.story_contents`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
+                },
               },
             },
           },
@@ -1249,6 +1585,7 @@ local function make_config()
       ["epic"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "The ID of the Epic we want to move this Epic after.",
             ["type"] = "`$INTEGER`",
@@ -1277,6 +1614,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "The ID of the Epic we want to move this Epic before.",
             ["type"] = "`$INTEGER`",
@@ -1299,12 +1637,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_override",
             ["op"] = {
               ["create"] = {
@@ -1319,11 +1659,13 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "converted_from_story_id",
             ["short"] = "The ID of the Story that was converted to an Epic.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -1335,6 +1677,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline",
             ["op"] = {
               ["create"] = {
@@ -1372,6 +1715,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_state_id",
             ["op"] = {
               ["create"] = {
@@ -1419,6 +1763,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "group_id",
             ["op"] = {
               ["create"] = {
@@ -1459,6 +1804,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Epic.",
@@ -1497,6 +1843,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "milestone_id",
             ["op"] = {
               ["create"] = {
@@ -1550,6 +1897,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "planned_start_date",
             ["op"] = {
               ["create"] = {
@@ -1564,12 +1912,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "The Epic's relative position in the Epic workflow state.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "productboard_id",
             ["req"] = true,
             ["short"] = "The ID of the associated productboard feature.",
@@ -1582,6 +1932,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "productboard_plugin_id",
             ["req"] = true,
             ["short"] = "The ID of the associated productboard integration.",
@@ -1600,6 +1951,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "requested_by_id",
             ["op"] = {
               ["create"] = {
@@ -1620,12 +1972,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was started.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at_override",
             ["op"] = {
               ["create"] = {
@@ -1660,12 +2014,14 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "stories_without_projects",
             ["req"] = true,
             ["short"] = "The number of stories in this epic which are not associated with a project.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -1676,6 +2032,10 @@ local function make_config()
             ["short"] = "The time/date the Epic was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "epic",
         ["op"] = {
@@ -1688,10 +2048,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -1718,6 +2084,11 @@ local function make_config()
                     ["updated_at"] = "`reqdata.updated_at`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
                 },
               },
             },
@@ -1765,11 +2136,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
-                  "epics",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1783,6 +2162,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                  "epics",
                 },
               },
               {
@@ -1799,10 +2184,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1812,6 +2203,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
                 },
               },
               {
@@ -1829,16 +2225,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/labels/{label-public-id}/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
-                  "{label_id}",
-                  "epics",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["label-public-id"] = "label_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
+                  {
+                    ["var"] = "label_id",
+                  },
+                  {
+                    ["lit"] = "epics",
                   },
                 },
                 ["select"] = {
@@ -1849,6 +2255,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
+                  "{label_id}",
+                  "epics",
                 },
               },
               {
@@ -1866,16 +2279,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/milestones/{milestone-public-id}/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{milestone_id}",
-                  "epics",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["milestone-public-id"] = "milestone_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
+                  {
+                    ["var"] = "milestone_id",
+                  },
+                  {
+                    ["lit"] = "epics",
                   },
                 },
                 ["select"] = {
@@ -1886,6 +2309,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{milestone_id}",
+                  "epics",
                 },
               },
               {
@@ -1903,16 +2333,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/objectives/{objective-public-id}/epics",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objectif_id}",
-                  "epics",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["objective-public-id"] = "objectif_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
+                  {
+                    ["var"] = "objectif_id",
+                  },
+                  {
+                    ["lit"] = "epics",
                   },
                 },
                 ["select"] = {
@@ -1923,6 +2363,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objectif_id}",
+                  "epics",
                 },
               },
             },
@@ -1946,15 +2393,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -1965,6 +2420,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
                 },
               },
             },
@@ -1988,15 +2449,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/epics/{epic-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -2007,6 +2476,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
                 },
               },
             },
@@ -2030,15 +2505,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/epics/{epic-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -2070,6 +2553,12 @@ local function make_config()
                     ["state"] = "`reqdata.state`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
                 },
               },
             },
@@ -2116,24 +2605,28 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_override",
             ["req"] = true,
             ["short"] = "A manual override for the time/date the Epic was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was created.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline",
             ["req"] = true,
             ["short"] = "The Epic's deadline.",
@@ -2151,6 +2644,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_state_id",
             ["req"] = true,
             ["short"] = "The ID of the Epic State.",
@@ -2174,6 +2668,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "group_id",
             ["req"] = true,
             ["short"] = "`Deprecated` The ID of the group to associate with the epic.",
@@ -2192,6 +2687,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Epic.",
@@ -2222,6 +2718,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "milestone_id",
             ["req"] = true,
             ["short"] = "`Deprecated` The ID of the Objective this Epic is related to.",
@@ -2246,18 +2743,21 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "planned_start_date",
             ["req"] = true,
             ["short"] = "The Epic's planned start date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "The Epic's relative position in the Epic workflow state.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "productboard_id",
             ["req"] = true,
             ["short"] = "The ID of the associated productboard feature.",
@@ -2270,6 +2770,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "productboard_plugin_id",
             ["req"] = true,
             ["short"] = "The ID of the associated productboard integration.",
@@ -2288,6 +2789,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "requested_by_id",
             ["req"] = true,
             ["short"] = "The ID of the Member that requested the epic.",
@@ -2300,12 +2802,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was started.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at_override",
             ["req"] = true,
             ["short"] = "A manual override for the time/date the Epic was started.",
@@ -2324,17 +2828,23 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "stories_without_projects",
             ["req"] = true,
             ["short"] = "The number of stories in this epic which are not associated with a project.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "epic_paginated_result",
         ["op"] = {
@@ -2368,11 +2878,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/paginated",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "paginated",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["lit"] = "paginated",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -2384,6 +2902,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "paginated",
                 },
               },
             },
@@ -2399,6 +2923,10 @@ local function make_config()
             ["name"] = "id",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "epic_unlink_productboard",
         ["op"] = {
@@ -2421,16 +2949,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/unlink-productboard",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                  "unlink-productboard",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "unlink-productboard",
                   },
                 },
                 ["select"] = {
@@ -2441,6 +2979,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
+                  "unlink-productboard",
                 },
               },
             },
@@ -2453,11 +2998,13 @@ local function make_config()
       ["epic_workflow"] = {
         ["fields"] = {
           {
+            ["format"] = "css-color",
             ["name"] = "color",
             ["short"] = "The hex color for this Epic State.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Epic State was created.",
@@ -2481,6 +3028,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Epic State.",
@@ -2493,6 +3041,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "The position that the Epic State is in, starting with 0 at the left.",
@@ -2505,11 +3054,16 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "When the Epic State was last updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "epic_workflow",
         ["op"] = {
@@ -2522,15 +3076,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epic-workflow",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epic-workflow",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epic-workflow",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.epic_states`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epic-workflow",
                 },
               },
             },
@@ -2560,6 +3125,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "css-color",
             ["name"] = "color",
             ["op"] = {
               ["create"] = {
@@ -2588,12 +3154,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The instant when this group was created.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "default_workflow_id",
             ["short"] = "The ID of the default workflow for stories created in this group.",
             ["type"] = "`$INTEGER`",
@@ -2619,6 +3187,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "display_icon_id",
             ["short"] = "The Icon id for the avatar of this Group.",
             ["type"] = "`$STRING`",
@@ -2635,6 +3204,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The id of the Group.",
@@ -2677,30 +3247,35 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics_started",
             ["req"] = true,
             ["short"] = "The number of epics assigned to the group which are in the started workflow state.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories",
             ["req"] = true,
             ["short"] = "The total number of stories assigned to the group.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_backlog",
             ["req"] = true,
             ["short"] = "The number of stories assigned to the group which are in a backlog workflow state.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_started",
             ["req"] = true,
             ["short"] = "The number of stories assigned to the group which are in a started workflow state.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The last instant when this group was updated.",
@@ -2721,6 +3296,10 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "group",
         ["op"] = {
           ["create"] = {
@@ -2732,10 +3311,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/groups",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "groups",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "groups",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -2751,6 +3336,11 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "groups",
+                },
               },
             },
           },
@@ -2763,15 +3353,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/groups",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "groups",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "groups",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "groups",
                 },
               },
             },
@@ -2795,15 +3396,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/groups/{group-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "groups",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["group-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "groups",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -2814,6 +3423,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "groups",
+                  "{id}",
                 },
               },
             },
@@ -2837,15 +3452,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/groups/{group-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "groups",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["group-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "groups",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -2868,6 +3491,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "groups",
+                  "{id}",
+                },
               },
             },
           },
@@ -2879,11 +3508,13 @@ local function make_config()
       ["health"] = {
         ["fields"] = {
           {
+            ["format"] = "uuid",
             ["name"] = "author_id",
             ["short"] = "The ID of the permission who created or updated the Health record.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["short"] = "The time that the Health record was created.",
             ["type"] = "`$STRING`",
@@ -2895,17 +3526,20 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_id",
             ["short"] = "The ID of the Epic associated with this Health record.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Health record.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "objective_id",
             ["short"] = "The ID of the Objective associated with this Health record.",
             ["type"] = "`$INTEGER`",
@@ -2927,10 +3561,15 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["short"] = "The time that the Health record was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "health",
         ["op"] = {
@@ -2953,16 +3592,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/health",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "health",
                   },
                 },
                 ["select"] = {
@@ -2976,6 +3625,13 @@ local function make_config()
                     ["text"] = "`reqdata.text`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health",
                 },
               },
             },
@@ -2999,16 +3655,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/health-history",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health-history",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "health-history",
                   },
                 },
                 ["select"] = {
@@ -3019,6 +3685,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health-history",
                 },
               },
             },
@@ -3042,16 +3715,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/health",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "health",
                   },
                 },
                 ["select"] = {
@@ -3062,6 +3745,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health",
                 },
               },
             },
@@ -3085,15 +3775,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/health/{health-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "health",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["health-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "health",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3107,6 +3805,12 @@ local function make_config()
                     ["text"] = "`reqdata.text`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "health",
+                  "{id}",
                 },
               },
             },
@@ -3139,6 +3843,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "automation_id",
             ["short"] = "The ID of the automation that performed the change.",
             ["type"] = "`$STRING`",
@@ -3155,12 +3860,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The ID representing the change for the story.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "member_id",
             ["short"] = "The ID of the member who performed the change.",
             ["type"] = "`$STRING`",
@@ -3197,6 +3904,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "history",
         ["op"] = {
           ["list"] = {
@@ -3218,16 +3929,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/stories/{story-public-id}/history",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "history",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "history",
                   },
                 },
                 ["select"] = {
@@ -3238,6 +3959,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "history",
                 },
               },
             },
@@ -3266,6 +3994,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The instant when this iteration was created.",
@@ -3286,6 +4015,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "end_date",
             ["op"] = {
               ["update"] = {
@@ -3342,6 +4072,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The ID of the iteration.",
@@ -3391,6 +4122,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "start_date",
             ["op"] = {
               ["update"] = {
@@ -3414,11 +4146,16 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The instant when this iteration was last updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "iteration",
         ["op"] = {
@@ -3431,10 +4168,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/iterations",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -3448,6 +4191,11 @@ local function make_config()
                     ["start_date"] = "`reqdata.start_date`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
                 },
               },
             },
@@ -3495,11 +4243,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search/iterations",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
-                  "iterations",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -3514,21 +4270,38 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                  "iterations",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/iterations",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
                 },
               },
             },
@@ -3552,15 +4325,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/iterations/{iteration-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["iteration-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3571,6 +4352,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
                 },
               },
             },
@@ -3594,15 +4381,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/iterations/{iteration-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["iteration-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3613,6 +4408,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
                 },
               },
             },
@@ -3636,15 +4437,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/iterations/{iteration-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["iteration-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3663,6 +4472,12 @@ local function make_config()
                     ["start_date"] = "`reqdata.start_date`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
                 },
               },
             },
@@ -3687,6 +4502,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The ID of the Key Result.",
@@ -3715,6 +4531,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "objective_id",
             ["req"] = true,
             ["short"] = "The Objective to which this Key Result belongs.",
@@ -3726,6 +4543,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "progress",
             ["req"] = true,
             ["short"] = "The integer percentage of progress toward completion of the Key Result.",
@@ -3742,6 +4560,10 @@ local function make_config()
             ["short"] = "The type of the Key Result (numeric, percent, or boolean).",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "key_result",
         ["op"] = {
@@ -3764,15 +4586,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/key-results/{key-result-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "key-results",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["key-result-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "key-results",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3783,6 +4613,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "key-results",
+                  "{id}",
                 },
               },
             },
@@ -3806,15 +4642,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/key-results/{key-result-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "key-results",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["key-result-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "key-results",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -3830,6 +4674,12 @@ local function make_config()
                     ["target_value"] = "`reqdata.target_value`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "key-results",
+                  "{id}",
                 },
               },
             },
@@ -3859,6 +4709,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "css-color",
             ["name"] = "color",
             ["op"] = {
               ["list"] = {
@@ -3870,6 +4721,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date that the Label was created.",
@@ -3909,6 +4761,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Label.",
@@ -3926,102 +4779,119 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics",
             ["req"] = true,
             ["short"] = "The total number of Epics with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics_completed",
             ["req"] = true,
             ["short"] = "The number of completed Epics associated with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics_in_progress",
             ["req"] = true,
             ["short"] = "The number of in progress epics associated with this label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics_total",
             ["req"] = true,
             ["short"] = "The total number of Epics associated with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_epics_unstarted",
             ["req"] = true,
             ["short"] = "The number of unstarted epics associated with this label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_points_backlog",
             ["req"] = true,
             ["short"] = "The total number of backlog points with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_points_completed",
             ["req"] = true,
             ["short"] = "The total number of completed points with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_points_in_progress",
             ["req"] = true,
             ["short"] = "The total number of in-progress points with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_points_total",
             ["req"] = true,
             ["short"] = "The total number of points with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_points_unstarted",
             ["req"] = true,
             ["short"] = "The total number of unstarted points with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_related_documents",
             ["req"] = true,
             ["short"] = "The total number of Documents associated this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_backlog",
             ["req"] = true,
             ["short"] = "The total number of stories backlog Stories with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_completed",
             ["req"] = true,
             ["short"] = "The total number of completed Stories with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_in_progress",
             ["req"] = true,
             ["short"] = "The total number of in-progress Stories with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_total",
             ["req"] = true,
             ["short"] = "The total number of Stories with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_unestimated",
             ["req"] = true,
             ["short"] = "The total number of Stories with no point estimate with this Label.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_stories_unstarted",
             ["req"] = true,
             ["short"] = "The total number of stories unstarted Stories with this Label.",
@@ -4034,11 +4904,16 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date that the Label was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "label",
         ["op"] = {
@@ -4051,10 +4926,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/labels",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -4065,6 +4946,11 @@ local function make_config()
                     ["name"] = "`reqdata.name`",
                   },
                   ["res"] = "`body.stats`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
                 },
               },
             },
@@ -4087,10 +4973,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/labels",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -4100,6 +4992,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
                 },
               },
             },
@@ -4123,15 +5020,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/labels/{label-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["label-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4142,6 +5047,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.stats`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
                 },
               },
             },
@@ -4165,15 +5076,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/labels/{label-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["label-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4184,6 +5103,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
                 },
               },
             },
@@ -4207,15 +5132,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/labels/{label-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["label-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4231,6 +5164,12 @@ local function make_config()
                     ["name"] = "`reqdata.name`",
                   },
                   ["res"] = "`body.stats`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
                 },
               },
             },
@@ -4254,6 +5193,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the LinkedFile was created.",
@@ -4286,6 +5226,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique identifier for the file.",
@@ -4315,6 +5256,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "size",
             ["op"] = {
               ["create"] = {
@@ -4329,6 +5271,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "story_id",
             ["short"] = "The ID of the linked story.",
             ["type"] = "`$INTEGER`",
@@ -4365,12 +5308,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the LinkedFile was updated.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "uploader_id",
             ["op"] = {
               ["create"] = {
@@ -4396,6 +5341,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "linked_file",
         ["op"] = {
           ["create"] = {
@@ -4407,10 +5356,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/linked-files",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "linked-files",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "linked-files",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -4427,6 +5382,11 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "linked-files",
+                },
               },
             },
           },
@@ -4439,15 +5399,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/linked-files",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "linked-files",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "linked-files",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "linked-files",
                 },
               },
             },
@@ -4471,15 +5442,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/linked-files/{linked-file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linked-file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "linked-files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4490,6 +5469,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
                 },
               },
             },
@@ -4513,15 +5498,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/linked-files/{linked-file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linked-file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "linked-files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4532,6 +5525,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
                 },
               },
             },
@@ -4555,15 +5554,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/linked-files/{linked-file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linked-file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "linked-files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4584,6 +5591,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
+                },
               },
             },
           },
@@ -4595,6 +5608,7 @@ local function make_config()
       ["member"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Member was created.",
@@ -4630,12 +5644,14 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The Member's ID in Shortcut.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "installation_id",
             ["short"] = "Only set for agents.",
             ["type"] = "`$STRING`",
@@ -4667,6 +5683,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "replaced_by",
             ["short"] = "The id of the member that replaces this one when merged.",
             ["type"] = "`$STRING`",
@@ -4684,6 +5701,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the Member was last updated.",
@@ -4694,6 +5712,10 @@ local function make_config()
             ["req"] = true,
             ["type"] = "`$OBJECT`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "member",
         ["op"] = {
@@ -4721,10 +5743,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/members",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "members",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "members",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -4735,6 +5763,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "members",
                 },
               },
             },
@@ -4766,15 +5799,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/members/{member-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "members",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["member-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "members",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -4787,21 +5828,38 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "members",
+                  "{id}",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/member",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "member",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "member",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "member",
                 },
               },
             },
@@ -4814,6 +5872,7 @@ local function make_config()
       ["milestone"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "The ID of the Milestone we want to move this Milestone after.",
             ["type"] = "`$INTEGER`",
@@ -4836,6 +5895,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "The ID of the Milestone we want to move this Milestone before.",
             ["type"] = "`$INTEGER`",
@@ -4861,12 +5921,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Milestone was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_override",
             ["op"] = {
               ["create"] = {
@@ -4881,6 +5943,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Milestone was created.",
@@ -4912,6 +5975,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Milestone.",
@@ -4935,6 +5999,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
@@ -4947,12 +6012,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at",
             ["req"] = true,
             ["short"] = "The time/date the Milestone was started.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at_override",
             ["op"] = {
               ["create"] = {
@@ -4987,11 +6054,16 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the Milestone was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "milestone",
         ["op"] = {
@@ -5004,10 +6076,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/milestones",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -5020,6 +6098,11 @@ local function make_config()
                     ["state"] = "`reqdata.state`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
                 },
               },
             },
@@ -5043,16 +6126,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/categories/{category-public-id}/milestones",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
-                  "{category_id}",
-                  "milestones",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["category-public-id"] = "category_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
+                  {
+                    ["var"] = "category_id",
+                  },
+                  {
+                    ["lit"] = "milestones",
                   },
                 },
                 ["select"] = {
@@ -5063,6 +6156,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
+                  "{category_id}",
+                  "milestones",
                 },
               },
               {
@@ -5080,16 +6180,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/categories/{category-public-id}/objectives",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "categories",
-                  "{category_id}",
-                  "objectives",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["category-public-id"] = "category_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "categories",
+                  },
+                  {
+                    ["var"] = "category_id",
+                  },
+                  {
+                    ["lit"] = "objectives",
                   },
                 },
                 ["select"] = {
@@ -5101,21 +6211,39 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "categories",
+                  "{category_id}",
+                  "objectives",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/milestones",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
                 },
               },
             },
@@ -5139,15 +6267,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/milestones/{milestone-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["milestone-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -5158,6 +6294,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
                 },
               },
             },
@@ -5181,15 +6323,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/milestones/{milestone-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["milestone-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -5200,6 +6350,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
                 },
               },
             },
@@ -5223,15 +6379,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/milestones/{milestone-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["milestone-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -5253,6 +6417,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
+                },
               },
             },
           },
@@ -5271,6 +6441,10 @@ local function make_config()
             ["name"] = "id",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "objectif",
         ["op"] = {
@@ -5293,15 +6467,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/objectives/{objective-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["objective-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -5312,6 +6494,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{id}",
                 },
               },
             },
@@ -5324,6 +6512,7 @@ local function make_config()
       ["objective"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "The ID of the Objective we want to move this Objective after.",
             ["type"] = "`$INTEGER`",
@@ -5346,6 +6535,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "The ID of the Objective we want to move this Objective before.",
             ["type"] = "`$INTEGER`",
@@ -5371,12 +6561,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Objective was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_override",
             ["op"] = {
               ["create"] = {
@@ -5391,6 +6583,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Objective was created.",
@@ -5425,6 +6618,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Objective.",
@@ -5448,6 +6642,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
@@ -5460,12 +6655,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at",
             ["req"] = true,
             ["short"] = "The time/date the Objective was started.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at_override",
             ["op"] = {
               ["create"] = {
@@ -5500,11 +6697,16 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the Objective was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "objective",
         ["op"] = {
@@ -5517,10 +6719,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/objectives",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -5533,6 +6741,11 @@ local function make_config()
                     ["state"] = "`reqdata.state`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
                 },
               },
             },
@@ -5580,11 +6793,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search/milestones",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
-                  "milestones",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "milestones",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -5598,6 +6819,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                  "milestones",
                 },
               },
               {
@@ -5639,11 +6866,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search/objectives",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
-                  "objectives",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -5658,21 +6893,38 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                  "objectives",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/objectives",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
                 },
               },
             },
@@ -5696,15 +6948,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/objectives/{objective-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objective_public_id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["objective-public-id"] = "objective_public_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
+                  {
+                    ["var"] = "objective_public_id",
                   },
                 },
                 ["select"] = {
@@ -5715,6 +6975,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objective_public_id}",
                 },
               },
             },
@@ -5738,15 +7004,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/objectives/{objective-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objective_public_id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["objective-public-id"] = "objective_public_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "objectives",
+                  },
+                  {
+                    ["var"] = "objective_public_id",
                   },
                 },
                 ["select"] = {
@@ -5767,6 +7041,12 @@ local function make_config()
                     ["state"] = "`reqdata.state`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objective_public_id}",
                 },
               },
             },
@@ -5814,6 +7094,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "css-color",
             ["name"] = "color",
             ["op"] = {
               ["create"] = {
@@ -5828,6 +7109,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -5839,6 +7121,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "days_to_thermometer",
             ["op"] = {
               ["update"] = {
@@ -5901,12 +7184,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Project.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "iteration_length",
             ["op"] = {
               ["create"] = {
@@ -5940,6 +7225,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "start_time",
             ["op"] = {
               ["create"] = {
@@ -5957,6 +7243,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "team_id",
             ["op"] = {
               ["update"] = {
@@ -5968,6 +7255,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -5979,11 +7267,16 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "workflow_id",
             ["req"] = true,
             ["short"] = "The ID of the workflow the project belongs to.",
             ["type"] = "`$INTEGER`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "project",
         ["op"] = {
@@ -5996,10 +7289,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/projects",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -6018,6 +7317,11 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
+                },
               },
             },
           },
@@ -6030,15 +7334,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/projects",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
                 },
               },
             },
@@ -6062,15 +7377,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/projects/{project-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["project-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -6081,6 +7404,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
                 },
               },
             },
@@ -6104,15 +7433,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/projects/{project-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["project-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -6123,6 +7460,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
                 },
               },
             },
@@ -6146,15 +7489,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/projects/{project-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["project-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -6176,6 +7527,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
+                },
               },
             },
           },
@@ -6187,6 +7544,7 @@ local function make_config()
       ["repository"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date the Repository was created.",
@@ -6211,6 +7569,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The ID associated to the VCS repository in Shortcut.",
@@ -6229,6 +7588,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date the Repository was updated.",
@@ -6241,6 +7601,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "repository",
         ["op"] = {
           ["list"] = {
@@ -6252,15 +7616,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/repositories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "repositories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "repositories",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "repositories",
                 },
               },
             },
@@ -6284,15 +7659,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/repositories/{repo-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "repositories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["repo-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "repositories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -6303,6 +7686,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "repositories",
+                  "{id}",
                 },
               },
             },
@@ -6384,10 +7773,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -6402,6 +7797,11 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                },
               },
             },
           },
@@ -6413,6 +7813,7 @@ local function make_config()
       ["story"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "The ID of the story we want to move this story after.",
             ["type"] = "`$INTEGER`",
@@ -6438,6 +7839,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "The ID of the story we want to move this story before.",
             ["type"] = "`$INTEGER`",
@@ -6518,12 +7920,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Story was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_override",
             ["op"] = {
               ["create"] = {
@@ -6538,6 +7942,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -6564,11 +7969,13 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "cycle_time",
             ["short"] = "The cycle time (in seconds) of this story when complete.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline",
             ["op"] = {
               ["create"] = {
@@ -6606,6 +8013,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_id",
             ["op"] = {
               ["create"] = {
@@ -6620,6 +8028,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "estimate",
             ["op"] = {
               ["create"] = {
@@ -6735,6 +8144,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "group_id",
             ["op"] = {
               ["create"] = {
@@ -6755,12 +8165,14 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Story.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "iteration_id",
             ["op"] = {
               ["create"] = {
@@ -6805,6 +8217,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "lead_time",
             ["short"] = "The lead time (in seconds) of this story when complete.",
             ["type"] = "`$INTEGER`",
@@ -6859,6 +8272,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "moved_at",
             ["req"] = true,
             ["short"] = "The time/date the Story was last changed workflow-state.",
@@ -6879,6 +8293,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "num_tasks_completed",
             ["op"] = {
               ["list"] = {
@@ -6914,11 +8329,13 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "parent_story_id",
             ["short"] = "The id of the parent story to associate with this story.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "A number representing the position of the story in relation to every other story in the current project.",
@@ -6931,6 +8348,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "project_id",
             ["op"] = {
               ["create"] = {
@@ -6961,6 +8379,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "requested_by_id",
             ["op"] = {
               ["create"] = {
@@ -6975,6 +8394,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "source_task_id",
             ["short"] = "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
             ["type"] = "`$INTEGER`",
@@ -6986,12 +8406,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at",
             ["req"] = true,
             ["short"] = "The time/date the Story was started.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "started_at_override",
             ["op"] = {
               ["create"] = {
@@ -7023,6 +8445,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "story_template_id",
             ["op"] = {
               ["create"] = {
@@ -7093,6 +8516,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -7104,12 +8528,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "workflow_id",
             ["req"] = true,
             ["short"] = "The ID of the workflow the story belongs to.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "workflow_state_id",
             ["op"] = {
               ["create"] = {
@@ -7124,6 +8550,10 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "story",
         ["op"] = {
           ["create"] = {
@@ -7135,10 +8565,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -7178,17 +8614,30 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/from-template",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "from-template",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["lit"] = "from-template",
+                  },
                 },
                 ["select"] = {
                   ["$action"] = "from_template",
@@ -7244,6 +8693,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "from-template",
+                },
               },
             },
           },
@@ -7290,11 +8745,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/search/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "search",
-                  "stories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -7308,6 +8771,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "search",
+                  "stories",
                 },
               },
               {
@@ -7339,16 +8808,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/groups/{group-public-id}/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "groups",
-                  "{group_id}",
-                  "stories",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["group-public-id"] = "group_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "groups",
+                  },
+                  {
+                    ["var"] = "group_id",
+                  },
+                  {
+                    ["lit"] = "stories",
                   },
                 },
                 ["select"] = {
@@ -7361,6 +8840,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "groups",
+                  "{group_id}",
+                  "stories",
                 },
               },
               {
@@ -7386,16 +8872,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "stories",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "stories",
                   },
                 },
                 ["select"] = {
@@ -7407,6 +8903,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "stories",
                 },
               },
               {
@@ -7432,16 +8935,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/iterations/{iteration-public-id}/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{iteration_id}",
-                  "stories",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["iteration-public-id"] = "iteration_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "iterations",
+                  },
+                  {
+                    ["var"] = "iteration_id",
+                  },
+                  {
+                    ["lit"] = "stories",
                   },
                 },
                 ["select"] = {
@@ -7453,6 +8966,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{iteration_id}",
+                  "stories",
                 },
               },
               {
@@ -7478,16 +8998,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/labels/{label-public-id}/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "labels",
-                  "{label_id}",
-                  "stories",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["label-public-id"] = "label_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "labels",
+                  },
+                  {
+                    ["var"] = "label_id",
+                  },
+                  {
+                    ["lit"] = "stories",
                   },
                 },
                 ["select"] = {
@@ -7499,6 +9029,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "labels",
+                  "{label_id}",
+                  "stories",
                 },
               },
               {
@@ -7524,16 +9061,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/projects/{project-public-id}/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "projects",
-                  "{project_id}",
-                  "stories",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["project-public-id"] = "project_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "projects",
+                  },
+                  {
+                    ["var"] = "project_id",
+                  },
+                  {
+                    ["lit"] = "stories",
                   },
                 },
                 ["select"] = {
@@ -7545,6 +9092,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "projects",
+                  "{project_id}",
+                  "stories",
                 },
               },
               {
@@ -7562,11 +9116,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/external-link/stories",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "external-link",
-                  "stories",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "external-link",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -7576,6 +9138,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "external-link",
+                  "stories",
                 },
               },
             },
@@ -7599,15 +9167,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/stories/{story-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -7618,6 +9194,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
                 },
               },
             },
@@ -7641,15 +9223,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/stories/{story-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -7660,6 +9250,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
                 },
               },
             },
@@ -7683,15 +9279,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/stories/{story-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -7732,6 +9336,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                },
               },
             },
           },
@@ -7765,6 +9375,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "author_id",
             ["op"] = {
               ["create"] = {
@@ -7781,6 +9392,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -7821,6 +9433,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Comment.",
@@ -7845,11 +9458,13 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "parent_id",
             ["short"] = "The ID of the parent Comment this Comment is threaded under.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "The Comments numerical position in the list from oldest to newest.",
@@ -7862,6 +9477,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "story_id",
             ["req"] = true,
             ["short"] = "The ID of the Story on which the Comment appears.",
@@ -7879,6 +9495,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -7889,6 +9506,10 @@ local function make_config()
             ["short"] = "The time/date when the Comment was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "story_comment",
         ["op"] = {
@@ -7918,19 +9539,33 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "unlink-from-slack",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "comment_id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "comment_id",
+                  },
+                  {
+                    ["lit"] = "unlink-from-slack",
                   },
                 },
                 ["select"] = {
@@ -7942,6 +9577,15 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "unlink-from-slack",
                 },
               },
               {
@@ -7959,16 +9603,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                  "comments",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "comments",
                   },
                 },
                 ["select"] = {
@@ -7986,6 +9640,13 @@ local function make_config()
                     ["updated_at"] = "`reqdata.updated_at`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                  "comments",
                 },
               },
             },
@@ -8009,16 +9670,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                  "comments",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "comments",
                   },
                 },
                 ["select"] = {
@@ -8029,6 +9700,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                  "comments",
                 },
               },
             },
@@ -8059,18 +9737,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -8082,6 +9772,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -8112,18 +9810,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -8137,6 +9847,14 @@ local function make_config()
                     ["text"] = "`reqdata.text`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -8157,6 +9875,7 @@ local function make_config()
       ["story_link"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The time/date when the Story Link was created.",
@@ -8169,12 +9888,14 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique identifier of the Story Link.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "object_id",
             ["op"] = {
               ["update"] = {
@@ -8186,6 +9907,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "subject_id",
             ["op"] = {
               ["update"] = {
@@ -8197,12 +9919,14 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "subject_workflow_state_id",
             ["req"] = true,
             ["short"] = "The workflow state of the \"subject\" story.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The time/date when the Story Link was last updated.",
@@ -8220,6 +9944,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "story_link",
         ["op"] = {
           ["create"] = {
@@ -8231,10 +9959,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/story-links",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "story-links",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "story-links",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -8244,6 +9978,11 @@ local function make_config()
                     ["verb"] = "`reqdata.verb`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "story-links",
                 },
               },
             },
@@ -8267,15 +10006,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/story-links/{story-link-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-link-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "story-links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -8286,6 +10033,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
                 },
               },
             },
@@ -8309,15 +10062,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/story-links/{story-link-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-link-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "story-links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -8328,6 +10089,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
                 },
               },
             },
@@ -8351,15 +10118,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/story-links/{story-link-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-link-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "story-links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -8374,6 +10149,12 @@ local function make_config()
                     ["verb"] = "`reqdata.verb`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
                 },
               },
             },
@@ -8420,19 +10201,33 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "reactions",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "comment_id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "comment_id",
+                  },
+                  {
+                    ["lit"] = "reactions",
                   },
                 },
                 ["select"] = {
@@ -8446,6 +10241,15 @@ local function make_config()
                     ["emoji"] = "`reqdata.emoji`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "reactions",
                 },
               },
             },
@@ -8476,19 +10280,33 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "reactions",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "comment_id",
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "comment_id",
+                  },
+                  {
+                    ["lit"] = "reactions",
                   },
                 },
                 ["select"] = {
@@ -8502,6 +10320,15 @@ local function make_config()
                     ["emoji"] = "`reqdata.emoji`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "reactions",
                 },
               },
             },
@@ -8519,6 +10346,7 @@ local function make_config()
       ["story_slim"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "The ID of the story that the stories are to be moved below.",
             ["type"] = "`$INTEGER`",
@@ -8529,26 +10357,31 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "The ID of the story that the stories are to be moved before.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_end",
             ["short"] = "Stories should have been completed on or before this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at_start",
             ["short"] = "Stories should have been completed on or after this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at_end",
             ["short"] = "Stories should have been created on or before this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at_start",
             ["short"] = "Stories should have been created on or after this date.",
             ["type"] = "`$STRING`",
@@ -8564,21 +10397,25 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline",
             ["short"] = "The due date of the story.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline_end",
             ["short"] = "Stories should have a deadline on or before this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "deadline_start",
             ["short"] = "Stories should have a deadline on or after this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "epic_id",
             ["short"] = "The Epic IDs that may be associated with the Stories.",
             ["type"] = "`$INTEGER`",
@@ -8589,6 +10426,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "estimate",
             ["short"] = "The number of estimate points associate with the Stories.",
             ["type"] = "`$INTEGER`",
@@ -8614,6 +10452,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "group_id",
             ["short"] = "The Group ID that is associated with the Stories",
             ["type"] = "`$STRING`",
@@ -8629,6 +10468,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "iteration_id",
             ["short"] = "The Iteration ID that may be associated with the Stories.",
             ["type"] = "`$INTEGER`",
@@ -8664,6 +10504,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "owner_id",
             ["short"] = "An array of UUIDs for any Users who may be Owners of the Stories.",
             ["type"] = "`$STRING`",
@@ -8684,6 +10525,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "project_id",
             ["short"] = "The IDs for the Projects the Stories may be assigned to.",
             ["type"] = "`$INTEGER`",
@@ -8694,6 +10536,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "requested_by_id",
             ["short"] = "The UUID of any Users who may have requested the Stories.",
             ["type"] = "`$STRING`",
@@ -8721,16 +10564,19 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at_end",
             ["short"] = "Stories should have been updated on or before this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at_start",
             ["short"] = "Stories should have been updated on or after this date.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "workflow_state_id",
             ["short"] = "The unique IDs of the specific Workflow States that the Stories should be in.",
             ["type"] = "`$INTEGER`",
@@ -8752,11 +10598,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/bulk",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["lit"] = "bulk",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -8765,17 +10619,31 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
+                },
               },
               {
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/search",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "search",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -8811,6 +10679,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "search",
+                },
               },
             },
           },
@@ -8823,11 +10697,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/stories/bulk",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["lit"] = "bulk",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -8858,6 +10740,12 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
+                },
               },
             },
           },
@@ -8869,11 +10757,13 @@ local function make_config()
       ["task"] = {
         ["fields"] = {
           {
+            ["format"] = "int64",
             ["name"] = "after_id",
             ["short"] = "Move task after this task ID.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "before_id",
             ["short"] = "Move task before this task ID.",
             ["type"] = "`$INTEGER`",
@@ -8893,12 +10783,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completed_at",
             ["req"] = true,
             ["short"] = "The time/date the Task was completed.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -8949,6 +10841,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Task.",
@@ -8981,18 +10874,21 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "position",
             ["req"] = true,
             ["short"] = "The number corresponding to the Task's position within a list of Tasks on a Story.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "story_id",
             ["req"] = true,
             ["short"] = "The unique identifier of the parent Story.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -9003,6 +10899,10 @@ local function make_config()
             ["short"] = "The time/date the Task was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "task",
         ["op"] = {
@@ -9025,16 +10925,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/stories/{story-public-id}/tasks",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "story_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "tasks",
                   },
                 },
                 ["select"] = {
@@ -9052,6 +10962,13 @@ local function make_config()
                     ["updated_at"] = "`reqdata.updated_at`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
                 },
               },
             },
@@ -9082,18 +10999,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "story_id",
                     ["task-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "tasks",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9105,6 +11034,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
                 },
               },
             },
@@ -9135,18 +11072,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "story_id",
                     ["task-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "tasks",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9158,6 +11107,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
                 },
               },
             },
@@ -9188,18 +11145,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["story-public-id"] = "story_id",
                     ["task-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "stories",
+                  },
+                  {
+                    ["var"] = "story_id",
+                  },
+                  {
+                    ["lit"] = "tasks",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9217,6 +11186,14 @@ local function make_config()
                     ["owner_ids"] = "`reqdata.owner_id`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
                 },
               },
             },
@@ -9239,6 +11216,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "author_id",
             ["op"] = {
               ["create"] = {
@@ -9256,6 +11234,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["create"] = {
@@ -9296,6 +11275,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Comment.",
@@ -9320,6 +11300,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["create"] = {
@@ -9330,6 +11311,10 @@ local function make_config()
             ["short"] = "The time/date the Comment was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "threaded_comment",
         ["op"] = {
@@ -9359,18 +11344,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9389,6 +11386,14 @@ local function make_config()
                   },
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
+                },
               },
               {
                 ["args"] = {
@@ -9405,16 +11410,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
                   },
                 },
                 ["select"] = {
@@ -9431,6 +11446,13 @@ local function make_config()
                     ["updated_at"] = "`reqdata.updated_at`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
                 },
               },
             },
@@ -9454,16 +11476,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
                   },
                 },
                 ["select"] = {
@@ -9474,6 +11506,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
                 },
               },
             },
@@ -9504,18 +11543,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9527,6 +11578,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -9557,18 +11616,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9580,6 +11651,14 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -9610,18 +11689,30 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["comment-public-id"] = "id",
                     ["epic-public-id"] = "epic_id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "epics",
+                  },
+                  {
+                    ["var"] = "epic_id",
+                  },
+                  {
+                    ["lit"] = "comments",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9635,6 +11726,14 @@ local function make_config()
                     ["text"] = "`reqdata.text`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
                 },
               },
             },
@@ -9657,6 +11756,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["op"] = {
               ["update"] = {
@@ -9708,6 +11808,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID for the file.",
@@ -9737,6 +11838,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "size",
             ["req"] = true,
             ["short"] = "The size of the file.",
@@ -9755,6 +11857,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["op"] = {
               ["update"] = {
@@ -9766,6 +11869,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "uploader_id",
             ["op"] = {
               ["update"] = {
@@ -9783,6 +11887,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "uploaded_file",
         ["op"] = {
           ["create"] = {
@@ -9794,15 +11902,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/files",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "files",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "files",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "files",
                 },
               },
             },
@@ -9816,15 +11935,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/files",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "files",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "files",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "files",
                 },
               },
             },
@@ -9848,15 +11978,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/files/{file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9867,6 +12005,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
                 },
               },
             },
@@ -9890,15 +12034,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/files/{file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9909,6 +12061,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
                 },
               },
             },
@@ -9932,15 +12090,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/api/v3/files/{file-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["file-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "files",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -9958,6 +12124,12 @@ local function make_config()
                     ["uploader_id"] = "`reqdata.uploader_id`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
                 },
               },
             },
@@ -9983,6 +12155,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "webhook",
         ["op"] = {
           ["create"] = {
@@ -9994,11 +12170,19 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/v3/integrations/webhook",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "integrations",
+                  },
+                  {
+                    ["lit"] = "webhook",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
@@ -10007,6 +12191,12 @@ local function make_config()
                     ["webhook_url"] = "`reqdata.webhook_url`",
                   },
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
                 },
               },
             },
@@ -10030,16 +12220,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/integrations/webhook/{integration-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["integration-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "integrations",
+                  },
+                  {
+                    ["lit"] = "webhook",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -10050,6 +12250,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
+                  "{id}",
                 },
               },
             },
@@ -10073,16 +12280,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/api/v3/integrations/webhook/{integration-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["integration-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "integrations",
+                  },
+                  {
+                    ["lit"] = "webhook",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -10093,6 +12310,13 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
+                  "{id}",
                 },
               },
             },
@@ -10111,12 +12335,14 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "created_at",
             ["req"] = true,
             ["short"] = "The date the Workflow was created.",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "default_state_id",
             ["req"] = true,
             ["short"] = "The unique ID of the default state that new Stories are entered into.",
@@ -10135,6 +12361,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "id",
             ["req"] = true,
             ["short"] = "The unique ID of the Workflow.",
@@ -10159,17 +12386,23 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "int64",
             ["name"] = "team_id",
             ["req"] = true,
             ["short"] = "The ID of the team the workflow belongs to.",
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updated_at",
             ["req"] = true,
             ["short"] = "The date the Workflow was updated.",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "workflow",
         ["op"] = {
@@ -10182,15 +12415,26 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/workflows",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "workflows",
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "workflows",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "workflows",
                 },
               },
             },
@@ -10214,15 +12458,23 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v3/workflows/{workflow-public-id}",
-                ["parts"] = {
-                  "api",
-                  "v3",
-                  "workflows",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["workflow-public-id"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "api",
+                  },
+                  {
+                    ["lit"] = "v3",
+                  },
+                  {
+                    ["lit"] = "workflows",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -10233,6 +12485,12 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "api",
+                  "v3",
+                  "workflows",
+                  "{id}",
                 },
               },
             },

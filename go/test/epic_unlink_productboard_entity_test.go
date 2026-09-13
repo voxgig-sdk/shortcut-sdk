@@ -52,7 +52,7 @@ func TestEpicUnlinkProductboardEntity(t *testing.T) {
 		// CREATE
 		epicUnlinkProductboardRef01Ent := client.EpicUnlinkProductboard(nil)
 		epicUnlinkProductboardRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "epic_unlink_productboard"}, setup.data), "epic_unlink_productboard_ref01"))
+			vs.GetPath(setup.data, []any{"new", "epic_unlink_productboard"}), "epic_unlink_productboard_ref01"))
 		epicUnlinkProductboardRef01Data["epic-public-id"] = setup.idmap["epic-public-id01"]
 
 		epicUnlinkProductboardRef01DataResult, err := epicUnlinkProductboardRef01Ent.Create(epicUnlinkProductboardRef01Data, nil)
@@ -94,7 +94,7 @@ func epic_unlink_productboardBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"epic_unlink_productboard01", "epic_unlink_productboard02", "epic_unlink_productboard03", "epic-public-id01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -114,7 +114,7 @@ func epic_unlink_productboardBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_EPIC_UNLINK_PRODUCTBOARD_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_EPIC_UNLINK_PRODUCTBOARD_ENTID"])
@@ -123,11 +123,23 @@ func epic_unlink_productboardBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

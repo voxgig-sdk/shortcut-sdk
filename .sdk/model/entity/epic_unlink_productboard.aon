@@ -36,18 +36,28 @@ main: kit: entity: epic_unlink_productboard: {
           }
           method: "POST"
           orig: "/api/v3/epics/{epic-public-id}/unlink-productboard"
-          parts: [
-            "api"
-            "v3"
-            "epics"
-            "{id}"
-            "unlink-productboard"
-          ]
           rename: {
             param: {
               "epic-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "epics"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "unlink-productboard"
+            }
+          ]
           select: {
             exist: [
               "id"

@@ -10,6 +10,22 @@ const FEATURE_CLASS = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named requires above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+//
+// Read by SecretsFeature through a DEFERRED require of this module: the
+// requires above make the pair circular, and this file replaces
+// module.exports at the end of its body, so anything reading the map at
+// module load would get undefined. See tm/js/src/feature/secrets.
+const FEATURE_PLUGINS = {
+  
+}
+
+
 class Config {
 
   makeFeature(fn) {
@@ -186,11 +202,19 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/stories/bulk",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "bulk"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "lit": "bulk"
+                }
               ],
               "select": {},
               "transform": {
@@ -198,7 +222,13 @@ class Config {
                   "story_ids": "`reqdata.story_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "bulk"
+              ]
             }
           ]
         }
@@ -221,6 +251,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "css-color",
           "name": "color",
           "op": {
             "create": {
@@ -235,6 +266,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date that the Category was created.",
@@ -264,6 +296,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Category.",
@@ -292,12 +325,17 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date that the Category was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "category",
       "op": {
         "create": {
@@ -309,10 +347,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/categories",
-              "parts": [
-                "api",
-                "v3",
-                "categories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                }
               ],
               "select": {},
               "transform": {
@@ -323,7 +367,12 @@ class Config {
                   "type": "`reqdata.type`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories"
+              ]
             }
           ]
         },
@@ -336,16 +385,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/categories",
-              "parts": [
-                "api",
-                "v3",
-                "categories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories"
+              ]
             }
           ]
         },
@@ -368,17 +428,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/categories/{category-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "categories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "category-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -387,7 +455,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories",
+                "{id}"
+              ]
             }
           ]
         },
@@ -410,17 +484,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/categories/{category-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "categories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "category-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -429,7 +511,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories",
+                "{id}"
+              ]
             }
           ]
         },
@@ -452,17 +540,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/categories/{category-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "categories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "category-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -475,7 +571,13 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories",
+                "{id}"
+              ]
             }
           ]
         }
@@ -491,6 +593,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "comment",
       "op": {
         "remove": {
@@ -519,20 +625,32 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -542,7 +660,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         }
@@ -558,11 +684,13 @@ class Config {
     "custom_field": {
       "fields": [
         {
+          "format": "uuid",
           "name": "after_id",
           "short": "The ID of the CustomField we want to move this CustomField after.",
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "before_id",
           "short": "The ID of the CustomField we want to move this CustomField before.",
           "type": "`$STRING`"
@@ -573,6 +701,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The instant when this CustomField was created.",
@@ -617,6 +746,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The unique public ID for the CustomField.",
@@ -634,6 +764,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "An integer indicating the position of this Custom Field with respect to the other CustomField",
@@ -645,6 +776,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The instant when this CustomField was last updated.",
@@ -656,6 +788,10 @@ class Config {
           "type": "`$ARRAY`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "custom_field",
       "op": {
         "list": {
@@ -667,16 +803,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/custom-fields",
-              "parts": [
-                "api",
-                "v3",
-                "custom-fields"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "custom-fields"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "custom-fields"
+              ]
             }
           ]
         },
@@ -699,17 +846,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "custom-fields",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "custom-field-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "custom-fields"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -718,7 +873,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "custom-fields",
+                "{id}"
+              ]
             }
           ]
         },
@@ -741,17 +902,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "custom-fields",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "custom-field-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "custom-fields"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -760,7 +929,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "custom-fields",
+                "{id}"
+              ]
             }
           ]
         },
@@ -783,17 +958,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "custom-fields",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "custom-field-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "custom-fields"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -810,7 +993,13 @@ class Config {
                   "values": "`reqdata.value`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "custom-fields",
+                "{id}"
+              ]
             }
           ]
         }
@@ -832,34 +1021,62 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/entity-templates/disable",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates",
-                "disable"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                },
+                {
+                  "lit": "disable"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates",
+                "disable"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/iterations/disable",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "disable"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "lit": "disable"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "disable"
+              ]
             }
           ]
         }
@@ -883,6 +1100,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The public id of the Doc",
@@ -895,6 +1113,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "doc_slim",
       "op": {
         "create": {
@@ -906,10 +1128,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/documents",
-              "parts": [
-                "api",
-                "v3",
-                "documents"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "documents"
+                }
               ],
               "select": {},
               "transform": {
@@ -918,7 +1146,12 @@ class Config {
                   "title": "`reqdata.title`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "documents"
+              ]
             }
           ]
         },
@@ -931,16 +1164,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/documents",
-              "parts": [
-                "api",
-                "v3",
-                "documents"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "documents"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "documents"
+              ]
             }
           ]
         }
@@ -962,34 +1206,62 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/entity-templates/enable",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates",
-                "enable"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                },
+                {
+                  "lit": "enable"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates",
+                "enable"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/iterations/enable",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "enable"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "lit": "enable"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "enable"
+              ]
             }
           ]
         }
@@ -1001,6 +1273,7 @@ class Config {
     "entity_template": {
       "fields": [
         {
+          "format": "uuid",
           "name": "author_id",
           "op": {
             "list": {
@@ -1012,6 +1285,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date when the entity template was created.",
@@ -1023,6 +1297,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "deadline",
           "short": "The due date of the story.",
           "type": "`$STRING`"
@@ -1044,11 +1319,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_id",
           "short": "The ID of the epic the story belongs to.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "estimate",
           "short": "The numeric point estimate of the story.",
           "type": "`$INTEGER`"
@@ -1069,17 +1346,20 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "group_id",
           "short": "The ID of the group to which the story is assigned.",
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The unique identifier for the entity template.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "iteration_id",
           "short": "The ID of the iteration the story belongs to.",
           "type": "`$INTEGER`"
@@ -1095,6 +1375,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "last_used_at",
           "req": true,
           "short": "The last time that someone created an entity using this template.",
@@ -1126,6 +1407,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "project_id",
           "short": "The ID of the project the story belongs to.",
           "type": "`$INTEGER`"
@@ -1157,17 +1439,23 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date when the entity template was last updated.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "workflow_state_id",
           "short": "The ID of the workflow state the story is currently in.",
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "entity_template",
       "op": {
         "create": {
@@ -1179,10 +1467,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/entity-templates",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                }
               ],
               "select": {},
               "transform": {
@@ -1192,7 +1486,12 @@ class Config {
                   "story_contents": "`reqdata.story_content`"
                 },
                 "res": "`body.story_contents`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates"
+              ]
             }
           ]
         },
@@ -1205,16 +1504,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/entity-templates",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates"
+              ]
             }
           ]
         },
@@ -1237,17 +1547,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "entity-template-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1256,7 +1574,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.story_contents`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates",
+                "{id}"
+              ]
             }
           ]
         },
@@ -1279,17 +1603,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "entity-template-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1298,7 +1630,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates",
+                "{id}"
+              ]
             }
           ]
         },
@@ -1321,17 +1659,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "entity-templates",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "entity-template-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "entity-templates"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -1343,7 +1689,13 @@ class Config {
                   "story_contents": "`reqdata.story_content`"
                 },
                 "res": "`body.story_contents`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "entity-templates",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1355,6 +1707,7 @@ class Config {
     "epic": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "The ID of the Epic we want to move this Epic after.",
           "type": "`$INTEGER`"
@@ -1383,6 +1736,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "The ID of the Epic we want to move this Epic before.",
           "type": "`$INTEGER`"
@@ -1405,12 +1759,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Epic was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_override",
           "op": {
             "create": {
@@ -1425,11 +1781,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "converted_from_story_id",
           "short": "The ID of the Story that was converted to an Epic.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -1441,6 +1799,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "deadline",
           "op": {
             "create": {
@@ -1478,6 +1837,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_state_id",
           "op": {
             "create": {
@@ -1525,6 +1885,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "group_id",
           "op": {
             "create": {
@@ -1565,6 +1926,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Epic.",
@@ -1603,6 +1965,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "milestone_id",
           "op": {
             "create": {
@@ -1656,6 +2019,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "planned_start_date",
           "op": {
             "create": {
@@ -1670,12 +2034,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "The Epic's relative position in the Epic workflow state.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "uuid",
           "name": "productboard_id",
           "req": true,
           "short": "The ID of the associated productboard feature.",
@@ -1688,6 +2054,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "productboard_plugin_id",
           "req": true,
           "short": "The ID of the associated productboard integration.",
@@ -1706,6 +2073,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "requested_by_id",
           "op": {
             "create": {
@@ -1726,12 +2094,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "started_at",
           "req": true,
           "short": "The time/date the Epic was started.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "started_at_override",
           "op": {
             "create": {
@@ -1766,12 +2136,14 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "int64",
           "name": "stories_without_projects",
           "req": true,
           "short": "The number of stories in this epic which are not associated with a project.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -1783,6 +2155,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "epic",
       "op": {
         "create": {
@@ -1794,10 +2170,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/epics",
-              "parts": [
-                "api",
-                "v3",
-                "epics"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                }
               ],
               "select": {},
               "transform": {
@@ -1824,7 +2206,12 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics"
+              ]
             }
           ]
         },
@@ -1871,11 +2258,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search/epics",
-              "parts": [
-                "api",
-                "v3",
-                "search",
-                "epics"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "epics"
+                }
               ],
               "select": {
                 "exist": [
@@ -1889,7 +2284,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search",
+                "epics"
+              ]
             },
             {
               "args": {
@@ -1905,10 +2306,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics",
-              "parts": [
-                "api",
-                "v3",
-                "epics"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                }
               ],
               "select": {
                 "exist": [
@@ -1918,7 +2325,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics"
+              ]
             },
             {
               "args": {
@@ -1935,18 +2347,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/labels/{label-public-id}/epics",
-              "parts": [
-                "api",
-                "v3",
-                "labels",
-                "{label_id}",
-                "epics"
-              ],
               "rename": {
                 "param": {
                   "label-public-id": "label_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                },
+                {
+                  "var": "label_id"
+                },
+                {
+                  "lit": "epics"
+                }
+              ],
               "select": {
                 "exist": [
                   "label_id"
@@ -1955,7 +2377,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels",
+                "{label_id}",
+                "epics"
+              ]
             },
             {
               "args": {
@@ -1972,18 +2401,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/milestones/{milestone-public-id}/epics",
-              "parts": [
-                "api",
-                "v3",
-                "milestones",
-                "{milestone_id}",
-                "epics"
-              ],
               "rename": {
                 "param": {
                   "milestone-public-id": "milestone_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                },
+                {
+                  "var": "milestone_id"
+                },
+                {
+                  "lit": "epics"
+                }
+              ],
               "select": {
                 "exist": [
                   "milestone_id"
@@ -1992,7 +2431,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones",
+                "{milestone_id}",
+                "epics"
+              ]
             },
             {
               "args": {
@@ -2009,18 +2455,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/objectives/{objective-public-id}/epics",
-              "parts": [
-                "api",
-                "v3",
-                "objectives",
-                "{objectif_id}",
-                "epics"
-              ],
               "rename": {
                 "param": {
                   "objective-public-id": "objectif_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                },
+                {
+                  "var": "objectif_id"
+                },
+                {
+                  "lit": "epics"
+                }
+              ],
               "select": {
                 "exist": [
                   "objectif_id"
@@ -2029,7 +2485,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives",
+                "{objectif_id}",
+                "epics"
+              ]
             }
           ]
         },
@@ -2052,17 +2515,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2071,7 +2542,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{id}"
+              ]
             }
           ]
         },
@@ -2094,17 +2571,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/epics/{epic-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2113,7 +2598,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{id}"
+              ]
             }
           ]
         },
@@ -2136,17 +2627,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/epics/{epic-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2176,7 +2675,13 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{id}"
+              ]
             }
           ]
         }
@@ -2222,24 +2727,28 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Epic was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_override",
           "req": true,
           "short": "A manual override for the time/date the Epic was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Epic was created.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "deadline",
           "req": true,
           "short": "The Epic's deadline.",
@@ -2257,6 +2766,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_state_id",
           "req": true,
           "short": "The ID of the Epic State.",
@@ -2280,6 +2790,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "group_id",
           "req": true,
           "short": "`Deprecated` The ID of the group to associate with the epic.",
@@ -2298,6 +2809,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Epic.",
@@ -2328,6 +2840,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "milestone_id",
           "req": true,
           "short": "`Deprecated` The ID of the Objective this Epic is related to.",
@@ -2352,18 +2865,21 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "planned_start_date",
           "req": true,
           "short": "The Epic's planned start date.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "The Epic's relative position in the Epic workflow state.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "uuid",
           "name": "productboard_id",
           "req": true,
           "short": "The ID of the associated productboard feature.",
@@ -2376,6 +2892,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "productboard_plugin_id",
           "req": true,
           "short": "The ID of the associated productboard integration.",
@@ -2394,6 +2911,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "requested_by_id",
           "req": true,
           "short": "The ID of the Member that requested the epic.",
@@ -2406,12 +2924,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "started_at",
           "req": true,
           "short": "The time/date the Epic was started.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "started_at_override",
           "req": true,
           "short": "A manual override for the time/date the Epic was started.",
@@ -2430,18 +2950,24 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "int64",
           "name": "stories_without_projects",
           "req": true,
           "short": "The number of stories in this epic which are not associated with a project.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the Epic was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "epic_paginated_result",
       "op": {
         "list": {
@@ -2474,11 +3000,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/paginated",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "paginated"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "lit": "paginated"
+                }
               ],
               "select": {
                 "exist": [
@@ -2490,7 +3024,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "paginated"
+              ]
             }
           ]
         }
@@ -2506,6 +3046,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "epic_unlink_productboard",
       "op": {
         "create": {
@@ -2527,18 +3071,28 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/epics/{epic-public-id}/unlink-productboard",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{id}",
-                "unlink-productboard"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "unlink-productboard"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2547,7 +3101,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{id}",
+                "unlink-productboard"
+              ]
             }
           ]
         }
@@ -2559,11 +3120,13 @@ class Config {
     "epic_workflow": {
       "fields": [
         {
+          "format": "css-color",
           "name": "color",
           "short": "The hex color for this Epic State.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Epic State was created.",
@@ -2587,6 +3150,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Epic State.",
@@ -2599,6 +3163,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "The position that the Epic State is in, starting with 0 at the left.",
@@ -2611,12 +3176,17 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "When the Epic State was last updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "epic_workflow",
       "op": {
         "list": {
@@ -2628,16 +3198,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epic-workflow",
-              "parts": [
-                "api",
-                "v3",
-                "epic-workflow"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epic-workflow"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.epic_states`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epic-workflow"
+              ]
             }
           ]
         }
@@ -2666,6 +3247,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "css-color",
           "name": "color",
           "op": {
             "create": {
@@ -2694,12 +3276,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The instant when this group was created.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "default_workflow_id",
           "short": "The ID of the default workflow for stories created in this group.",
           "type": "`$INTEGER`"
@@ -2725,6 +3309,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "uuid",
           "name": "display_icon_id",
           "short": "The Icon id for the avatar of this Group.",
           "type": "`$STRING`"
@@ -2741,6 +3326,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The id of the Group.",
@@ -2783,30 +3369,35 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "num_epics_started",
           "req": true,
           "short": "The number of epics assigned to the group which are in the started workflow state.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories",
           "req": true,
           "short": "The total number of stories assigned to the group.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_backlog",
           "req": true,
           "short": "The number of stories assigned to the group which are in a backlog workflow state.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_started",
           "req": true,
           "short": "The number of stories assigned to the group which are in a started workflow state.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The last instant when this group was updated.",
@@ -2827,6 +3418,10 @@ class Config {
           "type": "`$ARRAY`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "group",
       "op": {
         "create": {
@@ -2838,10 +3433,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/groups",
-              "parts": [
-                "api",
-                "v3",
-                "groups"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "groups"
+                }
               ],
               "select": {},
               "transform": {
@@ -2856,7 +3457,12 @@ class Config {
                   "workflow_ids": "`reqdata.workflow_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "groups"
+              ]
             }
           ]
         },
@@ -2869,16 +3475,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/groups",
-              "parts": [
-                "api",
-                "v3",
-                "groups"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "groups"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "groups"
+              ]
             }
           ]
         },
@@ -2901,17 +3518,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/groups/{group-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "groups",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "group-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "groups"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2920,7 +3545,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "groups",
+                "{id}"
+              ]
             }
           ]
         },
@@ -2943,17 +3574,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/groups/{group-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "groups",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "group-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "groups"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -2973,7 +3612,13 @@ class Config {
                   "workflow_ids": "`reqdata.workflow_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "groups",
+                "{id}"
+              ]
             }
           ]
         }
@@ -2985,11 +3630,13 @@ class Config {
     "health": {
       "fields": [
         {
+          "format": "uuid",
           "name": "author_id",
           "short": "The ID of the permission who created or updated the Health record.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "short": "The time that the Health record was created.",
           "type": "`$STRING`"
@@ -3001,17 +3648,20 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_id",
           "short": "The ID of the Epic associated with this Health record.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Health record.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "objective_id",
           "short": "The ID of the Objective associated with this Health record.",
           "type": "`$INTEGER`"
@@ -3033,11 +3683,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "short": "The time that the Health record was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "health",
       "op": {
         "create": {
@@ -3059,18 +3714,28 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/epics/{epic-public-id}/health",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "health"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "health"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id"
@@ -3082,7 +3747,14 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "health"
+              ]
             }
           ]
         },
@@ -3105,18 +3777,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}/health-history",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "health-history"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "health-history"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id"
@@ -3125,7 +3807,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "health-history"
+              ]
             }
           ]
         },
@@ -3148,18 +3837,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}/health",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "health"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "health"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id"
@@ -3168,7 +3867,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "health"
+              ]
             }
           ]
         },
@@ -3191,17 +3897,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/health/{health-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "health",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "health-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "health"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3213,7 +3927,13 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "health",
+                "{id}"
+              ]
             }
           ]
         }
@@ -3245,6 +3965,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "automation_id",
           "short": "The ID of the automation that performed the change.",
           "type": "`$STRING`"
@@ -3261,12 +3982,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The ID representing the change for the story.",
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "member_id",
           "short": "The ID of the member who performed the change.",
           "type": "`$STRING`"
@@ -3303,6 +4026,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "history",
       "op": {
         "list": {
@@ -3324,18 +4051,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/stories/{story-public-id}/history",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "history"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "history"
+                }
+              ],
               "select": {
                 "exist": [
                   "story_id"
@@ -3344,7 +4081,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "history"
+              ]
             }
           ]
         }
@@ -3372,6 +4116,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The instant when this iteration was created.",
@@ -3392,6 +4137,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "end_date",
           "op": {
             "update": {
@@ -3448,6 +4194,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The ID of the iteration.",
@@ -3497,6 +4244,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "start_date",
           "op": {
             "update": {
@@ -3520,12 +4268,17 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The instant when this iteration was last updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "iteration",
       "op": {
         "create": {
@@ -3537,10 +4290,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/iterations",
-              "parts": [
-                "api",
-                "v3",
-                "iterations"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                }
               ],
               "select": {},
               "transform": {
@@ -3554,7 +4313,12 @@ class Config {
                   "start_date": "`reqdata.start_date`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations"
+              ]
             }
           ]
         },
@@ -3601,11 +4365,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search/iterations",
-              "parts": [
-                "api",
-                "v3",
-                "search",
-                "iterations"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "iterations"
+                }
               ],
               "select": {
                 "exist": [
@@ -3619,23 +4391,40 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search",
+                "iterations"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/iterations",
-              "parts": [
-                "api",
-                "v3",
-                "iterations"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations"
+              ]
             }
           ]
         },
@@ -3658,17 +4447,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/iterations/{iteration-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "iteration-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3677,7 +4474,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "{id}"
+              ]
             }
           ]
         },
@@ -3700,17 +4503,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/iterations/{iteration-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "iteration-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3719,7 +4530,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "{id}"
+              ]
             }
           ]
         },
@@ -3742,17 +4559,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/iterations/{iteration-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "iteration-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3769,7 +4594,13 @@ class Config {
                   "start_date": "`reqdata.start_date`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "{id}"
+              ]
             }
           ]
         }
@@ -3793,6 +4624,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The ID of the Key Result.",
@@ -3821,6 +4653,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "objective_id",
           "req": true,
           "short": "The Objective to which this Key Result belongs.",
@@ -3832,6 +4665,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "int64",
           "name": "progress",
           "req": true,
           "short": "The integer percentage of progress toward completion of the Key Result.",
@@ -3849,6 +4683,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "key_result",
       "op": {
         "load": {
@@ -3870,17 +4708,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/key-results/{key-result-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "key-results",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "key-result-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "key-results"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3889,7 +4735,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "key-results",
+                "{id}"
+              ]
             }
           ]
         },
@@ -3912,17 +4764,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/key-results/{key-result-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "key-results",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "key-result-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "key-results"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -3936,7 +4796,13 @@ class Config {
                   "target_value": "`reqdata.target_value`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "key-results",
+                "{id}"
+              ]
             }
           ]
         }
@@ -3965,6 +4831,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "css-color",
           "name": "color",
           "op": {
             "list": {
@@ -3976,6 +4843,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date that the Label was created.",
@@ -4015,6 +4883,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Label.",
@@ -4032,102 +4901,119 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "num_epics",
           "req": true,
           "short": "The total number of Epics with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_epics_completed",
           "req": true,
           "short": "The number of completed Epics associated with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_epics_in_progress",
           "req": true,
           "short": "The number of in progress epics associated with this label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_epics_total",
           "req": true,
           "short": "The total number of Epics associated with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_epics_unstarted",
           "req": true,
           "short": "The number of unstarted epics associated with this label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_points_backlog",
           "req": true,
           "short": "The total number of backlog points with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_points_completed",
           "req": true,
           "short": "The total number of completed points with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_points_in_progress",
           "req": true,
           "short": "The total number of in-progress points with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_points_total",
           "req": true,
           "short": "The total number of points with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_points_unstarted",
           "req": true,
           "short": "The total number of unstarted points with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_related_documents",
           "req": true,
           "short": "The total number of Documents associated this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_backlog",
           "req": true,
           "short": "The total number of stories backlog Stories with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_completed",
           "req": true,
           "short": "The total number of completed Stories with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_in_progress",
           "req": true,
           "short": "The total number of in-progress Stories with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_total",
           "req": true,
           "short": "The total number of Stories with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_unestimated",
           "req": true,
           "short": "The total number of Stories with no point estimate with this Label.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "num_stories_unstarted",
           "req": true,
           "short": "The total number of stories unstarted Stories with this Label.",
@@ -4140,12 +5026,17 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date that the Label was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "label",
       "op": {
         "create": {
@@ -4157,10 +5048,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/labels",
-              "parts": [
-                "api",
-                "v3",
-                "labels"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                }
               ],
               "select": {},
               "transform": {
@@ -4171,7 +5068,12 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body.stats`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels"
+              ]
             }
           ]
         },
@@ -4193,10 +5095,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/labels",
-              "parts": [
-                "api",
-                "v3",
-                "labels"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                }
               ],
               "select": {
                 "exist": [
@@ -4206,7 +5114,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels"
+              ]
             }
           ]
         },
@@ -4229,17 +5142,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/labels/{label-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "labels",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "label-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4248,7 +5169,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.stats`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels",
+                "{id}"
+              ]
             }
           ]
         },
@@ -4271,17 +5198,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/labels/{label-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "labels",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "label-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4290,7 +5225,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels",
+                "{id}"
+              ]
             }
           ]
         },
@@ -4313,17 +5254,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/labels/{label-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "labels",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "label-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4337,7 +5286,13 @@ class Config {
                   "name": "`reqdata.name`"
                 },
                 "res": "`body.stats`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels",
+                "{id}"
+              ]
             }
           ]
         }
@@ -4360,6 +5315,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the LinkedFile was created.",
@@ -4392,6 +5348,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique identifier for the file.",
@@ -4421,6 +5378,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "size",
           "op": {
             "create": {
@@ -4435,6 +5393,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "story_id",
           "short": "The ID of the linked story.",
           "type": "`$INTEGER`"
@@ -4471,12 +5430,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the LinkedFile was updated.",
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "uploader_id",
           "op": {
             "create": {
@@ -4502,6 +5463,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "linked_file",
       "op": {
         "create": {
@@ -4513,10 +5478,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/linked-files",
-              "parts": [
-                "api",
-                "v3",
-                "linked-files"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "linked-files"
+                }
               ],
               "select": {},
               "transform": {
@@ -4532,7 +5503,12 @@ class Config {
                   "url": "`reqdata.url`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "linked-files"
+              ]
             }
           ]
         },
@@ -4545,16 +5521,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/linked-files",
-              "parts": [
-                "api",
-                "v3",
-                "linked-files"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "linked-files"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "linked-files"
+              ]
             }
           ]
         },
@@ -4577,17 +5564,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/linked-files/{linked-file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "linked-files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linked-file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "linked-files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4596,7 +5591,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "linked-files",
+                "{id}"
+              ]
             }
           ]
         },
@@ -4619,17 +5620,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/linked-files/{linked-file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "linked-files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linked-file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "linked-files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4638,7 +5647,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "linked-files",
+                "{id}"
+              ]
             }
           ]
         },
@@ -4661,17 +5676,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/linked-files/{linked-file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "linked-files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linked-file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "linked-files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -4689,7 +5712,13 @@ class Config {
                   "url": "`reqdata.url`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "linked-files",
+                "{id}"
+              ]
             }
           ]
         }
@@ -4701,6 +5730,7 @@ class Config {
     "member": {
       "fields": [
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Member was created.",
@@ -4736,12 +5766,14 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "req": true,
           "short": "The Member's ID in Shortcut.",
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "installation_id",
           "short": "Only set for agents.",
           "type": "`$STRING`"
@@ -4773,6 +5805,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "uuid",
           "name": "replaced_by",
           "short": "The id of the member that replaces this one when merged.",
           "type": "`$STRING`"
@@ -4790,6 +5823,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the Member was last updated.",
@@ -4801,6 +5835,10 @@ class Config {
           "type": "`$OBJECT`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "member",
       "op": {
         "list": {
@@ -4827,10 +5865,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/members",
-              "parts": [
-                "api",
-                "v3",
-                "members"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "members"
+                }
               ],
               "select": {
                 "exist": [
@@ -4841,7 +5885,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "members"
+              ]
             }
           ]
         },
@@ -4872,17 +5921,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/members/{member-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "members",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "member-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "members"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -4892,23 +5949,40 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "members",
+                "{id}"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/member",
-              "parts": [
-                "api",
-                "v3",
-                "member"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "member"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "member"
+              ]
             }
           ]
         }
@@ -4920,6 +5994,7 @@ class Config {
     "milestone": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "The ID of the Milestone we want to move this Milestone after.",
           "type": "`$INTEGER`"
@@ -4942,6 +6017,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "The ID of the Milestone we want to move this Milestone before.",
           "type": "`$INTEGER`"
@@ -4967,12 +6043,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Milestone was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_override",
           "op": {
             "create": {
@@ -4987,6 +6065,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Milestone was created.",
@@ -5018,6 +6097,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Milestone.",
@@ -5041,6 +6121,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
@@ -5053,12 +6134,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "started_at",
           "req": true,
           "short": "The time/date the Milestone was started.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "started_at_override",
           "op": {
             "create": {
@@ -5093,12 +6176,17 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the Milestone was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "milestone",
       "op": {
         "create": {
@@ -5110,10 +6198,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/milestones",
-              "parts": [
-                "api",
-                "v3",
-                "milestones"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                }
               ],
               "select": {},
               "transform": {
@@ -5126,7 +6220,12 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones"
+              ]
             }
           ]
         },
@@ -5149,18 +6248,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/categories/{category-public-id}/milestones",
-              "parts": [
-                "api",
-                "v3",
-                "categories",
-                "{category_id}",
-                "milestones"
-              ],
               "rename": {
                 "param": {
                   "category-public-id": "category_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                },
+                {
+                  "var": "category_id"
+                },
+                {
+                  "lit": "milestones"
+                }
+              ],
               "select": {
                 "exist": [
                   "category_id"
@@ -5169,7 +6278,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories",
+                "{category_id}",
+                "milestones"
+              ]
             },
             {
               "args": {
@@ -5186,18 +6302,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/categories/{category-public-id}/objectives",
-              "parts": [
-                "api",
-                "v3",
-                "categories",
-                "{category_id}",
-                "objectives"
-              ],
               "rename": {
                 "param": {
                   "category-public-id": "category_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "categories"
+                },
+                {
+                  "var": "category_id"
+                },
+                {
+                  "lit": "objectives"
+                }
+              ],
               "select": {
                 "exist": [
                   "category_id"
@@ -5206,23 +6332,41 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "categories",
+                "{category_id}",
+                "objectives"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/milestones",
-              "parts": [
-                "api",
-                "v3",
-                "milestones"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones"
+              ]
             }
           ]
         },
@@ -5245,17 +6389,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/milestones/{milestone-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "milestones",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "milestone-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -5264,7 +6416,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones",
+                "{id}"
+              ]
             }
           ]
         },
@@ -5287,17 +6445,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/milestones/{milestone-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "milestones",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "milestone-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -5306,7 +6472,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones",
+                "{id}"
+              ]
             }
           ]
         },
@@ -5329,17 +6501,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/milestones/{milestone-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "milestones",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "milestone-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "milestones"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -5358,7 +6538,13 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "milestones",
+                "{id}"
+              ]
             }
           ]
         }
@@ -5378,6 +6564,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "objectif",
       "op": {
         "remove": {
@@ -5399,17 +6589,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/objectives/{objective-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "objectives",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "objective-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -5418,7 +6616,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives",
+                "{id}"
+              ]
             }
           ]
         }
@@ -5430,6 +6634,7 @@ class Config {
     "objective": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "The ID of the Objective we want to move this Objective after.",
           "type": "`$INTEGER`"
@@ -5452,6 +6657,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "The ID of the Objective we want to move this Objective before.",
           "type": "`$INTEGER`"
@@ -5477,12 +6683,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Objective was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_override",
           "op": {
             "create": {
@@ -5497,6 +6705,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Objective was created.",
@@ -5531,6 +6740,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Objective.",
@@ -5554,6 +6764,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
@@ -5566,12 +6777,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "started_at",
           "req": true,
           "short": "The time/date the Objective was started.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "started_at_override",
           "op": {
             "create": {
@@ -5606,12 +6819,17 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the Objective was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "objective",
       "op": {
         "create": {
@@ -5623,10 +6841,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/objectives",
-              "parts": [
-                "api",
-                "v3",
-                "objectives"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                }
               ],
               "select": {},
               "transform": {
@@ -5639,7 +6863,12 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives"
+              ]
             }
           ]
         },
@@ -5686,11 +6915,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search/milestones",
-              "parts": [
-                "api",
-                "v3",
-                "search",
-                "milestones"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "milestones"
+                }
               ],
               "select": {
                 "exist": [
@@ -5704,7 +6941,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search",
+                "milestones"
+              ]
             },
             {
               "args": {
@@ -5745,11 +6988,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search/objectives",
-              "parts": [
-                "api",
-                "v3",
-                "search",
-                "objectives"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "objectives"
+                }
               ],
               "select": {
                 "exist": [
@@ -5763,23 +7014,40 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search",
+                "objectives"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/objectives",
-              "parts": [
-                "api",
-                "v3",
-                "objectives"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives"
+              ]
             }
           ]
         },
@@ -5802,17 +7070,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/objectives/{objective-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "objectives",
-                "{objective_public_id}"
-              ],
               "rename": {
                 "param": {
                   "objective-public-id": "objective_public_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                },
+                {
+                  "var": "objective_public_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "objective_public_id"
@@ -5821,7 +7097,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives",
+                "{objective_public_id}"
+              ]
             }
           ]
         },
@@ -5844,17 +7126,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/objectives/{objective-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "objectives",
-                "{objective_public_id}"
-              ],
               "rename": {
                 "param": {
                   "objective-public-id": "objective_public_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "objectives"
+                },
+                {
+                  "var": "objective_public_id"
+                }
+              ],
               "select": {
                 "exist": [
                   "objective_public_id"
@@ -5873,7 +7163,13 @@ class Config {
                   "state": "`reqdata.state`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "objectives",
+                "{objective_public_id}"
+              ]
             }
           ]
         }
@@ -5920,6 +7216,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "css-color",
           "name": "color",
           "op": {
             "create": {
@@ -5934,6 +7231,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -5945,6 +7243,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "days_to_thermometer",
           "op": {
             "update": {
@@ -6007,12 +7306,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Project.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "iteration_length",
           "op": {
             "create": {
@@ -6046,6 +7347,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "start_time",
           "op": {
             "create": {
@@ -6063,6 +7365,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "int64",
           "name": "team_id",
           "op": {
             "update": {
@@ -6074,6 +7377,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -6085,12 +7389,17 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "workflow_id",
           "req": true,
           "short": "The ID of the workflow the project belongs to.",
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "project",
       "op": {
         "create": {
@@ -6102,10 +7411,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/projects",
-              "parts": [
-                "api",
-                "v3",
-                "projects"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                }
               ],
               "select": {},
               "transform": {
@@ -6123,7 +7438,12 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects"
+              ]
             }
           ]
         },
@@ -6136,16 +7456,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/projects",
-              "parts": [
-                "api",
-                "v3",
-                "projects"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects"
+              ]
             }
           ]
         },
@@ -6168,17 +7499,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/projects/{project-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "projects",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "project-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -6187,7 +7526,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects",
+                "{id}"
+              ]
             }
           ]
         },
@@ -6210,17 +7555,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/projects/{project-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "projects",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "project-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -6229,7 +7582,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects",
+                "{id}"
+              ]
             }
           ]
         },
@@ -6252,17 +7611,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/projects/{project-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "projects",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "project-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -6281,7 +7648,13 @@ class Config {
                   "team_id": "`reqdata.team_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects",
+                "{id}"
+              ]
             }
           ]
         }
@@ -6293,6 +7666,7 @@ class Config {
     "repository": {
       "fields": [
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date the Repository was created.",
@@ -6317,6 +7691,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The ID associated to the VCS repository in Shortcut.",
@@ -6335,6 +7710,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date the Repository was updated.",
@@ -6347,6 +7723,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "repository",
       "op": {
         "list": {
@@ -6358,16 +7738,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/repositories",
-              "parts": [
-                "api",
-                "v3",
-                "repositories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "repositories"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "repositories"
+              ]
             }
           ]
         },
@@ -6390,17 +7781,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/repositories/{repo-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "repositories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "repo-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "repositories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -6409,7 +7808,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "repositories",
+                "{id}"
+              ]
             }
           ]
         }
@@ -6490,10 +7895,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search",
-              "parts": [
-                "api",
-                "v3",
-                "search"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                }
               ],
               "select": {
                 "exist": [
@@ -6507,7 +7918,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search"
+              ]
             }
           ]
         }
@@ -6519,6 +7935,7 @@ class Config {
     "story": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "The ID of the story we want to move this story after.",
           "type": "`$INTEGER`"
@@ -6544,6 +7961,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "The ID of the story we want to move this story before.",
           "type": "`$INTEGER`"
@@ -6624,12 +8042,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Story was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_override",
           "op": {
             "create": {
@@ -6644,6 +8064,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -6670,11 +8091,13 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "cycle_time",
           "short": "The cycle time (in seconds) of this story when complete.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "deadline",
           "op": {
             "create": {
@@ -6712,6 +8135,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_id",
           "op": {
             "create": {
@@ -6726,6 +8150,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "estimate",
           "op": {
             "create": {
@@ -6841,6 +8266,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "group_id",
           "op": {
             "create": {
@@ -6861,12 +8287,14 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Story.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "iteration_id",
           "op": {
             "create": {
@@ -6911,6 +8339,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "lead_time",
           "short": "The lead time (in seconds) of this story when complete.",
           "type": "`$INTEGER`"
@@ -6965,6 +8394,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "moved_at",
           "req": true,
           "short": "The time/date the Story was last changed workflow-state.",
@@ -6985,6 +8415,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "num_tasks_completed",
           "op": {
             "list": {
@@ -7020,11 +8451,13 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "parent_story_id",
           "short": "The id of the parent story to associate with this story.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "A number representing the position of the story in relation to every other story in the current project.",
@@ -7037,6 +8470,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "project_id",
           "op": {
             "create": {
@@ -7067,6 +8501,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "requested_by_id",
           "op": {
             "create": {
@@ -7081,6 +8516,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "source_task_id",
           "short": "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
           "type": "`$INTEGER`"
@@ -7092,12 +8528,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "started_at",
           "req": true,
           "short": "The time/date the Story was started.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "started_at_override",
           "op": {
             "create": {
@@ -7129,6 +8567,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "story_template_id",
           "op": {
             "create": {
@@ -7199,6 +8638,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -7210,12 +8650,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "workflow_id",
           "req": true,
           "short": "The ID of the workflow the story belongs to.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "workflow_state_id",
           "op": {
             "create": {
@@ -7230,6 +8672,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "story",
       "op": {
         "create": {
@@ -7241,10 +8687,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories",
-              "parts": [
-                "api",
-                "v3",
-                "stories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                }
               ],
               "select": {},
               "transform": {
@@ -7283,18 +8735,31 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/from-template",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "from-template"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "lit": "from-template"
+                }
               ],
               "select": {
                 "$action": "from_template"
@@ -7349,7 +8814,13 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "from-template"
+              ]
             }
           ]
         },
@@ -7396,11 +8867,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/search/stories",
-              "parts": [
-                "api",
-                "v3",
-                "search",
-                "stories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "search"
+                },
+                {
+                  "lit": "stories"
+                }
               ],
               "select": {
                 "exist": [
@@ -7414,7 +8893,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "search",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7445,18 +8930,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/groups/{group-public-id}/stories",
-              "parts": [
-                "api",
-                "v3",
-                "groups",
-                "{group_id}",
-                "stories"
-              ],
               "rename": {
                 "param": {
                   "group-public-id": "group_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "groups"
+                },
+                {
+                  "var": "group_id"
+                },
+                {
+                  "lit": "stories"
+                }
+              ],
               "select": {
                 "exist": [
                   "group_id",
@@ -7467,7 +8962,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "groups",
+                "{group_id}",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7492,18 +8994,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}/stories",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "stories"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "stories"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id",
@@ -7513,7 +9025,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7538,18 +9057,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/iterations/{iteration-public-id}/stories",
-              "parts": [
-                "api",
-                "v3",
-                "iterations",
-                "{iteration_id}",
-                "stories"
-              ],
               "rename": {
                 "param": {
                   "iteration-public-id": "iteration_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "iterations"
+                },
+                {
+                  "var": "iteration_id"
+                },
+                {
+                  "lit": "stories"
+                }
+              ],
               "select": {
                 "exist": [
                   "includes_description",
@@ -7559,7 +9088,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "iterations",
+                "{iteration_id}",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7584,18 +9120,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/labels/{label-public-id}/stories",
-              "parts": [
-                "api",
-                "v3",
-                "labels",
-                "{label_id}",
-                "stories"
-              ],
               "rename": {
                 "param": {
                   "label-public-id": "label_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "labels"
+                },
+                {
+                  "var": "label_id"
+                },
+                {
+                  "lit": "stories"
+                }
+              ],
               "select": {
                 "exist": [
                   "includes_description",
@@ -7605,7 +9151,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "labels",
+                "{label_id}",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7630,18 +9183,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/projects/{project-public-id}/stories",
-              "parts": [
-                "api",
-                "v3",
-                "projects",
-                "{project_id}",
-                "stories"
-              ],
               "rename": {
                 "param": {
                   "project-public-id": "project_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "projects"
+                },
+                {
+                  "var": "project_id"
+                },
+                {
+                  "lit": "stories"
+                }
+              ],
               "select": {
                 "exist": [
                   "includes_description",
@@ -7651,7 +9214,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "projects",
+                "{project_id}",
+                "stories"
+              ]
             },
             {
               "args": {
@@ -7668,11 +9238,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/external-link/stories",
-              "parts": [
-                "api",
-                "v3",
-                "external-link",
-                "stories"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "external-link"
+                },
+                {
+                  "lit": "stories"
+                }
               ],
               "select": {
                 "exist": [
@@ -7682,7 +9260,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "external-link",
+                "stories"
+              ]
             }
           ]
         },
@@ -7705,17 +9289,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/stories/{story-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -7724,7 +9316,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{id}"
+              ]
             }
           ]
         },
@@ -7747,17 +9345,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/stories/{story-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -7766,7 +9372,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{id}"
+              ]
             }
           ]
         },
@@ -7789,17 +9401,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/stories/{story-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -7837,7 +9457,13 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{id}"
+              ]
             }
           ]
         }
@@ -7871,6 +9497,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "author_id",
           "op": {
             "create": {
@@ -7887,6 +9514,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -7927,6 +9555,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Comment.",
@@ -7951,11 +9580,13 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "parent_id",
           "short": "The ID of the parent Comment this Comment is threaded under.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "The Comments numerical position in the list from oldest to newest.",
@@ -7968,6 +9599,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "story_id",
           "req": true,
           "short": "The ID of the Story on which the Comment appears.",
@@ -7985,6 +9617,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -7996,6 +9629,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "story_comment",
       "op": {
         "create": {
@@ -8024,21 +9661,35 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{comment_id}",
-                "unlink-from-slack"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "comment_id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "comment_id"
+                },
+                {
+                  "lit": "unlink-from-slack"
+                }
+              ],
               "select": {
                 "exist": [
                   "comment_id",
@@ -8048,7 +9699,16 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{comment_id}",
+                "unlink-from-slack"
+              ]
             },
             {
               "args": {
@@ -8065,18 +9725,28 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/{story-public-id}/comments",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{id}",
-                "comments"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "comments"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -8092,7 +9762,14 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{id}",
+                "comments"
+              ]
             }
           ]
         },
@@ -8115,18 +9792,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/stories/{story-public-id}/comments",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{id}",
-                "comments"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "comments"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -8135,7 +9822,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{id}",
+                "comments"
+              ]
             }
           ]
         },
@@ -8165,20 +9859,32 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -8188,7 +9894,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         },
@@ -8218,20 +9932,32 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -8243,7 +9969,15 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         }
@@ -8263,6 +9997,7 @@ class Config {
     "story_link": {
       "fields": [
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The time/date when the Story Link was created.",
@@ -8275,12 +10010,14 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique identifier of the Story Link.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "object_id",
           "op": {
             "update": {
@@ -8292,6 +10029,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "subject_id",
           "op": {
             "update": {
@@ -8303,12 +10041,14 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "subject_workflow_state_id",
           "req": true,
           "short": "The workflow state of the \"subject\" story.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The time/date when the Story Link was last updated.",
@@ -8326,6 +10066,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "story_link",
       "op": {
         "create": {
@@ -8337,10 +10081,16 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/story-links",
-              "parts": [
-                "api",
-                "v3",
-                "story-links"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "story-links"
+                }
               ],
               "select": {},
               "transform": {
@@ -8350,7 +10100,12 @@ class Config {
                   "verb": "`reqdata.verb`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "story-links"
+              ]
             }
           ]
         },
@@ -8373,17 +10128,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/story-links/{story-link-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "story-links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-link-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "story-links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -8392,7 +10155,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "story-links",
+                "{id}"
+              ]
             }
           ]
         },
@@ -8415,17 +10184,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/story-links/{story-link-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "story-links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-link-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "story-links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -8434,7 +10211,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "story-links",
+                "{id}"
+              ]
             }
           ]
         },
@@ -8457,17 +10240,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/story-links/{story-link-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "story-links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-link-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "story-links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -8480,7 +10271,13 @@ class Config {
                   "verb": "`reqdata.verb`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "story-links",
+                "{id}"
+              ]
             }
           ]
         }
@@ -8526,21 +10323,35 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{comment_id}",
-                "reactions"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "comment_id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "comment_id"
+                },
+                {
+                  "lit": "reactions"
+                }
+              ],
               "select": {
                 "exist": [
                   "comment_id",
@@ -8552,7 +10363,16 @@ class Config {
                   "emoji": "`reqdata.emoji`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{comment_id}",
+                "reactions"
+              ]
             }
           ]
         },
@@ -8582,21 +10402,35 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "comments",
-                "{comment_id}",
-                "reactions"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "comment_id",
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "comment_id"
+                },
+                {
+                  "lit": "reactions"
+                }
+              ],
               "select": {
                 "exist": [
                   "comment_id",
@@ -8608,7 +10442,16 @@ class Config {
                   "emoji": "`reqdata.emoji`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "comments",
+                "{comment_id}",
+                "reactions"
+              ]
             }
           ]
         }
@@ -8625,6 +10468,7 @@ class Config {
     "story_slim": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "The ID of the story that the stories are to be moved below.",
           "type": "`$INTEGER`"
@@ -8635,26 +10479,31 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "The ID of the story that the stories are to be moved before.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_end",
           "short": "Stories should have been completed on or before this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "completed_at_start",
           "short": "Stories should have been completed on or after this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at_end",
           "short": "Stories should have been created on or before this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at_start",
           "short": "Stories should have been created on or after this date.",
           "type": "`$STRING`"
@@ -8670,21 +10519,25 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "deadline",
           "short": "The due date of the story.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "deadline_end",
           "short": "Stories should have a deadline on or before this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "deadline_start",
           "short": "Stories should have a deadline on or after this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "epic_id",
           "short": "The Epic IDs that may be associated with the Stories.",
           "type": "`$INTEGER`"
@@ -8695,6 +10548,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "estimate",
           "short": "The number of estimate points associate with the Stories.",
           "type": "`$INTEGER`"
@@ -8720,6 +10574,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "group_id",
           "short": "The Group ID that is associated with the Stories",
           "type": "`$STRING`"
@@ -8735,6 +10590,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "int64",
           "name": "iteration_id",
           "short": "The Iteration ID that may be associated with the Stories.",
           "type": "`$INTEGER`"
@@ -8770,6 +10626,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "owner_id",
           "short": "An array of UUIDs for any Users who may be Owners of the Stories.",
           "type": "`$STRING`"
@@ -8790,6 +10647,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "project_id",
           "short": "The IDs for the Projects the Stories may be assigned to.",
           "type": "`$INTEGER`"
@@ -8800,6 +10658,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "uuid",
           "name": "requested_by_id",
           "short": "The UUID of any Users who may have requested the Stories.",
           "type": "`$STRING`"
@@ -8827,16 +10686,19 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at_end",
           "short": "Stories should have been updated on or before this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at_start",
           "short": "Stories should have been updated on or after this date.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "workflow_state_id",
           "short": "The unique IDs of the specific Workflow States that the Stories should be in.",
           "type": "`$INTEGER`"
@@ -8858,11 +10720,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/bulk",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "bulk"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "lit": "bulk"
+                }
               ],
               "select": {},
               "transform": {
@@ -8870,18 +10740,32 @@ class Config {
                   "stories": "`reqdata.story`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "bulk"
+              ]
             },
             {
               "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/search",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "search"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "lit": "search"
+                }
               ],
               "select": {},
               "transform": {
@@ -8916,7 +10800,13 @@ class Config {
                   "workflow_state_types": "`reqdata.workflow_state_type`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "search"
+              ]
             }
           ]
         },
@@ -8929,11 +10819,19 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/stories/bulk",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "bulk"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "lit": "bulk"
+                }
               ],
               "select": {},
               "transform": {
@@ -8963,7 +10861,13 @@ class Config {
                   "workflow_state_id": "`reqdata.workflow_state_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "bulk"
+              ]
             }
           ]
         }
@@ -8975,11 +10879,13 @@ class Config {
     "task": {
       "fields": [
         {
+          "format": "int64",
           "name": "after_id",
           "short": "Move task after this task ID.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "before_id",
           "short": "Move task before this task ID.",
           "type": "`$INTEGER`"
@@ -8999,12 +10905,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "completed_at",
           "req": true,
           "short": "The time/date the Task was completed.",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -9055,6 +10963,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Task.",
@@ -9087,18 +10996,21 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "position",
           "req": true,
           "short": "The number corresponding to the Task's position within a list of Tasks on a Story.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "int64",
           "name": "story_id",
           "req": true,
           "short": "The unique identifier of the parent Story.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -9110,6 +11022,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "task",
       "op": {
         "create": {
@@ -9131,18 +11047,28 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/stories/{story-public-id}/tasks",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "tasks"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "story_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "tasks"
+                }
+              ],
               "select": {
                 "exist": [
                   "story_id"
@@ -9158,7 +11084,14 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "tasks"
+              ]
             }
           ]
         },
@@ -9188,20 +11121,32 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "tasks",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "story_id",
                   "task-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "tasks"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -9211,7 +11156,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "tasks",
+                "{id}"
+              ]
             }
           ]
         },
@@ -9241,20 +11194,32 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "tasks",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "story_id",
                   "task-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "tasks"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -9264,7 +11229,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "tasks",
+                "{id}"
+              ]
             }
           ]
         },
@@ -9294,20 +11267,32 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "stories",
-                "{story_id}",
-                "tasks",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "story-public-id": "story_id",
                   "task-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "stories"
+                },
+                {
+                  "var": "story_id"
+                },
+                {
+                  "lit": "tasks"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id",
@@ -9323,7 +11308,15 @@ class Config {
                   "owner_ids": "`reqdata.owner_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "stories",
+                "{story_id}",
+                "tasks",
+                "{id}"
+              ]
             }
           ]
         }
@@ -9345,6 +11338,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "author_id",
           "op": {
             "create": {
@@ -9362,6 +11356,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "create": {
@@ -9402,6 +11397,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Comment.",
@@ -9426,6 +11422,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "create": {
@@ -9437,6 +11434,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "threaded_comment",
       "op": {
         "create": {
@@ -9465,20 +11466,32 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id",
@@ -9494,7 +11507,15 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments",
+                "{id}"
+              ]
             },
             {
               "args": {
@@ -9511,18 +11532,28 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/epics/{epic-public-id}/comments",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id"
@@ -9537,7 +11568,14 @@ class Config {
                   "updated_at": "`reqdata.updated_at`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments"
+              ]
             }
           ]
         },
@@ -9560,18 +11598,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}/comments",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments"
-              ],
               "rename": {
                 "param": {
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id"
@@ -9580,7 +11628,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments"
+              ]
             }
           ]
         },
@@ -9610,20 +11665,32 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id",
@@ -9633,7 +11700,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         },
@@ -9663,20 +11738,32 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id",
@@ -9686,7 +11773,15 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         },
@@ -9716,20 +11811,32 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "epics",
-                "{epic_id}",
-                "comments",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "comment-public-id": "id",
                   "epic-public-id": "epic_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "epics"
+                },
+                {
+                  "var": "epic_id"
+                },
+                {
+                  "lit": "comments"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "epic_id",
@@ -9741,7 +11848,15 @@ class Config {
                   "text": "`reqdata.text`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "epics",
+                "{epic_id}",
+                "comments",
+                "{id}"
+              ]
             }
           ]
         }
@@ -9763,6 +11878,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "op": {
             "update": {
@@ -9814,6 +11930,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID for the file.",
@@ -9843,6 +11960,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "size",
           "req": true,
           "short": "The size of the file.",
@@ -9861,6 +11979,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "op": {
             "update": {
@@ -9872,6 +11991,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uuid",
           "name": "uploader_id",
           "op": {
             "update": {
@@ -9889,6 +12009,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "uploaded_file",
       "op": {
         "create": {
@@ -9900,16 +12024,27 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/files",
-              "parts": [
-                "api",
-                "v3",
-                "files"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "files"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "files"
+              ]
             }
           ]
         },
@@ -9922,16 +12057,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/files",
-              "parts": [
-                "api",
-                "v3",
-                "files"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "files"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "files"
+              ]
             }
           ]
         },
@@ -9954,17 +12100,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/files/{file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -9973,7 +12127,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "files",
+                "{id}"
+              ]
             }
           ]
         },
@@ -9996,17 +12156,25 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/files/{file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -10015,7 +12183,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "files",
+                "{id}"
+              ]
             }
           ]
         },
@@ -10038,17 +12212,25 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/api/v3/files/{file-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "files",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "file-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "files"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -10064,7 +12246,13 @@ class Config {
                   "uploader_id": "`reqdata.uploader_id`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "files",
+                "{id}"
+              ]
             }
           ]
         }
@@ -10089,6 +12277,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "webhook",
       "op": {
         "create": {
@@ -10100,11 +12292,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/v3/integrations/webhook",
-              "parts": [
-                "api",
-                "v3",
-                "integrations",
-                "webhook"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "integrations"
+                },
+                {
+                  "lit": "webhook"
+                }
               ],
               "select": {},
               "transform": {
@@ -10113,7 +12313,13 @@ class Config {
                   "webhook_url": "`reqdata.webhook_url`"
                 },
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "integrations",
+                "webhook"
+              ]
             }
           ]
         },
@@ -10136,18 +12342,28 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/integrations/webhook/{integration-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "integrations",
-                "webhook",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "integration-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "integrations"
+                },
+                {
+                  "lit": "webhook"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -10156,7 +12372,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "integrations",
+                "webhook",
+                "{id}"
+              ]
             }
           ]
         },
@@ -10179,18 +12402,28 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/api/v3/integrations/webhook/{integration-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "integrations",
-                "webhook",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "integration-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "integrations"
+                },
+                {
+                  "lit": "webhook"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -10199,7 +12432,14 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "integrations",
+                "webhook",
+                "{id}"
+              ]
             }
           ]
         }
@@ -10217,12 +12457,14 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "created_at",
           "req": true,
           "short": "The date the Workflow was created.",
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "default_state_id",
           "req": true,
           "short": "The unique ID of the default state that new Stories are entered into.",
@@ -10241,6 +12483,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "int64",
           "name": "id",
           "req": true,
           "short": "The unique ID of the Workflow.",
@@ -10265,18 +12508,24 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "int64",
           "name": "team_id",
           "req": true,
           "short": "The ID of the team the workflow belongs to.",
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updated_at",
           "req": true,
           "short": "The date the Workflow was updated.",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "workflow",
       "op": {
         "list": {
@@ -10288,16 +12537,27 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/workflows",
-              "parts": [
-                "api",
-                "v3",
-                "workflows"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "workflows"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "workflows"
+              ]
             }
           ]
         },
@@ -10320,17 +12580,25 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v3/workflows/{workflow-public-id}",
-              "parts": [
-                "api",
-                "v3",
-                "workflows",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "workflow-public-id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v3"
+                },
+                {
+                  "lit": "workflows"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -10339,7 +12607,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v3",
+                "workflows",
+                "{id}"
+              ]
             }
           ]
         }
@@ -10355,6 +12629,7 @@ class Config {
 const config = new Config()
 
 module.exports = {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

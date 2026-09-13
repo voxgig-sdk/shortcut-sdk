@@ -53,7 +53,7 @@ func TestStorySlimEntity(t *testing.T) {
 		// CREATE
 		storySlimRef01Ent := client.StorySlim(nil)
 		storySlimRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "story_slim"}, setup.data), "story_slim_ref01"))
+			vs.GetPath(setup.data, []any{"new", "story_slim"}), "story_slim_ref01"))
 
 		storySlimRef01DataResult, err := storySlimRef01Ent.Create(storySlimRef01Data, nil)
 		if err != nil {
@@ -111,7 +111,7 @@ func story_slimBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"story_slim01", "story_slim02", "story_slim03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -131,7 +131,7 @@ func story_slimBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_STORY_SLIM_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_STORY_SLIM_ENTID"])
@@ -140,11 +140,23 @@ func story_slimBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

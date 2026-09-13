@@ -116,15 +116,17 @@ def uploaded_file_direct_setup(mockres)
   env = Runner.env_override({
     "SHORTCUT_TEST_UPLOADED_FILE_ENTID" => {},
     "SHORTCUT_TEST_LIVE" => "FALSE",
-    "SHORTCUT_APIKEY" => "NONE",
+    "SHORTCUT_APIKEY" => "",
   })
 
   live = env["SHORTCUT_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["SHORTCUT_APIKEY"],
-    }
+    })
     client = ShortcutSDK.new(merged_opts)
     return {
       client: client,

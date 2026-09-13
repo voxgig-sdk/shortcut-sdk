@@ -1,6 +1,14 @@
 # Shortcut SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -101,11 +109,19 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/stories/bulk",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "lit": "bulk",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -114,6 +130,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
+                ],
               },
             ],
           },
@@ -136,6 +158,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "css-color",
             "name": "color",
             "op": {
               "create": {
@@ -150,6 +173,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date that the Category was created.",
@@ -179,6 +203,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Category.",
@@ -207,12 +232,17 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date that the Category was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "category",
         "op": {
           "create": {
@@ -224,10 +254,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/categories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -239,6 +275,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                ],
               },
             ],
           },
@@ -251,16 +292,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/categories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                ],
               },
             ],
           },
@@ -283,17 +335,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/categories/{category-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "category-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -303,6 +363,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -325,17 +391,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/categories/{category-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "category-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -345,6 +419,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -367,17 +447,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/categories/{category-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "category-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -391,6 +479,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -406,6 +500,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "comment",
         "op": {
           "remove": {
@@ -434,20 +532,32 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -458,6 +568,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -473,11 +591,13 @@ def make_config():
       "custom_field": {
         "fields": [
           {
+            "format": "uuid",
             "name": "after_id",
             "short": "The ID of the CustomField we want to move this CustomField after.",
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "before_id",
             "short": "The ID of the CustomField we want to move this CustomField before.",
             "type": "`$STRING`",
@@ -488,6 +608,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The instant when this CustomField was created.",
@@ -532,6 +653,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The unique public ID for the CustomField.",
@@ -549,6 +671,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "An integer indicating the position of this Custom Field with respect to the other CustomField",
@@ -560,6 +683,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The instant when this CustomField was last updated.",
@@ -571,6 +695,10 @@ def make_config():
             "type": "`$ARRAY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "custom_field",
         "op": {
           "list": {
@@ -582,16 +710,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/custom-fields",
-                "parts": [
-                  "api",
-                  "v3",
-                  "custom-fields",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "custom-fields",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "custom-fields",
+                ],
               },
             ],
           },
@@ -614,17 +753,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "custom-field-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "custom-fields",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -634,6 +781,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -656,17 +809,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "custom-field-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "custom-fields",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -676,6 +837,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -698,17 +865,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/custom-fields/{custom-field-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "custom-fields",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "custom-field-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "custom-fields",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -726,6 +901,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "custom-fields",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -747,34 +928,62 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/entity-templates/disable",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
+                  {
+                    "lit": "disable",
+                  },
+                ],
+                "select": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
                 "parts": [
                   "api",
                   "v3",
                   "entity-templates",
                   "disable",
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/iterations/disable",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "disable",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "lit": "disable",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "disable",
+                ],
               },
             ],
           },
@@ -798,6 +1007,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The public id of the Doc",
@@ -810,6 +1020,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "doc_slim",
         "op": {
           "create": {
@@ -821,10 +1035,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/documents",
-                "parts": [
-                  "api",
-                  "v3",
-                  "documents",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "documents",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -834,6 +1054,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "documents",
+                ],
               },
             ],
           },
@@ -846,16 +1071,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/documents",
-                "parts": [
-                  "api",
-                  "v3",
-                  "documents",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "documents",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "documents",
+                ],
               },
             ],
           },
@@ -877,34 +1113,62 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/entity-templates/enable",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
+                  {
+                    "lit": "enable",
+                  },
+                ],
+                "select": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
                 "parts": [
                   "api",
                   "v3",
                   "entity-templates",
                   "enable",
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/iterations/enable",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "enable",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "lit": "enable",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "enable",
+                ],
               },
             ],
           },
@@ -916,6 +1180,7 @@ def make_config():
       "entity_template": {
         "fields": [
           {
+            "format": "uuid",
             "name": "author_id",
             "op": {
               "list": {
@@ -927,6 +1192,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date when the entity template was created.",
@@ -938,6 +1204,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "deadline",
             "short": "The due date of the story.",
             "type": "`$STRING`",
@@ -959,11 +1226,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_id",
             "short": "The ID of the epic the story belongs to.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "estimate",
             "short": "The numeric point estimate of the story.",
             "type": "`$INTEGER`",
@@ -984,17 +1253,20 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "group_id",
             "short": "The ID of the group to which the story is assigned.",
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The unique identifier for the entity template.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "iteration_id",
             "short": "The ID of the iteration the story belongs to.",
             "type": "`$INTEGER`",
@@ -1010,6 +1282,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "last_used_at",
             "req": True,
             "short": "The last time that someone created an entity using this template.",
@@ -1041,6 +1314,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "project_id",
             "short": "The ID of the project the story belongs to.",
             "type": "`$INTEGER`",
@@ -1072,17 +1346,23 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date when the entity template was last updated.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "workflow_state_id",
             "short": "The ID of the workflow state the story is currently in.",
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "entity_template",
         "op": {
           "create": {
@@ -1094,10 +1374,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/entity-templates",
-                "parts": [
-                  "api",
-                  "v3",
-                  "entity-templates",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -1108,6 +1394,11 @@ def make_config():
                   },
                   "res": "`body.story_contents`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "entity-templates",
+                ],
               },
             ],
           },
@@ -1120,16 +1411,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/entity-templates",
-                "parts": [
-                  "api",
-                  "v3",
-                  "entity-templates",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "entity-templates",
+                ],
               },
             ],
           },
@@ -1152,17 +1454,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "entity-template-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -1172,6 +1482,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.story_contents`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1194,17 +1510,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "entity-template-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -1214,6 +1538,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1236,17 +1566,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/entity-templates/{entity-template-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "entity-templates",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "entity-template-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "entity-templates",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -1259,6 +1597,12 @@ def make_config():
                   },
                   "res": "`body.story_contents`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "entity-templates",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1270,6 +1614,7 @@ def make_config():
       "epic": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "The ID of the Epic we want to move this Epic after.",
             "type": "`$INTEGER`",
@@ -1298,6 +1643,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "The ID of the Epic we want to move this Epic before.",
             "type": "`$INTEGER`",
@@ -1320,12 +1666,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Epic was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_override",
             "op": {
               "create": {
@@ -1340,11 +1688,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "converted_from_story_id",
             "short": "The ID of the Story that was converted to an Epic.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -1356,6 +1706,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "deadline",
             "op": {
               "create": {
@@ -1393,6 +1744,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_state_id",
             "op": {
               "create": {
@@ -1440,6 +1792,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "group_id",
             "op": {
               "create": {
@@ -1480,6 +1833,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Epic.",
@@ -1518,6 +1872,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "milestone_id",
             "op": {
               "create": {
@@ -1571,6 +1926,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "planned_start_date",
             "op": {
               "create": {
@@ -1585,12 +1941,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "The Epic's relative position in the Epic workflow state.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "uuid",
             "name": "productboard_id",
             "req": True,
             "short": "The ID of the associated productboard feature.",
@@ -1603,6 +1961,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "productboard_plugin_id",
             "req": True,
             "short": "The ID of the associated productboard integration.",
@@ -1621,6 +1980,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "requested_by_id",
             "op": {
               "create": {
@@ -1641,12 +2001,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "started_at",
             "req": True,
             "short": "The time/date the Epic was started.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "started_at_override",
             "op": {
               "create": {
@@ -1681,12 +2043,14 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "int64",
             "name": "stories_without_projects",
             "req": True,
             "short": "The number of stories in this epic which are not associated with a project.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -1698,6 +2062,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "epic",
         "op": {
           "create": {
@@ -1709,10 +2077,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -1740,6 +2114,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                ],
               },
             ],
           },
@@ -1786,11 +2165,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
-                  "epics",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
+                  {
+                    "lit": "epics",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1805,6 +2192,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                  "epics",
+                ],
               },
               {
                 "args": {
@@ -1820,10 +2213,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1834,6 +2233,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                ],
               },
               {
                 "args": {
@@ -1850,18 +2254,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/labels/{label-public-id}/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
-                  "{label_id}",
-                  "epics",
-                ],
                 "rename": {
                   "param": {
                     "label-public-id": "label_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
+                  {
+                    "var": "label_id",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "label_id",
@@ -1871,6 +2285,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                  "{label_id}",
+                  "epics",
+                ],
               },
               {
                 "args": {
@@ -1887,18 +2308,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/milestones/{milestone-public-id}/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{milestone_id}",
-                  "epics",
-                ],
                 "rename": {
                   "param": {
                     "milestone-public-id": "milestone_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
+                  {
+                    "var": "milestone_id",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "milestone_id",
@@ -1908,6 +2339,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{milestone_id}",
+                  "epics",
+                ],
               },
               {
                 "args": {
@@ -1924,18 +2362,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/objectives/{objective-public-id}/epics",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objectif_id}",
-                  "epics",
-                ],
                 "rename": {
                   "param": {
                     "objective-public-id": "objectif_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
+                  {
+                    "var": "objectif_id",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "objectif_id",
@@ -1945,6 +2393,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objectif_id}",
+                  "epics",
+                ],
               },
             ],
           },
@@ -1967,17 +2422,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -1987,6 +2450,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2009,17 +2478,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/epics/{epic-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -2029,6 +2506,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2051,17 +2534,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/epics/{epic-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -2092,6 +2583,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2137,24 +2634,28 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Epic was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_override",
             "req": True,
             "short": "A manual override for the time/date the Epic was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Epic was created.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "deadline",
             "req": True,
             "short": "The Epic's deadline.",
@@ -2172,6 +2673,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_state_id",
             "req": True,
             "short": "The ID of the Epic State.",
@@ -2195,6 +2697,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "group_id",
             "req": True,
             "short": "`Deprecated` The ID of the group to associate with the epic.",
@@ -2213,6 +2716,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Epic.",
@@ -2243,6 +2747,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "milestone_id",
             "req": True,
             "short": "`Deprecated` The ID of the Objective this Epic is related to.",
@@ -2267,18 +2772,21 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "planned_start_date",
             "req": True,
             "short": "The Epic's planned start date.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "The Epic's relative position in the Epic workflow state.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "uuid",
             "name": "productboard_id",
             "req": True,
             "short": "The ID of the associated productboard feature.",
@@ -2291,6 +2799,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "productboard_plugin_id",
             "req": True,
             "short": "The ID of the associated productboard integration.",
@@ -2309,6 +2818,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "requested_by_id",
             "req": True,
             "short": "The ID of the Member that requested the epic.",
@@ -2321,12 +2831,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "started_at",
             "req": True,
             "short": "The time/date the Epic was started.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "started_at_override",
             "req": True,
             "short": "A manual override for the time/date the Epic was started.",
@@ -2345,18 +2857,24 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "int64",
             "name": "stories_without_projects",
             "req": True,
             "short": "The number of stories in this epic which are not associated with a project.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the Epic was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "epic_paginated_result",
         "op": {
           "list": {
@@ -2389,11 +2907,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/paginated",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "paginated",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "lit": "paginated",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -2406,6 +2932,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "paginated",
+                ],
               },
             ],
           },
@@ -2421,6 +2953,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "epic_unlink_productboard",
         "op": {
           "create": {
@@ -2442,18 +2978,28 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/epics/{epic-public-id}/unlink-productboard",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{id}",
-                  "unlink-productboard",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "unlink-productboard",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -2463,6 +3009,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{id}",
+                  "unlink-productboard",
+                ],
               },
             ],
           },
@@ -2474,11 +3027,13 @@ def make_config():
       "epic_workflow": {
         "fields": [
           {
+            "format": "css-color",
             "name": "color",
             "short": "The hex color for this Epic State.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Epic State was created.",
@@ -2502,6 +3057,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Epic State.",
@@ -2514,6 +3070,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "The position that the Epic State is in, starting with 0 at the left.",
@@ -2526,12 +3083,17 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "When the Epic State was last updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "epic_workflow",
         "op": {
           "list": {
@@ -2543,16 +3105,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epic-workflow",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epic-workflow",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epic-workflow",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.epic_states`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epic-workflow",
+                ],
               },
             ],
           },
@@ -2581,6 +3154,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "css-color",
             "name": "color",
             "op": {
               "create": {
@@ -2609,12 +3183,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The instant when this group was created.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "default_workflow_id",
             "short": "The ID of the default workflow for stories created in this group.",
             "type": "`$INTEGER`",
@@ -2640,6 +3216,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "uuid",
             "name": "display_icon_id",
             "short": "The Icon id for the avatar of this Group.",
             "type": "`$STRING`",
@@ -2656,6 +3233,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The id of the Group.",
@@ -2698,30 +3276,35 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "num_epics_started",
             "req": True,
             "short": "The number of epics assigned to the group which are in the started workflow state.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories",
             "req": True,
             "short": "The total number of stories assigned to the group.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_backlog",
             "req": True,
             "short": "The number of stories assigned to the group which are in a backlog workflow state.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_started",
             "req": True,
             "short": "The number of stories assigned to the group which are in a started workflow state.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The last instant when this group was updated.",
@@ -2742,6 +3325,10 @@ def make_config():
             "type": "`$ARRAY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "group",
         "op": {
           "create": {
@@ -2753,10 +3340,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/groups",
-                "parts": [
-                  "api",
-                  "v3",
-                  "groups",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "groups",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -2772,6 +3365,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "groups",
+                ],
               },
             ],
           },
@@ -2784,16 +3382,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/groups",
-                "parts": [
-                  "api",
-                  "v3",
-                  "groups",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "groups",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "groups",
+                ],
               },
             ],
           },
@@ -2816,17 +3425,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/groups/{group-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "groups",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "group-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "groups",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -2836,6 +3453,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "groups",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2858,17 +3481,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/groups/{group-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "groups",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "group-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "groups",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -2889,6 +3520,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "groups",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2900,11 +3537,13 @@ def make_config():
       "health": {
         "fields": [
           {
+            "format": "uuid",
             "name": "author_id",
             "short": "The ID of the permission who created or updated the Health record.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "short": "The time that the Health record was created.",
             "type": "`$STRING`",
@@ -2916,17 +3555,20 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_id",
             "short": "The ID of the Epic associated with this Health record.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Health record.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "objective_id",
             "short": "The ID of the Objective associated with this Health record.",
             "type": "`$INTEGER`",
@@ -2948,11 +3590,16 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "short": "The time that the Health record was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "health",
         "op": {
           "create": {
@@ -2974,18 +3621,28 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/epics/{epic-public-id}/health",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "health",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -2998,6 +3655,13 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health",
+                ],
               },
             ],
           },
@@ -3020,18 +3684,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}/health-history",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health-history",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "health-history",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -3041,6 +3715,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health-history",
+                ],
               },
             ],
           },
@@ -3063,18 +3744,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}/health",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "health",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "health",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -3084,6 +3775,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "health",
+                ],
               },
             ],
           },
@@ -3106,17 +3804,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/health/{health-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "health",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "health-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "health",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3129,6 +3835,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "health",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3160,6 +3872,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "automation_id",
             "short": "The ID of the automation that performed the change.",
             "type": "`$STRING`",
@@ -3176,12 +3889,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The ID representing the change for the story.",
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "member_id",
             "short": "The ID of the member who performed the change.",
             "type": "`$STRING`",
@@ -3218,6 +3933,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "history",
         "op": {
           "list": {
@@ -3239,18 +3958,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/stories/{story-public-id}/history",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "history",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "history",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "story_id",
@@ -3260,6 +3989,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "history",
+                ],
               },
             ],
           },
@@ -3287,6 +4023,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The instant when this iteration was created.",
@@ -3307,6 +4044,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "end_date",
             "op": {
               "update": {
@@ -3363,6 +4101,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The ID of the iteration.",
@@ -3412,6 +4151,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "start_date",
             "op": {
               "update": {
@@ -3435,12 +4175,17 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The instant when this iteration was last updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "iteration",
         "op": {
           "create": {
@@ -3452,10 +4197,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/iterations",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -3470,6 +4221,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                ],
               },
             ],
           },
@@ -3516,11 +4272,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search/iterations",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
-                  "iterations",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -3535,22 +4299,39 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                  "iterations",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/iterations",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                ],
               },
             ],
           },
@@ -3573,17 +4354,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/iterations/{iteration-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "iteration-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3593,6 +4382,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3615,17 +4410,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/iterations/{iteration-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "iteration-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3635,6 +4438,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3657,17 +4466,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/iterations/{iteration-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "iteration-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3685,6 +4502,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3708,6 +4531,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The ID of the Key Result.",
@@ -3736,6 +4560,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "objective_id",
             "req": True,
             "short": "The Objective to which this Key Result belongs.",
@@ -3747,6 +4572,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "int64",
             "name": "progress",
             "req": True,
             "short": "The integer percentage of progress toward completion of the Key Result.",
@@ -3764,6 +4590,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "key_result",
         "op": {
           "load": {
@@ -3785,17 +4615,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/key-results/{key-result-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "key-results",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "key-result-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "key-results",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3805,6 +4643,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "key-results",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3827,17 +4671,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/key-results/{key-result-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "key-results",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "key-result-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "key-results",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -3852,6 +4704,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "key-results",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -3880,6 +4738,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "css-color",
             "name": "color",
             "op": {
               "list": {
@@ -3891,6 +4750,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date that the Label was created.",
@@ -3930,6 +4790,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Label.",
@@ -3947,102 +4808,119 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "num_epics",
             "req": True,
             "short": "The total number of Epics with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_epics_completed",
             "req": True,
             "short": "The number of completed Epics associated with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_epics_in_progress",
             "req": True,
             "short": "The number of in progress epics associated with this label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_epics_total",
             "req": True,
             "short": "The total number of Epics associated with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_epics_unstarted",
             "req": True,
             "short": "The number of unstarted epics associated with this label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_points_backlog",
             "req": True,
             "short": "The total number of backlog points with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_points_completed",
             "req": True,
             "short": "The total number of completed points with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_points_in_progress",
             "req": True,
             "short": "The total number of in-progress points with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_points_total",
             "req": True,
             "short": "The total number of points with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_points_unstarted",
             "req": True,
             "short": "The total number of unstarted points with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_related_documents",
             "req": True,
             "short": "The total number of Documents associated this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_backlog",
             "req": True,
             "short": "The total number of stories backlog Stories with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_completed",
             "req": True,
             "short": "The total number of completed Stories with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_in_progress",
             "req": True,
             "short": "The total number of in-progress Stories with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_total",
             "req": True,
             "short": "The total number of Stories with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_unestimated",
             "req": True,
             "short": "The total number of Stories with no point estimate with this Label.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "num_stories_unstarted",
             "req": True,
             "short": "The total number of stories unstarted Stories with this Label.",
@@ -4055,12 +4933,17 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date that the Label was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "label",
         "op": {
           "create": {
@@ -4072,10 +4955,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/labels",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -4087,6 +4976,11 @@ def make_config():
                   },
                   "res": "`body.stats`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                ],
               },
             ],
           },
@@ -4108,10 +5002,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/labels",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -4122,6 +5022,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                ],
               },
             ],
           },
@@ -4144,17 +5049,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/labels/{label-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "label-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4164,6 +5077,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.stats`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4186,17 +5105,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/labels/{label-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "label-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4206,6 +5133,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4228,17 +5161,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/labels/{label-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "label-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4253,6 +5194,12 @@ def make_config():
                   },
                   "res": "`body.stats`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4275,6 +5222,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the LinkedFile was created.",
@@ -4307,6 +5255,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique identifier for the file.",
@@ -4336,6 +5285,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "size",
             "op": {
               "create": {
@@ -4350,6 +5300,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "story_id",
             "short": "The ID of the linked story.",
             "type": "`$INTEGER`",
@@ -4386,12 +5337,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the LinkedFile was updated.",
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "uploader_id",
             "op": {
               "create": {
@@ -4417,6 +5370,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "linked_file",
         "op": {
           "create": {
@@ -4428,10 +5385,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/linked-files",
-                "parts": [
-                  "api",
-                  "v3",
-                  "linked-files",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "linked-files",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -4448,6 +5411,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "linked-files",
+                ],
               },
             ],
           },
@@ -4460,16 +5428,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/linked-files",
-                "parts": [
-                  "api",
-                  "v3",
-                  "linked-files",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "linked-files",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "linked-files",
+                ],
               },
             ],
           },
@@ -4492,17 +5471,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/linked-files/{linked-file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linked-file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "linked-files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4512,6 +5499,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4534,17 +5527,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/linked-files/{linked-file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linked-file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "linked-files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4554,6 +5555,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4576,17 +5583,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/linked-files/{linked-file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "linked-files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linked-file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "linked-files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4605,6 +5620,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "linked-files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -4616,6 +5637,7 @@ def make_config():
       "member": {
         "fields": [
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Member was created.",
@@ -4651,12 +5673,14 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "req": True,
             "short": "The Member's ID in Shortcut.",
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "installation_id",
             "short": "Only set for agents.",
             "type": "`$STRING`",
@@ -4688,6 +5712,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "uuid",
             "name": "replaced_by",
             "short": "The id of the member that replaces this one when merged.",
             "type": "`$STRING`",
@@ -4705,6 +5730,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the Member was last updated.",
@@ -4716,6 +5742,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "member",
         "op": {
           "list": {
@@ -4742,10 +5772,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/members",
-                "parts": [
-                  "api",
-                  "v3",
-                  "members",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "members",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -4757,6 +5793,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "members",
+                ],
               },
             ],
           },
@@ -4787,17 +5828,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/members/{member-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "members",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "member-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "members",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -4808,22 +5857,39 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "members",
+                  "{id}",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/member",
-                "parts": [
-                  "api",
-                  "v3",
-                  "member",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "member",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "member",
+                ],
               },
             ],
           },
@@ -4835,6 +5901,7 @@ def make_config():
       "milestone": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "The ID of the Milestone we want to move this Milestone after.",
             "type": "`$INTEGER`",
@@ -4857,6 +5924,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "The ID of the Milestone we want to move this Milestone before.",
             "type": "`$INTEGER`",
@@ -4882,12 +5950,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Milestone was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_override",
             "op": {
               "create": {
@@ -4902,6 +5972,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Milestone was created.",
@@ -4933,6 +6004,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Milestone.",
@@ -4956,6 +6028,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "A number representing the position of the Milestone in relation to every other Milestone within the Workspace.",
@@ -4968,12 +6041,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "started_at",
             "req": True,
             "short": "The time/date the Milestone was started.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "started_at_override",
             "op": {
               "create": {
@@ -5008,12 +6083,17 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the Milestone was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "milestone",
         "op": {
           "create": {
@@ -5025,10 +6105,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/milestones",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -5042,6 +6128,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                ],
               },
             ],
           },
@@ -5064,18 +6155,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/categories/{category-public-id}/milestones",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
-                  "{category_id}",
-                  "milestones",
-                ],
                 "rename": {
                   "param": {
                     "category-public-id": "category_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
+                  {
+                    "var": "category_id",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "category_id",
@@ -5085,6 +6186,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                  "{category_id}",
+                  "milestones",
+                ],
               },
               {
                 "args": {
@@ -5101,18 +6209,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/categories/{category-public-id}/objectives",
-                "parts": [
-                  "api",
-                  "v3",
-                  "categories",
-                  "{category_id}",
-                  "objectives",
-                ],
                 "rename": {
                   "param": {
                     "category-public-id": "category_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "categories",
+                  },
+                  {
+                    "var": "category_id",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "category_id",
@@ -5122,22 +6240,40 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "categories",
+                  "{category_id}",
+                  "objectives",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/milestones",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                ],
               },
             ],
           },
@@ -5160,17 +6296,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/milestones/{milestone-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "milestone-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -5180,6 +6324,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -5202,17 +6352,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/milestones/{milestone-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "milestone-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -5222,6 +6380,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -5244,17 +6408,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/milestones/{milestone-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "milestones",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "milestone-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -5274,6 +6446,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "milestones",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -5293,6 +6471,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "objectif",
         "op": {
           "remove": {
@@ -5314,17 +6496,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/objectives/{objective-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "objective-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -5334,6 +6524,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -5345,6 +6541,7 @@ def make_config():
       "objective": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "The ID of the Objective we want to move this Objective after.",
             "type": "`$INTEGER`",
@@ -5367,6 +6564,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "The ID of the Objective we want to move this Objective before.",
             "type": "`$INTEGER`",
@@ -5392,12 +6590,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Objective was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_override",
             "op": {
               "create": {
@@ -5412,6 +6612,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Objective was created.",
@@ -5446,6 +6647,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Objective.",
@@ -5469,6 +6671,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "A number representing the position of the Objective in relation to every other Objective within the Workspace.",
@@ -5481,12 +6684,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "started_at",
             "req": True,
             "short": "The time/date the Objective was started.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "started_at_override",
             "op": {
               "create": {
@@ -5521,12 +6726,17 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the Objective was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "objective",
         "op": {
           "create": {
@@ -5538,10 +6748,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/objectives",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -5555,6 +6771,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                ],
               },
             ],
           },
@@ -5601,11 +6822,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search/milestones",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
-                  "milestones",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
+                  {
+                    "lit": "milestones",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -5620,6 +6849,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                  "milestones",
+                ],
               },
               {
                 "args": {
@@ -5660,11 +6895,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search/objectives",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
-                  "objectives",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -5679,22 +6922,39 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                  "objectives",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/objectives",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                ],
               },
             ],
           },
@@ -5717,17 +6977,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/objectives/{objective-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objective_public_id}",
-                ],
                 "rename": {
                   "param": {
                     "objective-public-id": "objective_public_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
+                  {
+                    "var": "objective_public_id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "objective_public_id",
@@ -5737,6 +7005,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objective_public_id}",
+                ],
               },
             ],
           },
@@ -5759,17 +7033,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/objectives/{objective-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "objectives",
-                  "{objective_public_id}",
-                ],
                 "rename": {
                   "param": {
                     "objective-public-id": "objective_public_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "objectives",
+                  },
+                  {
+                    "var": "objective_public_id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "objective_public_id",
@@ -5789,6 +7071,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "objectives",
+                  "{objective_public_id}",
+                ],
               },
             ],
           },
@@ -5835,6 +7123,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "css-color",
             "name": "color",
             "op": {
               "create": {
@@ -5849,6 +7138,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -5860,6 +7150,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "days_to_thermometer",
             "op": {
               "update": {
@@ -5922,12 +7213,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Project.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "iteration_length",
             "op": {
               "create": {
@@ -5961,6 +7254,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "start_time",
             "op": {
               "create": {
@@ -5978,6 +7272,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "int64",
             "name": "team_id",
             "op": {
               "update": {
@@ -5989,6 +7284,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -6000,12 +7296,17 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "workflow_id",
             "req": True,
             "short": "The ID of the workflow the project belongs to.",
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "project",
         "op": {
           "create": {
@@ -6017,10 +7318,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/projects",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -6039,6 +7346,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                ],
               },
             ],
           },
@@ -6051,16 +7363,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/projects",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                ],
               },
             ],
           },
@@ -6083,17 +7406,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/projects/{project-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "project-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -6103,6 +7434,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -6125,17 +7462,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/projects/{project-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "project-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -6145,6 +7490,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -6167,17 +7518,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/projects/{project-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "project-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -6197,6 +7556,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -6208,6 +7573,7 @@ def make_config():
       "repository": {
         "fields": [
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date the Repository was created.",
@@ -6232,6 +7598,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The ID associated to the VCS repository in Shortcut.",
@@ -6250,6 +7617,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date the Repository was updated.",
@@ -6262,6 +7630,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "repository",
         "op": {
           "list": {
@@ -6273,16 +7645,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/repositories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "repositories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "repositories",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "repositories",
+                ],
               },
             ],
           },
@@ -6305,17 +7688,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/repositories/{repo-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "repositories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "repo-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "repositories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -6325,6 +7716,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "repositories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -6405,10 +7802,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -6423,6 +7826,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                ],
               },
             ],
           },
@@ -6434,6 +7842,7 @@ def make_config():
       "story": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "The ID of the story we want to move this story after.",
             "type": "`$INTEGER`",
@@ -6459,6 +7868,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "The ID of the story we want to move this story before.",
             "type": "`$INTEGER`",
@@ -6539,12 +7949,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Story was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_override",
             "op": {
               "create": {
@@ -6559,6 +7971,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -6585,11 +7998,13 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "cycle_time",
             "short": "The cycle time (in seconds) of this story when complete.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "deadline",
             "op": {
               "create": {
@@ -6627,6 +8042,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_id",
             "op": {
               "create": {
@@ -6641,6 +8057,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "estimate",
             "op": {
               "create": {
@@ -6756,6 +8173,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "group_id",
             "op": {
               "create": {
@@ -6776,12 +8194,14 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Story.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "iteration_id",
             "op": {
               "create": {
@@ -6826,6 +8246,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "lead_time",
             "short": "The lead time (in seconds) of this story when complete.",
             "type": "`$INTEGER`",
@@ -6880,6 +8301,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "moved_at",
             "req": True,
             "short": "The time/date the Story was last changed workflow-state.",
@@ -6900,6 +8322,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "num_tasks_completed",
             "op": {
               "list": {
@@ -6935,11 +8358,13 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "parent_story_id",
             "short": "The id of the parent story to associate with this story.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "A number representing the position of the story in relation to every other story in the current project.",
@@ -6952,6 +8377,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "project_id",
             "op": {
               "create": {
@@ -6982,6 +8408,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "requested_by_id",
             "op": {
               "create": {
@@ -6996,6 +8423,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "source_task_id",
             "short": "Given this story was converted from a task in another story, this is the original task ID that was converted to this story.",
             "type": "`$INTEGER`",
@@ -7007,12 +8435,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "started_at",
             "req": True,
             "short": "The time/date the Story was started.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "started_at_override",
             "op": {
               "create": {
@@ -7044,6 +8474,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "story_template_id",
             "op": {
               "create": {
@@ -7114,6 +8545,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -7125,12 +8557,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "workflow_id",
             "req": True,
             "short": "The ID of the workflow the story belongs to.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "workflow_state_id",
             "op": {
               "create": {
@@ -7145,6 +8579,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "story",
         "op": {
           "create": {
@@ -7156,10 +8594,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -7199,17 +8643,30 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/from-template",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "from-template",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "lit": "from-template",
+                  },
                 ],
                 "select": {
                   "$action": "from_template",
@@ -7265,6 +8722,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "from-template",
+                ],
               },
             ],
           },
@@ -7311,11 +8774,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/search/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "search",
-                  "stories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "search",
+                  },
+                  {
+                    "lit": "stories",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -7330,6 +8801,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "search",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7360,18 +8837,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/groups/{group-public-id}/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "groups",
-                  "{group_id}",
-                  "stories",
-                ],
                 "rename": {
                   "param": {
                     "group-public-id": "group_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "groups",
+                  },
+                  {
+                    "var": "group_id",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "group_id",
@@ -7383,6 +8870,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "groups",
+                  "{group_id}",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7407,18 +8901,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "stories",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -7429,6 +8933,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7453,18 +8964,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/iterations/{iteration-public-id}/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "iterations",
-                  "{iteration_id}",
-                  "stories",
-                ],
                 "rename": {
                   "param": {
                     "iteration-public-id": "iteration_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "iterations",
+                  },
+                  {
+                    "var": "iteration_id",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "includes_description",
@@ -7475,6 +8996,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "iterations",
+                  "{iteration_id}",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7499,18 +9027,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/labels/{label-public-id}/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "labels",
-                  "{label_id}",
-                  "stories",
-                ],
                 "rename": {
                   "param": {
                     "label-public-id": "label_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "labels",
+                  },
+                  {
+                    "var": "label_id",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "includes_description",
@@ -7521,6 +9059,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "labels",
+                  "{label_id}",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7545,18 +9090,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/projects/{project-public-id}/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "projects",
-                  "{project_id}",
-                  "stories",
-                ],
                 "rename": {
                   "param": {
                     "project-public-id": "project_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "projects",
+                  },
+                  {
+                    "var": "project_id",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "includes_description",
@@ -7567,6 +9122,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "projects",
+                  "{project_id}",
+                  "stories",
+                ],
               },
               {
                 "args": {
@@ -7583,11 +9145,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/external-link/stories",
-                "parts": [
-                  "api",
-                  "v3",
-                  "external-link",
-                  "stories",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "external-link",
+                  },
+                  {
+                    "lit": "stories",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -7598,6 +9168,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "external-link",
+                  "stories",
+                ],
               },
             ],
           },
@@ -7620,17 +9196,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/stories/{story-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -7640,6 +9224,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -7662,17 +9252,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/stories/{story-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -7682,6 +9280,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -7704,17 +9308,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/stories/{story-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -7753,6 +9365,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -7786,6 +9404,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "author_id",
             "op": {
               "create": {
@@ -7802,6 +9421,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -7842,6 +9462,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Comment.",
@@ -7866,11 +9487,13 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "parent_id",
             "short": "The ID of the parent Comment this Comment is threaded under.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "The Comments numerical position in the list from oldest to newest.",
@@ -7883,6 +9506,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "story_id",
             "req": True,
             "short": "The ID of the Story on which the Comment appears.",
@@ -7900,6 +9524,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -7911,6 +9536,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "story_comment",
         "op": {
           "create": {
@@ -7939,21 +9568,35 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "unlink-from-slack",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "comment_id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "comment_id",
+                  },
+                  {
+                    "lit": "unlink-from-slack",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "comment_id",
@@ -7964,6 +9607,15 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "unlink-from-slack",
+                ],
               },
               {
                 "args": {
@@ -7980,18 +9632,28 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/{story-public-id}/comments",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                  "comments",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8008,6 +9670,13 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                  "comments",
+                ],
               },
             ],
           },
@@ -8030,18 +9699,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/stories/{story-public-id}/comments",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{id}",
-                  "comments",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8051,6 +9730,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{id}",
+                  "comments",
+                ],
               },
             ],
           },
@@ -8080,20 +9766,32 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8104,6 +9802,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -8133,20 +9839,32 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8159,6 +9877,14 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -8178,6 +9904,7 @@ def make_config():
       "story_link": {
         "fields": [
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The time/date when the Story Link was created.",
@@ -8190,12 +9917,14 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique identifier of the Story Link.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "object_id",
             "op": {
               "update": {
@@ -8207,6 +9936,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "subject_id",
             "op": {
               "update": {
@@ -8218,12 +9948,14 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "subject_workflow_state_id",
             "req": True,
             "short": "The workflow state of the \"subject\" story.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The time/date when the Story Link was last updated.",
@@ -8241,6 +9973,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "story_link",
         "op": {
           "create": {
@@ -8252,10 +9988,16 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/story-links",
-                "parts": [
-                  "api",
-                  "v3",
-                  "story-links",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "story-links",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -8266,6 +10008,11 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "story-links",
+                ],
               },
             ],
           },
@@ -8288,17 +10035,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/story-links/{story-link-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-link-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "story-links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8308,6 +10063,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -8330,17 +10091,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/story-links/{story-link-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-link-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "story-links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8350,6 +10119,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -8372,17 +10147,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/story-links/{story-link-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "story-links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-link-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "story-links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -8396,6 +10179,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "story-links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -8441,21 +10230,35 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "reactions",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "comment_id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "comment_id",
+                  },
+                  {
+                    "lit": "reactions",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "comment_id",
@@ -8468,6 +10271,15 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "reactions",
+                ],
               },
             ],
           },
@@ -8497,21 +10309,35 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/stories/{story-public-id}/comments/{comment-public-id}/reactions",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "comments",
-                  "{comment_id}",
-                  "reactions",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "comment_id",
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "comment_id",
+                  },
+                  {
+                    "lit": "reactions",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "comment_id",
@@ -8524,6 +10350,15 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "comments",
+                  "{comment_id}",
+                  "reactions",
+                ],
               },
             ],
           },
@@ -8540,6 +10375,7 @@ def make_config():
       "story_slim": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "The ID of the story that the stories are to be moved below.",
             "type": "`$INTEGER`",
@@ -8550,26 +10386,31 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "The ID of the story that the stories are to be moved before.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_end",
             "short": "Stories should have been completed on or before this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "completed_at_start",
             "short": "Stories should have been completed on or after this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at_end",
             "short": "Stories should have been created on or before this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at_start",
             "short": "Stories should have been created on or after this date.",
             "type": "`$STRING`",
@@ -8585,21 +10426,25 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "deadline",
             "short": "The due date of the story.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "deadline_end",
             "short": "Stories should have a deadline on or before this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "deadline_start",
             "short": "Stories should have a deadline on or after this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "epic_id",
             "short": "The Epic IDs that may be associated with the Stories.",
             "type": "`$INTEGER`",
@@ -8610,6 +10455,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "estimate",
             "short": "The number of estimate points associate with the Stories.",
             "type": "`$INTEGER`",
@@ -8635,6 +10481,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "group_id",
             "short": "The Group ID that is associated with the Stories",
             "type": "`$STRING`",
@@ -8650,6 +10497,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "int64",
             "name": "iteration_id",
             "short": "The Iteration ID that may be associated with the Stories.",
             "type": "`$INTEGER`",
@@ -8685,6 +10533,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "owner_id",
             "short": "An array of UUIDs for any Users who may be Owners of the Stories.",
             "type": "`$STRING`",
@@ -8705,6 +10554,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "project_id",
             "short": "The IDs for the Projects the Stories may be assigned to.",
             "type": "`$INTEGER`",
@@ -8715,6 +10565,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "uuid",
             "name": "requested_by_id",
             "short": "The UUID of any Users who may have requested the Stories.",
             "type": "`$STRING`",
@@ -8742,16 +10593,19 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at_end",
             "short": "Stories should have been updated on or before this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at_start",
             "short": "Stories should have been updated on or after this date.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "workflow_state_id",
             "short": "The unique IDs of the specific Workflow States that the Stories should be in.",
             "type": "`$INTEGER`",
@@ -8773,11 +10627,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/bulk",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "lit": "bulk",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -8786,17 +10648,31 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
+                ],
               },
               {
                 "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/search",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "search",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "lit": "search",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -8832,6 +10708,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "search",
+                ],
               },
             ],
           },
@@ -8844,11 +10726,19 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/stories/bulk",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "bulk",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "lit": "bulk",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -8879,6 +10769,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "bulk",
+                ],
               },
             ],
           },
@@ -8890,11 +10786,13 @@ def make_config():
       "task": {
         "fields": [
           {
+            "format": "int64",
             "name": "after_id",
             "short": "Move task after this task ID.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "before_id",
             "short": "Move task before this task ID.",
             "type": "`$INTEGER`",
@@ -8914,12 +10812,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "completed_at",
             "req": True,
             "short": "The time/date the Task was completed.",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -8970,6 +10870,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Task.",
@@ -9002,18 +10903,21 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "position",
             "req": True,
             "short": "The number corresponding to the Task's position within a list of Tasks on a Story.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "int64",
             "name": "story_id",
             "req": True,
             "short": "The unique identifier of the parent Story.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -9025,6 +10929,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "task",
         "op": {
           "create": {
@@ -9046,18 +10954,28 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/stories/{story-public-id}/tasks",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "story_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "tasks",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "story_id",
@@ -9074,6 +10992,13 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                ],
               },
             ],
           },
@@ -9103,20 +11028,32 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "story_id",
                     "task-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "tasks",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9127,6 +11064,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9156,20 +11101,32 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "story_id",
                     "task-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "tasks",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9180,6 +11137,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9209,20 +11174,32 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/stories/{story-public-id}/tasks/{task-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "stories",
-                  "{story_id}",
-                  "tasks",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "story-public-id": "story_id",
                     "task-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "stories",
+                  },
+                  {
+                    "var": "story_id",
+                  },
+                  {
+                    "lit": "tasks",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9239,6 +11216,14 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "stories",
+                  "{story_id}",
+                  "tasks",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9260,6 +11245,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "author_id",
             "op": {
               "create": {
@@ -9277,6 +11263,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "create": {
@@ -9317,6 +11304,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Comment.",
@@ -9341,6 +11329,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "create": {
@@ -9352,6 +11341,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "threaded_comment",
         "op": {
           "create": {
@@ -9380,20 +11373,32 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9410,6 +11415,14 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
               {
                 "args": {
@@ -9426,18 +11439,28 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/epics/{epic-public-id}/comments",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9453,6 +11476,13 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                ],
               },
             ],
           },
@@ -9475,18 +11505,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}/comments",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                ],
                 "rename": {
                   "param": {
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9496,6 +11536,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                ],
               },
             ],
           },
@@ -9525,20 +11572,32 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9549,6 +11608,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9578,20 +11645,32 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9602,6 +11681,14 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9631,20 +11718,32 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/epics/{epic-public-id}/comments/{comment-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "epics",
-                  "{epic_id}",
-                  "comments",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "comment-public-id": "id",
                     "epic-public-id": "epic_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "epics",
+                  },
+                  {
+                    "var": "epic_id",
+                  },
+                  {
+                    "lit": "comments",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "epic_id",
@@ -9657,6 +11756,14 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "epics",
+                  "{epic_id}",
+                  "comments",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9678,6 +11785,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "op": {
               "update": {
@@ -9729,6 +11837,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID for the file.",
@@ -9758,6 +11867,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "size",
             "req": True,
             "short": "The size of the file.",
@@ -9776,6 +11886,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "op": {
               "update": {
@@ -9787,6 +11898,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uuid",
             "name": "uploader_id",
             "op": {
               "update": {
@@ -9804,6 +11916,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "uploaded_file",
         "op": {
           "create": {
@@ -9815,16 +11931,27 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/files",
-                "parts": [
-                  "api",
-                  "v3",
-                  "files",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "files",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "files",
+                ],
               },
             ],
           },
@@ -9837,16 +11964,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/files",
-                "parts": [
-                  "api",
-                  "v3",
-                  "files",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "files",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "files",
+                ],
               },
             ],
           },
@@ -9869,17 +12007,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/files/{file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9889,6 +12035,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9911,17 +12063,25 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/files/{file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9931,6 +12091,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -9953,17 +12119,25 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/api/v3/files/{file-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "files",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "file-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "files",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -9980,6 +12154,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "files",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -10004,6 +12184,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "webhook",
         "op": {
           "create": {
@@ -10015,11 +12199,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/v3/integrations/webhook",
-                "parts": [
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "integrations",
+                  },
+                  {
+                    "lit": "webhook",
+                  },
                 ],
                 "select": {},
                 "transform": {
@@ -10029,6 +12221,12 @@ def make_config():
                   },
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
+                ],
               },
             ],
           },
@@ -10051,18 +12249,28 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/integrations/webhook/{integration-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "integration-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "integrations",
+                  },
+                  {
+                    "lit": "webhook",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -10072,6 +12280,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -10094,18 +12309,28 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/api/v3/integrations/webhook/{integration-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "integrations",
-                  "webhook",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "integration-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "integrations",
+                  },
+                  {
+                    "lit": "webhook",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -10115,6 +12340,13 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "integrations",
+                  "webhook",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -10132,12 +12364,14 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "created_at",
             "req": True,
             "short": "The date the Workflow was created.",
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "default_state_id",
             "req": True,
             "short": "The unique ID of the default state that new Stories are entered into.",
@@ -10156,6 +12390,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "int64",
             "name": "id",
             "req": True,
             "short": "The unique ID of the Workflow.",
@@ -10180,18 +12415,24 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "int64",
             "name": "team_id",
             "req": True,
             "short": "The ID of the team the workflow belongs to.",
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updated_at",
             "req": True,
             "short": "The date the Workflow was updated.",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "workflow",
         "op": {
           "list": {
@@ -10203,16 +12444,27 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/workflows",
-                "parts": [
-                  "api",
-                  "v3",
-                  "workflows",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "workflows",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "workflows",
+                ],
               },
             ],
           },
@@ -10235,17 +12487,25 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v3/workflows/{workflow-public-id}",
-                "parts": [
-                  "api",
-                  "v3",
-                  "workflows",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "workflow-public-id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v3",
+                  },
+                  {
+                    "lit": "workflows",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -10255,6 +12515,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v3",
+                  "workflows",
+                  "{id}",
+                ],
               },
             ],
           },

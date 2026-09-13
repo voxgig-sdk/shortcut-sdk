@@ -6,6 +6,7 @@ main: kit: entity: story: {
 
   fields: [
     {
+      format: "int64"
       name: "after_id"
       req: false
       short: "The ID of the story we want to move this story after."
@@ -34,6 +35,7 @@ main: kit: entity: story: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "int64"
       name: "before_id"
       req: false
       short: "The ID of the story we want to move this story before."
@@ -122,12 +124,14 @@ main: kit: entity: story: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date-time"
       name: "completed_at"
       req: true
       short: "The time/date the Story was completed."
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "completed_at_override"
       op: {
         create: {
@@ -144,6 +148,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "created_at"
       op: {
         create: {
@@ -174,12 +179,14 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "cycle_time"
       req: false
       short: "The cycle time (in seconds) of this story when complete."
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "deadline"
       op: {
         create: {
@@ -222,6 +229,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "epic_id"
       op: {
         create: {
@@ -238,6 +246,7 @@ main: kit: entity: story: {
       type: "`$INTEGER`"
     }
     {
+      format: "int64"
       name: "estimate"
       op: {
         create: {
@@ -369,6 +378,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "uuid"
       name: "group_id"
       op: {
         create: {
@@ -391,12 +401,14 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "id"
       req: true
       short: "The unique ID of the Story."
       type: "`$INTEGER`"
     }
     {
+      format: "int64"
       name: "iteration_id"
       op: {
         create: {
@@ -447,6 +459,7 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "lead_time"
       req: false
       short: "The lead time (in seconds) of this story when complete."
@@ -507,6 +520,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "moved_at"
       req: true
       short: "The time/date the Story was last changed workflow-state."
@@ -529,6 +543,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "num_tasks_completed"
       op: {
         list: {
@@ -569,12 +584,14 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "parent_story_id"
       req: false
       short: "The id of the parent story to associate with this story."
       type: "`$INTEGER`"
     }
     {
+      format: "int64"
       name: "position"
       req: true
       short: "A number representing the position of the story in relation to every other story in the current project."
@@ -587,6 +604,7 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "project_id"
       op: {
         create: {
@@ -621,6 +639,7 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "uuid"
       name: "requested_by_id"
       op: {
         create: {
@@ -637,6 +656,7 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "source_task_id"
       req: false
       short: "Given this story was converted from a task in another story, this is the original task ID that was converted to this story."
@@ -649,12 +669,14 @@ main: kit: entity: story: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date-time"
       name: "started_at"
       req: true
       short: "The time/date the Story was started."
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "started_at_override"
       op: {
         create: {
@@ -689,6 +711,7 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "uuid"
       name: "story_template_id"
       op: {
         create: {
@@ -767,6 +790,7 @@ main: kit: entity: story: {
       type: "`$ARRAY`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       op: {
         create: {
@@ -779,12 +803,14 @@ main: kit: entity: story: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "workflow_id"
       req: true
       short: "The ID of the workflow the story belongs to."
       type: "`$INTEGER`"
     }
     {
+      format: "int64"
       name: "workflow_state_id"
       op: {
         create: {
@@ -815,10 +841,16 @@ main: kit: entity: story: {
         {
           method: "POST"
           orig: "/api/v3/stories"
-          parts: [
-            "api"
-            "v3"
-            "stories"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "stories"
+            }
           ]
           transform: {
             req: {
@@ -861,11 +893,19 @@ main: kit: entity: story: {
         {
           method: "POST"
           orig: "/api/v3/stories/from-template"
-          parts: [
-            "api"
-            "v3"
-            "stories"
-            "from-template"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "stories"
+            }
+            {
+              lit: "from-template"
+            }
           ]
           select: {
             "$action": "from_template"
@@ -969,11 +1009,19 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/search/stories"
-          parts: [
-            "api"
-            "v3"
-            "search"
-            "stories"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "search"
+            }
+            {
+              lit: "stories"
+            }
           ]
           select: {
             exist: [
@@ -1019,18 +1067,28 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/groups/{group-public-id}/stories"
-          parts: [
-            "api"
-            "v3"
-            "groups"
-            "{group_id}"
-            "stories"
-          ]
           rename: {
             param: {
               "group-public-id": "group_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "groups"
+            }
+            {
+              var: "group_id"
+            }
+            {
+              lit: "stories"
+            }
+          ]
           select: {
             exist: [
               "group_id"
@@ -1066,18 +1124,28 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/epics/{epic-public-id}/stories"
-          parts: [
-            "api"
-            "v3"
-            "epics"
-            "{epic_id}"
-            "stories"
-          ]
           rename: {
             param: {
               "epic-public-id": "epic_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "epics"
+            }
+            {
+              var: "epic_id"
+            }
+            {
+              lit: "stories"
+            }
+          ]
           select: {
             exist: [
               "epic_id"
@@ -1112,18 +1180,28 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/iterations/{iteration-public-id}/stories"
-          parts: [
-            "api"
-            "v3"
-            "iterations"
-            "{iteration_id}"
-            "stories"
-          ]
           rename: {
             param: {
               "iteration-public-id": "iteration_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "iterations"
+            }
+            {
+              var: "iteration_id"
+            }
+            {
+              lit: "stories"
+            }
+          ]
           select: {
             exist: [
               "includes_description"
@@ -1158,18 +1236,28 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/labels/{label-public-id}/stories"
-          parts: [
-            "api"
-            "v3"
-            "labels"
-            "{label_id}"
-            "stories"
-          ]
           rename: {
             param: {
               "label-public-id": "label_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "labels"
+            }
+            {
+              var: "label_id"
+            }
+            {
+              lit: "stories"
+            }
+          ]
           select: {
             exist: [
               "includes_description"
@@ -1204,18 +1292,28 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/projects/{project-public-id}/stories"
-          parts: [
-            "api"
-            "v3"
-            "projects"
-            "{project_id}"
-            "stories"
-          ]
           rename: {
             param: {
               "project-public-id": "project_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "stories"
+            }
+          ]
           select: {
             exist: [
               "includes_description"
@@ -1241,11 +1339,19 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/external-link/stories"
-          parts: [
-            "api"
-            "v3"
-            "external-link"
-            "stories"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "external-link"
+            }
+            {
+              lit: "stories"
+            }
           ]
           select: {
             exist: [
@@ -1276,17 +1382,25 @@ main: kit: entity: story: {
           }
           method: "GET"
           orig: "/api/v3/stories/{story-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "stories"
-            "{id}"
-          ]
           rename: {
             param: {
               "story-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "stories"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -1316,17 +1430,25 @@ main: kit: entity: story: {
           }
           method: "DELETE"
           orig: "/api/v3/stories/{story-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "stories"
-            "{id}"
-          ]
           rename: {
             param: {
               "story-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "stories"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -1356,17 +1478,25 @@ main: kit: entity: story: {
           }
           method: "PUT"
           orig: "/api/v3/stories/{story-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "stories"
-            "{id}"
-          ]
           rename: {
             param: {
               "story-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "stories"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

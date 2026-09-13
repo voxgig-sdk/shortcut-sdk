@@ -18,6 +18,7 @@ main: kit: entity: linked_file: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "created_at"
       req: true
       short: "The time/date the LinkedFile was created."
@@ -52,6 +53,7 @@ main: kit: entity: linked_file: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "id"
       req: true
       short: "The unique identifier for the file."
@@ -82,6 +84,7 @@ main: kit: entity: linked_file: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "size"
       op: {
         create: {
@@ -98,6 +101,7 @@ main: kit: entity: linked_file: {
       type: "`$INTEGER`"
     }
     {
+      format: "int64"
       name: "story_id"
       req: false
       short: "The ID of the linked story."
@@ -138,12 +142,14 @@ main: kit: entity: linked_file: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       req: true
       short: "The time/date the LinkedFile was updated."
       type: "`$STRING`"
     }
     {
+      format: "uuid"
       name: "uploader_id"
       op: {
         create: {
@@ -186,10 +192,16 @@ main: kit: entity: linked_file: {
         {
           method: "POST"
           orig: "/api/v3/linked-files"
-          parts: [
-            "api"
-            "v3"
-            "linked-files"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "linked-files"
+            }
           ]
           transform: {
             req: {
@@ -214,10 +226,16 @@ main: kit: entity: linked_file: {
         {
           method: "GET"
           orig: "/api/v3/linked-files"
-          parts: [
-            "api"
-            "v3"
-            "linked-files"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "linked-files"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -243,17 +261,25 @@ main: kit: entity: linked_file: {
           }
           method: "GET"
           orig: "/api/v3/linked-files/{linked-file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "linked-files"
-            "{id}"
-          ]
           rename: {
             param: {
               "linked-file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "linked-files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -283,17 +309,25 @@ main: kit: entity: linked_file: {
           }
           method: "DELETE"
           orig: "/api/v3/linked-files/{linked-file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "linked-files"
-            "{id}"
-          ]
           rename: {
             param: {
               "linked-file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "linked-files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -323,17 +357,25 @@ main: kit: entity: linked_file: {
           }
           method: "PUT"
           orig: "/api/v3/linked-files/{linked-file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "linked-files"
-            "{id}"
-          ]
           rename: {
             param: {
               "linked-file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "linked-files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

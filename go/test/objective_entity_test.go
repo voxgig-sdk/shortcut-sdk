@@ -101,7 +101,7 @@ func TestObjectiveEntity(t *testing.T) {
 		// CREATE
 		objectiveRef01Ent := client.Objective(nil)
 		objectiveRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "objective"}, setup.data), "objective_ref01"))
+			vs.GetPath(setup.data, []any{"new", "objective"}), "objective_ref01"))
 
 		objectiveRef01DataResult, err := objectiveRef01Ent.Create(objectiveRef01Data, nil)
 		if err != nil {
@@ -199,7 +199,7 @@ func objectiveBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"objective01", "objective02", "objective03", "objectif01", "objectif02", "objectif03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -219,7 +219,7 @@ func objectiveBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_OBJECTIVE_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_OBJECTIVE_ENTID"])
@@ -228,11 +228,23 @@ func objectiveBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

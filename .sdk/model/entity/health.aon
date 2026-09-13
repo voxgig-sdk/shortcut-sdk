@@ -6,12 +6,14 @@ main: kit: entity: health: {
 
   fields: [
     {
+      format: "uuid"
       name: "author_id"
       req: false
       short: "The ID of the permission who created or updated the Health record."
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "created_at"
       req: false
       short: "The time that the Health record was created."
@@ -24,18 +26,21 @@ main: kit: entity: health: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "epic_id"
       req: false
       short: "The ID of the Epic associated with this Health record."
       type: "`$INTEGER`"
     }
     {
+      format: "uuid"
       name: "id"
       req: true
       short: "The unique ID of the Health record."
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "objective_id"
       req: false
       short: "The ID of the Objective associated with this Health record."
@@ -60,6 +65,7 @@ main: kit: entity: health: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       req: false
       short: "The time that the Health record was updated."
@@ -91,18 +97,28 @@ main: kit: entity: health: {
           }
           method: "POST"
           orig: "/api/v3/epics/{epic-public-id}/health"
-          parts: [
-            "api"
-            "v3"
-            "epics"
-            "{epic_id}"
-            "health"
-          ]
           rename: {
             param: {
               "epic-public-id": "epic_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "epics"
+            }
+            {
+              var: "epic_id"
+            }
+            {
+              lit: "health"
+            }
+          ]
           select: {
             exist: [
               "epic_id"
@@ -135,18 +151,28 @@ main: kit: entity: health: {
           }
           method: "GET"
           orig: "/api/v3/epics/{epic-public-id}/health-history"
-          parts: [
-            "api"
-            "v3"
-            "epics"
-            "{epic_id}"
-            "health-history"
-          ]
           rename: {
             param: {
               "epic-public-id": "epic_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "epics"
+            }
+            {
+              var: "epic_id"
+            }
+            {
+              lit: "health-history"
+            }
+          ]
           select: {
             exist: [
               "epic_id"
@@ -176,18 +202,28 @@ main: kit: entity: health: {
           }
           method: "GET"
           orig: "/api/v3/epics/{epic-public-id}/health"
-          parts: [
-            "api"
-            "v3"
-            "epics"
-            "{epic_id}"
-            "health"
-          ]
           rename: {
             param: {
               "epic-public-id": "epic_id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "epics"
+            }
+            {
+              var: "epic_id"
+            }
+            {
+              lit: "health"
+            }
+          ]
           select: {
             exist: [
               "epic_id"
@@ -217,17 +253,25 @@ main: kit: entity: health: {
           }
           method: "PUT"
           orig: "/api/v3/health/{health-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "health"
-            "{id}"
-          ]
           rename: {
             param: {
               "health-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "health"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

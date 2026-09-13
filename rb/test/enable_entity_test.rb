@@ -84,7 +84,7 @@ def enable_basic_setup(extra)
     "SHORTCUT_TEST_ENABLE_ENTID" => idmap,
     "SHORTCUT_TEST_LIVE" => "FALSE",
     "SHORTCUT_TEST_EXPLAIN" => "FALSE",
-    "SHORTCUT_APIKEY" => "NONE",
+    "SHORTCUT_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,6 +95,9 @@ def enable_basic_setup(extra)
 
   if env["SHORTCUT_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["SHORTCUT_APIKEY"],
       },

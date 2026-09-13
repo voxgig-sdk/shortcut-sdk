@@ -101,7 +101,7 @@ func TestUploadedFileEntity(t *testing.T) {
 		// CREATE
 		uploadedFileRef01Ent := client.UploadedFile(nil)
 		uploadedFileRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "uploaded_file"}, setup.data), "uploaded_file_ref01"))
+			vs.GetPath(setup.data, []any{"new", "uploaded_file"}), "uploaded_file_ref01"))
 
 		uploadedFileRef01DataResult, err := uploadedFileRef01Ent.Create(uploadedFileRef01Data, nil)
 		if err != nil {
@@ -225,7 +225,7 @@ func uploaded_fileBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"uploaded_file01", "uploaded_file02", "uploaded_file03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -245,7 +245,7 @@ func uploaded_fileBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_UPLOADED_FILE_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_UPLOADED_FILE_ENTID"])
@@ -254,11 +254,23 @@ func uploaded_fileBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

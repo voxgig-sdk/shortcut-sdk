@@ -12,6 +12,7 @@ main: kit: entity: uploaded_file: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "created_at"
       op: {
         update: {
@@ -66,6 +67,7 @@ main: kit: entity: uploaded_file: {
       type: "`$ARRAY`"
     }
     {
+      format: "int64"
       name: "id"
       req: true
       short: "The unique ID for the file."
@@ -96,6 +98,7 @@ main: kit: entity: uploaded_file: {
       type: "`$STRING`"
     }
     {
+      format: "int64"
       name: "size"
       req: true
       short: "The size of the file."
@@ -114,6 +117,7 @@ main: kit: entity: uploaded_file: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updated_at"
       op: {
         update: {
@@ -126,6 +130,7 @@ main: kit: entity: uploaded_file: {
       type: "`$STRING`"
     }
     {
+      format: "uuid"
       name: "uploader_id"
       op: {
         update: {
@@ -158,10 +163,16 @@ main: kit: entity: uploaded_file: {
         {
           method: "POST"
           orig: "/api/v3/files"
-          parts: [
-            "api"
-            "v3"
-            "files"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "files"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -176,10 +187,16 @@ main: kit: entity: uploaded_file: {
         {
           method: "GET"
           orig: "/api/v3/files"
-          parts: [
-            "api"
-            "v3"
-            "files"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "files"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -205,17 +222,25 @@ main: kit: entity: uploaded_file: {
           }
           method: "GET"
           orig: "/api/v3/files/{file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "files"
-            "{id}"
-          ]
           rename: {
             param: {
               "file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -245,17 +270,25 @@ main: kit: entity: uploaded_file: {
           }
           method: "DELETE"
           orig: "/api/v3/files/{file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "files"
-            "{id}"
-          ]
           rename: {
             param: {
               "file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -285,17 +318,25 @@ main: kit: entity: uploaded_file: {
           }
           method: "PUT"
           orig: "/api/v3/files/{file-public-id}"
-          parts: [
-            "api"
-            "v3"
-            "files"
-            "{id}"
-          ]
           rename: {
             param: {
               "file-public-id": "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v3"
+            }
+            {
+              lit: "files"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

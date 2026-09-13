@@ -101,7 +101,7 @@ func TestStoryCommentEntity(t *testing.T) {
 		// CREATE
 		storyCommentRef01Ent := client.StoryComment(nil)
 		storyCommentRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "story_comment"}, setup.data), "story_comment_ref01"))
+			vs.GetPath(setup.data, []any{"new", "story_comment"}), "story_comment_ref01"))
 		storyCommentRef01Data["story-public-id"] = setup.idmap["story-public-id01"]
 		storyCommentRef01Data["story_id"] = setup.idmap["story01"]
 
@@ -204,7 +204,7 @@ func story_commentBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"story_comment01", "story_comment02", "story_comment03", "story01", "story02", "story03", "comment01", "comment02", "comment03", "story-public-id01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -224,7 +224,7 @@ func story_commentBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_STORY_COMMENT_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_STORY_COMMENT_ENTID"])
@@ -237,11 +237,23 @@ func story_commentBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}

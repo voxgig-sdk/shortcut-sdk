@@ -429,52 +429,7 @@ class EpicLoadMatch
 /** Request payload for Epic#list. */
 class EpicListMatch
 {
-    public ?int $after_id = null;
-    public ?string $app_url = null;
-    public ?bool $archived = null;
-    public ?array $associated_groups = null;
-    public ?int $before_id = null;
-    public ?array $comments = null;
-    public ?bool $completed = null;
-    public ?string $completed_at = null;
-    public ?string $completed_at_override = null;
-    public ?int $converted_from_story_id = null;
-    public ?string $created_at = null;
-    public ?string $deadline = null;
-    public ?string $description = null;
-    public ?string $entity_type = null;
-    public ?int $epic_state_id = null;
-    public ?string $external_id = null;
-    public ?array $follower_ids = null;
-    public ?string $global_id = null;
-    public ?string $group_id = null;
-    public ?array $group_ids = null;
-    public ?array $group_mention_ids = null;
-    public ?array $health = null;
-    public ?int $id = null;
-    public ?array $label_ids = null;
-    public ?array $labels = null;
-    public ?array $member_mention_ids = null;
-    public ?array $mention_ids = null;
-    public ?int $milestone_id = null;
-    public ?string $name = null;
-    public ?array $objective_ids = null;
-    public ?array $owner_ids = null;
-    public ?string $planned_start_date = null;
-    public ?int $position = null;
-    public ?string $productboard_id = null;
-    public ?string $productboard_name = null;
-    public ?string $productboard_plugin_id = null;
-    public ?string $productboard_url = null;
-    public ?array $project_ids = null;
-    public ?string $requested_by_id = null;
-    public ?bool $started = null;
-    public ?string $started_at = null;
-    public ?string $started_at_override = null;
-    public ?string $state = null;
-    public ?array $stats = null;
-    public ?int $stories_without_projects = null;
-    public ?string $updated_at = null;
+    public ?bool $includes_description = null;
 }
 
 /** Request payload for Epic#create. */
@@ -634,47 +589,9 @@ class EpicPaginatedResult
 /** Request payload for EpicPaginatedResult#list. */
 class EpicPaginatedResultListMatch
 {
-    public ?string $app_url = null;
-    public ?bool $archived = null;
-    public ?array $associated_groups = null;
-    public ?bool $completed = null;
-    public ?string $completed_at = null;
-    public ?string $completed_at_override = null;
-    public ?string $created_at = null;
-    public ?string $deadline = null;
-    public ?string $description = null;
-    public ?string $entity_type = null;
-    public ?int $epic_state_id = null;
-    public ?string $external_id = null;
-    public ?array $follower_ids = null;
-    public ?string $global_id = null;
-    public ?string $group_id = null;
-    public ?array $group_ids = null;
-    public ?array $group_mention_ids = null;
-    public ?int $id = null;
-    public ?array $label_ids = null;
-    public ?array $labels = null;
-    public ?array $member_mention_ids = null;
-    public ?array $mention_ids = null;
-    public ?int $milestone_id = null;
-    public ?string $name = null;
-    public ?array $objective_ids = null;
-    public ?array $owner_ids = null;
-    public ?string $planned_start_date = null;
-    public ?int $position = null;
-    public ?string $productboard_id = null;
-    public ?string $productboard_name = null;
-    public ?string $productboard_plugin_id = null;
-    public ?string $productboard_url = null;
-    public ?array $project_ids = null;
-    public ?string $requested_by_id = null;
-    public ?bool $started = null;
-    public ?string $started_at = null;
-    public ?string $started_at_override = null;
-    public ?string $state = null;
-    public ?array $stats = null;
-    public ?int $stories_without_projects = null;
-    public ?string $updated_at = null;
+    public ?bool $includes_description = null;
+    public ?int $page = null;
+    public ?int $page_size = null;
 }
 
 /** EpicUnlinkProductboard entity data model. */
@@ -1096,35 +1013,7 @@ class LabelLoadMatch
 /** Request payload for Label#list. */
 class LabelListMatch
 {
-    public ?string $app_url = null;
-    public ?bool $archived = null;
-    public ?string $color = null;
-    public ?string $created_at = null;
-    public ?string $description = null;
-    public ?string $entity_type = null;
-    public ?string $external_id = null;
-    public ?string $global_id = null;
-    public ?int $id = null;
-    public ?string $name = null;
-    public ?int $num_epics = null;
-    public ?int $num_epics_completed = null;
-    public ?int $num_epics_in_progress = null;
-    public ?int $num_epics_total = null;
-    public ?int $num_epics_unstarted = null;
-    public ?int $num_points_backlog = null;
-    public ?int $num_points_completed = null;
-    public ?int $num_points_in_progress = null;
-    public ?int $num_points_total = null;
-    public ?int $num_points_unstarted = null;
-    public ?int $num_related_documents = null;
-    public ?int $num_stories_backlog = null;
-    public ?int $num_stories_completed = null;
-    public ?int $num_stories_in_progress = null;
-    public ?int $num_stories_total = null;
-    public ?int $num_stories_unestimated = null;
-    public ?int $num_stories_unstarted = null;
-    public ?array $stats = null;
-    public ?string $updated_at = null;
+    public ?bool $slim = null;
 }
 
 /** Request payload for Label#create. */
@@ -1328,29 +1217,14 @@ class Member
 class MemberLoadMatch
 {
     public string $id;
+    public ?string $org_public_id = null;
 }
 
 /** Request payload for Member#list. */
 class MemberListMatch
 {
-    public ?string $created_at = null;
-    public ?bool $created_without_invite = null;
     public ?bool $disabled = null;
-    public ?string $entity_type = null;
-    public ?string $global_id = null;
-    public ?array $group_ids = null;
-    public ?string $id = null;
-    public ?string $installation_id = null;
-    public ?bool $is_owner = null;
-    public ?string $mention_name = null;
-    public ?string $name = null;
-    public ?array $organization2 = null;
-    public ?array $profile = null;
-    public ?string $replaced_by = null;
-    public ?string $role = null;
-    public ?string $state = null;
-    public ?string $updated_at = null;
-    public ?array $workspace2 = null;
+    public ?string $org_public_id = null;
 }
 
 /** Milestone entity data model. */
@@ -1758,10 +1632,11 @@ class Search
 /** Request payload for Search#load. */
 class SearchLoadMatch
 {
-    public ?array $epics = null;
-    public ?array $iterations = null;
-    public ?array $milestones = null;
-    public ?array $stories = null;
+    public ?string $detail = null;
+    public ?array $entity_type = null;
+    public ?string $next = null;
+    public ?int $page_size = null;
+    public string $query;
 }
 
 /** Story entity data model. */
@@ -1861,89 +1736,11 @@ class StoryLoadMatch
 /** Request payload for Story#list. */
 class StoryListMatch
 {
-    public ?int $after_id = null;
-    public ?string $app_url = null;
-    public ?bool $archived = null;
-    public ?int $before_id = null;
-    public ?bool $blocked = null;
-    public ?bool $blocker = null;
-    public ?array $branch_ids = null;
-    public ?array $branches = null;
-    public ?array $comment_ids = null;
-    public ?array $comments = null;
-    public ?array $commit_ids = null;
-    public ?array $commits = null;
-    public ?bool $completed = null;
-    public ?string $completed_at = null;
-    public ?string $completed_at_override = null;
-    public ?string $created_at = null;
-    public ?array $custom_fields = null;
-    public ?array $custom_fields_add = null;
-    public ?array $custom_fields_remove = null;
-    public ?int $cycle_time = null;
-    public ?string $deadline = null;
-    public ?string $description = null;
-    public ?string $entity_type = null;
-    public ?int $epic_id = null;
-    public ?int $estimate = null;
-    public ?string $external_id = null;
-    public ?array $external_links = null;
-    public ?array $external_links_add = null;
-    public ?array $external_links_remove = null;
-    public ?array $file_ids = null;
-    public ?array $file_ids_add = null;
-    public ?array $file_ids_remove = null;
-    public ?array $files = null;
-    public ?array $follower_ids = null;
-    public ?array $follower_ids_add = null;
-    public ?array $follower_ids_remove = null;
-    public ?string $formatted_vcs_branch_name = null;
-    public ?string $global_id = null;
-    public ?string $group_id = null;
-    public ?array $group_mention_ids = null;
-    public ?int $id = null;
-    public ?int $iteration_id = null;
-    public ?array $label_ids = null;
-    public ?array $labels = null;
-    public ?array $labels_add = null;
-    public ?array $labels_remove = null;
-    public ?int $lead_time = null;
-    public ?array $linked_file_ids = null;
-    public ?array $linked_file_ids_add = null;
-    public ?array $linked_file_ids_remove = null;
-    public ?array $linked_files = null;
-    public ?array $member_mention_ids = null;
-    public ?array $mention_ids = null;
-    public ?string $move_to = null;
-    public ?string $moved_at = null;
-    public ?string $name = null;
-    public ?int $num_tasks_completed = null;
-    public ?array $owner_ids = null;
-    public ?array $owner_ids_add = null;
-    public ?array $owner_ids_remove = null;
-    public ?int $parent_story_id = null;
-    public ?int $position = null;
-    public ?array $previous_iteration_ids = null;
-    public ?int $project_id = null;
-    public ?array $pull_request_ids = null;
-    public ?array $pull_requests = null;
-    public ?string $requested_by_id = null;
-    public ?int $source_task_id = null;
-    public ?bool $started = null;
-    public ?string $started_at = null;
-    public ?string $started_at_override = null;
-    public ?array $stats = null;
-    public ?array $story_links = null;
-    public ?string $story_template_id = null;
-    public ?string $story_type = null;
-    public ?array $sub_task_story_ids = null;
-    public ?array $sub_tasks = null;
-    public ?array $synced_item = null;
-    public ?array $task_ids = null;
-    public ?array $tasks = null;
-    public ?string $updated_at = null;
-    public ?int $workflow_id = null;
-    public ?int $workflow_state_id = null;
+    public ?string $detail = null;
+    public ?array $entity_type = null;
+    public ?string $next = null;
+    public ?int $page_size = null;
+    public string $query;
 }
 
 /** Request payload for Story#create. */

@@ -94,14 +94,22 @@ func doc_slimDirectSetup(mockres any) *doc_slimDirectSetupResult {
 	env := envOverride(map[string]any{
 		"SHORTCUT_TEST_DOC_SLIM_ENTID": map[string]any{},
 		"SHORTCUT_TEST_LIVE":    "FALSE",
-		"SHORTCUT_APIKEY":       "NONE",
+		"SHORTCUT_APIKEY":       "",
 	})
 
 	live := env["SHORTCUT_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["SHORTCUT_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewShortcutSDK(mergedOpts)
 

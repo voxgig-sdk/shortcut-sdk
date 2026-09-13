@@ -101,7 +101,7 @@ func TestEpicEntity(t *testing.T) {
 		// CREATE
 		epicRef01Ent := client.Epic(nil)
 		epicRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "epic"}, setup.data), "epic_ref01"))
+			vs.GetPath(setup.data, []any{"new", "epic"}), "epic_ref01"))
 		epicRef01Data["label_id"] = setup.idmap["label01"]
 		epicRef01Data["milestone_id"] = setup.idmap["milestone01"]
 		epicRef01Data["objectif_id"] = setup.idmap["objectif01"]
@@ -232,7 +232,7 @@ func epicBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"epic01", "epic02", "epic03", "label01", "label02", "label03", "milestone01", "milestone02", "milestone03", "objectif01", "objectif02", "objectif03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -252,7 +252,7 @@ func epicBasicSetup(extra map[string]any) *entityTestSetup {
 		"SHORTCUT_TEST_EPIC_ENTID": idmap,
 		"SHORTCUT_TEST_LIVE":      "FALSE",
 		"SHORTCUT_TEST_EXPLAIN":   "FALSE",
-		"SHORTCUT_APIKEY":         "NONE",
+		"SHORTCUT_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["SHORTCUT_TEST_EPIC_ENTID"])
@@ -261,11 +261,23 @@ func epicBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["SHORTCUT_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["SHORTCUT_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewShortcutSDK(core.ToMapAny(mergedOpts))
 	}
