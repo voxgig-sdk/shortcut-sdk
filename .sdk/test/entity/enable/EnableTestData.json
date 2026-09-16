@@ -16,5 +16,77 @@
     "enable": {
       "enable_ref01": {}
     }
+  },
+  "requests": {
+    "PUT /api/v3/entity-templates/enable": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "enableStoryTemplates",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PUT /api/v3/iterations/enable": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "enableIterations",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

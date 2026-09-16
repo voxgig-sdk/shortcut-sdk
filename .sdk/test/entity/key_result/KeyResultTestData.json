@@ -9,7 +9,7 @@
         "name": "s68",
         "objective_id": "OBJECTIVE01",
         "observed_value": {},
-        "progress": "s6b",
+        "progress": 107,
         "target_value": {},
         "type": "s6d"
       },
@@ -21,7 +21,7 @@
         "name": "scc",
         "objective_id": "OBJECTIVE01",
         "observed_value": {},
-        "progress": "scf",
+        "progress": 207,
         "target_value": {},
         "type": "sd1"
       },
@@ -33,7 +33,7 @@
         "name": "s130",
         "objective_id": "OBJECTIVE01",
         "observed_value": {},
-        "progress": "s133",
+        "progress": 307,
         "target_value": {},
         "type": "s135"
       }
@@ -48,9 +48,352 @@
         "name": "s194",
         "objective_id": "OBJECTIVE01",
         "observed_value": {},
-        "progress": "s197",
+        "progress": 407,
         "target_value": {},
         "type": "s199"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/v3/key-results/{key-result-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getKeyResult",
+        "parameters": [
+          {
+            "description": "The ID of the Key Result.",
+            "in": "path",
+            "name": "key-result-public-id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "current_observed_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "current_target_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The ID of the Key Result.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "initial_observed_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "name": {
+                      "description": "The name of the Key Result.",
+                      "type": "string"
+                    },
+                    "objective_id": {
+                      "description": "The Objective to which this Key Result belongs.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "progress": {
+                      "description": "The integer percentage of progress toward completion of the Key Result.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "The type of the Key Result (numeric, percent, or boolean).",
+                      "enum": [
+                        "percent",
+                        "boolean",
+                        "numeric"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "objective_id",
+                    "type",
+                    "initial_observed_value",
+                    "current_observed_value",
+                    "current_target_value",
+                    "progress"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PUT /api/v3/key-results/{key-result-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateKeyResult",
+        "parameters": [
+          {
+            "description": "The ID of the Key Result.",
+            "in": "path",
+            "name": "key-result-public-id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "initial_observed_value": {
+                    "additionalProperties": false,
+                    "description": "The starting value of the Key Result.",
+                    "properties": {
+                      "boolean_value": {
+                        "description": "The boolean value.",
+                        "type": "boolean"
+                      },
+                      "numeric_value": {
+                        "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "The name of the Key Result.",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "observed_value": {
+                    "additionalProperties": false,
+                    "description": "The starting value of the Key Result.",
+                    "properties": {
+                      "boolean_value": {
+                        "description": "The boolean value.",
+                        "type": "boolean"
+                      },
+                      "numeric_value": {
+                        "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "target_value": {
+                    "additionalProperties": false,
+                    "description": "The starting value of the Key Result.",
+                    "properties": {
+                      "boolean_value": {
+                        "description": "The boolean value.",
+                        "type": "boolean"
+                      },
+                      "numeric_value": {
+                        "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "current_observed_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "current_target_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "The ID of the Key Result.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "initial_observed_value": {
+                      "additionalProperties": false,
+                      "description": "The starting value of the Key Result.",
+                      "properties": {
+                        "boolean_value": {
+                          "description": "The boolean value.",
+                          "type": "boolean"
+                        },
+                        "numeric_value": {
+                          "description": "The numeric value, as a decimal string. No more than two decimal places are allowed.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "name": {
+                      "description": "The name of the Key Result.",
+                      "type": "string"
+                    },
+                    "objective_id": {
+                      "description": "The Objective to which this Key Result belongs.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "progress": {
+                      "description": "The integer percentage of progress toward completion of the Key Result.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "The type of the Key Result (numeric, percent, or boolean).",
+                      "enum": [
+                        "percent",
+                        "boolean",
+                        "numeric"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "objective_id",
+                    "type",
+                    "initial_observed_value",
+                    "current_observed_value",
+                    "current_target_value",
+                    "progress"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

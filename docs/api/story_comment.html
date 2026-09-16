@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>StoryComment | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a aria-current="page" href="../api/story_comment.html">StoryComment</a><div class="nav-sections"><a class="nav-section" href="#post-apiv3storiesstory-public-idcommentscomment-public-idunlink-from-slack">POST /api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack</a>
+<a class="nav-section" href="#post-apiv3storiesstory-public-idcomments">POST /api/v3/stories/{story-public-id}/comments</a>
+<a class="nav-section" href="#get-apiv3storiesstory-public-idcomments">GET /api/v3/stories/{story-public-id}/comments</a>
+<a class="nav-section" href="#get-apiv3storiesstory-public-idcommentscomment-public-id">GET /api/v3/stories/{story-public-id}/comments/{comment-public-id}</a>
+<a class="nav-section" href="#put-apiv3storiesstory-public-idcommentscomment-public-id">PUT /api/v3/stories/{story-public-id}/comments/{comment-public-id}</a></div>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="storycomment">StoryComment</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3storiesstory-public-idcommentscomment-public-idunlink-from-slack"><code>/api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3storiesstory-public-idcomments"><code>/api/v3/stories/{story-public-id}/comments</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3storiesstory-public-idcomments"><code>/api/v3/stories/{story-public-id}/comments</code></a></td>
+<td><code>list</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3storiesstory-public-idcommentscomment-public-id"><code>/api/v3/stories/{story-public-id}/comments/{comment-public-id}</code></a></td>
+<td><code>load</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-apiv3storiesstory-public-idcommentscomment-public-id"><code>/api/v3/stories/{story-public-id}/comments/{comment-public-id}</code></a></td>
+<td><code>update</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>reactions</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>story_id</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment.</td>
+</tr>
+<tr>
+<td><code>unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-apiv3storiesstory-public-idcommentscomment-public-idunlink-from-slack" class="operation" data-method="post"><code>POST</code> /api/v3/stories/{story-public-id}/comments/{comment-public-id}/unlink-from-slack</h3>
+<p>Operation ID: <code>unlinkCommentThreadFromSlack</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>story-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Story to unlink. |
+| <code>comment-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Comment to unlink. |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="201-resource" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+<h3 id="post-apiv3storiesstory-public-idcomments" class="operation" data-method="post"><code>POST</code> /api/v3/stories/{story-public-id}/comments</h3>
+<p>Operation ID: <code>createStoryComment</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>story-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Story that the Comment is in. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The Member ID of the Comment's author. Defaults to the user identified by the API token.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the comment is created, but can be set to reflect another date.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the Comment that this comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The comment text.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the comment is last updated, but can be set to reflect another date.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-1">Responses</h4>
+<h5 id="201-resource-1" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-1" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-1" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-1" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="list">list</h2>
+<h3 id="get-apiv3storiesstory-public-idcomments" class="operation" data-method="get"><code>GET</code> /api/v3/stories/{story-public-id}/comments</h3>
+<p>Operation ID: <code>listStoryComment</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>story-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Story that the Comment is in. |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>[].deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>[].linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>[].reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>[].reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>[].reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>[].story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>[].text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>[].unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-2" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-2" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-2" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="load">load</h2>
+<h3 id="get-apiv3storiesstory-public-idcommentscomment-public-id" class="operation" data-method="get"><code>GET</code> /api/v3/stories/{story-public-id}/comments/{comment-public-id}</h3>
+<p>Operation ID: <code>getStoryComment</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-3">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>story-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Story that the Comment is in. |
+| <code>comment-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Comment. |</p>
+<h4 id="responses-3">Responses</h4>
+<h5 id="200-resource-1" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-3" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-3" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-3" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="update">update</h2>
+<h3 id="put-apiv3storiesstory-public-idcommentscomment-public-id" class="operation" data-method="put"><code>PUT</code> /api/v3/stories/{story-public-id}/comments/{comment-public-id}</h3>
+<p>Operation ID: <code>updateStoryComment</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-4">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>story-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Story that the Comment is in. |
+| <code>comment-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The ID of the Comment |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The updated comment text.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-4">Responses</h4>
+<h5 id="200-resource-2" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-4" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-4" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-4" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

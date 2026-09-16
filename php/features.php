@@ -4,7 +4,14 @@ declare(strict_types=1);
 // Shortcut SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/DebugFeature.php';
+require_once __DIR__ . '/feature/IdempotencyFeature.php';
+require_once __DIR__ . '/feature/MetricsFeature.php';
+require_once __DIR__ . '/feature/PagingFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class ShortcutFeatures
@@ -14,8 +21,22 @@ class ShortcutFeatures
         switch ($name) {
             case "base":
                 return new ShortcutBaseFeature();
+            case "debug":
+                return new ShortcutDebugFeature();
+            case "idempotency":
+                return new ShortcutIdempotencyFeature();
+            case "metrics":
+                return new ShortcutMetricsFeature();
+            case "paging":
+                return new ShortcutPagingFeature();
+            case "ratelimit":
+                return new ShortcutRatelimitFeature();
+            case "retry":
+                return new ShortcutRetryFeature();
             case "test":
                 return new ShortcutTestFeature();
+            case "timeout":
+                return new ShortcutTimeoutFeature();
             default:
                 return new ShortcutBaseFeature();
         }
@@ -31,7 +52,14 @@ class ShortcutFeatures
     {
         switch ($name) {
             case "base":
+            case "debug":
+            case "idempotency":
+            case "metrics":
+            case "paging":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

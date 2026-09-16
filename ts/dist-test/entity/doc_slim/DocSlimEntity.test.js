@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.SHORTCUT_TEST_LIVE;
         for (const op of ['create', 'list']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'doc_slim.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'doc_slim.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set SHORTCUT_TEST_DOC_SLIM_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "app_url", "req": true, "short": "The Shortcut application url for the Doc.", "type": "`$STRING`", "index$": 0 }, { "active": true, "name": "content", "req": true, "short": "The content for the new document", "type": "`$STRING`", "index$": 1 }, { "active": true, "format": "uuid", "name": "id", "req": true, "short": "The public id of the Doc", "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "title", "req": true, "short": "The title for the new document", "type": "`$STRING`", "index$": 3 }], "id": { "field": "id", "name": "id" }, "name": "doc_slim", "op": { "create": { "input": "data", "name": "create", "points": [{ "active": true, "args": {}, "contract": { "id": "POST /api/v3/documents", "json": "{\"operationId\":\"createDoc\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"content\":{\"description\":\"The content for the new document\",\"type\":\"string\"},\"title\":{\"description\":\"The title for the new document\",\"maxLength\":256,\"minLength\":1,\"type\":\"string\"}},\"required\":[\"title\",\"content\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"app_url\":{\"description\":\"The Shortcut application url for the Doc.\",\"type\":\"string\"},\"id\":{\"description\":\"The public id of the Doc\",\"format\":\"uuid\",\"type\":\"string\"},\"title\":{\"description\":\"The Docs Title\",\"nullable\":true,\"type\":\"string\"}},\"required\":[\"id\",\"title\",\"app_url\"],\"type\":\"object\"}}},\"description\":\"Resource\"},\"400\":{\"description\":\"Schema mismatch\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"feature_tag\":{\"description\":\"The feature that is disabled\",\"type\":\"string\"},\"message\":{\"description\":\"The message explaining the error\",\"type\":\"string\"}},\"required\":[\"feature_tag\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"},\"404\":{\"description\":\"Resource does not exist\"},\"422\":{\"description\":\"Unprocessable\"}},\"security\":[{\"api_token\":[]}],\"securitySchemes\":{\"api_token\":{\"in\":\"header\",\"name\":\"Shortcut-Token\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "POST", "orig": "/api/v3/documents", "segments": [{ "lit": "api" }, { "lit": "v3" }, { "lit": "documents" }], "select": {}, "transform": { "req": { "content": "`reqdata.content`", "title": "`reqdata.title`" }, "res": "`body`" }, "index$": 0 }], "key$": "create" }, "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /api/v3/documents", "json": "{\"operationId\":\"listDocs\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"additionalProperties\":false,\"properties\":{\"app_url\":{\"description\":\"The Shortcut application url for the Doc.\",\"type\":\"string\"},\"id\":{\"description\":\"The public id of the Doc\",\"format\":\"uuid\",\"type\":\"string\"},\"title\":{\"description\":\"The Docs Title\",\"nullable\":true,\"type\":\"string\"}},\"required\":[\"id\",\"title\",\"app_url\"],\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Resource\"},\"400\":{\"description\":\"Schema mismatch\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"properties\":{\"feature_tag\":{\"description\":\"The feature that is disabled\",\"type\":\"string\"},\"message\":{\"description\":\"The message explaining the error\",\"type\":\"string\"}},\"required\":[\"feature_tag\",\"message\"],\"type\":\"object\"}}},\"description\":\"\"},\"404\":{\"description\":\"Resource does not exist\"},\"422\":{\"description\":\"Unprocessable\"}},\"security\":[{\"api_token\":[]}],\"securitySchemes\":{\"api_token\":{\"in\":\"header\",\"name\":\"Shortcut-Token\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/v3/documents", "segments": [{ "lit": "api" }, { "lit": "v3" }, { "lit": "documents" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "doc_slim", "name__orig": "doc_slim", "Name": "DocSlim", "name_": "doc_slim", "name-": "doc-slim", "NAME": "DOC_SLIM", "index$": 5 }, { "active": true, "entity": "doc_slim", "key$": "BasicDocSlimFlow", "kind": "basic", "name": "BasicDocSlimFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "doc_slim_ref01" }, "match": {}, "op": "create", "spec": [], "valid": [], "index$": 0 }, { "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "doc_slim_ref01" } }], "index$": 1 }] }, 'DocSlim');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -105,12 +103,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['SHORTCUT_TEST_DOC_SLIM_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'SHORTCUT_TEST_DOC_SLIM_ENTID': idmap,
         'SHORTCUT_TEST_LIVE': 'FALSE',
@@ -119,7 +111,13 @@ function basicSetup(extra) {
     });
     idmap = env['SHORTCUT_TEST_DOC_SLIM_ENTID'];
     const live = 'TRUE' === env.SHORTCUT_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['SHORTCUT_TEST_DOC_SLIM_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.ShortcutSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -132,7 +130,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -144,7 +143,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.SHORTCUT_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

@@ -1,0 +1,2637 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>StorySlim | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a aria-current="page" href="../api/story_slim.html">StorySlim</a><div class="nav-sections"><a class="nav-section" href="#post-apiv3storiesbulk">POST /api/v3/stories/bulk</a>
+<a class="nav-section" href="#post-apiv3storiessearch">POST /api/v3/stories/search</a>
+<a class="nav-section" href="#put-apiv3storiesbulk">PUT /api/v3/stories/bulk</a></div>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="storyslim">StorySlim</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3storiesbulk"><code>/api/v3/stories/bulk</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3storiessearch"><code>/api/v3/stories/search</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-apiv3storiesbulk"><code>/api/v3/stories/bulk</code></a></td>
+<td><code>update</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>after_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the story that the stories are to be moved below.</td>
+</tr>
+<tr>
+<td><code>archived</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>A true/false boolean indicating whether the Story is in archived state.</td>
+</tr>
+<tr>
+<td><code>before_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the story that the stories are to be moved before.</td>
+</tr>
+<tr>
+<td><code>completed_at_end</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been completed on or before this date.</td>
+</tr>
+<tr>
+<td><code>completed_at_start</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been completed on or after this date.</td>
+</tr>
+<tr>
+<td><code>created_at_end</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been created on or before this date.</td>
+</tr>
+<tr>
+<td><code>created_at_start</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been created on or after this date.</td>
+</tr>
+<tr>
+<td><code>custom_fields_add</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>custom_fields_remove</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>deadline</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>deadline_end</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have a deadline on or before this date.</td>
+</tr>
+<tr>
+<td><code>deadline_start</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have a deadline on or after this date.</td>
+</tr>
+<tr>
+<td><code>epic_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The Epic IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>epic_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The Epic IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>estimate</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The number of estimate points associate with the Stories.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>An ID or URL that references an external resource.</td>
+</tr>
+<tr>
+<td><code>external_links</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of External Links associated with this story.</td>
+</tr>
+<tr>
+<td><code>follower_ids_add</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The UUIDs of the new followers to be added.</td>
+</tr>
+<tr>
+<td><code>follower_ids_remove</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The UUIDs of the followers to be removed.</td>
+</tr>
+<tr>
+<td><code>group_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Group ID that is associated with the Stories</td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The Group IDs that are associated with the Stories</td>
+</tr>
+<tr>
+<td><code>includes_description</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Whether to include the story description in the response.</td>
+</tr>
+<tr>
+<td><code>iteration_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The Iteration ID that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>iteration_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The Iteration IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The Label IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>label_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of any associated Labels.</td>
+</tr>
+<tr>
+<td><code>labels_add</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of labels to be added.</td>
+</tr>
+<tr>
+<td><code>labels_remove</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of labels to be removed.</td>
+</tr>
+<tr>
+<td><code>move_to</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>One of &quot;first&quot; or &quot;last&quot;.</td>
+</tr>
+<tr>
+<td><code>owner_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Users who may be Owners of the Stories.</td>
+</tr>
+<tr>
+<td><code>owner_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Users who may be Owners of the Stories.</td>
+</tr>
+<tr>
+<td><code>owner_ids_add</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The UUIDs of the new owners to be added.</td>
+</tr>
+<tr>
+<td><code>owner_ids_remove</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The UUIDs of the owners to be removed.</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The IDs for the Projects the Stories may be assigned to.</td>
+</tr>
+<tr>
+<td><code>project_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The IDs for the Projects the Stories may be assigned to.</td>
+</tr>
+<tr>
+<td><code>requested_by_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The UUID of any Users who may have requested the Stories.</td>
+</tr>
+<tr>
+<td><code>stories</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of stories to be created.</td>
+</tr>
+<tr>
+<td><code>story_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>The Ids of the Stories you wish to update.</td>
+</tr>
+<tr>
+<td><code>story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of Stories that you want returned.</td>
+</tr>
+<tr>
+<td><code>updated_at_end</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been updated on or before this date.</td>
+</tr>
+<tr>
+<td><code>updated_at_start</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>Stories should have been updated on or after this date.</td>
+</tr>
+<tr>
+<td><code>workflow_state_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The unique IDs of the specific Workflow States that the Stories should be in.</td>
+</tr>
+<tr>
+<td><code>workflow_state_types</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>The type of Workflow State the Stories may be in.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-apiv3storiesbulk" class="operation" data-method="post"><code>POST</code> /api/v3/stories/bulk</h3>
+<p>Operation ID: <code>createMultipleStories</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stories</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of stories to be created.</td>
+</tr>
+<tr>
+<td><code>stories[].archived</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Controls the story's archived state.</td>
+</tr>
+<tr>
+<td><code>stories[].comments</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of comments to add to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The Member ID of the Comment's author. Defaults to the user identified by the API token.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the comment is created, but can be set to reflect another date.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the Comment that this comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The comment text.</td>
+</tr>
+<tr>
+<td><code>stories[].comments[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the comment is last updated, but can be set to reflect another date.</td>
+</tr>
+<tr>
+<td><code>stories[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>A manual override for the time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>stories[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The time/date the Story was created.</td>
+</tr>
+<tr>
+<td><code>stories[].custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>stories[].custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>stories[].custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>stories[].custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>stories[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>stories[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>stories[].epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories[].estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>stories[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Story has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories[].external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of External Links associated with this story.</td>
+</tr>
+<tr>
+<td><code>stories[].file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the followers of this story.</td>
+</tr>
+<tr>
+<td><code>stories[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The id of the group to associate with this story.</td>
+</tr>
+<tr>
+<td><code>stories[].iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories[].labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>stories[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>stories[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>stories[].linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].move_to</code></td>
+<td><code>enum: last, first</code></td>
+<td>No</td>
+<td>One of &quot;first&quot; or &quot;last&quot;. This can be used to move the given story to the first or last position in the workflow state.</td>
+</tr>
+<tr>
+<td><code>stories[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>stories[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>stories[].parent_story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The id of the parent story to associate with this story.</td>
+</tr>
+<tr>
+<td><code>stories[].project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the member that requested the story.</td>
+</tr>
+<tr>
+<td><code>stories[].source_task_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>Given this story was converted from a task in another story, this is the original task ID that was converted to this story.</td>
+</tr>
+<tr>
+<td><code>stories[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>A manual override for the time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>stories[].story_links</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of story links attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].story_links[].object_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The unique ID of the Story defined as object.</td>
+</tr>
+<tr>
+<td><code>stories[].story_links[].subject_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The unique ID of the Story defined as subject.</td>
+</tr>
+<tr>
+<td><code>stories[].story_links[].verb</code></td>
+<td><code>enum: blocks, duplicates, relates to</code></td>
+<td>Yes</td>
+<td>How the subject Story acts on the object Story. This can be &quot;blocks&quot;, &quot;duplicates&quot;, or &quot;relates to&quot;.</td>
+</tr>
+<tr>
+<td><code>stories[].story_template_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The id of the story template used to create this story, if applicable. This is just an association; no content from the story template is inherited by the story simply by setting this field.</td>
+</tr>
+<tr>
+<td><code>stories[].story_type</code></td>
+<td><code>enum: feature, chore, bug</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>stories[].sub_tasks</code></td>
+<td><code>array of object or object</code></td>
+<td>No</td>
+<td>A list of either params to create a new sub-task or link an existing story as a sub-task</td>
+</tr>
+<tr>
+<td><code>stories[].tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task is completed. Defaults to false.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the Task is created but can be set to reflect another creation time/date.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Task description.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any members you want to add as Owners on this new Task.</td>
+</tr>
+<tr>
+<td><code>stories[].tasks[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Defaults to the time/date the Task is created in Shortcut but can be set to reflect another time/date.</td>
+</tr>
+<tr>
+<td><code>stories[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The time/date the Story was updated.</td>
+</tr>
+<tr>
+<td><code>stories[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="201-resource" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Story.</td>
+</tr>
+<tr>
+<td><code>[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True if the story has been archived or not.</td>
+</tr>
+<tr>
+<td><code>[].blocked</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently blocked.</td>
+</tr>
+<tr>
+<td><code>[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently a blocker of another story.</td>
+</tr>
+<tr>
+<td><code>[].comment_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Comments attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was created.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of CustomField value assertions for the story.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomField.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string representation of the value, if applicable.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>[].cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The cycle time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the Story.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Story has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].external_links</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>An array of external links (strings) associated with a Story</td>
+</tr>
+<tr>
+<td><code>[].file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Files attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>[].formatted_vcs_branch_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The formatted branch name for this story.</td>
+</tr>
+<tr>
+<td><code>[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the group associated with the story.</td>
+</tr>
+<tr>
+<td><code>[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Story.</td>
+</tr>
+<tr>
+<td><code>[].iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>[].lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The lead time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of LinkedFiles attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].moved_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was last changed workflow-state.</td>
+</tr>
+<tr>
+<td><code>[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>[].num_tasks_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of tasks on the story which are complete.</td>
+</tr>
+<tr>
+<td><code>[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>[].parent_story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>A number representing the position of the story in relation to every other story in the current project.</td>
+</tr>
+<tr>
+<td><code>[].previous_iteration_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that requested the story.</td>
+</tr>
+<tr>
+<td><code>[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been started.</td>
+</tr>
+<tr>
+<td><code>[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The stats object for Stories</td>
+</tr>
+<tr>
+<td><code>[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of documents related to this Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of story links attached to the Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was created.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier of the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].object_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the object Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the subject Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The workflow state of the &quot;subject&quot; story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This indicates whether the Story is the subject or object in the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was last updated.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].verb</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>How the subject Story acts on the object Story. This can be &quot;blocks&quot;, &quot;duplicates&quot;, or &quot;relates to&quot;.</td>
+</tr>
+<tr>
+<td><code>[].story_template_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the story template used to create this story, or null if not created using a template.</td>
+</tr>
+<tr>
+<td><code>[].story_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>[].sub_task_story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].synced_item</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The synced item for the story.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The id used to reference an external entity.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url to the external entity.</td>
+</tr>
+<tr>
+<td><code>[].task_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Tasks attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was updated.</td>
+</tr>
+<tr>
+<td><code>[].workflow_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+<h3 id="post-apiv3storiessearch" class="operation" data-method="post"><code>POST</code> /api/v3/stories/search</h3>
+<p>Operation ID: <code>queryStories</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>archived</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>A true/false boolean indicating whether the Story is in archived state.</td>
+</tr>
+<tr>
+<td><code>completed_at_end</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been completed on or before this date.</td>
+</tr>
+<tr>
+<td><code>completed_at_start</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been completed on or after this date.</td>
+</tr>
+<tr>
+<td><code>created_at_end</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been created on or before this date.</td>
+</tr>
+<tr>
+<td><code>created_at_start</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been created on or after this date.</td>
+</tr>
+<tr>
+<td><code>deadline_end</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have a deadline on or before this date.</td>
+</tr>
+<tr>
+<td><code>deadline_start</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have a deadline on or after this date.</td>
+</tr>
+<tr>
+<td><code>epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The Epic IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>epic_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>The Epic IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of estimate points associate with the Stories.</td>
+</tr>
+<tr>
+<td><code>external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>An ID or URL that references an external resource. Useful during imports.</td>
+</tr>
+<tr>
+<td><code>group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The Group ID that is associated with the Stories</td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>The Group IDs that are associated with the Stories</td>
+</tr>
+<tr>
+<td><code>includes_description</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Whether to include the story description in the response.</td>
+</tr>
+<tr>
+<td><code>iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The Iteration ID that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>iteration_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>The Iteration IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>The Label IDs that may be associated with the Stories.</td>
+</tr>
+<tr>
+<td><code>label_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of any associated Labels.</td>
+</tr>
+<tr>
+<td><code>owner_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Users who may be Owners of the Stories.</td>
+</tr>
+<tr>
+<td><code>owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Users who may be Owners of the Stories.</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The IDs for the Projects the Stories may be assigned to.</td>
+</tr>
+<tr>
+<td><code>project_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>The IDs for the Projects the Stories may be assigned to.</td>
+</tr>
+<tr>
+<td><code>requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The UUID of any Users who may have requested the Stories.</td>
+</tr>
+<tr>
+<td><code>story_type</code></td>
+<td><code>enum: feature, chore, bug</code></td>
+<td>No</td>
+<td>The type of Stories that you want returned.</td>
+</tr>
+<tr>
+<td><code>updated_at_end</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been updated on or before this date.</td>
+</tr>
+<tr>
+<td><code>updated_at_start</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>Stories should have been updated on or after this date.</td>
+</tr>
+<tr>
+<td><code>workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The unique IDs of the specific Workflow States that the Stories should be in.</td>
+</tr>
+<tr>
+<td><code>workflow_state_types</code></td>
+<td><code>array of enum: started, backlog, unstarted, done</code></td>
+<td>No</td>
+<td>The type of Workflow State the Stories may be in.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-1">Responses</h4>
+<h5 id="201-resource-1" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Story.</td>
+</tr>
+<tr>
+<td><code>[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True if the story has been archived or not.</td>
+</tr>
+<tr>
+<td><code>[].blocked</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently blocked.</td>
+</tr>
+<tr>
+<td><code>[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently a blocker of another story.</td>
+</tr>
+<tr>
+<td><code>[].comment_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Comments attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was created.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of CustomField value assertions for the story.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomField.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string representation of the value, if applicable.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>[].cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The cycle time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the Story.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Story has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].external_links</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>An array of external links (strings) associated with a Story</td>
+</tr>
+<tr>
+<td><code>[].file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Files attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>[].formatted_vcs_branch_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The formatted branch name for this story.</td>
+</tr>
+<tr>
+<td><code>[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the group associated with the story.</td>
+</tr>
+<tr>
+<td><code>[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Story.</td>
+</tr>
+<tr>
+<td><code>[].iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>[].lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The lead time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of LinkedFiles attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].moved_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was last changed workflow-state.</td>
+</tr>
+<tr>
+<td><code>[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>[].num_tasks_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of tasks on the story which are complete.</td>
+</tr>
+<tr>
+<td><code>[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>[].parent_story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>A number representing the position of the story in relation to every other story in the current project.</td>
+</tr>
+<tr>
+<td><code>[].previous_iteration_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that requested the story.</td>
+</tr>
+<tr>
+<td><code>[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been started.</td>
+</tr>
+<tr>
+<td><code>[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The stats object for Stories</td>
+</tr>
+<tr>
+<td><code>[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of documents related to this Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of story links attached to the Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was created.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier of the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].object_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the object Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the subject Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The workflow state of the &quot;subject&quot; story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This indicates whether the Story is the subject or object in the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was last updated.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].verb</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>How the subject Story acts on the object Story. This can be &quot;blocks&quot;, &quot;duplicates&quot;, or &quot;relates to&quot;.</td>
+</tr>
+<tr>
+<td><code>[].story_template_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the story template used to create this story, or null if not created using a template.</td>
+</tr>
+<tr>
+<td><code>[].story_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>[].sub_task_story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].synced_item</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The synced item for the story.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The id used to reference an external entity.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url to the external entity.</td>
+</tr>
+<tr>
+<td><code>[].task_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Tasks attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was updated.</td>
+</tr>
+<tr>
+<td><code>[].workflow_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-1" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-1" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-1" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="update">update</h2>
+<h3 id="put-apiv3storiesbulk" class="operation" data-method="put"><code>PUT</code> /api/v3/stories/bulk</h3>
+<p>Operation ID: <code>updateMultipleStories</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="request-body-2">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>after_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the story that the stories are to be moved below.</td>
+</tr>
+<tr>
+<td><code>archived</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>If the Stories should be archived or not.</td>
+</tr>
+<tr>
+<td><code>before_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the story that the stories are to be moved before.</td>
+</tr>
+<tr>
+<td><code>custom_fields_add</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>custom_fields_add[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>custom_fields_add[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>custom_fields_add[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>custom_fields_remove</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>A map specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>custom_fields_remove[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>custom_fields_remove[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>custom_fields_remove[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of External Links associated with this story.</td>
+</tr>
+<tr>
+<td><code>follower_ids_add</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>The UUIDs of the new followers to be added.</td>
+</tr>
+<tr>
+<td><code>follower_ids_remove</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>The UUIDs of the followers to be removed.</td>
+</tr>
+<tr>
+<td><code>group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The Id of the Group the Stories should belong to.</td>
+</tr>
+<tr>
+<td><code>iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>labels_add</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels to be added.</td>
+</tr>
+<tr>
+<td><code>labels_add[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels_add[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>labels_add[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels_add[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>labels_remove</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels to be removed.</td>
+</tr>
+<tr>
+<td><code>labels_remove[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels_remove[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>labels_remove[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels_remove[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>move_to</code></td>
+<td><code>enum: last, first</code></td>
+<td>No</td>
+<td>One of &quot;first&quot; or &quot;last&quot;. This can be used to move the given story to the first or last position in the workflow state.</td>
+</tr>
+<tr>
+<td><code>owner_ids_add</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>The UUIDs of the new owners to be added.</td>
+</tr>
+<tr>
+<td><code>owner_ids_remove</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>The UUIDs of the owners to be removed.</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the Project the Stories should belong to.</td>
+</tr>
+<tr>
+<td><code>requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the member that requested the story.</td>
+</tr>
+<tr>
+<td><code>story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The Ids of the Stories you wish to update.</td>
+</tr>
+<tr>
+<td><code>story_type</code></td>
+<td><code>enum: feature, chore, bug</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state to put the stories in.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Story.</td>
+</tr>
+<tr>
+<td><code>[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True if the story has been archived or not.</td>
+</tr>
+<tr>
+<td><code>[].blocked</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently blocked.</td>
+</tr>
+<tr>
+<td><code>[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently a blocker of another story.</td>
+</tr>
+<tr>
+<td><code>[].comment_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Comments attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was created.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of CustomField value assertions for the story.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomField.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string representation of the value, if applicable.</td>
+</tr>
+<tr>
+<td><code>[].custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>[].cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The cycle time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the Story.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Story has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].external_links</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>An array of external links (strings) associated with a Story</td>
+</tr>
+<tr>
+<td><code>[].file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Files attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>[].formatted_vcs_branch_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The formatted branch name for this story.</td>
+</tr>
+<tr>
+<td><code>[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the group associated with the story.</td>
+</tr>
+<tr>
+<td><code>[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Story.</td>
+</tr>
+<tr>
+<td><code>[].iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>[].lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The lead time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>[].linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of LinkedFiles attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].moved_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was last changed workflow-state.</td>
+</tr>
+<tr>
+<td><code>[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>[].num_tasks_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of tasks on the story which are complete.</td>
+</tr>
+<tr>
+<td><code>[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>[].parent_story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>A number representing the position of the story in relation to every other story in the current project.</td>
+</tr>
+<tr>
+<td><code>[].previous_iteration_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that requested the story.</td>
+</tr>
+<tr>
+<td><code>[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been started.</td>
+</tr>
+<tr>
+<td><code>[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The stats object for Stories</td>
+</tr>
+<tr>
+<td><code>[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of documents related to this Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of story links attached to the Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was created.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier of the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].object_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the object Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the subject Story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].subject_workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The workflow state of the &quot;subject&quot; story.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This indicates whether the Story is the subject or object in the Story Link.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was last updated.</td>
+</tr>
+<tr>
+<td><code>[].story_links[].verb</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>How the subject Story acts on the object Story. This can be &quot;blocks&quot;, &quot;duplicates&quot;, or &quot;relates to&quot;.</td>
+</tr>
+<tr>
+<td><code>[].story_template_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the story template used to create this story, or null if not created using a template.</td>
+</tr>
+<tr>
+<td><code>[].story_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>[].sub_task_story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].synced_item</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The synced item for the story.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The id used to reference an external entity.</td>
+</tr>
+<tr>
+<td><code>[].synced_item.url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url to the external entity.</td>
+</tr>
+<tr>
+<td><code>[].task_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs of Tasks attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was updated.</td>
+</tr>
+<tr>
+<td><code>[].workflow_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-2" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-2" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-2" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

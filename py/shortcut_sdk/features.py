@@ -1,12 +1,26 @@
 # Shortcut SDK feature factory
 
 from shortcut_sdk.feature.base_feature import ShortcutBaseFeature
+from shortcut_sdk.feature.debug_feature import ShortcutDebugFeature
+from shortcut_sdk.feature.idempotency_feature import ShortcutIdempotencyFeature
+from shortcut_sdk.feature.metrics_feature import ShortcutMetricsFeature
+from shortcut_sdk.feature.paging_feature import ShortcutPagingFeature
+from shortcut_sdk.feature.ratelimit_feature import ShortcutRatelimitFeature
+from shortcut_sdk.feature.retry_feature import ShortcutRetryFeature
 from shortcut_sdk.feature.test_feature import ShortcutTestFeature
+from shortcut_sdk.feature.timeout_feature import ShortcutTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ShortcutBaseFeature(),
+    "debug": lambda: ShortcutDebugFeature(),
+    "idempotency": lambda: ShortcutIdempotencyFeature(),
+    "metrics": lambda: ShortcutMetricsFeature(),
+    "paging": lambda: ShortcutPagingFeature(),
+    "ratelimit": lambda: ShortcutRatelimitFeature(),
+    "retry": lambda: ShortcutRetryFeature(),
     "test": lambda: ShortcutTestFeature(),
+    "timeout": lambda: ShortcutTimeoutFeature(),
 }
 
 

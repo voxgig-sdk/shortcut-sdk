@@ -1,0 +1,2867 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EntityTemplate | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a aria-current="page" href="../api/entity_template.html">EntityTemplate</a><div class="nav-sections"><a class="nav-section" href="#post-apiv3entity-templates">POST /api/v3/entity-templates</a>
+<a class="nav-section" href="#get-apiv3entity-templates">GET /api/v3/entity-templates</a>
+<a class="nav-section" href="#get-apiv3entity-templatesentity-template-public-id">GET /api/v3/entity-templates/{entity-template-public-id}</a>
+<a class="nav-section" href="#delete-apiv3entity-templatesentity-template-public-id">DELETE /api/v3/entity-templates/{entity-template-public-id}</a>
+<a class="nav-section" href="#put-apiv3entity-templatesentity-template-public-id">PUT /api/v3/entity-templates/{entity-template-public-id}</a></div>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="entitytemplate">EntityTemplate</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3entity-templates"><code>/api/v3/entity-templates</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3entity-templates"><code>/api/v3/entity-templates</code></a></td>
+<td><code>list</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3entity-templatesentity-template-public-id"><code>/api/v3/entity-templates/{entity-template-public-id}</code></a></td>
+<td><code>load</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><a href="#delete-apiv3entity-templatesentity-template-public-id"><code>/api/v3/entity-templates/{entity-template-public-id}</code></a></td>
+<td><code>remove</code></td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-apiv3entity-templatesentity-template-public-id"><code>/api/v3/entity-templates/{entity-template-public-id}</code></a></td>
+<td><code>update</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The id of the user creating this template.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was created.</td>
+</tr>
+<tr>
+<td><code>custom_fields</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>deadline</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epic_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>estimate</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story.</td>
+</tr>
+<tr>
+<td><code>external_links</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of external links connected to the story.</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>group_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The ID of the group to which the story is assigned.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The unique identifier for the entity template.</td>
+</tr>
+<tr>
+<td><code>iteration_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>last_used_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The last time that someone created an entity using this template.</td>
+</tr>
+<tr>
+<td><code>linked_files</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>owner_ids</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>project_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A map of story attributes this template populates.</td>
+</tr>
+<tr>
+<td><code>story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>sub_tasks</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>tasks</code></td>
+<td><code>array</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was last updated.</td>
+</tr>
+<tr>
+<td><code>workflow_state_id</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-apiv3entity-templates" class="operation" data-method="post"><code>POST</code> /api/v3/entity-templates</h3>
+<p>Operation ID: <code>createEntityTemplate</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The id of the user creating this template.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new entity template</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A map of story attributes this template populates.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of the attached file IDs to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels to be populated by the template.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of the linked file IDs to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks to be populated by the template.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task is completed. Defaults to false.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Task description.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any members you want to add as Owners on this new Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state to be populated.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="201-resource" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the member who created the template.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was created.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the entity template.</td>
+</tr>
+<tr>
+<td><code>last_used_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The last time that someone created an entity using this template.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The template's name.</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A container entity for the attributes this template should populate.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.entity_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Free form string corresponding to a text or image file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the File has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].filename</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name assigned to the file in Shortcut upon upload.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Groups who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Members who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The optional User-specified name of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The size of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Stories associated with this file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url where the thumbnail of the file can be found in Shortcut.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to which the story is assigned.</td>
+</tr>
+<tr>
+<td><code>story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content type of the image (for example txt/plain).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The groups that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The members that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the linked file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The filesize, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the stories this file is attached to.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file thumbnail, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The integration type (for example google, dropbox, box).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The UUID of the member that uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task has been completed.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Full text of the Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the Owners of this Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number corresponding to the Task's position within a list of Tasks on a Story.</td>
+</tr>
+<tr>
+<td><code>story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="list">list</h2>
+<h3 id="get-apiv3entity-templates" class="operation" data-method="get"><code>GET</code> /api/v3/entity-templates</h3>
+<p>Operation ID: <code>listEntityTemplates</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the member who created the template.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was created.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the entity template.</td>
+</tr>
+<tr>
+<td><code>[].last_used_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The last time that someone created an entity using this template.</td>
+</tr>
+<tr>
+<td><code>[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The template's name.</td>
+</tr>
+<tr>
+<td><code>[].story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A container entity for the attributes this template should populate.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.entity_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links connected to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Free form string corresponding to a text or image file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was created.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the File has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].filename</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name assigned to the file in Shortcut upon upload.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Groups who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID for the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Members who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The optional User-specified name of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The size of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Stories associated with this file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url where the thumbnail of the file can be found in Shortcut.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was updated.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who uploaded the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to which the story is assigned.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content type of the image (for example txt/plain).</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was created.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The groups that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The members that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the linked file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The filesize, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the stories this file is attached to.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file thumbnail, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The integration type (for example google, dropbox, box).</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was updated.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The UUID of the member that uploaded the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.linked_files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>[].story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>[].story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task has been completed.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Full text of the Task.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the Owners of this Task.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.tasks[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number corresponding to the Task's position within a list of Tasks on a Story.</td>
+</tr>
+<tr>
+<td><code>[].story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-1" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-1" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-1" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="load">load</h2>
+<h3 id="get-apiv3entity-templatesentity-template-public-id" class="operation" data-method="get"><code>GET</code> /api/v3/entity-templates/{entity-template-public-id}</h3>
+<p>Operation ID: <code>getEntityTemplate</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>entity-template-public-id</code> | <code>path</code> | <code>string (uuid)</code> | Yes | The unique ID of the entity template. |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-resource-1" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the member who created the template.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was created.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the entity template.</td>
+</tr>
+<tr>
+<td><code>last_used_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The last time that someone created an entity using this template.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The template's name.</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A container entity for the attributes this template should populate.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.entity_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Free form string corresponding to a text or image file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the File has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].filename</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name assigned to the file in Shortcut upon upload.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Groups who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Members who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The optional User-specified name of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The size of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Stories associated with this file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url where the thumbnail of the file can be found in Shortcut.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to which the story is assigned.</td>
+</tr>
+<tr>
+<td><code>story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content type of the image (for example txt/plain).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The groups that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The members that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the linked file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The filesize, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the stories this file is attached to.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file thumbnail, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The integration type (for example google, dropbox, box).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The UUID of the member that uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task has been completed.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Full text of the Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the Owners of this Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number corresponding to the Task's position within a list of Tasks on a Story.</td>
+</tr>
+<tr>
+<td><code>story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-2" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-2" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-2" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="remove">remove</h2>
+<h3 id="delete-apiv3entity-templatesentity-template-public-id" class="operation" data-method="delete"><code>DELETE</code> /api/v3/entity-templates/{entity-template-public-id}</h3>
+<p>Operation ID: <code>deleteEntityTemplate</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>entity-template-public-id</code> | <code>path</code> | <code>string (uuid)</code> | Yes | The unique ID of the entity template. |</p>
+<h4 id="responses-3">Responses</h4>
+<h5 id="204-no-content" class="status" data-status="2xx">204: No Content</h5>
+<h5 id="400-schema-mismatch-3" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-3" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-3" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="update">update</h2>
+<h3 id="put-apiv3entity-templatesentity-template-public-id" class="operation" data-method="put"><code>PUT</code> /api/v3/entity-templates/{entity-template-public-id}</h3>
+<p>Operation ID: <code>updateEntityTemplate</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>entity-template-public-id</code> | <code>path</code> | <code>string (uuid)</code> | Yes | The unique ID of the template to be updated. |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The updated template name.</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>Updated attributes for the template to populate.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of the attached file IDs to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels to be populated by the template.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of the linked file IDs to be populated.</td>
+</tr>
+<tr>
+<td><code>story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks to be populated by the template.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task is completed. Defaults to false.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Task description.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any members you want to add as Owners on this new Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state to be populated.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-4">Responses</h4>
+<h5 id="200-resource-2" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the member who created the template.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was created.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the entity template.</td>
+</tr>
+<tr>
+<td><code>last_used_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The last time that someone created an entity using this template.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The template's name.</td>
+</tr>
+<tr>
+<td><code>story_contents</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A container entity for the attributes this template should populate.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of maps specifying a CustomField ID and CustomFieldEnumValue ID that represents an assertion of some value for a CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomField.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A literal value for the CustomField. Currently ignored.</td>
+</tr>
+<tr>
+<td><code>story_contents.custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for the CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>story_contents.deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.entity_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>story_contents.external_links</code></td>
+<td><code>array of string</code></td>
+<td>No</td>
+<td>An array of external links connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Free form string corresponding to a text or image file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the File has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].filename</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name assigned to the file in Shortcut upon upload.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Groups who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Members who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The optional User-specified name of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The size of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Stories associated with this file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url where the thumbnail of the file can be found in Shortcut.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>story_contents.group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the group to which the story is assigned.</td>
+</tr>
+<tr>
+<td><code>story_contents.iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>story_contents.labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content type of the image (for example txt/plain).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was created.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The groups that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The members that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the linked file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The filesize, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the stories this file is attached to.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file thumbnail, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The integration type (for example google, dropbox, box).</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was updated.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The UUID of the member that uploaded the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.linked_files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file.</td>
+</tr>
+<tr>
+<td><code>story_contents.name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>story_contents.story_type</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of sub-tasks connected to the story</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the SubTask.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>story_contents.sub_tasks[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story will be in.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>True/false boolean indicating whether the Task has been completed.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Full text of the Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs of the Owners of this Task.</td>
+</tr>
+<tr>
+<td><code>story_contents.tasks[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number corresponding to the Task's position within a list of Tasks on a Story.</td>
+</tr>
+<tr>
+<td><code>story_contents.workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the entity template was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-4" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-4" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-4" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

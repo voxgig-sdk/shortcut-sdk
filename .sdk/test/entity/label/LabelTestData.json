@@ -12,23 +12,23 @@
         "global_id": "GLOBAL01",
         "id": "LABEL00",
         "name": "s12b",
-        "num_epics": "s12c",
-        "num_epics_completed": "s12d",
-        "num_epics_in_progress": "s12e",
-        "num_epics_total": "s12f",
-        "num_epics_unstarted": "s130",
-        "num_points_backlog": "s131",
-        "num_points_completed": "s132",
-        "num_points_in_progress": "s133",
-        "num_points_total": "s134",
-        "num_points_unstarted": "s135",
-        "num_related_documents": "s136",
-        "num_stories_backlog": "s137",
-        "num_stories_completed": "s138",
-        "num_stories_in_progress": "s139",
-        "num_stories_total": "s13a",
-        "num_stories_unestimated": "s13b",
-        "num_stories_unstarted": "s13c",
+        "num_epics": 300,
+        "num_epics_completed": 301,
+        "num_epics_in_progress": 302,
+        "num_epics_total": 303,
+        "num_epics_unstarted": 304,
+        "num_points_backlog": 305,
+        "num_points_completed": 306,
+        "num_points_in_progress": 307,
+        "num_points_total": 308,
+        "num_points_unstarted": 309,
+        "num_related_documents": 310,
+        "num_stories_backlog": 311,
+        "num_stories_completed": 312,
+        "num_stories_in_progress": 313,
+        "num_stories_total": 314,
+        "num_stories_unestimated": 315,
+        "num_stories_unstarted": 316,
         "stats": {},
         "updated_at": "s13e"
       },
@@ -43,23 +43,23 @@
         "global_id": "GLOBAL01",
         "id": "LABEL01",
         "name": "s24d",
-        "num_epics": "s24e",
-        "num_epics_completed": "s24f",
-        "num_epics_in_progress": "s250",
-        "num_epics_total": "s251",
-        "num_epics_unstarted": "s252",
-        "num_points_backlog": "s253",
-        "num_points_completed": "s254",
-        "num_points_in_progress": "s255",
-        "num_points_total": "s256",
-        "num_points_unstarted": "s257",
-        "num_related_documents": "s258",
-        "num_stories_backlog": "s259",
-        "num_stories_completed": "s25a",
-        "num_stories_in_progress": "s25b",
-        "num_stories_total": "s25c",
-        "num_stories_unestimated": "s25d",
-        "num_stories_unstarted": "s25e",
+        "num_epics": 590,
+        "num_epics_completed": 591,
+        "num_epics_in_progress": 592,
+        "num_epics_total": 593,
+        "num_epics_unstarted": 594,
+        "num_points_backlog": 595,
+        "num_points_completed": 596,
+        "num_points_in_progress": 597,
+        "num_points_total": 598,
+        "num_points_unstarted": 599,
+        "num_related_documents": 600,
+        "num_stories_backlog": 601,
+        "num_stories_completed": 602,
+        "num_stories_in_progress": 603,
+        "num_stories_total": 604,
+        "num_stories_unestimated": 605,
+        "num_stories_unstarted": 606,
         "stats": {},
         "updated_at": "s260"
       },
@@ -74,23 +74,23 @@
         "global_id": "GLOBAL01",
         "id": "LABEL02",
         "name": "s36f",
-        "num_epics": "s370",
-        "num_epics_completed": "s371",
-        "num_epics_in_progress": "s372",
-        "num_epics_total": "s373",
-        "num_epics_unstarted": "s374",
-        "num_points_backlog": "s375",
-        "num_points_completed": "s376",
-        "num_points_in_progress": "s377",
-        "num_points_total": "s378",
-        "num_points_unstarted": "s379",
-        "num_related_documents": "s37a",
-        "num_stories_backlog": "s37b",
-        "num_stories_completed": "s37c",
-        "num_stories_in_progress": "s37d",
-        "num_stories_total": "s37e",
-        "num_stories_unestimated": "s37f",
-        "num_stories_unstarted": "s380",
+        "num_epics": 880,
+        "num_epics_completed": 881,
+        "num_epics_in_progress": 882,
+        "num_epics_total": 883,
+        "num_epics_unstarted": 884,
+        "num_points_backlog": 885,
+        "num_points_completed": 886,
+        "num_points_in_progress": 887,
+        "num_points_total": 888,
+        "num_points_unstarted": 889,
+        "num_related_documents": 890,
+        "num_stories_backlog": 891,
+        "num_stories_completed": 892,
+        "num_stories_in_progress": 893,
+        "num_stories_total": 894,
+        "num_stories_unestimated": 895,
+        "num_stories_unstarted": 896,
         "stats": {},
         "updated_at": "s382"
       }
@@ -108,25 +108,1082 @@
         "external_id": "EXTERNAL01",
         "global_id": "GLOBAL01",
         "name": "s491",
-        "num_epics": "s492",
-        "num_epics_completed": "s493",
-        "num_epics_in_progress": "s494",
-        "num_epics_total": "s495",
-        "num_epics_unstarted": "s496",
-        "num_points_backlog": "s497",
-        "num_points_completed": "s498",
-        "num_points_in_progress": "s499",
-        "num_points_total": "s49a",
-        "num_points_unstarted": "s49b",
-        "num_related_documents": "s49c",
-        "num_stories_backlog": "s49d",
-        "num_stories_completed": "s49e",
-        "num_stories_in_progress": "s49f",
-        "num_stories_total": "s4a0",
-        "num_stories_unestimated": "s4a1",
-        "num_stories_unstarted": "s4a2",
+        "num_epics": 1170,
+        "num_epics_completed": 1171,
+        "num_epics_in_progress": 1172,
+        "num_epics_total": 1173,
+        "num_epics_unstarted": 1174,
+        "num_points_backlog": 1175,
+        "num_points_completed": 1176,
+        "num_points_in_progress": 1177,
+        "num_points_total": 1178,
+        "num_points_unstarted": 1179,
+        "num_related_documents": 1180,
+        "num_stories_backlog": 1181,
+        "num_stories_completed": 1182,
+        "num_stories_in_progress": 1183,
+        "num_stories_total": 1184,
+        "num_stories_unestimated": 1185,
+        "num_stories_unstarted": 1186,
         "stats": {},
         "updated_at": "s4a4"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/v3/labels": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createLabel",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "Request parameters for creating a Label on a Shortcut Story.",
+                "properties": {
+                  "color": {
+                    "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                    "format": "css-color",
+                    "minLength": 1,
+                    "pattern": "^#[a-fA-F0-9]{6}$",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The description of the new Label.",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "external_id": {
+                    "description": "This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.",
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the new Label.",
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": "Request parameters for creating a Label on a Shortcut Story.",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "A Label can be used to associate and filter Stories and Epics, and also create new Workspaces.",
+                  "properties": {
+                    "app_url": {
+                      "description": "The Shortcut application url for the Label.",
+                      "type": "string"
+                    },
+                    "archived": {
+                      "description": "A true/false boolean indicating if the Label has been archived.",
+                      "type": "boolean"
+                    },
+                    "color": {
+                      "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                      "format": "css-color",
+                      "minLength": 1,
+                      "nullable": true,
+                      "pattern": "^#[a-fA-F0-9]{6}$",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date that the Label was created.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the Label.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "external_id": {
+                      "description": "This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "global_id": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique ID of the Label.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The name of the Label.",
+                      "type": "string"
+                    },
+                    "stats": {
+                      "additionalProperties": false,
+                      "description": "A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.",
+                      "properties": {
+                        "num_epics": {
+                          "description": "The total number of Epics with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_completed": {
+                          "description": "The number of completed Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_in_progress": {
+                          "description": "The number of in progress epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_total": {
+                          "description": "The total number of Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_unstarted": {
+                          "description": "The number of unstarted epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_backlog": {
+                          "description": "The total number of backlog points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_completed": {
+                          "description": "The total number of completed points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_in_progress": {
+                          "description": "The total number of in-progress points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_total": {
+                          "description": "The total number of points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_unstarted": {
+                          "description": "The total number of unstarted points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_related_documents": {
+                          "description": "The total number of Documents associated this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_backlog": {
+                          "description": "The total number of stories backlog Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_completed": {
+                          "description": "The total number of completed Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_in_progress": {
+                          "description": "The total number of in-progress Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_total": {
+                          "description": "The total number of Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unestimated": {
+                          "description": "The total number of Stories with no point estimate with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unstarted": {
+                          "description": "The total number of stories unstarted Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "num_related_documents",
+                        "num_epics",
+                        "num_stories_unstarted",
+                        "num_stories_total",
+                        "num_epics_unstarted",
+                        "num_epics_in_progress",
+                        "num_points_unstarted",
+                        "num_stories_unestimated",
+                        "num_points_in_progress",
+                        "num_epics_total",
+                        "num_stories_completed",
+                        "num_points_completed",
+                        "num_stories_backlog",
+                        "num_points_total",
+                        "num_stories_in_progress",
+                        "num_points_backlog",
+                        "num_epics_completed"
+                      ],
+                      "type": "object"
+                    },
+                    "updated_at": {
+                      "description": "The time/date that the Label was updated.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "app_url",
+                    "description",
+                    "archived",
+                    "entity_type",
+                    "color",
+                    "name",
+                    "global_id",
+                    "updated_at",
+                    "external_id",
+                    "id",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /api/v3/labels": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listLabels",
+        "parameters": [
+          {
+            "description": "A true/false boolean indicating if the slim versions of the Label should be returned.",
+            "in": "query",
+            "name": "slim",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "description": "A Label can be used to associate and filter Stories and Epics, and also create new Workspaces.",
+                    "properties": {
+                      "app_url": {
+                        "description": "The Shortcut application url for the Label.",
+                        "type": "string"
+                      },
+                      "archived": {
+                        "description": "A true/false boolean indicating if the Label has been archived.",
+                        "type": "boolean"
+                      },
+                      "color": {
+                        "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                        "format": "css-color",
+                        "minLength": 1,
+                        "nullable": true,
+                        "pattern": "^#[a-fA-F0-9]{6}$",
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "description": "The time/date that the Label was created.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "The description of the Label.",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "entity_type": {
+                        "description": "A string description of this resource.",
+                        "type": "string"
+                      },
+                      "external_id": {
+                        "description": "This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "global_id": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "The unique ID of the Label.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "The name of the Label.",
+                        "type": "string"
+                      },
+                      "stats": {
+                        "additionalProperties": false,
+                        "description": "A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.",
+                        "properties": {
+                          "num_epics": {
+                            "description": "The total number of Epics with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_epics_completed": {
+                            "description": "The number of completed Epics associated with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_epics_in_progress": {
+                            "description": "The number of in progress epics associated with this label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_epics_total": {
+                            "description": "The total number of Epics associated with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_epics_unstarted": {
+                            "description": "The number of unstarted epics associated with this label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_points_backlog": {
+                            "description": "The total number of backlog points with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_points_completed": {
+                            "description": "The total number of completed points with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_points_in_progress": {
+                            "description": "The total number of in-progress points with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_points_total": {
+                            "description": "The total number of points with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_points_unstarted": {
+                            "description": "The total number of unstarted points with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_related_documents": {
+                            "description": "The total number of Documents associated this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_backlog": {
+                            "description": "The total number of stories backlog Stories with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_completed": {
+                            "description": "The total number of completed Stories with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_in_progress": {
+                            "description": "The total number of in-progress Stories with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_total": {
+                            "description": "The total number of Stories with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_unestimated": {
+                            "description": "The total number of Stories with no point estimate with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          },
+                          "num_stories_unstarted": {
+                            "description": "The total number of stories unstarted Stories with this Label.",
+                            "format": "int64",
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "num_related_documents",
+                          "num_epics",
+                          "num_stories_unstarted",
+                          "num_stories_total",
+                          "num_epics_unstarted",
+                          "num_epics_in_progress",
+                          "num_points_unstarted",
+                          "num_stories_unestimated",
+                          "num_points_in_progress",
+                          "num_epics_total",
+                          "num_stories_completed",
+                          "num_points_completed",
+                          "num_stories_backlog",
+                          "num_points_total",
+                          "num_stories_in_progress",
+                          "num_points_backlog",
+                          "num_epics_completed"
+                        ],
+                        "type": "object"
+                      },
+                      "updated_at": {
+                        "description": "The time/date that the Label was updated.",
+                        "format": "date-time",
+                        "nullable": true,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "app_url",
+                      "description",
+                      "archived",
+                      "entity_type",
+                      "color",
+                      "name",
+                      "global_id",
+                      "updated_at",
+                      "external_id",
+                      "id",
+                      "created_at"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /api/v3/labels/{label-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLabel",
+        "parameters": [
+          {
+            "description": "The unique ID of the Label.",
+            "in": "path",
+            "name": "label-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "A Label can be used to associate and filter Stories and Epics, and also create new Workspaces.",
+                  "properties": {
+                    "app_url": {
+                      "description": "The Shortcut application url for the Label.",
+                      "type": "string"
+                    },
+                    "archived": {
+                      "description": "A true/false boolean indicating if the Label has been archived.",
+                      "type": "boolean"
+                    },
+                    "color": {
+                      "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                      "format": "css-color",
+                      "minLength": 1,
+                      "nullable": true,
+                      "pattern": "^#[a-fA-F0-9]{6}$",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date that the Label was created.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the Label.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "external_id": {
+                      "description": "This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "global_id": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique ID of the Label.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The name of the Label.",
+                      "type": "string"
+                    },
+                    "stats": {
+                      "additionalProperties": false,
+                      "description": "A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.",
+                      "properties": {
+                        "num_epics": {
+                          "description": "The total number of Epics with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_completed": {
+                          "description": "The number of completed Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_in_progress": {
+                          "description": "The number of in progress epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_total": {
+                          "description": "The total number of Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_unstarted": {
+                          "description": "The number of unstarted epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_backlog": {
+                          "description": "The total number of backlog points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_completed": {
+                          "description": "The total number of completed points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_in_progress": {
+                          "description": "The total number of in-progress points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_total": {
+                          "description": "The total number of points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_unstarted": {
+                          "description": "The total number of unstarted points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_related_documents": {
+                          "description": "The total number of Documents associated this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_backlog": {
+                          "description": "The total number of stories backlog Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_completed": {
+                          "description": "The total number of completed Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_in_progress": {
+                          "description": "The total number of in-progress Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_total": {
+                          "description": "The total number of Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unestimated": {
+                          "description": "The total number of Stories with no point estimate with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unstarted": {
+                          "description": "The total number of stories unstarted Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "num_related_documents",
+                        "num_epics",
+                        "num_stories_unstarted",
+                        "num_stories_total",
+                        "num_epics_unstarted",
+                        "num_epics_in_progress",
+                        "num_points_unstarted",
+                        "num_stories_unestimated",
+                        "num_points_in_progress",
+                        "num_epics_total",
+                        "num_stories_completed",
+                        "num_points_completed",
+                        "num_stories_backlog",
+                        "num_points_total",
+                        "num_stories_in_progress",
+                        "num_points_backlog",
+                        "num_epics_completed"
+                      ],
+                      "type": "object"
+                    },
+                    "updated_at": {
+                      "description": "The time/date that the Label was updated.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "app_url",
+                    "description",
+                    "archived",
+                    "entity_type",
+                    "color",
+                    "name",
+                    "global_id",
+                    "updated_at",
+                    "external_id",
+                    "id",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "DELETE /api/v3/labels/{label-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteLabel",
+        "parameters": [
+          {
+            "description": "The unique ID of the Label.",
+            "in": "path",
+            "name": "label-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PUT /api/v3/labels/{label-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateLabel",
+        "parameters": [
+          {
+            "description": "The unique ID of the Label you wish to update.",
+            "in": "path",
+            "name": "label-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "archived": {
+                    "description": "A true/false boolean indicating if the Label has been archived.",
+                    "type": "boolean"
+                  },
+                  "color": {
+                    "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                    "format": "css-color",
+                    "minLength": 1,
+                    "nullable": true,
+                    "pattern": "^#[a-fA-F0-9]{6}$",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The new description of the label.",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The new name of the label.",
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "A Label can be used to associate and filter Stories and Epics, and also create new Workspaces.",
+                  "properties": {
+                    "app_url": {
+                      "description": "The Shortcut application url for the Label.",
+                      "type": "string"
+                    },
+                    "archived": {
+                      "description": "A true/false boolean indicating if the Label has been archived.",
+                      "type": "boolean"
+                    },
+                    "color": {
+                      "description": "The hex color to be displayed with the Label (for example, \"#ff0000\").",
+                      "format": "css-color",
+                      "minLength": 1,
+                      "nullable": true,
+                      "pattern": "^#[a-fA-F0-9]{6}$",
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date that the Label was created.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the Label.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "external_id": {
+                      "description": "This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "global_id": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique ID of the Label.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The name of the Label.",
+                      "type": "string"
+                    },
+                    "stats": {
+                      "additionalProperties": false,
+                      "description": "A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.",
+                      "properties": {
+                        "num_epics": {
+                          "description": "The total number of Epics with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_completed": {
+                          "description": "The number of completed Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_in_progress": {
+                          "description": "The number of in progress epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_total": {
+                          "description": "The total number of Epics associated with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_epics_unstarted": {
+                          "description": "The number of unstarted epics associated with this label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_backlog": {
+                          "description": "The total number of backlog points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_completed": {
+                          "description": "The total number of completed points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_in_progress": {
+                          "description": "The total number of in-progress points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_total": {
+                          "description": "The total number of points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_points_unstarted": {
+                          "description": "The total number of unstarted points with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_related_documents": {
+                          "description": "The total number of Documents associated this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_backlog": {
+                          "description": "The total number of stories backlog Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_completed": {
+                          "description": "The total number of completed Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_in_progress": {
+                          "description": "The total number of in-progress Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_total": {
+                          "description": "The total number of Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unestimated": {
+                          "description": "The total number of Stories with no point estimate with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "num_stories_unstarted": {
+                          "description": "The total number of stories unstarted Stories with this Label.",
+                          "format": "int64",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "num_related_documents",
+                        "num_epics",
+                        "num_stories_unstarted",
+                        "num_stories_total",
+                        "num_epics_unstarted",
+                        "num_epics_in_progress",
+                        "num_points_unstarted",
+                        "num_stories_unestimated",
+                        "num_points_in_progress",
+                        "num_epics_total",
+                        "num_stories_completed",
+                        "num_points_completed",
+                        "num_stories_backlog",
+                        "num_points_total",
+                        "num_stories_in_progress",
+                        "num_points_backlog",
+                        "num_epics_completed"
+                      ],
+                      "type": "object"
+                    },
+                    "updated_at": {
+                      "description": "The time/date that the Label was updated.",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "app_url",
+                    "description",
+                    "archived",
+                    "entity_type",
+                    "color",
+                    "name",
+                    "global_id",
+                    "updated_at",
+                    "external_id",
+                    "id",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

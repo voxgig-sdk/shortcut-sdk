@@ -1,12 +1,14 @@
 
 const envlocal = __dirname + '/../../../.env.local'
-require('dotenv').config({ quiet: true, path: [envlocal] })
+require('../../utility').loadEnvLocal(envlocal)
 
 const Path = require('node:path')
 const Fs = require('node:fs')
 
 const { test, describe, afterEach } = require('node:test')
 const assert = require('node:assert')
+const { createLiveTransport } = require('../../live-runner')
+const { runLiveEntity } = require('../../live-entity')
 
 
 const { ShortcutSDK, BaseFeature, stdutil, config } = require('../../..')
@@ -36,9 +38,13 @@ describe('CommentEntity', async () => {
   })
 
 
-  test('basic', async () => {
+  test('basic', async (t) => {
 
+    
     const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"id","req":false,"type":"`$STRING`","index$":0}],"id":{"field":"id","name":"id"},"name":"comment","op":{"remove":{"input":"data","name":"remove","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"id","orig":"comment_public_id","reqd":true,"type":"`$INTEGER`","index$":0},{"active":true,"kind":"param","name":"story_id","orig":"story_public_id","reqd":true,"type":"`$INTEGER`","index$":1}]},"contract":{"id":"DELETE /api/v3/stories/{story-public-id}/comments/{comment-public-id}","json":"{\"operationId\":\"deleteStoryComment\",\"parameters\":[{\"description\":\"The ID of the Story that the Comment is in.\",\"in\":\"path\",\"name\":\"story-public-id\",\"required\":true,\"schema\":{\"format\":\"int64\",\"type\":\"integer\"}},{\"description\":\"The ID of the Comment.\",\"in\":\"path\",\"name\":\"comment-public-id\",\"required\":true,\"schema\":{\"format\":\"int64\",\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"204\":{\"description\":\"No Content\"},\"400\":{\"description\":\"Schema mismatch\"},\"404\":{\"description\":\"Resource does not exist\"},\"422\":{\"description\":\"Unprocessable\"}},\"security\":[{\"api_token\":[]}],\"securitySchemes\":{\"api_token\":{\"in\":\"header\",\"name\":\"Shortcut-Token\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"DELETE","orig":"/api/v3/stories/{story-public-id}/comments/{comment-public-id}","rename":{"param":{"comment-public-id":"id","story-public-id":"story_id"}},"segments":[{"lit":"api"},{"lit":"v3"},{"lit":"stories"},{"var":"story_id"},{"lit":"comments"},{"var":"id"}],"select":{"exist":["id","story_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"remove"}},"relations":{"ancestors":[["story"]]},"key$":"comment","name__orig":"comment","Name":"Comment","name_":"comment","name-":"comment","NAME":"COMMENT","index$":2}, {"active":true,"entity":"comment","key$":"BasicCommentFlow","kind":"basic","name":"BasicCommentFlow","param":{},"step":[]}, 'Comment')
+    }
     const client = setup.client
     const struct = setup.struct
 
@@ -92,7 +98,14 @@ function basicSetup(extra) {
 
   idmap = env['SHORTCUT_TEST_COMMENT_ENTID']
 
-  if ('TRUE' === env.SHORTCUT_TEST_LIVE) {
+  const live = 'TRUE' === env.SHORTCUT_TEST_LIVE
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['SHORTCUT_TEST_COMMENT_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new ShortcutSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -104,7 +117,8 @@ function basicSetup(extra) {
       // the last entry is undefined, and basicSetup is normally called with no
       // argument at all - so a bare 'extra' silently discarded the apikey and
       // server values above and handed the SDK undefined.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -116,6 +130,8 @@ function basicSetup(extra) {
     struct,
     data: entityData,
     explain: 'TRUE' === env.SHORTCUT_TEST_EXPLAIN,
+    live,
+    transport,
     now: Date.now(),
   }
 

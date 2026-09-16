@@ -1,0 +1,2508 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Iteration | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a aria-current="page" href="../api/iteration.html">Iteration</a><div class="nav-sections"><a class="nav-section" href="#post-apiv3iterations">POST /api/v3/iterations</a>
+<a class="nav-section" href="#get-apiv3searchiterations">GET /api/v3/search/iterations</a>
+<a class="nav-section" href="#get-apiv3iterations">GET /api/v3/iterations</a>
+<a class="nav-section" href="#get-apiv3iterationsiteration-public-id">GET /api/v3/iterations/{iteration-public-id}</a>
+<a class="nav-section" href="#delete-apiv3iterationsiteration-public-id">DELETE /api/v3/iterations/{iteration-public-id}</a>
+<a class="nav-section" href="#put-apiv3iterationsiteration-public-id">PUT /api/v3/iterations/{iteration-public-id}</a></div>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="iteration">Iteration</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-apiv3iterations"><code>/api/v3/iterations</code></a></td>
+<td><code>create</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3searchiterations"><code>/api/v3/search/iterations</code></a></td>
+<td><code>list</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3iterations"><code>/api/v3/iterations</code></a></td>
+<td><code>list</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3iterationsiteration-public-id"><code>/api/v3/iterations/{iteration-public-id}</code></a></td>
+<td><code>load</code></td>
+<td>Resource</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><a href="#delete-apiv3iterationsiteration-public-id"><code>/api/v3/iterations/{iteration-public-id}</code></a></td>
+<td><code>remove</code></td>
+<td>No Content</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><a href="#put-apiv3iterationsiteration-public-id"><code>/api/v3/iterations/{iteration-public-id}</code></a></td>
+<td><code>update</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-apiv3iterations" class="operation" data-method="post"><code>POST</code> /api/v3/iterations</h3>
+<p>Operation ID: <code>createIteration</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the Iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date this Iteration ends, for example 2019-07-01.</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members you want to add as Followers.</td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of Labels attached to the Iteration.</td>
+</tr>
+<tr>
+<td><code>labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of this Iteration.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The date this Iteration begins, for example 2019-07-01.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="201-resource" class="status" data-status="2xx">201: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="list">list</h2>
+<h3 id="get-apiv3searchiterations" class="operation" data-method="get"><code>GET</code> /api/v3/search/iterations</h3>
+<p>Operation ID: <code>searchIterations</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>query</code> | <code>query</code> | <code>string</code> | Yes | See our help center article on <a href="https://help.shortcut.com/hc/en-us/articles/360000046646-Search-Operators">search operators</a> |
+| <code>page_size</code> | <code>query</code> | <code>integer (int64)</code> | No | The number of search results to include in a page. Minimum of 1 and maximum of 250. |
+| <code>detail</code> | <code>query</code> | <code>enum: full, slim</code> | No | The amount of detail included in each result item. &quot;full&quot; will include all descriptions and comments and more fields on related items such as pull requests, branches and tasks. &quot;slim&quot; omits larger fulltext fields such as descriptions and comments and only references related items by id. The default is &quot;full&quot;. |
+| <code>next</code> | <code>query</code> | <code>string</code> | No | The next page token. |
+| <code>entity_types</code> | <code>query</code> | <code>array of enum: story, milestone, epic, iteration, objective</code> | No | A collection of entity_types to search. Defaults to story and epic. Supports: epic, iteration, objective, story. |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A list of search results.</td>
+</tr>
+<tr>
+<td><code>data[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>data[].associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>data[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>data[].end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>data[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>data[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>data[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>data[].group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>data[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>data[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>data[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>data[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>data[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>data[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>data[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>data[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>data[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>data[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>data[].start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>data[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>data[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>data[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>data[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+<tr>
+<td><code>next</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL path and query string for the next page of search results.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of matches for the search query. The first 1000 matches can be paged through via the API.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-either-1-schema-mismatch-or-2-maximum-of-1000-search-results-exceeded" class="status" data-status="4xx">400: <strong>Either:</strong> (1) Schema mismatch <strong>or</strong> (2) Maximum of 1000 search results exceeded</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td><code>enum: maximum-results-exceeded</code></td>
+<td>Yes</td>
+<td>The name for this type of error, <code>maximum-results-exceeded</code></td>
+</tr>
+<tr>
+<td><code>maximum-results</code></td>
+<td><code>enum: 1000</code></td>
+<td>Yes</td>
+<td>The maximum number of search results supported, <code>1000</code></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>An explanatory message: &quot;A maximum of 1000 search results are supported.&quot;</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-resource-does-not-exist-1" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-1" class="status" data-status="4xx">422: Unprocessable</h5>
+<h3 id="get-apiv3iterations" class="operation" data-method="get"><code>GET</code> /api/v3/iterations</h3>
+<p>Operation ID: <code>listIterations</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="200-resource-1" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>[].associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>[].associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>[].associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>[].end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>[].start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-1" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-2" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-2" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="load">load</h2>
+<h3 id="get-apiv3iterationsiteration-public-id" class="operation" data-method="get"><code>GET</code> /api/v3/iterations/{iteration-public-id}</h3>
+<p>Operation ID: <code>getIteration</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>iteration-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The unique ID of the Iteration. |</p>
+<h4 id="responses-3">Responses</h4>
+<h5 id="200-resource-2" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-2" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-3" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-3" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="remove">remove</h2>
+<h3 id="delete-apiv3iterationsiteration-public-id" class="operation" data-method="delete"><code>DELETE</code> /api/v3/iterations/{iteration-public-id}</h3>
+<p>Operation ID: <code>deleteIteration</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>iteration-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The unique ID of the Iteration. |</p>
+<h4 id="responses-4">Responses</h4>
+<h5 id="204-no-content" class="status" data-status="2xx">204: No Content</h5>
+<h5 id="400-schema-mismatch-3" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-4" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-4" class="status" data-status="4xx">422: Unprocessable</h5>
+<h2 id="update">update</h2>
+<h3 id="put-apiv3iterationsiteration-public-id" class="operation" data-method="put"><code>PUT</code> /api/v3/iterations/{iteration-public-id}</h3>
+<p>Operation ID: <code>updateIteration</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters-3">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>iteration-public-id</code> | <code>path</code> | <code>integer (int64)</code> | Yes | The unique ID of the Iteration. |</p>
+<h4 id="request-body-1">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the Iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The date this Iteration ends, for example 2019-07-05.</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Members you want to add as Followers.</td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>No</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of Labels attached to the Iteration.</td>
+</tr>
+<tr>
+<td><code>labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the new Label.</td>
+</tr>
+<tr>
+<td><code>labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the new Label.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The name of this Iteration</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The date this Iteration begins, for example 2019-07-01</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses-5">Responses</h4>
+<h5 id="200-resource-3" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the iteration.</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch-4" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist-5" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable-5" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

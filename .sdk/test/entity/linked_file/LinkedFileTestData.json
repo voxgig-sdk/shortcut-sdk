@@ -11,7 +11,7 @@
         "member_mention_ids": [],
         "mention_ids": [],
         "name": "sb2",
-        "size": "sb3",
+        "size": 179,
         "story_id": "STORY01",
         "story_ids": [],
         "thumbnail_url": "sb6",
@@ -30,7 +30,7 @@
         "member_mention_ids": [],
         "mention_ids": [],
         "name": "s15c",
-        "size": "s15d",
+        "size": 349,
         "story_id": "STORY01",
         "story_ids": [],
         "thumbnail_url": "s160",
@@ -49,7 +49,7 @@
         "member_mention_ids": [],
         "mention_ids": [],
         "name": "s206",
-        "size": "s207",
+        "size": 519,
         "story_id": "STORY01",
         "story_ids": [],
         "thumbnail_url": "s20a",
@@ -71,7 +71,7 @@
         "member_mention_ids": [],
         "mention_ids": [],
         "name": "s2b0",
-        "size": "s2b1",
+        "size": 689,
         "story_id": "STORY01",
         "story_ids": [],
         "thumbnail_url": "s2b4",
@@ -79,6 +79,824 @@
         "updated_at": "s2b6",
         "uploader_id": "UPLOADER01",
         "url": "s2b8"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/v3/linked-files": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createLinkedFile",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "content_type": {
+                    "description": "The content type of the image (e.g. txt/plain).",
+                    "maxLength": 128,
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The description of the file.",
+                    "maxLength": 512,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the file.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "size": {
+                    "description": "The filesize, if the integration provided it.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "story_id": {
+                    "description": "The ID of the linked story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "thumbnail_url": {
+                    "description": "The URL of the thumbnail, if the integration provided it.",
+                    "maxLength": 2048,
+                    "pattern": "^https?://.+$",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "The integration type of the file (e.g. google, dropbox, box).",
+                    "enum": [
+                      "google",
+                      "url",
+                      "dropbox",
+                      "box",
+                      "onedrive"
+                    ],
+                    "type": "string"
+                  },
+                  "uploader_id": {
+                    "description": "The UUID of the member that uploaded the file.",
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "The URL of linked file.",
+                    "maxLength": 2048,
+                    "pattern": "^https?://.+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Linked files are stored on a third-party website and linked to one or more Stories. Shortcut currently supports linking files from Google Drive, Dropbox, Box, and by URL.",
+                  "properties": {
+                    "content_type": {
+                      "description": "The content type of the image (e.g. txt/plain).",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date the LinkedFile was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the file.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "group_mention_ids": {
+                      "description": "The groups that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the file.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "member_mention_ids": {
+                      "description": "The members that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "mention_ids": {
+                      "description": "`Deprecated:` use `member_mention_ids`.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "The name of the linked file.",
+                      "type": "string"
+                    },
+                    "size": {
+                      "description": "The filesize, if the integration provided it.",
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
+                    },
+                    "story_ids": {
+                      "description": "The IDs of the stories this file is attached to.",
+                      "items": {
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "type": "array"
+                    },
+                    "thumbnail_url": {
+                      "description": "The URL of the file thumbnail, if the integration provided it.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "The integration type (e.g. google, dropbox, box).",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "The time/date the LinkedFile was updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "uploader_id": {
+                      "description": "The UUID of the member that uploaded the file.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "The URL of the file.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "entity_type",
+                    "story_ids",
+                    "mention_ids",
+                    "member_mention_ids",
+                    "name",
+                    "thumbnail_url",
+                    "type",
+                    "size",
+                    "uploader_id",
+                    "content_type",
+                    "updated_at",
+                    "group_mention_ids",
+                    "id",
+                    "url",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /api/v3/linked-files": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listLinkedFiles",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "description": "Linked files are stored on a third-party website and linked to one or more Stories. Shortcut currently supports linking files from Google Drive, Dropbox, Box, and by URL.",
+                    "properties": {
+                      "content_type": {
+                        "description": "The content type of the image (e.g. txt/plain).",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "description": "The time/date the LinkedFile was created.",
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "The description of the file.",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "entity_type": {
+                        "description": "A string description of this resource.",
+                        "type": "string"
+                      },
+                      "group_mention_ids": {
+                        "description": "The groups that are mentioned in the description of the file.",
+                        "items": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "id": {
+                        "description": "The unique identifier for the file.",
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "member_mention_ids": {
+                        "description": "The members that are mentioned in the description of the file.",
+                        "items": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "mention_ids": {
+                        "description": "`Deprecated:` use `member_mention_ids`.",
+                        "items": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "description": "The name of the linked file.",
+                        "type": "string"
+                      },
+                      "size": {
+                        "description": "The filesize, if the integration provided it.",
+                        "format": "int64",
+                        "nullable": true,
+                        "type": "integer"
+                      },
+                      "story_ids": {
+                        "description": "The IDs of the stories this file is attached to.",
+                        "items": {
+                          "format": "int64",
+                          "type": "integer"
+                        },
+                        "type": "array"
+                      },
+                      "thumbnail_url": {
+                        "description": "The URL of the file thumbnail, if the integration provided it.",
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "The integration type (e.g. google, dropbox, box).",
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "description": "The time/date the LinkedFile was updated.",
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "uploader_id": {
+                        "description": "The UUID of the member that uploaded the file.",
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "url": {
+                        "description": "The URL of the file.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "entity_type",
+                      "story_ids",
+                      "mention_ids",
+                      "member_mention_ids",
+                      "name",
+                      "thumbnail_url",
+                      "type",
+                      "size",
+                      "uploader_id",
+                      "content_type",
+                      "updated_at",
+                      "group_mention_ids",
+                      "id",
+                      "url",
+                      "created_at"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /api/v3/linked-files/{linked-file-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLinkedFile",
+        "parameters": [
+          {
+            "description": "The unique identifier of the linked file.",
+            "in": "path",
+            "name": "linked-file-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Linked files are stored on a third-party website and linked to one or more Stories. Shortcut currently supports linking files from Google Drive, Dropbox, Box, and by URL.",
+                  "properties": {
+                    "content_type": {
+                      "description": "The content type of the image (e.g. txt/plain).",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date the LinkedFile was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the file.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "group_mention_ids": {
+                      "description": "The groups that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the file.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "member_mention_ids": {
+                      "description": "The members that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "mention_ids": {
+                      "description": "`Deprecated:` use `member_mention_ids`.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "The name of the linked file.",
+                      "type": "string"
+                    },
+                    "size": {
+                      "description": "The filesize, if the integration provided it.",
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
+                    },
+                    "story_ids": {
+                      "description": "The IDs of the stories this file is attached to.",
+                      "items": {
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "type": "array"
+                    },
+                    "thumbnail_url": {
+                      "description": "The URL of the file thumbnail, if the integration provided it.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "The integration type (e.g. google, dropbox, box).",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "The time/date the LinkedFile was updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "uploader_id": {
+                      "description": "The UUID of the member that uploaded the file.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "The URL of the file.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "entity_type",
+                    "story_ids",
+                    "mention_ids",
+                    "member_mention_ids",
+                    "name",
+                    "thumbnail_url",
+                    "type",
+                    "size",
+                    "uploader_id",
+                    "content_type",
+                    "updated_at",
+                    "group_mention_ids",
+                    "id",
+                    "url",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "DELETE /api/v3/linked-files/{linked-file-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteLinkedFile",
+        "parameters": [
+          {
+            "description": "The unique identifier of the linked file.",
+            "in": "path",
+            "name": "linked-file-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PUT /api/v3/linked-files/{linked-file-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateLinkedFile",
+        "parameters": [
+          {
+            "description": "The unique identifier of the linked file.",
+            "in": "path",
+            "name": "linked-file-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "description": {
+                    "description": "The description of the file.",
+                    "maxLength": 512,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The name of the file.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "size": {
+                    "description": "The filesize, if the integration provided it.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "story_id": {
+                    "description": "The ID of the linked story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "thumbnail_url": {
+                    "description": "The URL of the thumbnail, if the integration provided it.",
+                    "maxLength": 2048,
+                    "pattern": "^https?://.+$",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "The integration type of the file (e.g. google, dropbox, box).",
+                    "enum": [
+                      "google",
+                      "url",
+                      "dropbox",
+                      "box",
+                      "onedrive"
+                    ],
+                    "type": "string"
+                  },
+                  "uploader_id": {
+                    "description": "The UUID of the member that uploaded the file.",
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "url": {
+                    "description": "The URL of linked file.",
+                    "maxLength": 2048,
+                    "pattern": "^https?://.+$",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Linked files are stored on a third-party website and linked to one or more Stories. Shortcut currently supports linking files from Google Drive, Dropbox, Box, and by URL.",
+                  "properties": {
+                    "content_type": {
+                      "description": "The content type of the image (e.g. txt/plain).",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "description": "The time/date the LinkedFile was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "The description of the file.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "group_mention_ids": {
+                      "description": "The groups that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "id": {
+                      "description": "The unique identifier for the file.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "member_mention_ids": {
+                      "description": "The members that are mentioned in the description of the file.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "mention_ids": {
+                      "description": "`Deprecated:` use `member_mention_ids`.",
+                      "items": {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "name": {
+                      "description": "The name of the linked file.",
+                      "type": "string"
+                    },
+                    "size": {
+                      "description": "The filesize, if the integration provided it.",
+                      "format": "int64",
+                      "nullable": true,
+                      "type": "integer"
+                    },
+                    "story_ids": {
+                      "description": "The IDs of the stories this file is attached to.",
+                      "items": {
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "type": "array"
+                    },
+                    "thumbnail_url": {
+                      "description": "The URL of the file thumbnail, if the integration provided it.",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "The integration type (e.g. google, dropbox, box).",
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "description": "The time/date the LinkedFile was updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "uploader_id": {
+                      "description": "The UUID of the member that uploaded the file.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "The URL of the file.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "entity_type",
+                    "story_ids",
+                    "mention_ids",
+                    "member_mention_ids",
+                    "name",
+                    "thumbnail_url",
+                    "type",
+                    "size",
+                    "uploader_id",
+                    "content_type",
+                    "updated_at",
+                    "group_mention_ids",
+                    "id",
+                    "url",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

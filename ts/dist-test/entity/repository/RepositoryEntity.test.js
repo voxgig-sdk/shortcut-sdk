@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.SHORTCUT_TEST_LIVE;
         for (const op of ['list', 'load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'repository.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'repository.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set SHORTCUT_TEST_REPOSITORY_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "format": "date-time", "name": "created_at", "req": true, "short": "The time/date the Repository was created.", "type": "`$STRING`", "index$": 0 }, { "active": true, "name": "entity_type", "req": true, "short": "A string description of this resource.", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "external_id", "req": true, "short": "The VCS unique identifier for the Repository.", "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "full_name", "req": true, "short": "The full name of the VCS repository.", "type": "`$STRING`", "index$": 3 }, { "active": true, "format": "int64", "name": "id", "req": true, "short": "The ID associated to the VCS repository in Shortcut.", "type": "`$INTEGER`", "index$": 4 }, { "active": true, "name": "name", "req": true, "short": "The shorthand name of the VCS repository.", "type": "`$STRING`", "index$": 5 }, { "active": true, "name": "type", "req": true, "short": "The VCS provider for the Repository.", "type": "`$STRING`", "index$": 6 }, { "active": true, "format": "date-time", "name": "updated_at", "req": true, "short": "The time/date the Repository was updated.", "type": "`$STRING`", "index$": 7 }, { "active": true, "name": "url", "req": true, "short": "The URL of the Repository.", "type": "`$STRING`", "index$": 8 }], "id": { "field": "id", "name": "id" }, "name": "repository", "op": { "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /api/v3/repositories", "json": "{\"operationId\":\"listRepositories\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"additionalProperties\":false,\"description\":\"Repository refers to a VCS repository.\",\"properties\":{\"created_at\":{\"description\":\"The time/date the Repository was created.\",\"format\":\"date-time\",\"nullable\":true,\"type\":\"string\"},\"entity_type\":{\"description\":\"A string description of this resource.\",\"type\":\"string\"},\"external_id\":{\"description\":\"The VCS unique identifier for the Repository.\",\"nullable\":true,\"type\":\"string\"},\"full_name\":{\"description\":\"The full name of the VCS repository.\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"The ID associated to the VCS repository in Shortcut.\",\"format\":\"int64\",\"nullable\":true,\"type\":\"integer\"},\"name\":{\"description\":\"The shorthand name of the VCS repository.\",\"nullable\":true,\"type\":\"string\"},\"type\":{\"description\":\"The VCS provider for the Repository.\",\"enum\":[\"github\",\"gitlab\",\"bitbucket\"],\"type\":\"string\"},\"updated_at\":{\"description\":\"The time/date the Repository was updated.\",\"format\":\"date-time\",\"nullable\":true,\"type\":\"string\"},\"url\":{\"description\":\"The URL of the Repository.\",\"nullable\":true,\"type\":\"string\"}},\"required\":[\"entity_type\",\"name\",\"type\",\"updated_at\",\"external_id\",\"id\",\"url\",\"full_name\",\"created_at\"],\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Resource\"},\"400\":{\"description\":\"Schema mismatch\"},\"404\":{\"description\":\"Resource does not exist\"},\"422\":{\"description\":\"Unprocessable\"}},\"security\":[{\"api_token\":[]}],\"securitySchemes\":{\"api_token\":{\"in\":\"header\",\"name\":\"Shortcut-Token\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/v3/repositories", "segments": [{ "lit": "api" }, { "lit": "v3" }, { "lit": "repositories" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "id", "orig": "repo_public_id", "reqd": true, "type": "`$INTEGER`", "index$": 0 }] }, "contract": { "id": "GET /api/v3/repositories/{repo-public-id}", "json": "{\"operationId\":\"getRepository\",\"parameters\":[{\"description\":\"The unique ID of the Repository.\",\"in\":\"path\",\"name\":\"repo-public-id\",\"required\":true,\"schema\":{\"format\":\"int64\",\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"Repository refers to a VCS repository.\",\"properties\":{\"created_at\":{\"description\":\"The time/date the Repository was created.\",\"format\":\"date-time\",\"nullable\":true,\"type\":\"string\"},\"entity_type\":{\"description\":\"A string description of this resource.\",\"type\":\"string\"},\"external_id\":{\"description\":\"The VCS unique identifier for the Repository.\",\"nullable\":true,\"type\":\"string\"},\"full_name\":{\"description\":\"The full name of the VCS repository.\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"The ID associated to the VCS repository in Shortcut.\",\"format\":\"int64\",\"nullable\":true,\"type\":\"integer\"},\"name\":{\"description\":\"The shorthand name of the VCS repository.\",\"nullable\":true,\"type\":\"string\"},\"type\":{\"description\":\"The VCS provider for the Repository.\",\"enum\":[\"github\",\"gitlab\",\"bitbucket\"],\"type\":\"string\"},\"updated_at\":{\"description\":\"The time/date the Repository was updated.\",\"format\":\"date-time\",\"nullable\":true,\"type\":\"string\"},\"url\":{\"description\":\"The URL of the Repository.\",\"nullable\":true,\"type\":\"string\"}},\"required\":[\"entity_type\",\"name\",\"type\",\"updated_at\",\"external_id\",\"id\",\"url\",\"full_name\",\"created_at\"],\"type\":\"object\"}}},\"description\":\"Resource\"},\"400\":{\"description\":\"Schema mismatch\"},\"404\":{\"description\":\"Resource does not exist\"},\"422\":{\"description\":\"Unprocessable\"}},\"security\":[{\"api_token\":[]}],\"securitySchemes\":{\"api_token\":{\"in\":\"header\",\"name\":\"Shortcut-Token\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/v3/repositories/{repo-public-id}", "rename": { "param": { "repo-public-id": "id" } }, "segments": [{ "lit": "api" }, { "lit": "v3" }, { "lit": "repositories" }, { "var": "id" }], "select": { "exist": ["id"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "repository", "name__orig": "repository", "Name": "Repository", "name_": "repository", "name-": "repository", "NAME": "REPOSITORY", "index$": 24 }, { "active": true, "entity": "repository", "key$": "BasicRepositoryFlow", "kind": "basic", "name": "BasicRepositoryFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "repository_ref01" } }], "index$": 0 }, { "active": true, "data": {}, "input": { "ref": "repository_ref01", "srcdatavar": "repository_ref01_data", "suffix": "_dt0" }, "match": { "id": "repository01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-repository_ref01" } }], "index$": 1 }] }, 'Repository');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -106,12 +104,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['SHORTCUT_TEST_REPOSITORY_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'SHORTCUT_TEST_REPOSITORY_ENTID': idmap,
         'SHORTCUT_TEST_LIVE': 'FALSE',
@@ -120,7 +112,13 @@ function basicSetup(extra) {
     });
     idmap = env['SHORTCUT_TEST_REPOSITORY_ENTID'];
     const live = 'TRUE' === env.SHORTCUT_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['SHORTCUT_TEST_REPOSITORY_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.ShortcutSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -133,7 +131,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -145,7 +144,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.SHORTCUT_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

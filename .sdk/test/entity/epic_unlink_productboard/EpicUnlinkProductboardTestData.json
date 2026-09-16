@@ -16,5 +16,53 @@
     "epic_unlink_productboard": {
       "epic_unlink_productboard_ref01": {}
     }
+  },
+  "requests": {
+    "POST /api/v3/epics/{epic-public-id}/unlink-productboard": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "unlinkProductboardFromEpic",
+        "parameters": [
+          {
+            "description": "The unique ID of the Epic.",
+            "in": "path",
+            "name": "epic-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

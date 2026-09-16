@@ -45,5 +45,426 @@
         "verb": "s147"
       }
     }
+  },
+  "requests": {
+    "POST /api/v3/story-links": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createStoryLink",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "object_id": {
+                    "description": "The ID of the object Story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "subject_id": {
+                    "description": "The ID of the subject Story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "verb": {
+                    "description": "The type of link.",
+                    "enum": [
+                      "blocks",
+                      "duplicates",
+                      "relates to"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "verb",
+                  "subject_id",
+                  "object_id"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Story links allow you create semantic relationships between two stories. Relationship types are relates to, blocks / blocked by, and duplicates / is duplicated by. The format is `subject -> link -> object`, or for example \"story 5 blocks story 6\".",
+                  "properties": {
+                    "created_at": {
+                      "description": "The time/date when the Story Link was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the Story Link.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "object_id": {
+                      "description": "The ID of the object Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_id": {
+                      "description": "The ID of the subject Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_workflow_state_id": {
+                      "description": "The workflow state of the \"subject\" story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "The time/date when the Story Link was last updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "verb": {
+                      "description": "How the subject Story acts on the object Story. This can be \"blocks\", \"duplicates\", or \"relates to\".",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "entity_type",
+                    "id",
+                    "subject_id",
+                    "subject_workflow_state_id",
+                    "verb",
+                    "object_id",
+                    "created_at",
+                    "updated_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /api/v3/story-links/{story-link-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getStoryLink",
+        "parameters": [
+          {
+            "description": "The unique ID of the Story Link.",
+            "in": "path",
+            "name": "story-link-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Story links allow you create semantic relationships between two stories. Relationship types are relates to, blocks / blocked by, and duplicates / is duplicated by. The format is `subject -> link -> object`, or for example \"story 5 blocks story 6\".",
+                  "properties": {
+                    "created_at": {
+                      "description": "The time/date when the Story Link was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the Story Link.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "object_id": {
+                      "description": "The ID of the object Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_id": {
+                      "description": "The ID of the subject Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_workflow_state_id": {
+                      "description": "The workflow state of the \"subject\" story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "The time/date when the Story Link was last updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "verb": {
+                      "description": "How the subject Story acts on the object Story. This can be \"blocks\", \"duplicates\", or \"relates to\".",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "entity_type",
+                    "id",
+                    "subject_id",
+                    "subject_workflow_state_id",
+                    "verb",
+                    "object_id",
+                    "created_at",
+                    "updated_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "DELETE /api/v3/story-links/{story-link-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "deleteStoryLink",
+        "parameters": [
+          {
+            "description": "The unique ID of the Story Link.",
+            "in": "path",
+            "name": "story-link-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "PUT /api/v3/story-links/{story-link-public-id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "updateStoryLink",
+        "parameters": [
+          {
+            "description": "The unique ID of the Story Link.",
+            "in": "path",
+            "name": "story-link-public-id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "object_id": {
+                    "description": "The ID of the object Story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "subject_id": {
+                    "description": "The ID of the subject Story.",
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "verb": {
+                    "description": "The type of link.",
+                    "enum": [
+                      "blocks",
+                      "duplicates",
+                      "relates to"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Story links allow you create semantic relationships between two stories. Relationship types are relates to, blocks / blocked by, and duplicates / is duplicated by. The format is `subject -> link -> object`, or for example \"story 5 blocks story 6\".",
+                  "properties": {
+                    "created_at": {
+                      "description": "The time/date when the Story Link was created.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "entity_type": {
+                      "description": "A string description of this resource.",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "The unique identifier of the Story Link.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "object_id": {
+                      "description": "The ID of the object Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_id": {
+                      "description": "The ID of the subject Story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "subject_workflow_state_id": {
+                      "description": "The workflow state of the \"subject\" story.",
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "updated_at": {
+                      "description": "The time/date when the Story Link was last updated.",
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "verb": {
+                      "description": "How the subject Story acts on the object Story. This can be \"blocks\", \"duplicates\", or \"relates to\".",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "entity_type",
+                    "id",
+                    "subject_id",
+                    "subject_workflow_state_id",
+                    "verb",
+                    "object_id",
+                    "created_at",
+                    "updated_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Resource"
+          },
+          "400": {
+            "description": "Schema mismatch"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "422": {
+            "description": "Unprocessable"
+          }
+        },
+        "security": [
+          {
+            "api_token": []
+          }
+        ],
+        "securitySchemes": {
+          "api_token": {
+            "in": "header",
+            "name": "Shortcut-Token",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

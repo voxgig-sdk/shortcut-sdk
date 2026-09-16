@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>API overview | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a aria-current="page" href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="api-overview">API overview</h1>
+<p>Shortcut API</p>
+<ul>
+<li><code>https://api.app.shortcut.com</code></li>
+</ul>
+<p>This documentation is generated from the <a href="https://github.com/voxgig-sdk/shortcut-sdk/blob/main/.sdk/def/shortcut-v3-openapi-3.0.0.json">OpenAPI specification</a> held in the SDK repository.</p>
+<ul>
+<li><a href="bulk.html">Bulk</a></li>
+<li><a href="category.html">Category</a></li>
+<li><a href="comment.html">Comment</a></li>
+<li><a href="custom_field.html">CustomField</a></li>
+<li><a href="disable.html">Disable</a></li>
+<li><a href="doc_slim.html">DocSlim</a></li>
+<li><a href="enable.html">Enable</a></li>
+<li><a href="entity_template.html">EntityTemplate</a></li>
+<li><a href="epic.html">Epic</a></li>
+<li><a href="epic_paginated_result.html">EpicPaginatedResult</a></li>
+<li><a href="epic_unlink_productboard.html">EpicUnlinkProductboard</a></li>
+<li><a href="epic_workflow.html">EpicWorkflow</a></li>
+<li><a href="group.html">Group</a></li>
+<li><a href="health.html">Health</a></li>
+<li><a href="history.html">History</a></li>
+<li><a href="iteration.html">Iteration</a></li>
+<li><a href="key_result.html">KeyResult</a></li>
+<li><a href="label.html">Label</a></li>
+<li><a href="linked_file.html">LinkedFile</a></li>
+<li><a href="member.html">Member</a></li>
+<li><a href="milestone.html">Milestone</a></li>
+<li><a href="objectif.html">Objectif</a></li>
+<li><a href="objective.html">Objective</a></li>
+<li><a href="project.html">Project</a></li>
+<li><a href="repository.html">Repository</a></li>
+<li><a href="search.html">Search</a></li>
+<li><a href="story.html">Story</a></li>
+<li><a href="story_comment.html">StoryComment</a></li>
+<li><a href="story_link.html">StoryLink</a></li>
+<li><a href="story_reaction.html">StoryReaction</a></li>
+<li><a href="story_slim.html">StorySlim</a></li>
+<li><a href="task.html">Task</a></li>
+<li><a href="threaded_comment.html">ThreadedComment</a></li>
+<li><a href="uploaded_file.html">UploadedFile</a></li>
+<li><a href="webhook.html">Webhook</a></li>
+<li><a href="workflow.html">Workflow</a></li>
+</ul>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

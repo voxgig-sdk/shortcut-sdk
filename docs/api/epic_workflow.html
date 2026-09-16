@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>EpicWorkflow | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a aria-current="page" href="../api/epic_workflow.html">EpicWorkflow</a><div class="nav-sections"><a class="nav-section" href="#get-apiv3epic-workflow">GET /api/v3/epic-workflow</a></div>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a href="../api/search.html">Search</a>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="epicworkflow">EpicWorkflow</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3epic-workflow"><code>/api/v3/epic-workflow</code></a></td>
+<td><code>list</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The hex color for this Epic State.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The time/date the Epic State was created.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of what sort of Epics belong in that Epic State.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The unique ID of the Epic State.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Epic State's name.</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>integer</code></td>
+<td>Yes</td>
+<td>The position that the Epic State is in, starting with 0 at the left.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of Epic State (Unstarted, Started, or Done)</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>When the Epic State was last updated.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-apiv3epic-workflow" class="operation" data-method="get"><code>GET</code> /api/v3/epic-workflow</h3>
+<p>Operation ID: <code>getEpicWorkflow</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date the Epic Workflow was created.</td>
+</tr>
+<tr>
+<td><code>default_epic_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the default Epic State that new Epics are assigned by default.</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epic_states</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A map of the Epic States in this Epic Workflow.</td>
+</tr>
+<tr>
+<td><code>epic_states[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>No</td>
+<td>The hex color for this Epic State.</td>
+</tr>
+<tr>
+<td><code>epic_states[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Epic State was created.</td>
+</tr>
+<tr>
+<td><code>epic_states[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of what sort of Epics belong in that Epic State.</td>
+</tr>
+<tr>
+<td><code>epic_states[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epic_states[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>epic_states[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Epic State.</td>
+</tr>
+<tr>
+<td><code>epic_states[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Epic State's name.</td>
+</tr>
+<tr>
+<td><code>epic_states[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The position that the Epic State is in, starting with 0 at the left.</td>
+</tr>
+<tr>
+<td><code>epic_states[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of Epic State (Unstarted, Started, or Done)</td>
+</tr>
+<tr>
+<td><code>epic_states[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>When the Epic State was last updated.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Epic Workflow.</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date the Epic Workflow was updated.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-schema-mismatch" class="status" data-status="4xx">400: Schema mismatch</h5>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

@@ -1,0 +1,2811 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Search | Shortcut API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">Shortcut API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/shortcut-sdk">voxgig-sdk/shortcut-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">Shortcut API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/bulk.html">Bulk</a>
+<a href="../api/category.html">Category</a>
+<a href="../api/comment.html">Comment</a>
+<a href="../api/custom_field.html">CustomField</a>
+<a href="../api/disable.html">Disable</a>
+<a href="../api/doc_slim.html">DocSlim</a>
+<a href="../api/enable.html">Enable</a>
+<a href="../api/entity_template.html">EntityTemplate</a>
+<a href="../api/epic.html">Epic</a>
+<a href="../api/epic_paginated_result.html">EpicPaginatedResult</a>
+<a href="../api/epic_unlink_productboard.html">EpicUnlinkProductboard</a>
+<a href="../api/epic_workflow.html">EpicWorkflow</a>
+<a href="../api/group.html">Group</a>
+<a href="../api/health.html">Health</a>
+<a href="../api/history.html">History</a>
+<a href="../api/iteration.html">Iteration</a>
+<a href="../api/key_result.html">KeyResult</a>
+<a href="../api/label.html">Label</a>
+<a href="../api/linked_file.html">LinkedFile</a>
+<a href="../api/member.html">Member</a>
+<a href="../api/milestone.html">Milestone</a>
+<a href="../api/objectif.html">Objectif</a>
+<a href="../api/objective.html">Objective</a>
+<a href="../api/project.html">Project</a>
+<a href="../api/repository.html">Repository</a>
+<a aria-current="page" href="../api/search.html">Search</a><div class="nav-sections"><a class="nav-section" href="#get-apiv3search">GET /api/v3/search</a></div>
+<a href="../api/story.html">Story</a>
+<a href="../api/story_comment.html">StoryComment</a>
+<a href="../api/story_link.html">StoryLink</a>
+<a href="../api/story_reaction.html">StoryReaction</a>
+<a href="../api/story_slim.html">StorySlim</a>
+<a href="../api/task.html">Task</a>
+<a href="../api/threaded_comment.html">ThreadedComment</a>
+<a href="../api/uploaded_file.html">UploadedFile</a>
+<a href="../api/webhook.html">Webhook</a>
+<a href="../api/workflow.html">Workflow</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/js.html">JavaScript</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
+<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
+<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
+<a href="../features/paging.html">Pagination signals for list operations</a>
+<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
+<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
+<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
+<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="search">Search</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-apiv3search"><code>/api/v3/search</code></a></td>
+<td><code>load</code></td>
+<td>Resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>epics</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The results of the Epic search query.</td>
+</tr>
+<tr>
+<td><code>iterations</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The results of the Iteration search query.</td>
+</tr>
+<tr>
+<td><code>milestones</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The results of the Objective search query.</td>
+</tr>
+<tr>
+<td><code>stories</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The results of the Story search query.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-apiv3search" class="operation" data-method="get"><code>GET</code> /api/v3/search</h3>
+<p>Operation ID: <code>search</code>.</p>
+<p>Authentication: API key in the header (<code>api_token</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>query</code> | <code>query</code> | <code>string</code> | Yes | See our help center article on <a href="https://help.shortcut.com/hc/en-us/articles/360000046646-Search-Operators">search operators</a> |
+| <code>page_size</code> | <code>query</code> | <code>integer (int64)</code> | No | The number of search results to include in a page. Minimum of 1 and maximum of 250. |
+| <code>detail</code> | <code>query</code> | <code>enum: full, slim</code> | No | The amount of detail included in each result item. &quot;full&quot; will include all descriptions and comments and more fields on related items such as pull requests, branches and tasks. &quot;slim&quot; omits larger fulltext fields such as descriptions and comments and only references related items by id. The default is &quot;full&quot;. |
+| <code>next</code> | <code>query</code> | <code>string</code> | No | The next page token. |
+| <code>entity_types</code> | <code>query</code> | <code>array of enum: story, milestone, epic, iteration, objective</code> | No | A collection of entity_types to search. Defaults to story and epic. Supports: epic, iteration, objective, story. |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-resource" class="status" data-status="2xx">200: Resource</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>epics</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The results of the Epic search query.</td>
+</tr>
+<tr>
+<td><code>epics.data</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A list of search results.</td>
+</tr>
+<tr>
+<td><code>epics.data[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean that indicates whether the Epic is archived or not.</td>
+</tr>
+<tr>
+<td><code>epics.data[].associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Epic's associated groups.</td>
+</tr>
+<tr>
+<td><code>epics.data[].associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>A nested array of threaded comments.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member that authored the Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].comments</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A nested array of threaded comments.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Comment was created.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment is deleted.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in this Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in this Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment.</td>
+</tr>
+<tr>
+<td><code>epics.data[].comments[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Comment was updated.</td>
+</tr>
+<tr>
+<td><code>epics.data[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Epic has been completed.</td>
+</tr>
+<tr>
+<td><code>epics.data[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Epic was completed.</td>
+</tr>
+<tr>
+<td><code>epics.data[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Epic was completed.</td>
+</tr>
+<tr>
+<td><code>epics.data[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Epic was created.</td>
+</tr>
+<tr>
+<td><code>epics.data[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The Epic's deadline.</td>
+</tr>
+<tr>
+<td><code>epics.data[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Epic's description.</td>
+</tr>
+<tr>
+<td><code>epics.data[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epics.data[].epic_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Epic State.</td>
+</tr>
+<tr>
+<td><code>epics.data[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Epic has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>epics.data[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members you want to add as Followers on this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>epics.data[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated</code> The ID of the group to associate with the epic. Use <code>group_ids</code>.</td>
+</tr>
+<tr>
+<td><code>epics.data[].group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDS for Groups to which this Epic is related.</td>
+</tr>
+<tr>
+<td><code>epics.data[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Epic description.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The current health status of the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>No</td>
+<td>The ID of the permission who created or updated the Health record.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The time that the Health record was created.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the Epic associated with this Health record.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Health record.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.objective_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the Objective associated with this Health record.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.status</code></td>
+<td><code>enum: At Risk, On Track, Off Track, No Health</code></td>
+<td>Yes</td>
+<td>The health status of the Epic or Objective.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.text</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The text of the Health record.</td>
+</tr>
+<tr>
+<td><code>epics.data[].health.updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>No</td>
+<td>The time that the Health record was updated.</td>
+</tr>
+<tr>
+<td><code>epics.data[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of Label ids attached to the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of Labels attached to the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>epics.data[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>epics.data[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Epic description.</td>
+</tr>
+<tr>
+<td><code>epics.data[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>epics.data[].milestone_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td><code>Deprecated</code> The ID of the Objective this Epic is related to. Use <code>objective_ids</code>.</td>
+</tr>
+<tr>
+<td><code>epics.data[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].objective_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of IDs for Objectives to which this epic is related.</td>
+</tr>
+<tr>
+<td><code>epics.data[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any members you want to add as Owners on this new Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].planned_start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The Epic's planned start date.</td>
+</tr>
+<tr>
+<td><code>epics.data[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Epic's relative position in the Epic workflow state.</td>
+</tr>
+<tr>
+<td><code>epics.data[].productboard_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the associated productboard feature.</td>
+</tr>
+<tr>
+<td><code>epics.data[].productboard_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the associated productboard feature.</td>
+</tr>
+<tr>
+<td><code>epics.data[].productboard_plugin_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the associated productboard integration.</td>
+</tr>
+<tr>
+<td><code>epics.data[].productboard_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the associated productboard feature.</td>
+</tr>
+<tr>
+<td><code>epics.data[].project_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of Projects related to this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that requested the epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Epic has been started.</td>
+</tr>
+<tr>
+<td><code>epics.data[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Epic was started.</td>
+</tr>
+<tr>
+<td><code>epics.data[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Epic was started.</td>
+</tr>
+<tr>
+<td><code>epics.data[].state</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td><code>Deprecated</code> The workflow state that the Epic is in.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.last_story_update</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date of the last update of a Story in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents associated with this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Epic.</td>
+</tr>
+<tr>
+<td><code>epics.data[].stories_without_projects</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of stories in this epic which are not associated with a project.</td>
+</tr>
+<tr>
+<td><code>epics.data[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Epic was updated.</td>
+</tr>
+<tr>
+<td><code>epics.next</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL path and query string for the next page of search results.</td>
+</tr>
+<tr>
+<td><code>epics.total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of matches for the search query. The first 1000 matches can be paged through via the API.</td>
+</tr>
+<tr>
+<td><code>iterations</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The results of the Iteration search query.</td>
+</tr>
+<tr>
+<td><code>iterations.data</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A list of search results.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].associated_groups</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array containing Group IDs and Group-owned story counts for the Iteration's associated groups.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].associated_groups[].associated_stories_count</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of stories this Group owns in the Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].associated_groups[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The Group ID of the associated group.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was created.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].end_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration ends.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource</td>
+</tr>
+<tr>
+<td><code>iterations.data[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>iterations.data[].group_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Groups you want to add as Followers. Currently, only one Group association is presented in our web UI.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>A group of calculated values for this Label. This is not included if the slim? flag is set to true for the List Labels endpoint.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_epics</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_epics_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of completed Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_epics_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of in progress epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_epics_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Epics associated with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_epics_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of unstarted epics associated with this label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_points_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_points_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress points with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_points_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Documents associated this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories backlog Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_in_progress</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of in-progress Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of stories unstarted Stories with this Label.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].start_date</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The date this iteration begins.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_points</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_points_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_points_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of completed points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_points_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_points_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted points in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of documents related to an Iteration</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_stories_backlog</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of backlog Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_stories_done</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of done Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_stories_started</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of started Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_stories_unestimated</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of Stories with no point estimate.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].stats.num_stories_unstarted</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of unstarted Stories in this Iteration.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].status</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The status of the iteration. Values are either &quot;unstarted&quot;, &quot;started&quot;, or &quot;done&quot;.</td>
+</tr>
+<tr>
+<td><code>iterations.data[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The instant when this iteration was last updated.</td>
+</tr>
+<tr>
+<td><code>iterations.next</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL path and query string for the next page of search results.</td>
+</tr>
+<tr>
+<td><code>iterations.total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of matches for the search query. The first 1000 matches can be paged through via the API.</td>
+</tr>
+<tr>
+<td><code>milestones</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The results of the Objective search query.</td>
+</tr>
+<tr>
+<td><code>milestones.data</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A list of search results.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A boolean indicating whether the Milestone has been archived or not.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of Categories attached to the Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Category has been archived.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Category (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Category was created.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Category has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Global ID of the Category.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Category.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Category.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of entity this Category is associated with; currently Milestone or Objective is the only type of Category.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].categories[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Category was updated.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Milestone has been completed.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Milestone was completed.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Milestone was completed.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Milestone was created.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The Milestone's description.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>milestones.data[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].key_result_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The IDs of the Key Results associated with the Objective.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>A number representing the position of the Milestone in relation to every other Milestone within the Workspace.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Milestone has been started.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Milestone was started.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Milestone was started.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].state</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The workflow state that the Milestone is in.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>A group of calculated values for this Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].stats.average_cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average cycle time (in seconds) of completed stories in this Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].stats.average_lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The average lead time (in seconds) of completed stories in this Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of related documents to this Milestone.</td>
+</tr>
+<tr>
+<td><code>milestones.data[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Milestone was updated.</td>
+</tr>
+<tr>
+<td><code>milestones.next</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL path and query string for the next page of search results.</td>
+</tr>
+<tr>
+<td><code>milestones.total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of matches for the search query. The first 1000 matches can be paged through via the API.</td>
+</tr>
+<tr>
+<td><code>stories</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The results of the Story search query.</td>
+</tr>
+<tr>
+<td><code>stories.data</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A list of search results.</td>
+</tr>
+<tr>
+<td><code>stories.data[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True if the story has been archived or not.</td>
+</tr>
+<tr>
+<td><code>stories.data[].blocked</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently blocked.</td>
+</tr>
+<tr>
+<td><code>stories.data[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story is currently a blocker of another story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of Git branches attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Branch was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Branch has been deleted.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Branch.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].merged_branch_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the Branches the Branch has been merged into.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Branch.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].persistent</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>This field is deprecated, and will always be false.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of PullRequests attached to the Branch (there is usually only one).</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].branch_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].branch_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].build_status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status of the Continuous Integration workflow for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].closed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request has been closed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the pull request was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].draft</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request is in the draft state.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].has_overlapping_stories</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Boolean indicating that the Pull Request has Stories that have Pull Requests that change at least one of the same lines this Pull Request changes.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID associated with the pull request in Shortcut.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].merged</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request has been merged.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].num_added</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines added in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].num_commits</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of commits on the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].num_modified</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines modified in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].num_removed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines removed in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].number</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The pull request's unique number ID in VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].overlapping_stories</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of Story ids that have Pull Requests that change at least one of the same lines this Pull Request changes.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].repository_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the repository for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].review_status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status of the review for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].target_branch_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the target branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].target_branch_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the target branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The title of the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the pull request was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].pull_requests[].vcs_labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of PullRequestLabels attached to the PullRequest.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].repository_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Repository that contains the Branch.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Branch was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].branches[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the Branch.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comment_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of Comments attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of comments attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who is the Comment's author.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].blocker</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as a blocker that can be surfaced to permissions or teams mentioned in the comment. Can only be used on a top-level comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].deleted</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Comment has been deleted.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Comment has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Group who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].linked_to_slack</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Whether the Comment is currently the root of a thread that is linked to Slack.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Member who are mentioned in the Comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].parent_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The ID of the parent Comment this Comment is threaded under.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The Comments numerical position in the list from oldest to newest.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].reactions</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A set of Reactions to this Comment.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].reactions[].emoji</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Emoji text of the reaction.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].reactions[].permission_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>Permissions who have reacted with this.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Story on which the Comment appears.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].text</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The text of the Comment. In the case that the Comment has been deleted, this field can be set to nil.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].unblocks_parent</code></td>
+<td><code>boolean</code></td>
+<td>No</td>
+<td>Marks the comment as an unblocker to its blocker parent. Can only be set on a threaded comment who has a parent with <code>blocker</code> set.</td>
+</tr>
+<tr>
+<td><code>stories.data[].comments[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Comment was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of commits attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_email</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The email address of the VCS user that authored the Commit.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that authored the Commit, if known.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_identity</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The Identity of the VCS user that authored the Commit.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_identity.entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_identity.name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This is your login in VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].author_identity.type</code></td>
+<td><code>enum: slack, github, gitlab, bitbucket</code></td>
+<td>Yes</td>
+<td>The service this Identity is for.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Commit was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].hash</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Commit hash.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Commit.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Commit message.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].repository_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the Repository that contains the Commit.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].timestamp</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Commit was pushed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Commit was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].commits[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the Commit.</td>
+</tr>
+<tr>
+<td><code>stories.data[].completed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been completed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].completed_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was completed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].custom_fields</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of CustomField value assertions for the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].custom_fields[].field_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomField.</td>
+</tr>
+<tr>
+<td><code>stories.data[].custom_fields[].value</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string representation of the value, if applicable.</td>
+</tr>
+<tr>
+<td><code>stories.data[].custom_fields[].value_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique public ID for a CustomFieldEnumValue.</td>
+</tr>
+<tr>
+<td><code>stories.data[].cycle_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The cycle time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>stories.data[].deadline</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The due date of the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].epic_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the epic the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].estimate</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The numeric point estimate of the story. Can also be null, which means unestimated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Story has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories.data[].external_links</code></td>
+<td><code>array of string</code></td>
+<td>Yes</td>
+<td>An array of external links (strings) associated with a Story</td>
+</tr>
+<tr>
+<td><code>stories.data[].file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of Files attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of files attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Free form string corresponding to a text or image file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the File has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].filename</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name assigned to the file in Shortcut upon upload.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Groups who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID for the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Members who are mentioned in the file description.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The optional User-specified name of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The size of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique IDs of the Stories associated with this file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url where the thumbnail of the file can be found in Shortcut.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the file was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Member who uploaded the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].follower_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs for any Members listed as Followers.</td>
+</tr>
+<tr>
+<td><code>stories.data[].formatted_vcs_branch_name</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The formatted branch name for this story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stories.data[].group_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the group associated with the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Group IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>stories.data[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].iteration_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].label_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>An array of label ids attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of labels attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].app_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The Shortcut application url for the Label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].archived</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Label has been archived.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The hex color to be displayed with the Label (for example, &quot;#ff0000&quot;).</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the Label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Label has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the Label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].labels[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date that the Label was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].lead_time</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The lead time (in seconds) of this story when complete.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_file_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of LinkedFiles attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of linked files attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].content_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The content type of the image (for example txt/plain).</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The description of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The groups that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier for the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>The members that are mentioned in the description of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the linked file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].size</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The filesize, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the stories this file is attached to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].thumbnail_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file thumbnail, if the integration provided it.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The integration type (for example google, dropbox, box).</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the LinkedFile was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].uploader_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The UUID of the member that uploaded the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].linked_files[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the file.</td>
+</tr>
+<tr>
+<td><code>stories.data[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of Member IDs that have been mentioned in the Story description.</td>
+</tr>
+<tr>
+<td><code>stories.data[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>stories.data[].moved_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was last changed workflow-state.</td>
+</tr>
+<tr>
+<td><code>stories.data[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].num_tasks_completed</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td>The number of tasks on the story which are complete.</td>
+</tr>
+<tr>
+<td><code>stories.data[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of the owners of this story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].parent_story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stories.data[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>A number representing the position of the story in relation to every other story in the current project.</td>
+</tr>
+<tr>
+<td><code>stories.data[].previous_iteration_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>Yes</td>
+<td>The IDs of the iteration the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].project_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the project the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of Pull/Merge Requests attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].branch_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].branch_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].build_status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status of the Continuous Integration workflow for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].closed</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request has been closed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the pull request was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].draft</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request is in the draft state.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].has_overlapping_stories</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>Boolean indicating that the Pull Request has Stories that have Pull Requests that change at least one of the same lines this Pull Request changes.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID associated with the pull request in Shortcut.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].merged</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/False boolean indicating whether the VCS pull request has been merged.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].num_added</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines added in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].num_commits</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of commits on the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].num_modified</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines modified in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].num_removed</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>Number of lines removed in the pull request, according to VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].number</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The pull request's unique number ID in VCS.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].overlapping_stories</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of Story ids that have Pull Requests that change at least one of the same lines this Pull Request changes.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].repository_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the repository for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].review_status</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The status of the review for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].target_branch_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the target branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].target_branch_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the target branch for the particular pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].title</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The title of the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the pull request was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL for the pull request.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of PullRequestLabels attached to the PullRequest.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels[].color</code></td>
+<td><code>string (css-color)</code></td>
+<td>Yes</td>
+<td>The color of the VCS label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels[].description</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The description of the VCS label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the VCS Label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].pull_requests[].vcs_labels[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The name of the VCS label.</td>
+</tr>
+<tr>
+<td><code>stories.data[].requested_by_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the Member that requested the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].started</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>A true/false boolean indicating if the Story has been started.</td>
+</tr>
+<tr>
+<td><code>stories.data[].started_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>stories.data[].started_at_override</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>A manual override for the time/date the Story was started.</td>
+</tr>
+<tr>
+<td><code>stories.data[].stats</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The stats object for Stories</td>
+</tr>
+<tr>
+<td><code>stories.data[].stats.num_related_documents</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number of documents related to this Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>An array of story links attached to the Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier of the Story Link.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].object_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the object Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].subject_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the subject Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].subject_workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The workflow state of the &quot;subject&quot; story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This indicates whether the Story is the subject or object in the Story Link.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date when the Story Link was last updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_links[].verb</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>How the subject Story acts on the object Story. This can be &quot;blocks&quot;, &quot;duplicates&quot;, or &quot;relates to&quot;.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_template_id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The ID of the story template used to create this story, or null if not created using a template.</td>
+</tr>
+<tr>
+<td><code>stories.data[].story_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of story (feature, bug, chore).</td>
+</tr>
+<tr>
+<td><code>stories.data[].sub_task_story_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stories.data[].synced_item</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The synced item for the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].synced_item.external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The id used to reference an external entity.</td>
+</tr>
+<tr>
+<td><code>stories.data[].synced_item.url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The url to the external entity.</td>
+</tr>
+<tr>
+<td><code>stories.data[].task_ids</code></td>
+<td><code>array of integer (int64)</code></td>
+<td>No</td>
+<td>An array of IDs of Tasks attached to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks</code></td>
+<td><code>array of object</code></td>
+<td>No</td>
+<td>An array of tasks connected to the story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].complete</code></td>
+<td><code>boolean</code></td>
+<td>Yes</td>
+<td>True/false boolean indicating whether the Task has been completed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].completed_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Task was completed.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].created_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Task was created.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>Full text of the Task.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].entity_type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A string description of this resource.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].external_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>This field can be set to another unique ID. In the case that the Task has been imported from another tool, the ID in the other tool can be indicated here.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].global_id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].group_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of Groups mentioned in this Task.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique ID of the Task.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].member_mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of Members mentioned in this Task.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].mention_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td><code>Deprecated:</code> use <code>member_mention_ids</code>.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].owner_ids</code></td>
+<td><code>array of string (uuid)</code></td>
+<td>Yes</td>
+<td>An array of UUIDs of the Owners of this Task.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].position</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The number corresponding to the Task's position within a list of Tasks on a Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].story_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The unique identifier of the parent Story.</td>
+</tr>
+<tr>
+<td><code>stories.data[].tasks[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Task was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].updated_at</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time/date the Story was updated.</td>
+</tr>
+<tr>
+<td><code>stories.data[].workflow_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow the story belongs to.</td>
+</tr>
+<tr>
+<td><code>stories.data[].workflow_state_id</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The ID of the workflow state the story is currently in.</td>
+</tr>
+<tr>
+<td><code>stories.next</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL path and query string for the next page of search results.</td>
+</tr>
+<tr>
+<td><code>stories.total</code></td>
+<td><code>integer (int64)</code></td>
+<td>Yes</td>
+<td>The total number of matches for the search query. The first 1000 matches can be paged through via the API.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-either-1-schema-mismatch-or-2-maximum-of-1000-search-results-exceeded" class="status" data-status="4xx">400: <strong>Either:</strong> (1) Schema mismatch <strong>or</strong> (2) Maximum of 1000 search results exceeded</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td><code>enum: maximum-results-exceeded</code></td>
+<td>Yes</td>
+<td>The name for this type of error, <code>maximum-results-exceeded</code></td>
+</tr>
+<tr>
+<td><code>maximum-results</code></td>
+<td><code>enum: 1000</code></td>
+<td>Yes</td>
+<td>The maximum number of search results supported, <code>1000</code></td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>An explanatory message: &quot;A maximum of 1000 search results are supported.&quot;</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-resource-does-not-exist" class="status" data-status="4xx">404: Resource does not exist</h5>
+<h5 id="422-unprocessable" class="status" data-status="4xx">422: Unprocessable</h5>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>
